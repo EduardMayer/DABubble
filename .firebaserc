@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "dabubble-aa8ad": {
+      "hosting": {
+        "da-bubble": [
+          "dabubble-aa8ad"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "dabubble-aa8ad"
+  }
+}
