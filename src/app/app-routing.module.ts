@@ -5,10 +5,11 @@ import { LoginComponent } from './startscreen/login/login.component';
 import { StartscreenComponent } from './startscreen/startscreen.component';
 
 const routes: Routes = [
+  
   { path: '', component: MainscreenComponent },
   { path: 'login', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent },
-  
+  { path: '', component: LoginComponent },
 ]
   
 
