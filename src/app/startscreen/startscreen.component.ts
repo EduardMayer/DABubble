@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class StartscreenComponent {
 
+  showLogin = true; 
+  imprint = false; 
+  privacyPolicy = false; 
+
+
+  closeImprintAndPrivacy(){
+    this.imprint = false; 
+    this.privacyPolicy = false; 
+  }
+
 }

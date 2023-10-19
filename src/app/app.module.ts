@@ -23,6 +23,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImprintComponent } from './startscreen/imprint/imprint.component';
+import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-policy.component';
 
 
 
@@ -37,7 +39,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     ChannelComponent,
     ThreadComponent,
-    ChatComponent
+    ChatComponent,
+    ImprintComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
