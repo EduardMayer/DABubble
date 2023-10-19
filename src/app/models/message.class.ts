@@ -1,11 +1,11 @@
 export class Message {
-    messageId: string;
+    id: string;
     content: Message;
     timestamp: number;
     autorId: string;
 
     constructor(obj?: any) {
-        this.messageId = obj ? obj.messageId : "";
+        this.id = obj ? obj.id : "";
         this.content = obj ? obj.content : "";
         this.timestamp = obj ? obj.timestamp : 0;
         this.autorId = obj ? obj.autorId : "";
@@ -13,7 +13,7 @@ export class Message {
 
     toJSON() {
         return {
-            messageId: this.messageId,
+            id: this.id,
             content: this.content,
             timestamp: this.timestamp,
             autorId: this.autorId

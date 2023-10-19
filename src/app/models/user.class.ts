@@ -10,6 +10,7 @@ export class User {
    
 
     constructor(obj?: any) {
+        this.id = obj ? obj.id : "";
         this.firstName = obj ? obj.firstName : "";
         this.lastName = obj ? obj.lastName : "";
         this.mail = obj ? obj.mail : "";
@@ -17,19 +18,19 @@ export class User {
         this.street = obj ? obj.street : "";
         this.zipCode = obj ? obj.zipCode : "";
         this.city = obj ? obj.city : "";
-        this.id = obj ? obj.id : "";
+       
     }
 
     toJSON() {
         return {
+            id: this.id,
             firstName: this.firstName,
             lastName: this.lastName,
             mail: this.mail,
             birthDate: this.birthDate,
             street: this.street,
             zipCode: this.zipCode,
-            city: this.city,
-            id: this.id
+            city: this.city
         }
     }
 }
