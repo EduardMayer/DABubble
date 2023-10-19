@@ -1,6 +1,6 @@
 import { Chat } from "./chat.class";
 
-export class Threads extends Chat {
+export class Channel extends Chat {
     channelName: string;
 
     constructor(obj?: any) {

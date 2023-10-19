@@ -1,9 +1,6 @@
 import { Chat } from "./chat.class";
-import { Message } from "./message.class";
-import { User } from "./user.class";
 
-
-export class Threads extends Chat {
+export class Thread extends Chat {
     refChannelId: string;
 
     constructor(obj?: any) {
