@@ -8,7 +8,9 @@ const routes: Routes = [
   { path: '', component: MainscreenComponent },
   { path: 'login', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent },
-];
+  
+]
+  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

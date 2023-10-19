@@ -17,6 +17,14 @@ import { HeaderComponent } from './mainscreen/header/header.component';
 import { ChannelComponent } from './mainscreen/channel/channel.component';
 import { ThreadComponent } from './mainscreen/thread/thread.component';
 import { ChatComponent } from './mainscreen/chat/chat.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -34,6 +42,14 @@ import { ChatComponent } from './mainscreen/chat/chat.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
