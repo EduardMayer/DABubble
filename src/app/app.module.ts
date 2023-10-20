@@ -26,9 +26,6 @@ import { ImprintComponent } from './startscreen/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-policy.component';
 import { TestModuleComponent } from './test-module/test-module.component';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
