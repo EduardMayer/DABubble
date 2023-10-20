@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators,FormGroup} from '@angular/forms';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 
@@ -7,9 +7,12 @@ import { AuthFirebaseService } from 'src/services/auth-firebase.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   errorInfo: any = false;
   hide: any;
+
+  guestLoginName = "guest@guest.at"; 
+  guestLoginPassword = "DABubbleGuest";
   
   contactForm = new FormGroup({
     emailInput: new FormControl('', [Validators.required, Validators.email]),
@@ -18,6 +21,10 @@ export class LoginComponent {
 
   constructor(private authService: AuthFirebaseService){
 
+  }
+
+  ngOnInit(): void {
+    console.log("User Logged In: " + this.authService.isLoggedIn());  
   }
 
   async login(){
@@ -34,17 +41,22 @@ export class LoginComponent {
           // Handle login error here
           console.error('Login failed:', error.message);
         });
-    
     }
   }
 
 
-
-
-
-
-
-
+  async guestLogin(){
+      
+        this.authService.login( this.guestLoginName , this.guestLoginPassword )
+        .then((result) => {
+          // Handle successful login
+          console.log("logged in successfully");
+        })
+        .catch((error) => {
+          // Handle login error here
+          console.error('Login failed:', error.message);
+        });
+    }
 }
 
 

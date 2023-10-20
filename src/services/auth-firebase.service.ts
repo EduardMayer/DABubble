@@ -18,11 +18,11 @@ import { Router } from '@angular/router';
 })
 export class AuthFirebaseService {
 
-  UserData : any;
+  UserData: any;
 
-  constructor(private auth: Auth, private router : Router, public ngZone: NgZone) {
-    onAuthStateChanged(this.auth,(user: any)=>{
-      if(user){
+  constructor(private auth: Auth, private router: Router, public ngZone: NgZone) {
+    onAuthStateChanged(this.auth, (user: any) => {
+      if (user) {
         this.UserData = user;
         localStorage.setItem('user', JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem('user')!);
@@ -31,23 +31,28 @@ export class AuthFirebaseService {
         JSON.parse(localStorage.getItem('user')!);
       }
     })
-   }
+  }
 
   //Login Method
-  login(email : string, password : string){
-      return signInWithEmailAndPassword(this.auth, email, password)
+  login(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password)
       .then((result: any) => {
         this.UserData = result.user;
         this.ngZone.run(() => {
           this.router.navigate(['/main']);
         });
       })
-    } 
-    
-    //Logout
-    logout() {
-        signOut(this.auth).then(()=>this.router.navigate(['/login']))
-    }
+  }
 
-  
+  //Logout
+  logout() {
+    signOut(this.auth).then(() => this.router.navigate(['/login']))
+  }
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('user')
+    const user = JSON.parse(token as string);
+    return user !== null ? true : false;
+  }
+
 }
