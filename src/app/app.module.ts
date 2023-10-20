@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StartscreenComponent } from './startscreen/startscreen.component';
 import { MainscreenComponent } from './mainscreen/mainscreen.component';
@@ -18,13 +17,15 @@ import { ChannelComponent } from './mainscreen/channel/channel.component';
 import { ThreadComponent } from './mainscreen/thread/thread.component';
 import { ChatComponent } from './mainscreen/chat/chat.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImprintComponent } from './startscreen/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-policy.component';
+import { TestModuleComponent } from './test-module/test-module.component';
+
 
 
 
@@ -41,7 +42,8 @@ import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-pol
     ThreadComponent,
     ChatComponent,
     ImprintComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    TestModuleComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,6 @@ import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-pol
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

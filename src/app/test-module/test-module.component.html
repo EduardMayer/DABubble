@@ -1,0 +1,15 @@
+<mat-card>
+    <table class="user-table">
+        <thead>
+            <th>Name</th>
+            <th>E-Mail</th>
+            <th>City</th>
+        </thead>
+        <tr *ngFor="let user of firebaseService.loadedUsers" [routerLink]="['/user/' + user.id ]">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.city }}</td>
+            <td>{{ user.id }}</td>
+        </tr>
+    </table>
+</mat-card>
