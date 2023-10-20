@@ -8,12 +8,14 @@ import {FormControl, Validators,FormGroup} from '@angular/forms';
 })
 export class LoginComponent {
   errorInfo: any = false;
+  hide: any;
+  
 
   contactForm = new FormGroup({
     emailInput: new FormControl('', [Validators.required, Validators.email]),
     passwordInput: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
-  
+
 
 
 
