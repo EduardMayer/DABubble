@@ -34,7 +34,7 @@ export class AuthFirebaseService {
    }
 
   //Login Method
-  loginUser(email : string, password : string){
+  login(email : string, password : string){
       return signInWithEmailAndPassword(this.auth, email, password)
       .then((result: any) => {
         this.UserData = result.user;
@@ -42,26 +42,12 @@ export class AuthFirebaseService {
           this.router.navigate(['/main']);
         });
       })
+    } 
     
-    }  
-
-    /* 
-      //Login Method
-  loginUser(email : string, password : string){
-      return signInWithEmailAndPassword(this.auth, email, password)
-      .then((result: any) => {
-        this.UserData = result.user;
-        this.ngZone.run(() => {
-          this.router.navigate(['/main']);
-        });
-        console.log(this.UserData);
-      })
-      .catch((error) => {
-         return error //window.alert(error.message);
-      });
-    }  
-
-    */
+    //Logout
+    logout() {
+        signOut(this.auth).then(()=>this.router.navigate(['/login']))
+    }
 
   
 }

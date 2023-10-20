@@ -25,7 +25,7 @@ export class LoginComponent {
     console.log(this.contactForm.value.passwordInput);
     if( this.contactForm.value.emailInput  != null && this.contactForm.value.passwordInput != null ){
       
-        this.authService.loginUser( this.contactForm.value.emailInput , this.contactForm.value.passwordInput )
+        this.authService.login( this.contactForm.value.emailInput , this.contactForm.value.passwordInput )
         .then((result) => {
           // Handle successful login
           console.log("logged in successfully");

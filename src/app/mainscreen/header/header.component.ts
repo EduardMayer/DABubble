@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+
+  constructor(private authService:AuthFirebaseService){}
+
+  logout(){
+    this.authService.logout(); 
+  }
 }
