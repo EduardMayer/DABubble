@@ -1,12 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { 
-    margin: 0; 
-    font-family: 'Nunito', sans-serif;
-    background-color: #edeefe; 
+
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('assets/fonts/nunito-v26-latin-regular.woff2');
 }
 
-.br-30{
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url('assets/fonts/nunito-sans-v15-latin-regular.woff2');
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    background-color: #edeefe;
+}
+
+input {
+    font-family: 'Nunito', sans-serif;
+}
+
+textarea {
+    font-family: 'Nunito', sans-serif;
+}
+
+.br-30 {
     border-radius: 30px;
 }
