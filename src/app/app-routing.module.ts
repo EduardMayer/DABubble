@@ -6,7 +6,6 @@ import { StartscreenComponent } from './startscreen/startscreen.component';
 
 const routes: Routes = [
   
-  { path: '', component: LoginComponent },
   { path: '', component: MainscreenComponent },
   { path: 'login', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent },

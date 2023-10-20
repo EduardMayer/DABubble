@@ -1,5 +1,3 @@
-
-
 @use '@angular/material' as mat;
 
 
@@ -14,14 +12,6 @@
     src: url('assets/fonts/nunito-sans-v15-latin-regular.woff2');
 }
 
-$mat-body-1: mat.define-typography-level(
-  $font-family: Roboto,
-  $font-weight: 400,
-  $font-size: 1rem,
-  $line-height: 1,
-  $letter-spacing: normal,
-);
-
 /* You can add global styles to this file, and also import other style files */
 
 html,
@@ -35,9 +25,14 @@ body {
     background-color: #edeefe;
 }
 
+input {
+    font-family: 'Nunito', sans-serif;
+}
+
+textarea {
+    font-family: 'Nunito', sans-serif;
+}
+
 .br-30 {
     border-radius: 30px;
 }
-
-
-
