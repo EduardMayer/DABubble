@@ -55,4 +55,15 @@ export class AuthFirebaseService {
     return user !== null ? true : false;
   }
 
+  //Login with Google
+  GoogleAuth() {
+    return this.loginWithPopup(new GoogleAuthProvider());
+  }
+
+  loginWithPopup(provider: any) {
+    return signInWithPopup(this.auth, provider).then(() => {
+      this.router.navigate(['main']);
+    });
+  }
+
 }
