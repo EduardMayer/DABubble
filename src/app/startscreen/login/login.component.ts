@@ -9,7 +9,8 @@ import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 })
 export class LoginComponent implements OnInit {
   errorInfo: any = false;
-  hide: any;
+  isInputActive = false;
+  isPasswordInputActive = false;
 
   guestLoginName = "guest@guest.at";
   guestLoginPassword = "DABubbleGuest";
