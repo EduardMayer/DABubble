@@ -1,31 +1,56 @@
 #startScreen-container {
-    height: 100vh;
-    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 48px;
+
+    h3{
+        margin: 0;
+    }
+    
+    a{
+        text-decoration: none;
+        color: rgba(121, 126, 243, 1);
+        padding: 10px 15px;
+        font-size: 18px;
+        cursor: pointer;
+
+        &:hover{
+        border: 1px solid rgba(173, 176, 217, 1);
+        border-radius: 100px;
+        }
+    }
 }
 
+.uper-startscreen-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: center;
+    padding-top: 75px;
+    padding-bottom: 11px;
+ 
+}
+
+
 #startScreen-logo {
-    position: absolute;
-    top: 24px;
-    left: 24px;
+    display: flex;
+    padding-left: 75px;
 }
 
 #startScreen-register {
-    position: absolute;
-    top: 24px;
-    right: 24px;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    padding-right: 75px;
 }
 
+
 #startscreen-imprint-container {
-    position: absolute;
-    bottom: 50px;
     display: flex;
-    gap: 48px;
-    a{
-        text-decoration: none;
-    }
+    gap: 16px;
+    padding-top: 68px;
+    padding-bottom: 48px;
 }
+

@@ -1,17 +1,18 @@
 <div id="startScreen-container">
-    <div id="startScreen-logo">
-        <img src="assets/img/logo/logo.svg" alt="logo">
+    <div class="uper-startscreen-container">
+        <div id="startScreen-logo">
+            <img src="assets/img/logo/logo.svg" alt="logo">
+        </div>
+        <div id="startScreen-register" *ngIf="showLogin && !imprint && !privacyPolicy">
+            <h3>Neu bei DABubble?</h3>
+            <a (click)="showLogin = false">Konto erstellen</a>
+        </div>
     </div>
-    <div id="startScreen-register" *ngIf="showLogin && !imprint && !privacyPolicy">
-        <h3>Neu bei DA Bubble?</h3>
-        <a (click)="showLogin = false">Konto erstellen</a>
-    </div>
-
-    <app-login *ngIf="showLogin && !imprint && !privacyPolicy"></app-login>
-    <app-register *ngIf="!showLogin && !imprint && !privacyPolicy"></app-register>
-    <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>
-    <app-privacy-policy *ngIf="privacyPolicy" (closePrivacyPolicyView)="closeImprintAndPrivacy()"></app-privacy-policy>
-
+        <app-login *ngIf="showLogin && !imprint && !privacyPolicy"></app-login>
+        <app-register *ngIf="!showLogin && !imprint && !privacyPolicy"></app-register>
+        <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>
+        <app-privacy-policy *ngIf="privacyPolicy" (closePrivacyPolicyView)="closeImprintAndPrivacy()"></app-privacy-policy>
+    
     <div id="startscreen-imprint-container">
         <a (click)="imprint = true" *ngIf="!imprint && !privacyPolicy">Impressum</a>
         <a (click)="privacyPolicy = true" *ngIf="!imprint && !privacyPolicy">Datenschutz</a>
