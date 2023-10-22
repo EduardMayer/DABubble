@@ -1,1 +1,90 @@
-<p>register works!</p>
+<mat-card class="user-register-container br-30">
+    <span class="user-register-title">
+        <div class="user-uper-register-title"><a class="user-uper-icon-title" href="/">
+                <img src="./assets/img/icons/arrow_left_back.svg">
+            </a>
+            <h1>Konto erstellen</h1>
+            <div></div>
+        </div>
+        <span><b>Mit deinem Namen und deiner E-Mail-Adresse hast
+                du dein neues DABubble-Konto.</b></span>
+    </span>
+    <form [formGroup]="contactForm">
+        <div class="user-register-input-container">
+
+            <div class="user-register-box">
+                <div class="user-register-icon">
+                    <img
+                        [src]="isNameInputActive ? './assets/img/icons/personblack.svg' : './assets/img/icons/persongrey.svg'">
+                </div>
+                <input class="user-register-email" [ngClass]="{
+                    'warning': contactForm.get('nameInput')?.invalid && (contactForm.get('nameInput')?.dirty || contactForm.get('nameInput')?.touched)
+                }" formControlName="nameInput" [placeholder]="'Name und Nachname' " type="text" name="name"
+                    (focus)="isNameInputActive = true" (blur)="isNameInputActive = false">
+            </div>
+            <div
+                *ngIf="contactForm.controls['nameInput'].invalid && (contactForm.controls['nameInput'].dirty || contactForm.controls['nameInput'].touched)">
+                <span class="required-informations" *ngIf="contactForm.controls['nameInput'].errors?.['required']"
+                    [ngClass]="{'warning-text': true}">
+                    {{ '*Bitte einen Namen eingeben.' }}
+                </span>
+                <span class="required-informations" *ngIf="contactForm.controls['nameInput'].hasError('minlength')"
+                    [ngClass]="{'warning-text': true}">
+                    {{ '*Der Name muss mindestens 3 Zeichen lang sein.' }}
+                </span>
+            </div>
+
+            <div class="user-register-box">
+                <div class="user-register-icon">
+                    <img
+                        [src]="isEmailInputActive? './assets/img/icons/mailblack.svg' : './assets/img/icons/mailgrey.svg'">
+                </div>
+                <input class="user-register-email" [ngClass]="{
+                    'warning': contactForm.get('emailInput')?.invalid && (contactForm.get('emailInput')?.dirty || contactForm.get('emailInput')?.touched)
+                }" formControlName="emailInput" [placeholder]="'beispielname@email.com' " type="email" name="email"
+                    (focus)="isEmailInputActive = true" (blur)="isEmailInputActive = false">
+            </div>
+
+            <div
+                *ngIf="contactForm.controls['emailInput'].invalid && (contactForm.controls['emailInput'].dirty || contactForm.controls['emailInput'].touched)">
+                <span class="required-informations" *ngIf="contactForm.controls['emailInput'].errors?.['required']"
+                    [ngClass]="{'warning-text': true}">
+                    {{ '*Diese E-Mail-Adresse ist leider ungültig.' }}
+                </span>
+                <span class="required-informations" *ngIf="contactForm.controls['emailInput'].hasError('email')"
+                    [ngClass]="{'warning-text': true}">
+                    {{ '*Gültige E-Mail-Adresse eingeben.' }}
+                </span>
+            </div>
+
+            <div class="user-register-box">
+                <div class="user-register-icon">
+                    <img
+                        [src]="isPasswordInputActive ? './assets/img/icons/lockblack.svg' : './assets/img/icons/lockgrey.svg'">
+                </div>
+                <input class="user-register-password warning" [ngClass]="{
+        'warning': contactForm.get('passwordInput')?.invalid && (contactForm.get('passwordInput')?.dirty || contactForm.get('passwordInput')?.touched)
+    }" formControlName="passwordInput" [placeholder]="'Passwort'" type="password" name="password"
+                    (focus)="isPasswordInputActive = true" (blur)="isPasswordInputActive = false">
+            </div>
+            <div
+                *ngIf="contactForm.controls['passwordInput'].invalid && (contactForm.controls['passwordInput'].dirty || contactForm.controls['passwordInput'].touched)">
+                <span class="required-informations" *ngIf="contactForm.controls['passwordInput'].hasError('minlength')"
+                    [ngClass]="{'warning-password': true}">
+                    {{ '*Gültiges Passwort eingeben (mindestens 6 Zeichen).' }}
+                </span>
+            </div>
+            
+
+        </div>
+    </form>
+    <div class="user-register-checkbox">
+        <input type="checkbox" [(ngModel)]="checkboxValue" id="myCheckbox" class="custom-checkbox">
+        <label for="myCheckbox">Ich stimme der <a href="#">Datenschutzerklärung</a> zu.</label>
+    </div>
+
+    <div class="user-register-button-container">
+            <button class="blue-button" mat-raised-button color="primary">Weiter</button>
+    </div>
+   
+</mat-card>
