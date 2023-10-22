@@ -23,7 +23,6 @@ export class RegisterComponent {
     nameInput: new FormControl('', [Validators.required, Validators.minLength(3)]),
     emailInput: new FormControl('', [Validators.required, Validators.email]),
     passwordInput: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    accept: new FormControl(false) // Das FormControl für die Checkbox
   });
 
 }
