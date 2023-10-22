@@ -4,7 +4,8 @@
     
     <div id="main-body">    
         <app-sidenav id="main-sidebar"></app-sidenav>
-
-
+        <app-channel *ngIf="channelOpen" id="main-channel"></app-channel>
+        <app-channel *ngIf="!channelOpen" id="main-chat"></app-channel>
+        <app-thread id="main-thread"></app-thread>
     </div>
 </div>

@@ -1,12 +1,35 @@
+$sideNav-width: 300px; 
+$thread-width: 300px;
+
+app-channel{
+    flex-grow: 1;
+}
+
 #main-container{
+    display: flex;
+    flex-direction: column;
+
     height: 100%;
     max-height: calc(100vh - 48px);
     padding: 24px;
 
     #main-body{
         
+        display: flex;
+        justify-content: space-between;
+        gap:12px; 
+        height: 100%;
         #main-sidebar{
-           
+           width: $sideNav-width;
+        }
+        #main-channel{
+
+        }
+        #main-chat{
+            
+        }
+        #main-thread{
+            width: $thread-width;
         }
 
     }
