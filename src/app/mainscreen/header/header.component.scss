@@ -1,11 +1,19 @@
+$headerImage-width: 300px; 
+$headerUser-width: 300px; 
+
 #header-container{
     width: 100%;
+    gap:12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+    #header-image-container{
+        min-width: $headerImage-width;
+    }
 
     #header-searchfield{
+        flex-grow: 1;
         width: 50%;
         border-radius: 42px;
         height: 40px;
@@ -16,6 +24,7 @@
         display: flex;
         align-items: center;
         gap:12px;
+        min-width: $headerUser-width;
         #header-user-icon{
             position: relative;
             img{
