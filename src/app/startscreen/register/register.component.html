@@ -84,7 +84,8 @@
     </div>
 
     <div class="user-register-button-container">
-            <button class="blue-button" mat-raised-button color="primary">Weiter</button>
+        <button class="blue-button" mat-raised-button color="primary" [disabled]="isButtonDisabled()" [ngClass]="{'disabled-button': isButtonDisabled()}">Weiter</button>
+
     </div>
    
 </mat-card>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -11,13 +10,11 @@ export class RegisterComponent {
 
   constructor() {}
 
-
   errorInfo: any = false;
   isNameInputActive = false;
   isEmailInputActive = false;
   isPasswordInputActive = false;
   checkboxValue: boolean = false;
-
 
   contactForm = new FormGroup({ 
     nameInput: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -25,5 +22,8 @@ export class RegisterComponent {
     passwordInput: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
 
+ 
+  isButtonDisabled() {
+    return this.contactForm.invalid || !this.checkboxValue;
+  }
 }
-

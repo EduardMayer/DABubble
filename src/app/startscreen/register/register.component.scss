@@ -106,12 +106,17 @@
     font-size: 18px;
     margin-top: 35px;
     background-color: rgba(68, 77, 242, 1) !important;
-
+  
     &:hover {
-        background-color: rgba(121, 126, 243, 1) !important;
-        transition: background-color 0.15s ease-in-out;
+      background-color: rgba(121, 126, 243, 1) !important;
+      transition: background-color 0.15s ease-in-out;
     }
-}
+  
+    &.disabled-button {
+      background-color: gray !important;
+      cursor: not-allowed;
+    }
+  }
 
 .user-register-checkbox{
     display: flex;
