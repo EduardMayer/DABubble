@@ -5,11 +5,26 @@
             <th>E-Mail</th>
             <th>City</th>
         </thead>
-        <tr *ngFor="let user of firebaseService.loadedUsers" [routerLink]="['/user/' + user.id ]">
+
+        <tr *ngFor="let channel of firebaseServiceUser.loadedUsers" [routerLink]="['/user/' + channel.id ]">
+            <td>{{ user.id }}</td>
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
             <td>{{ user.city }}</td>
-            <td>{{ user.id }}</td>
+        </tr>
+    </table>
+</mat-card>
+
+
+<mat-card>
+    <table class="user-table">
+        <thead>
+            <th>ChannelId</th>
+            <th>ChannelName</th>
+        </thead>
+        <tr *ngFor="let channel of firebaseServiceChannel.loadedChannels" [routerLink]="['/channel/' + channel.id ]">
+            <td>{{ channel.id }}</td>
+            <td>{{ channel.channelName }}</td>
         </tr>
     </table>
 </mat-card>

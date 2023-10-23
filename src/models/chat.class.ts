@@ -3,21 +3,33 @@ import { User } from "./user.class";
 
 export class Chat {
     id: string;
-    messages: Array<Message["id"]>; //Funktioniert wahrscheinlich ansonsten statt Message["id"]-> string
-    users: Array<User["id"]>;//Funktioniert wahrscheinlich ansonsten statt User["id"]-> string
+    messages: string[];
+    users: string[];
 
-    constructor(obj?: any) {
-        this.id = obj ? obj.id : "";
-        this.messages = obj ? obj.messages : [];
-        this.users = obj ? obj.users : [];
 
+    constructor(data: any) {
+        this.id = data.id || "";
+        this.messages = data.messages || [];
+        this.users = data.users || [];
     }
 
+
     toJSON() {
+
+        let messagesAsString = "";
+        if (Array.isArray(this.messages)) {
+            messagesAsString = this.messages.join();
+        }
+
+        let usersAsString = "";
+        if (Array.isArray(this.users)) {
+            usersAsString = this.users.join();
+        }
+
         return {
             id: this.id,
-            messages: this.messages,
-            users: this.users
+            messages: messagesAsString,
+            users: usersAsString
         }
     }
 }

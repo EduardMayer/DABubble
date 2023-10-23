@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImprintComponent } from './startscreen/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-policy.component';
 import { TestModuleComponent } from './test-module/test-module.component';
+import { MessageComponent } from './mainscreen/message/message.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TestModuleComponent } from './test-module/test-module.component';
     ChatComponent,
     ImprintComponent,
     PrivacyPolicyComponent,
-    TestModuleComponent
+    TestModuleComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

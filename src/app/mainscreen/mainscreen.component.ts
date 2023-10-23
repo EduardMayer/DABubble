@@ -7,6 +7,15 @@ import { Component } from '@angular/core';
 })
 export class MainscreenComponent {
 
-  channelOpen = true; 
-  
+  channelOpen = true;
+
+
+  /*
+
+  EXAMPLE VALUES
+  messageRef: string = "aSyrPGGxzgTZMjZxjJVB";
+  messageRef2: string= "EO7EJSfbToZGXF7YL4cZ";
+  */
+
+
 }

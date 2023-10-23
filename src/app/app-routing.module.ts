@@ -5,9 +5,10 @@ import { LoginComponent } from './startscreen/login/login.component';
 import { StartscreenComponent } from './startscreen/startscreen.component';
 
 const routes: Routes = [
+  { path: '', component: MainscreenComponent },
   { path: '', component: StartscreenComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', component: MainscreenComponent },
+  
   { path: 'main', component: MainscreenComponent },
   
 ]

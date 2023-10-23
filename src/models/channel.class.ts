@@ -3,17 +3,21 @@ import { Chat } from "./chat.class";
 export class Channel extends Chat {
     channelName: string;
 
-    constructor(obj?: any) {
-        super();
-        this.channelName = obj ? obj.channelName : "";
+    constructor(data: any) {
+        super(data);
+        this.channelName = data ? data.channelName : "";
     }
 
     override toJSON() {
+
+        let messagesAsString=this.messages.join();
+        let usersAsString=this.users.join();
+
         return {
             id: this.id,
             channelName: this.channelName,
-            messages: this.messages,
-            users: this.users
+            messages: messagesAsString,
+            users: usersAsString
         }
     }
 }
