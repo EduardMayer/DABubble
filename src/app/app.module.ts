@@ -27,6 +27,7 @@ import { ImprintComponent } from './startscreen/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-policy.component';
 import { TestModuleComponent } from './test-module/test-module.component';
 import { MessageComponent } from './mainscreen/message/message.component';
+import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MessageComponent } from './mainscreen/message/message.component';
     ImprintComponent,
     PrivacyPolicyComponent,
     TestModuleComponent,
-    MessageComponent
+    MessageComponent,
+    AvatarChooseComponent
   ],
   imports: [
     BrowserModule,
