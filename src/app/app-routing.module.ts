@@ -7,7 +7,7 @@ import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose
 
 const routes: Routes = [
   //{ path: '', component: AvatarChooseComponent },
-  { path: '', component: MainscreenComponent },
+  //{ path: '', component: MainscreenComponent },
   { path: '', component: StartscreenComponent },
   { path: 'login', component: LoginComponent },
   

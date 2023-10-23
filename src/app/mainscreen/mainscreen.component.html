@@ -1,15 +1,19 @@
 <div id="main-container">
-
+    
     <app-header id="main-header"></app-header>
     
     <div id="main-body">    
-        <app-sidenav id="main-sidebar"></app-sidenav>
+        <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
         <app-channel *ngIf="channelOpen" id="main-channel"></app-channel>
         <app-channel *ngIf="!channelOpen" id="main-chat"></app-channel>
-        <app-thread id="main-thread"></app-thread>
+        <app-thread  [class.dsp-none] = "!threadOpen" id="main-thread"></app-thread>
     </div>
 </div>
 
+<div (click)="toggleSideNav()" id="workspace">
+    <h4 *ngIf="sideNavOpen">Workspace-Menü schließen</h4>
+    <h4 *ngIf="!sideNavOpen">Workspace-Menü öffnen</h4>
+</div>
 
 <!--
 EXAMPLE MESSAGE OUTPUT
