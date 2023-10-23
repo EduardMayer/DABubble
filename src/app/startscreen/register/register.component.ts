@@ -4,10 +4,9 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-
   constructor() {}
 
   errorInfo: any = false;
@@ -16,13 +15,18 @@ export class RegisterComponent {
   isPasswordInputActive = false;
   checkboxValue: boolean = false;
 
-  contactForm = new FormGroup({ 
-    nameInput: new FormControl('', [Validators.required, Validators.minLength(3)]),
+  contactForm = new FormGroup({
+    nameInput: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
     emailInput: new FormControl('', [Validators.required, Validators.email]),
-    passwordInput: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    passwordInput: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
   });
 
- 
   isButtonDisabled() {
     return this.contactForm.invalid || !this.checkboxValue;
   }
