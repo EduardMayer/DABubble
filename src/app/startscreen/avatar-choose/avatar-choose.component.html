@@ -1,25 +1,33 @@
 <mat-card class="user-avatar-container br-30">
-    <div class="user-avatar-title">
-      <div class="user-uper-avatar-title">
-        <a class="user-uper-icon-title" href="/">
-          <img src="./assets/img/icons/arrow_left_back.svg" />
-        </a>
-        <h1>Wähle deinen Avatar</h1>
+  <div class="user-avatar-title">
+    <div class="user-uper-avatar-title">
+      <a class="user-uper-icon-title" href="/">
+        <img src="./assets/img/icons/arrow_left_back.svg" />
+      </a>
+      <h1>Wähle deinen Avatar</h1>
+    </div>
+    <div class="avatar-box">
+      <img [src]="'./assets/img/avatar/' + user.avatar + '.svg'">
+    </div>
+    <span></span>
+   
+    <div class="choose-avatar-container">
+      <div class="choose-avatar-text-box">
+        Aus der Liste wählen
       </div>
-      <div class="avatar-box">
-        <img src="./assets/img/avatar/avatar0.svg" alt="">
-        </div>
+      <div class="choose-avatar-box" *ngFor="let avatar of avatars">
+        <img [src]="'./assets/img/avatar/' + avatar + '.svg'" (click)="selectAvatar(avatar)">
+      </div>
     </div>
-  
-  
-    <div class="user-avatar-button-container">
-      <button
-        class="blue-button"
-        mat-raised-button
-        color="primary"
-       >
-        Weiter
-      </button>
-    </div>
-  </mat-card>
-  
+  </div>
+
+  <div class="user-avatar-button-container">
+    <button
+      class="blue-button"
+      mat-raised-button
+      color="primary"
+    >
+      Weiter
+    </button>
+  </div>
+</mat-card>
