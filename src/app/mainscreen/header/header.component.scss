@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 $headerImage-width: 300px; 
 $headerUser-width: 300px; 
+
 
 #header-container{
     width: 100%;
@@ -23,6 +25,7 @@ $headerUser-width: 300px;
     #header-user{
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         gap:12px;
         min-width: $headerUser-width;
         #header-user-icon{
@@ -44,4 +47,8 @@ $headerUser-width: 300px;
             }
         }
     }
+}
+
+.mat-mdc-menu-panel{
+    border-radius: 30px !important;
 }

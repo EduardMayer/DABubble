@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-header',
