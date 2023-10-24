@@ -28,6 +28,8 @@ import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-pol
 import { TestModuleComponent } from './test-module/test-module.component';
 import { MessageComponent } from './mainscreen/message/message.component';
 import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule
   ],

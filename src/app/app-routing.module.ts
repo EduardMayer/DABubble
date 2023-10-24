@@ -10,7 +10,6 @@ const routes: Routes = [
   //{ path: '', component: MainscreenComponent },
   { path: '', component: StartscreenComponent },
   { path: 'login', component: LoginComponent },
-  
   { path: 'main', component: MainscreenComponent },
   
 ]

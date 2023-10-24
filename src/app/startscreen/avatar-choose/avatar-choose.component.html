@@ -21,6 +21,10 @@
     </div>
   </div>
 
+  <label for="fileUpload">Choose a File</label>
+  <input id="fileUpload" type="file" #upload (change)="uploadFile(upload)">
+
+
   <div class="user-avatar-button-container">
     <button
       class="blue-button"
