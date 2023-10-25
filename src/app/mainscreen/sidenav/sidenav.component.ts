@@ -7,4 +7,27 @@ import { Component } from '@angular/core';
 })
 export class SidenavComponent {
 
-}
+unpackChannels = false;
+unpackMessages = false;
+
+
+  showChannels() {
+
+    if(this.unpackChannels == false) {
+      this.unpackChannels = true;
+    } else {
+      this.unpackChannels = false;
+    }
+  }
+
+
+  showMessages() {
+    if(this.unpackMessages == false) {
+      this.unpackMessages = true;
+    } else {
+      this.unpackMessages = false;
+    }
+  }
+  }
+
+

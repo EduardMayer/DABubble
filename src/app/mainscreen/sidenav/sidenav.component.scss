@@ -1,3 +1,122 @@
-#sidenav{
+#sidenav {
     height: 100%;
+}
+
+.sidenavHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 27px;
+}
+
+.editSquare {
+
+    &:hover {
+        filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+        transform: scale(1.05);
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.myChannelsHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.add {
+    &:hover {
+        filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+
+.addImage {
+    width: 17px;
+    height: 17px;
+}
+
+.myChannelsHeader2 {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        .arrow_drop_channels {
+            filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+            transform: scale(1.05);
+        }
+
+        .workspaces {
+            filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+            transform: scale(1.05);
+        }
+
+        .myChannelsHeaderText {
+            filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+            transform: scale(1.01);
+        }
+    }
+
+    cursor: pointer;
+}
+
+.pad-right17 {
+    padding-right: 17px;
+
+}
+
+.myChannels {
+    display: flex;
+    justify-content: center;
+}
+
+.myMessagesHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 33px;
+
+    &:hover {
+        .arrow_drop {
+            filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+            transform: scale(1.05);
+        }
+
+        .accountIcon {
+            filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+            transform: scale(1.05);
+        }
+
+        .myMessagesHeaderText {
+            filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+            transform: scale(1.01);
+        }
+        cursor: pointer;
+    }
+}
+
+.addChannel {
+    padding-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    &:hover {
+        filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
+        transform: scale(1.01);
+        cursor: pointer;
+    }
+}
+
+.myMessages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
