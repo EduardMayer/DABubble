@@ -9,14 +9,10 @@ export class Thread extends Chat {
     }
 
     override toJSON() {
-
-        let messagesAsString=JSON.stringify(this.messages);
-        let usersAsString=JSON.stringify(this.users);
-
         return {
             id: this.id,
-            messages: messagesAsString,
-            users: usersAsString,
+            messages: this.messages,
+            users: this.users,
             refChannelId: this.refChannelId
         }
     }

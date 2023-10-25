@@ -4,7 +4,7 @@
     
     <div id="main-body">    
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
-        <app-channel *ngIf="channelOpen" id="main-channel"></app-channel>
+        <app-channel *ngIf="channelOpen && channelFirebaseService.loadedChannels" [channelData]="channelFirebaseService.loadedChannels[0]" id="main-channel"></app-channel>
         <app-channel *ngIf="!channelOpen" id="main-chat"></app-channel>
         <app-thread  [class.dsp-none] = "!threadOpen" id="main-thread"></app-thread>
     </div>

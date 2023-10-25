@@ -1,3 +1,12 @@
 <mat-card id="channel" class="br-30">
     <mat-card-content id="channel-content">channel</mat-card-content>
+    <ul>
+        <!-- <li *ngFor="let user of channelData.users">{{ }}      </li>-->
+    </ul>
+
+    <div *ngIf="channelData">
+        <div *ngFor="let messageRef of messages">
+            <app-message [id]="messageRef"></app-message>
+        </div>
+    </div>
 </mat-card>

@@ -53,7 +53,7 @@ export class ChannelFirebaseService {
     }
 
     getById(channelId: string) {
-        const channel = doc(collection(this.firestore, "threads"), channelId);
+        const channel = doc(collection(this.firestore, "channels"), channelId);
         this.unsubChannel = onSnapshot(channel, (doc) => {
             this.loadedChannel = undefined;
             let docData = doc.data();

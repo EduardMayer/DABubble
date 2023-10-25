@@ -9,15 +9,11 @@ export class Channel extends Chat {
     }
 
     override toJSON() {
-
-        let messagesAsString=this.messages.join();
-        let usersAsString=this.users.join();
-
         return {
             id: this.id,
             channelName: this.channelName,
-            messages: messagesAsString,
-            users: usersAsString
+            messages: this.messages,
+            users: this.users
         }
     }
 }

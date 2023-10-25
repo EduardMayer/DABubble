@@ -15,21 +15,10 @@ export class Chat {
 
 
     toJSON() {
-
-        let messagesAsString = "";
-        if (Array.isArray(this.messages)) {
-            messagesAsString = this.messages.join();
-        }
-
-        let usersAsString = "";
-        if (Array.isArray(this.users)) {
-            usersAsString = this.users.join();
-        }
-
         return {
             id: this.id,
-            messages: messagesAsString,
-            users: usersAsString
+            messages: this.messages,
+            users: this.users
         }
     }
 }
