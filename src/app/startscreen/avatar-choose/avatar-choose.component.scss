@@ -100,6 +100,38 @@
   }
 }
 
+.choose-avatar-upload-container{
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-left: 20px;
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 400px;
+}
+
+.white-button{
+  display: flex;
+  border-radius: 25px;
+  align-items: center;
+  padding: 12px 25px;
+  font-weight: 700;
+  max-height: 49px;
+  max-width: 137px;
+  font-size: 18px;
+  border: 1px solid  rgba(68, 77, 242, 1) !important ;
+  background-color: white;
+  color: rgba(68, 77, 242, 1);
+  cursor: pointer;
+  
+
+  &:hover{
+      background-color: rgba(68, 77, 242, 1) !important;
+      transition: background-color 0.15s ease-in-out;
+      color: white;
+  }
+}
+
 .br-30 {
   border-radius: 30px;
 }

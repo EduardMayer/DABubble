@@ -7,23 +7,28 @@
       <h1>Wähle deinen Avatar</h1>
     </div>
     <div class="avatar-box">
-      <img [src]="'./assets/img/avatar/' + user.avatar + '.svg'">
+      <img [src]="user.avatar">
     </div>
-    <span></span>
+    <span>Username</span>
    
     <div class="choose-avatar-container">
       <div class="choose-avatar-text-box">
         Aus der Liste wählen
       </div>
       <div class="choose-avatar-box" *ngFor="let avatar of avatars">
-        <img [src]="'./assets/img/avatar/' + avatar + '.svg'" (click)="selectAvatar(avatar)">
-      </div>
+        <img [src]=" 'assets/img/avatar/'+ avatar" (click)="selectAvatar(avatar)">
+    </div>
     </div>
   </div>
 
-  <label for="fileUpload">Choose a File</label>
-  <input id="fileUpload" type="file" #upload (change)="uploadFile(upload)">
-
+ <div class="choose-avatar-upload-container">
+  eigenes Bild verwenden
+  <label for="fileUpload" class="white-button">
+    Datei hochladen 
+  </label>
+  <input id="fileUpload" type="file" accept="image/*" #upload (change)="uploadFile(upload)" style="display: none;">
+</div>
+  
 
   <div class="user-avatar-button-container">
     <button
