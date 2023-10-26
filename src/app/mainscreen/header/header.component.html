@@ -9,14 +9,23 @@
             <img src="assets/img/avatar/avatar1.svg" alt="UserIcon">
             <div id="header-status"></div>
         </div>
-        <div>
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <div id="headerDropdown">
+            <button mat-icon-button (click)="toogleHeaderMenu()">
+                <mat-icon>expand_more</mat-icon>
+            </button>
+      
+            
+           <!--  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>expand_more</mat-icon>
               </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item>Profil</button>
                 <button mat-menu-item (click)="logout()">Logout</button>
-            </mat-menu>
+            </mat-menu> -->
         </div>
+    </div>
+    <div id="headerMenu" *ngIf="showHeaderMenu">
+        <a>Profil</a>
+        <a (click)="logout()">Logout</a>
     </div>
 </div>

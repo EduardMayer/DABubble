@@ -61,7 +61,9 @@ export class AuthFirebaseService {
    * Loggout the User and redirect to startscreen. 
    */
   logout() {
-    signOut(this.auth).then(() => this.router.navigate(['']))
+    signOut(this.auth).then(() => {
+      this.router.navigate(['']);
+    })
   }
 
   /**

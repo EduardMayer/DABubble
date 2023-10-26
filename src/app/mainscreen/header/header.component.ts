@@ -5,6 +5,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class HeaderComponent implements OnInit{
     zipCode:"" 
   }) ; 
 
-  constructor(private authService:AuthFirebaseService , private userService:UserFirebaseService){}
+  showHeaderMenu = false; 
+
+  constructor(private authService:AuthFirebaseService , private userService:UserFirebaseService , private router:Router){}
 
   ngOnInit(): void {
     //Get current UserID from Local Storage 
@@ -33,5 +36,9 @@ export class HeaderComponent implements OnInit{
 
   logout(){
     this.authService.logout(); 
+  }
+
+  toogleHeaderMenu(){
+    this.showHeaderMenu = !this.showHeaderMenu; 
   }
 }
