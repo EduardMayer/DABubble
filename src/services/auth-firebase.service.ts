@@ -12,11 +12,15 @@ import {
   User
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserFirebaseService } from './user-firebase.service';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthFirebaseService {
+
+  firebaseUserService = inject(UserFirebaseService);
 
   UserData: any;
 
@@ -48,20 +52,52 @@ export class AuthFirebaseService {
    * @returns {Promise} - Retruns Promise (User Objekt) if login was successfull. Otherwise a errormessage with the reason of failure.
    */
   login(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password)
-      .then((result: any) => {
-        this.UserData = result.user;
-        this.ngZone.run(() => {
-          this.router.navigate(['/main']);
-        });
-      })
+    if (this.firebaseUserService.mailExists(email)) {
+      signInWithEmailAndPassword(this.auth, email, password)
+        .then((result: any) => {
+          this.UserData = result.user;
+          this.ngZone.run(() => {
+            this.router.navigate(['/main']);
+          });
+        })
+      return true;
+    } else {
+      console.log("Mail not found!");
+      return false;
+    }
   }
 
   /**
    * Loggout the User and redirect to startscreen. 
    */
   logout() {
-    signOut(this.auth).then(() => {this.router.navigate([''])})
+    signOut(this.auth).then(() => { this.router.navigate(['']) })
+  }
+
+
+  /**
+ * Register a user with the provided email and password.
+ * @param {string} email - The email of the user to register.
+ * @param {string} password - The password for the user's account.
+ */
+  register(email: string, password: string) {
+    if (!this.firebaseUserService.mailExists(email)) {
+      createUserWithEmailAndPassword(this.auth, email, password)
+        .then((result) => {
+          this.UserData = result.user;
+          this.firebaseUserService.update(this.UserData);
+          this.ngZone.run(() => {
+            this.router.navigate(['/main']);
+          });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode + " " + errorMessage);
+        });
+    } else {
+      console.log("Mail already exists");
+    }
   }
 
   /**
@@ -79,15 +115,15 @@ export class AuthFirebaseService {
    * Checks if Login is expired.
    * @returns {boolean}
    */
-  loginExprired(){
-    const token = localStorage.getItem('user'); 
-    if(token != null){
-      const expirationTime = JSON.parse(token).stsTokenManager.expirationTime; 
-      if(expirationTime > new Date().getTime() ){
-          return true 
+  loginExprired() {
+    const token = localStorage.getItem('user');
+    if (token != null) {
+      const expirationTime = JSON.parse(token).stsTokenManager.expirationTime;
+      if (expirationTime > new Date().getTime()) {
+        return true
       }
     }
-    return false; 
+    return false;
   }
 
   /**
