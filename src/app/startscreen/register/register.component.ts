@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { User } from 'src/models/user.class';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
+
+
 
 @Component({
   selector: 'app-register',
@@ -7,8 +11,10 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  constructor() {}
 
+
+constructor(private userService: UserFirebaseService) {}
+  users = new User();
   isNameInputActive = false;
   isEmailInputActive = false;
   isPasswordInputActive = false;
