@@ -75,11 +75,16 @@
           }"
           formControlName="passwordInput"
           [placeholder]="'Passwort'"
-          type="password"
+          [type]="isPasswordVisible ? 'text' : 'password'"
           name="password"
           (focus)="isPasswordInputActive = true"
           (blur)="isPasswordInputActive = false"
         />
+        <div class="user-register-passwort-hide">
+          <img src="{{ isPasswordVisible ? showPasswordImage : hidePasswordImage }}" (click)="togglePasswordVisibility()" style="cursor: pointer" />
+          <span (click)="togglePasswordVisibility()" style="cursor: pointer"></span>
+
+        </div>
       </div>
       <div
         *ngIf="
@@ -90,13 +95,13 @@
       >
         <span
           class="required-informations"
-          *ngIf="contactForm.controls['passwordInput'].hasError('email')"
+          *ngIf="contactForm.controls['passwordInput'].hasError('minlength')"
           [ngClass]="{ 'warning-password': true }"
         >
-          {{ "*Gültiges Passwort eingeben (mindestens 6 Zeichen)." }}
+        {{ "*Gültiges Passwort eingeben." }}
         </span>
       </div>
-
+    
       <span class="user-login-password-restore">
         <a href="">Passwort vergessen ?</a>
       </span>

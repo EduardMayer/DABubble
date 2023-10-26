@@ -11,6 +11,9 @@ export class LoginComponent implements OnInit {
   errorInfo: any = false;
   isInputActive = false;
   isPasswordInputActive = false;
+  isPasswordVisible: boolean = false;
+  showPasswordImage: string = 'assets/img/icons/eye.png';
+  hidePasswordImage: string = 'assets/img/icons/hideeye.png';
 
   guestLoginName = 'guest@guest.at';
   guestLoginPassword = 'DABubbleGuest';
@@ -67,5 +70,9 @@ export class LoginComponent implements OnInit {
 
   loginWithGoogle() {
     this.authService.GoogleAuth();
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }
