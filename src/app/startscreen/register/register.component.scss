@@ -51,10 +51,11 @@
 
 .user-register-passwort-hide{
     display: flex;
-    position: relative;
-    left: 450px;
-    top: -41px;
-    width: 50px;
+    position: absolute; 
+    right: 75px;
+    top: 456px;
+
+    
     img{
         width: 24px;
         height: 24px;
