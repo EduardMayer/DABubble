@@ -22,10 +22,12 @@ export class HeaderComponent implements OnInit{
     id:"", 
     mail:"", 
     street:"", 
-    zipCode:"" 
+    zipCode:"", 
+    avatar: "assets/img/avatar/avatar1.svg", 
   }) ; 
 
   showHeaderMenu = false; 
+  showHeaderUserProfil = true; 
 
   constructor(private authService:AuthFirebaseService , private userService:UserFirebaseService , private router:Router){}
 
@@ -35,10 +37,17 @@ export class HeaderComponent implements OnInit{
   }
 
   logout(){
+    this.showHeaderMenu = false;
     this.authService.logout(); 
+    //this.router.navigate(['']);
   }
 
   toogleHeaderMenu(){
     this.showHeaderMenu = !this.showHeaderMenu; 
+  }
+
+  showProfil(){
+    this.showHeaderMenu = false;
+    this.showHeaderUserProfil = true; 
   }
 }

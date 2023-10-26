@@ -25,7 +25,30 @@
         </div>
     </div>
     <div id="headerMenu" *ngIf="showHeaderMenu">
-        <a>Profil</a>
+        <a (click)="showProfil()">Profil</a>
         <a (click)="logout()">Logout</a>
+    </div>
+    <div id="headerUserProfil" *ngIf="showHeaderUserProfil">
+        <div id="headerUserProfil-header">
+            <h3>Profil</h3>
+            <img src="assets/img/icons/close.svg" alt="close" (click)="showHeaderUserProfil=false">
+        </div>
+        <div id="headerUserProfil-image-container">
+            <img src="{{user.avatar}}" alt="">
+        </div>
+        <div id="headerUserProfil-name">
+            <div>
+                <h2>{{user.firstName}} {{user.lastName}}</h2>
+            </div>
+            <div>
+                <a>bearbeiten</a>
+            </div>
+        </div>
+        <div>
+            <h4>Status</h4>
+        </div>
+        <div>
+            <h4>E-mail-Adresse</h4>
+        </div>
     </div>
 </div>
