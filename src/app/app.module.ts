@@ -29,7 +29,7 @@ import { TestModuleComponent } from './test-module/test-module.component';
 import { MessageComponent } from './mainscreen/message/message.component';
 import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
