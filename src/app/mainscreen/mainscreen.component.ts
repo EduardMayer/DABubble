@@ -5,26 +5,27 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 @Component({
   selector: 'app-mainscreen',
   templateUrl: './mainscreen.component.html',
-  styleUrls: ['./mainscreen.component.scss' , '../../styles.scss']
+  styleUrls: ['./mainscreen.component.scss', '../../styles.scss']
 })
 export class MainscreenComponent {
 
   channelOpen = true;
-  threadOpen = true; 
-  sideNavOpen = true; 
+  threadOpen = true;
+  sideNavOpen = true;
 
   seclectedChannel: string = "";
-  channelData: Channel[] | undefined;
+  channelData: Channel[];
 
   constructor(public channelFirebaseService: ChannelFirebaseService) {
     this.selectChannel("Alt");
+    this.channelData = channelFirebaseService.loadedChannels;
   }
 
   selectChannel(channelName: string) {
     this.seclectedChannel = channelName;
     this.channelFirebaseService.load("channelName", channelName);
   }
-  
+
   /*
   EXAMPLE VALUES
   messageRef: string = "aSyrPGGxzgTZMjZxjJVB";
@@ -32,8 +33,8 @@ export class MainscreenComponent {
   */
 
 
-  toggleSideNav(){
-    this.sideNavOpen = !this.sideNavOpen; 
+  toggleSideNav() {
+    this.sideNavOpen = !this.sideNavOpen;
   }
 
 

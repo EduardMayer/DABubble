@@ -12,17 +12,17 @@ export class ChannelComponent {
   messages: string[] = [];
 
   constructor() {
-   
 
-    setTimeout(()=>{
+
+    setTimeout(() => {
       console.log(this.channelData);
       console.log(this.messages);
 
       if (this.channelData) {
         console.log(this.channelData.messages);
-        this.messages=this.channelData.messages;
+        this.messages = this.channelData.messages;
         //this.messages=JSON.parse(this.channelData.messages);
       }
-    },1000)
+    }, 1000)
   }
 }

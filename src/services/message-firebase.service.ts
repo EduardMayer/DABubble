@@ -62,7 +62,6 @@ export class MessageFirebaseService {
         this.unsubMessage = onSnapshot(message, (doc) => {
             this.loadedMessage = undefined;
             let docData = doc.data();
-            console.log(doc.data());
             if (docData) {
                 const message = new Message(docData);
                 message.id=messageId;
@@ -81,12 +80,12 @@ export class MessageFirebaseService {
     async update(message: Message) {
         if (message.id === "") {
             const docInstance = doc(collection(this.firestore, "messages"));
-            setDoc(docInstance, message.toJSON());
-            console.log("message created");
+            let update= await setDoc(docInstance, message.toJSON());
+            console.log("message created"+ update);
         } else {
             const docInstance = doc(this.firestore, 'messages', message.id);
-            updateDoc(docInstance, message.toJSON());
-            console.log("message updated");
+            let update= await updateDoc(docInstance, message.toJSON());
+            console.log("message updated "+ update);
         }
     }
 

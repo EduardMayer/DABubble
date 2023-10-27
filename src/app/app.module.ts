@@ -30,9 +30,8 @@ import { MessageComponent } from './mainscreen/message/message.component';
 import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { MatMenuModule } from '@angular/material/menu';
-
-
-
+import { MessageEditComponent } from './mainscreen/channel/message-edit/message-edit.component';
+import { MessageCreateComponent } from './mainscreen/channel/message-create/message-create.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +49,9 @@ import { MatMenuModule } from '@angular/material/menu';
     PrivacyPolicyComponent,
     TestModuleComponent,
     MessageComponent,
-    AvatarChooseComponent
+    AvatarChooseComponent,
+    MessageEditComponent,
+    MessageCreateComponent
   ],
   imports: [
     BrowserModule,
