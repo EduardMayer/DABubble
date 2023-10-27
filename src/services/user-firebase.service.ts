@@ -14,6 +14,17 @@ export class UserFirebaseService {
     public loadedUser: User | undefined;
     private unsubUser: any;
 
+    public currentUser: User = new User(
+        {
+        id: "",
+        fullName: "Guest",
+        firstName: "Guest",
+        lastName: "",
+        mail: "guest@guest.at",
+        avatar: ""
+        }
+    )
+
     constructor(private firestore: Firestore) {
     }
 

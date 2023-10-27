@@ -64,8 +64,8 @@ export class ChannelFirebaseService {
             this.loadedChannel = undefined;
             let docData = doc.data();
             if (docData) {
-                const thread = new Channel(docData);
-                this.loadedChannel = thread;
+                const channel = new Channel(docData);
+                this.loadedChannel = channel;
             }
         })
     };
