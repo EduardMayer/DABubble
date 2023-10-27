@@ -19,9 +19,12 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthFirebaseService {
+  createUserWithEmailAndPassword(emailInputValue: string, passwordInputValue: string) {
+    throw new Error('Method not implemented.');
+  }
+
 
   firebaseUserService = inject(UserFirebaseService);
-
   UserData: any;
 
   /**
@@ -85,9 +88,9 @@ export class AuthFirebaseService {
       createUserWithEmailAndPassword(this.auth, email, password)
         .then((result) => {
           this.UserData = result.user;
-          this.firebaseUserService.update(this.UserData);
+          //this.firebaseUserService.update(this.UserData);
           this.ngZone.run(() => {
-            this.router.navigate(['/main']);
+          //this.router.navigate(['/avatar']);
           });
         })
         .catch((error) => {
