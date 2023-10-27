@@ -1,0 +1,32 @@
+<form class="addChannelDialogContainer" [formGroup]="addChannelForm"
+    (ngSubmit)="onSubmitNewChannel(addChannelForm.value)">
+    <mat-form-field>
+        <h1>Channel erstellen</h1>
+
+        <p>Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein #marketing zum
+            Beispiel.
+        </p>
+
+        <div class="channelNameContainer">
+            <h2>Channel-Name</h2>
+            <input matInput formControlName="channelName" palceholder="# z.B. Kooperationsprojekte" required>
+        </div>
+        <mat-error *ngFor="let validation of validation_messages.channelName">
+            <mat-error class="error-message"
+                *ngIf="addChannelForm.get('channelName')?.hasError(validation.type) && (addChannelForm.get('channelName')?.dirty || addChannelForm.get('channelName')?.touched)">
+                {{validation.message}}
+            </mat-error>
+        </mat-error>
+    </mat-form-field>
+<p>channel name is {{channelName}}</p>
+
+        <!--<div class="channelDescriptionContainer">
+            <h2>Beschreibung</h2>
+            <input matInput [(ngModel)]="channelDescription">
+        </div>-->
+
+    <button class="createChannelButton" type="submit" [disabled]="!addChannelForm.valid">
+        Erstellen
+    </button>
+
+</form>

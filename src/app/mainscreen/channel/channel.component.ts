@@ -15,8 +15,8 @@ export class ChannelComponent {
    
 
     setTimeout(()=>{
-      console.log(this.channelData);
-      console.log(this.messages);
+      console.log('here is channeldata', this.channelData);
+      console.log('here are messages', this.messages);
 
       if (this.channelData) {
         console.log(this.channelData.messages);

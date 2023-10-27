@@ -30,7 +30,8 @@ import { MessageComponent } from './mainscreen/message/message.component';
 import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import {MatMenuModule} from '@angular/material/menu';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
 
 
 
@@ -50,7 +51,8 @@ import {MatMenuModule} from '@angular/material/menu';
     PrivacyPolicyComponent,
     TestModuleComponent,
     MessageComponent,
-    AvatarChooseComponent
+    AvatarChooseComponent,
+    AddChannelDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import {MatMenuModule} from '@angular/material/menu';
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule, 
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
