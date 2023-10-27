@@ -11,22 +11,22 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
 export class MessageCreateComponent {
   @Input() channel: any; //Channel, Chat, Thread
 
-  message=new Message();
+  message = new Message();
 
   constructor(
-    private firebaseMessageService: MessageFirebaseService, 
-    private firebaseChannelService: ChannelFirebaseService
-    ){
-   
+    private firebaseMessageService: MessageFirebaseService,
+    public firebaseChannelService: ChannelFirebaseService
+  ) {
+
   }
 
- async createMessage(){
+  async createMessage() {
     console.log(this.message.content);
     this.message.content;
-    let messageId=await this.firebaseMessageService.update(this.message);
-    if(true){
-      this.channel.messages.push(messageId);
-      this.firebaseChannelService.update(this.channel);
+    let messageId = await this.firebaseMessageService.update(this.message);
+    if (true) {
+      this.firebaseChannelService.currentChannel.messages.push(messageId);
+      this.firebaseChannelService.update(this.firebaseChannelService.currentChannel);
     }
   }
 }

@@ -26,13 +26,6 @@ export class MainscreenComponent {
     this.channelFirebaseService.load("channelName", channelName);
   }
 
-  /*
-  EXAMPLE VALUES
-  messageRef: string = "aSyrPGGxzgTZMjZxjJVB";
-  messageRef2: string= "EO7EJSfbToZGXF7YL4cZ";
-  */
-
-
   toggleSideNav() {
     this.sideNavOpen = !this.sideNavOpen;
   }
