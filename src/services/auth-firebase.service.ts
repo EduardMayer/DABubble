@@ -59,6 +59,7 @@ export class AuthFirebaseService {
       signInWithEmailAndPassword(this.auth, email, password)
         .then((result: any) => {
           this.UserData = result.user;
+          this.firebaseUserService.setCurrentUser(this.UserData);
           this.ngZone.run(() => {
             this.router.navigate(['/main']);
           });
@@ -89,6 +90,7 @@ export class AuthFirebaseService {
         .then((result) => {
           this.UserData = result.user;
           //this.firebaseUserService.update(this.UserData);
+          this.firebaseUserService.setCurrentUser(this.UserData)
           this.ngZone.run(() => {
           //this.router.navigate(['/avatar']);
           });

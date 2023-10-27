@@ -8,6 +8,7 @@ import { User } from '../models/user.class';
     providedIn: 'root'
 })
 export class UserFirebaseService {
+    
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
@@ -27,6 +28,10 @@ export class UserFirebaseService {
 
     constructor(private firestore: Firestore) {
     }
+
+    setCurrentUser(UserData: any) {
+        this.currentUser=new User(UserData);
+      }
 
     /**
     * Asynchronously loads user data from Firestore based on optional index parameters.
