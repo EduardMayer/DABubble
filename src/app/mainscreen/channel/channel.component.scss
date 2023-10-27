@@ -1,4 +1,16 @@
-#channel{
+#channel {
     height: 100%;
     flex-grow: 1;
+    display:flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    margin:0;
+    border-radius: 30px;
+    padding:35px;
+
+}
+
+.align-bottom {
+    position: sticky;
+    bottom: 0;
 }

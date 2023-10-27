@@ -1,0 +1,7 @@
+<textarea 
+    class="message-write-container" 
+    [(ngModel)]="message.content"
+    *ngIf="firebaseChannelService.loadedChannels[firebaseChannelService.loadedChannelId]"
+    placeholder="Nachricht an #{{ firebaseChannelService.loadedChannels[firebaseChannelService.loadedChannelId].channelName }}">
+</textarea>
+<button (click)="createMessage()">Create Messge</button>

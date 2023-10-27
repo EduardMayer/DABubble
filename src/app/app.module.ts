@@ -34,6 +34,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
 
 
+import { MessageEditComponent } from './mainscreen/channel/message-edit/message-edit.component';
+import { MessageCreateComponent } from './mainscreen/channel/message-create/message-create.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dial
     TestModuleComponent,
     MessageComponent,
     AvatarChooseComponent,
-    AddChannelDialogComponent
+    AddChannelDialogComponent,
+    MessageEditComponent,
+    MessageCreateComponent
   ],
   imports: [
     BrowserModule,

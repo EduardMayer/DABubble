@@ -14,9 +14,15 @@ export class ChannelFirebaseService {
     private unsubChannel: any;
     public loadedChannel: Channel | undefined;
 
+    loadedChannelId: number;
+
     constructor(private firestore: Firestore) {
+        this.loadedChannelId = 0;
     }
 
+    get currentChannel() {
+        return this.loadedChannels[this.loadedChannelId];
+    }
 
     /**
     * Generates a Firestore query to retrieve channel data with optional index-based filtering.
@@ -58,12 +64,12 @@ export class ChannelFirebaseService {
             this.loadedChannel = undefined;
             let docData = doc.data();
             if (docData) {
-                const thread = new Channel(docData);
-                this.loadedChannel = thread;
+                const channel = new Channel(docData);
+                this.loadedChannel = channel;
             }
         })
     };
-    
+
     /**
     * Updates Or Creates a channel document in Firestore.
     * Depending on if channel.is i given

@@ -54,14 +54,14 @@
           *ngIf="contactForm.controls['nameInput'].errors?.['required']"
           [ngClass]="{ 'warning-text': true }"
         >
-          {{ "*Bitte einen Namen eingeben." }}
+          {{ "*Der Vorname und Nachname muss aus zwei Wörtern bestehen." }}
         </span>
         <span
           class="required-informations"
           *ngIf="contactForm.controls['nameInput'].hasError('minlength')"
           [ngClass]="{ 'warning-text': true }"
         >
-          {{ "*Der Name muss mindestens 3 Zeichen lang sein." }}
+          {{ "*Bitte einen Vorname und Nachname eingeben." }}
         </span>
       </div>
 
@@ -135,11 +135,16 @@
           }"
           formControlName="passwordInput"
           [placeholder]="'Passwort'"
-          type="password"
+          [type]="isPasswordVisible ? 'text' : 'password'"
           name="password"
           (focus)="isPasswordInputActive = true"
           (blur)="isPasswordInputActive = false"
         />
+        <div class="user-register-passwort-hide">
+          <img src="{{ isPasswordVisible ? showPasswordImage : hidePasswordImage }}" (click)="togglePasswordVisibility()" style="cursor: pointer" />
+          <span (click)="togglePasswordVisibility()" style="cursor: pointer"></span>
+
+        </div>
       </div>
       <div
         *ngIf="
@@ -153,7 +158,7 @@
           *ngIf="contactForm.controls['passwordInput'].hasError('minlength')"
           [ngClass]="{ 'warning-password': true }"
         >
-          {{ "*Gültiges Passwort eingeben (mindestens 6 Zeichen)." }}
+        {{ "*Gültiges Passwort mit mindestens 6 Zeichen , einem Großbuchstaben und einem Sonderzeichen eingeben." }}
         </span>
       </div>
     </div>
@@ -171,7 +176,7 @@
   </div>
 
   <div class="user-register-button-container">
-    <button
+    <button (click)="onSubmit()"
       class="blue-button"
       mat-raised-button
       color="primary"
@@ -179,6 +184,7 @@
       [ngClass]="{ 'disabled-button': isButtonDisabled() }"
     >
       Weiter
+      
     </button>
   </div>
 </mat-card>

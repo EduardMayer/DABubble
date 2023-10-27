@@ -4,9 +4,13 @@
         <!-- <li *ngFor="let user of channelData.users">{{ }}      </li>-->
     </ul>
 
-    <div *ngIf="channelData">
-        <div *ngFor="let messageRef of messages">
+    <div *ngIf="channelFirebaseService.currentChannel">
+        <div *ngFor="let messageRef of channelFirebaseService.currentChannel.messages">
             <app-message [id]="messageRef"></app-message>
         </div>
     </div>
+    
+    <app-message-create></app-message-create>
+
+    
 </mat-card>

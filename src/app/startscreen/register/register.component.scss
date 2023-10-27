@@ -49,6 +49,19 @@
     
 }
 
+.user-register-passwort-hide{
+    display: flex;
+    position: absolute; 
+    right: 75px;
+    top: 456px;
+
+    
+    img{
+        width: 24px;
+        height: 24px;
+    }
+}
+
 
 .user-register-email,
 .user-register-password {

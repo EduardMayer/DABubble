@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,9 @@ export class LoginComponent implements OnInit {
   errorInfo: any = false;
   isInputActive = false;
   isPasswordInputActive = false;
+  isPasswordVisible: boolean = false;
+  showPasswordImage: string = 'assets/img/icons/eye.png';
+  hidePasswordImage: string = 'assets/img/icons/hideeye.png';
 
   guestLoginName = 'guest@guest.at';
   guestLoginPassword = 'DABubbleGuest';
@@ -23,10 +27,12 @@ export class LoginComponent implements OnInit {
     ]),
   });
 
-  constructor(private authService: AuthFirebaseService) {}
+  constructor(private authService: AuthFirebaseService) { }
 
+  firebaseUserService = inject(UserFirebaseService);
   ngOnInit(): void {
     console.log('User Logged In: ' + this.authService.isLoggedIn());
+
   }
 
   async login() {
@@ -40,22 +46,9 @@ export class LoginComponent implements OnInit {
         .login(
           this.contactForm.value.emailInput,
           this.contactForm.value.passwordInput
-        )
-        .then((result) => {
-          // Handle successful login
-          console.log('logged in successfully');
-        })
-        .catch((error) => {
-          // Handle login error here
-          console.error('Login failed:', error.message);
-        });
-    }
-  }
-
-  async guestLogin() {
-    this.authService
-      .login(this.guestLoginName, this.guestLoginPassword)
-      .then((result) => {
+        );
+      /*
+      .then(() => {
         // Handle successful login
         console.log('logged in successfully');
       })
@@ -63,9 +56,30 @@ export class LoginComponent implements OnInit {
         // Handle login error here
         console.error('Login failed:', error.message);
       });
+      */
+    }
+  }
+
+  async guestLogin() {
+    this.authService
+      .login(this.guestLoginName, this.guestLoginPassword)
+    /*
+    .then((result) => {
+      // Handle successful login
+      console.log('logged in successfully');
+    })
+    .catch((error) => {
+      // Handle login error here
+      console.error('Login failed:', error.message);
+    });
+    */
   }
 
   loginWithGoogle() {
     this.authService.GoogleAuth();
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }

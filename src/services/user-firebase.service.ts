@@ -8,39 +8,36 @@ import { User } from '../models/user.class';
     providedIn: 'root'
 })
 export class UserFirebaseService {
+    
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
     public loadedUser: User | undefined;
     private unsubUser: any;
 
+    public currentUser: User = new User(
+        {
+        id: "",
+        fullName: "Guest",
+        firstName: "Guest",
+        lastName: "",
+        mail: "guest@guest.at",
+        avatar: ""
+        }
+    )
+
     constructor(private firestore: Firestore) {
     }
 
-
-    /**
-    * Generates a Firestore query to retrieve user data with optional index-based filtering.
-    *
-    * @param {any} indexName - (Optional) The name of the index to filter users.
-    * @param {String} indexValue - (Optional) The value to filter users by within the specified index.
-    * @returns {Query} A Firestore query for user data with optional filtering.
-    */
-    getQuery(indexName?: any, indexValue: String = "") {
-        if (indexName) {
-            return query(collection(this.firestore, "users"), where(indexName, "==", indexValue));
-        } else {
-            return query(collection(this.firestore, "users"));
-        }
-    }
+    setCurrentUser(UserData: any) {
+        this.currentUser=new User(UserData);
+      }
 
     /**
     * Asynchronously loads user data from Firestore based on optional index parameters.
-    *
-    * @param {any} indexName - (Optional) The name of the index to filter users.
-    * @param {String} indexValue - (Optional) The value to filter users by within the specified index.
     */
-    async load(indexName?: any, indexValue: String = "") {
-        const q = this.getQuery(indexName, indexValue);
+    async load() {
+        const q = query(collection(this.firestore, "users"));
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];
             querySnapshot.forEach((doc) => {
@@ -50,24 +47,6 @@ export class UserFirebaseService {
             });
         });
     }
-
-
-    /**
-    * Retrieves a user by its unique identifier.
-    *
-    * @param {string} id - The unique identifier of the user to retrieve.
-    */
-    getById(id: string) {
-        const thread = doc(collection(this.firestore, "users"), id);
-        this.unsubUser = onSnapshot(thread, (doc) => {
-            this.loadedUser = undefined;
-            let docData = doc.data();
-            if (docData) {
-                const thread = new User(docData);
-                this.loadedUser = thread;
-            }
-        })
-    };
 
 
     /**
@@ -84,6 +63,30 @@ export class UserFirebaseService {
             const docInstance = doc(this.firestore, 'users', user.id);
             updateDoc(docInstance, user.toJSON());
             console.log("user updated");
+        }
+    }
+
+
+
+    /**
+     * Check if a given email exists in the array of loaded users.
+     *
+     * @param {string} mail - The email to check for in the user data.
+     * @returns {boolean} Returns `true` if the email exists in the loaded users, or `false` otherwise.
+     */
+    mailExists(mail: string) {
+        this.load();
+        console.log(this.loadedUsers);
+        if (this.loadedUsers[0]) {
+            for (let i = 0; i < this.loadedUsers.length; i++) {
+                if (this.loadedUsers[i].mail === mail) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            console.log("Error: User Data could not be loaded");
+            return false;
         }
     }
 

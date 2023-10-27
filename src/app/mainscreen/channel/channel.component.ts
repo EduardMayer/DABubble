@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
+import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 
 @Component({
   selector: 'app-channel',
@@ -8,21 +9,32 @@ import { Channel } from 'src/models/channel.class';
   styleUrls: ['./channel.component.scss']
 })
 export class ChannelComponent {
-  @Input() channelData: Channel | undefined;
   messages: string[] = [];
+  channelInstance: any;
 
-  constructor() {
-   
-
+  constructor(public channelFirebaseService: ChannelFirebaseService) {
+    
     setTimeout(()=>{
       console.log('here is channeldata', this.channelData);
       console.log('here are messages', this.messages);
+      this.channelInstance=this.channelFirebaseService.currentChannel;
+      this.messages=this.channelFirebaseService.currentChannel.messages;
+      console.log(this.channelInstance);
+    },2000)
+  }
 
-      if (this.channelData) {
-        console.log(this.channelData.messages);
-        this.messages=this.channelData.messages;
+
+  /*
+      if (currentChannel) {
+        console.log(currentChannel.messages);
+        this.messages = currentChannel.messages;
         //this.messages=JSON.parse(this.channelData.messages);
       }
-    },1000)
-  }
+  */
+      
+
+
+
+
+  
 }

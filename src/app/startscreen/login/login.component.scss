@@ -96,6 +96,21 @@
     }
 }
 
+.user-register-passwort-hide {
+    display: flex;
+    position: absolute; 
+    right: 75px;
+    top: 375px;
+    
+    img{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+
+
 .user-login-seperation{
     display: flex;
     text-align: center;
