@@ -54,14 +54,14 @@
           *ngIf="contactForm.controls['nameInput'].errors?.['required']"
           [ngClass]="{ 'warning-text': true }"
         >
-          {{ "*Bitte einen Namen eingeben." }}
+          {{ "*Der Vorname und Nachname muss aus zwei Wörtern bestehen." }}
         </span>
         <span
           class="required-informations"
           *ngIf="contactForm.controls['nameInput'].hasError('minlength')"
           [ngClass]="{ 'warning-text': true }"
         >
-          {{ "*Der Name muss mindestens 3 Zeichen lang sein." }}
+          {{ "*Bitte einen Vorname und Nachname eingeben." }}
         </span>
       </div>
 
@@ -176,7 +176,7 @@
   </div>
 
   <div class="user-register-button-container">
-    <button
+    <button (click)="onSubmit()"
       class="blue-button"
       mat-raised-button
       color="primary"
@@ -184,6 +184,7 @@
       [ngClass]="{ 'disabled-button': isButtonDisabled() }"
     >
       Weiter
+      
     </button>
   </div>
 </mat-card>

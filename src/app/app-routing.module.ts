@@ -7,9 +7,9 @@ import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose
 import { authGuard } from 'src/guard/auth-guard.guard';
 
 const routes: Routes = [
-  //{ path: '', component: AvatarChooseComponent },
   //{ path: '', component: MainscreenComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'avatar', component: AvatarChooseComponent },
 
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
