@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Message } from 'src/models/message.class';
+import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 
 @Component({
@@ -12,16 +13,20 @@ export class MessageCreateComponent {
 
   message=new Message();
 
-  constructor(private firebaseMessageService: MessageFirebaseService){
+  constructor(
+    private firebaseMessageService: MessageFirebaseService, 
+    private firebaseChannelService: ChannelFirebaseService
+    ){
    
   }
 
-  createMessage(){
+ async createMessage(){
     console.log(this.message.content);
     this.message.content;
-    this.firebaseMessageService.update(this.message);
+    let messageId=await this.firebaseMessageService.update(this.message);
     if(true){
-      this.channel.messages.push("messageId");
+      this.channel.messages.push(messageId);
+      this.firebaseChannelService.update(this.channel);
     }
   }
 }
