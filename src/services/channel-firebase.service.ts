@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
+import { Message } from 'src/models/message.class';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChannelFirebaseService {
+
     public loadedChannels: Channel[] = [];
     private unsubChannels: any; //Whats the type?
 
@@ -15,6 +17,8 @@ export class ChannelFirebaseService {
     public loadedChannel: Channel | undefined;
 
     loadedChannelId: number;
+    loadedChannelMessages: Message[] = [];
+    lastMessageTimestamp: number = 0;
 
     constructor(private firestore: Firestore) {
         this.loadedChannelId = 0;
@@ -31,7 +35,7 @@ export class ChannelFirebaseService {
     * @param {String} indexValue - (Optional) The value to filter channels by within the specified index.
     * @returns {Query} A Firestore query for channel data with optional filtering.
     */
-    getQuery(indexName?: any, indexValue: String = "") {
+    getChannelQuery(indexName?: any, indexValue: String = "") {
         if (indexName) {
             return query(collection(this.firestore, "channels"), where(indexName, "==", indexValue));
         } else {
@@ -46,7 +50,7 @@ export class ChannelFirebaseService {
     * @param {String} indexValue - (Optional) The value to filter channels by within the specified index.
     */
     async load(indexName?: any, indexValue: String = "") {
-        const q = this.getQuery(indexName, indexValue);
+        const q = this.getChannelQuery(indexName, indexValue);
         this.unsubChannels = onSnapshot(q, (querySnapshot) => {
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
@@ -55,11 +59,38 @@ export class ChannelFirebaseService {
                 this.loadedChannels.push(channel);
             });
         });
+        setTimeout(() => {
+            this.loadChannelMessages(this.loadedChannels[0].id);
+        }, 1000)
         return this.unsubChannels;
     }
 
+
+    /**
+    * Asynchronously loads messages of the channels messages Subcollection from Firestore.
+    *
+    * @param {string} channelId - The ID of the channel from which to load messages.
+    * @returns {Promise<void>} - A Promise that resolves when the messages have been loaded.
+    */
+    async loadChannelMessages(channelId: string) {
+        const q = query(collection(this.firestore, `channels/${channelId}/messages`));
+        this.unsubChannel = onSnapshot(q, (querySnapshot: any) => {
+            this.loadedChannelMessages = [];
+            querySnapshot.forEach((doc: any) => {
+                if (doc.data()) {
+                    const message = new Message(doc.data());
+                    this.loadedChannelMessages.push(message);
+                }
+            })
+        });
+    }
+
+    getChannelMessagesQuery(channelId: string) {
+        return query(collection(this.firestore, `channels/${channelId}/messages`));
+    }
+
     getById(channelId: string) {
-        const channel = doc(collection(this.firestore, "channels"), channelId);
+        const channel = doc(collection(this.firestore, "channels",), channelId);
         this.unsubChannel = onSnapshot(channel, (doc) => {
             this.loadedChannel = undefined;
             let docData = doc.data();
@@ -75,7 +106,7 @@ export class ChannelFirebaseService {
     * Depending on if channel.is i given
     * @param {Channel} channel - The channel object to be updated or created.
      */
-    async update(channel: Channel) {
+    async updateChannel(channel: Channel) {
         if (channel.id == "") {
             const docInstance = doc(collection(this.firestore, "channels"));
             setDoc(docInstance, channel.toJSON());
@@ -87,6 +118,29 @@ export class ChannelFirebaseService {
         }
     }
 
+    async updateChannelMessage(channelId: string, channelMessage: Message) {
+        console.log(channelId);
+        console.log(channelMessage);
+        if (channelId != "") {
+            console.log("here");
+            if (channelMessage.id == "") {
+                channelMessage.id = String(this.cyrb53(String(channelId) + String(channelMessage.content)));
+                const docInstance = doc(this.firestore, `channels/${channelId}/messages/${channelMessage.id}`);
+                await setDoc(docInstance, channelMessage.toJSON());
+                console.log("channelMessages updated");
+
+            } else {
+                const docInstance = doc(this.firestore, `channels/${channelId}/messages`, channelMessage.id);
+                await updateDoc(docInstance, channelMessage.toJSON());
+                console.log("channelMessages updated");
+            }
+
+        }
+
+    }
+
+
+
 
     /**
     * Lifecycle hook called when the component is about to be destroyed.
@@ -96,5 +150,27 @@ export class ChannelFirebaseService {
         this.unsubChannels();
     }
 
+
+    /**
+   * Calculates the Cyrb53 hash of the input string.
+   *
+   * @param {string} str - The input string to be hashed.
+   * @param {number} seed - An optional seed value to initialize the hash (default is 0).
+   * @returns {number} - The Cyrb53 hash value as a 32-bit unsigned integer.
+   */
+    cyrb53 = (str: string, seed = 0) => {
+        let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
+        for (let i = 0, ch; i < str.length; i++) {
+            ch = str.charCodeAt(i);
+            h1 = Math.imul(h1 ^ ch, 2654435761);
+            h2 = Math.imul(h2 ^ ch, 1597334677);
+        }
+        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+        h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+        h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+
+        return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+    };
 
 }

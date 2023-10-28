@@ -9,16 +9,19 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
   styleUrls: ['./channel.component.scss']
 })
 export class ChannelComponent {
-  messages: string[] = [];
-  channelInstance: any;
+
+  lastMessageTimestamp=0;
 
   constructor(public channelFirebaseService: ChannelFirebaseService) {
+  }
+
+  setLastMessageTimestamp(timestamp: number){
+    this.lastMessageTimestamp=timestamp;
+    console.log(timestamp);
+  }
+
+  channelMessages(){
     
-    setTimeout(()=>{
-      this.channelInstance=this.channelFirebaseService.currentChannel;
-      this.messages=this.channelFirebaseService.currentChannel.messages;
-      console.log(this.channelInstance);
-    },2000)
   }
 
 

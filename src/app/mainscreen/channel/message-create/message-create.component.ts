@@ -23,10 +23,13 @@ export class MessageCreateComponent {
   async createMessage() {
     console.log(this.message.content);
     this.message.content;
-    let messageId = await this.firebaseMessageService.update(this.message);
+    this.message.timestamp=Date.now();
+    //let messageId = await this.firebaseMessageService.update(this.message);
     if (true) {
-      this.firebaseChannelService.currentChannel.messages.push(messageId);
-      this.firebaseChannelService.update(this.firebaseChannelService.currentChannel);
+      //this.firebaseChannelService.currentChannel.messages.push(messageId);
+      //this.firebaseChannelService.updateChannel(this.firebaseChannelService.currentChannel);
+      this.firebaseChannelService.updateChannelMessage(this.firebaseChannelService.currentChannel.id,this.message);
+
     }
   }
 }

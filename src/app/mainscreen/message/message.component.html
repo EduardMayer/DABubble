@@ -1,1 +1,20 @@
-<div *ngIf="messageFirebaseService.loadedMessage">{{ messageFirebaseService.loadedMessage.content }}</div>
+<div class='message-container' *ngIf="message" >
+    <div class="message-head">
+        <div> {{ formatTimestampToHHMM(message.timestamp) }}</div>
+        <div><b>{{ message.autorId}}</b></div>
+    </div>
+    <mat-card>
+        <mat-card-content>{{ message.content }}</mat-card-content>
+    </mat-card>
+</div>
+
+
+<div class='message-container inverted'>
+    <div class="message-head">
+        <div>15:06</div>
+        <div><b>Guest</b></div>
+    </div>
+    <mat-card>
+        <mat-card-content>Testantwort</mat-card-content>
+    </mat-card>
+</div>

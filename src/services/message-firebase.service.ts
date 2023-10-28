@@ -118,8 +118,15 @@ export class MessageFirebaseService {
     * Unsubscribes from any active subscription.
     */
     ngOnDestroy() {
-        this.unsubMessages();
-        this.unsubMessage();
+        if(this.unsubMessages){
+            this.unsubMessages();
+        }
+
+        if(this.unsubMessage){
+            this.unsubMessage();
+        }
+       
+       
     }
 
 

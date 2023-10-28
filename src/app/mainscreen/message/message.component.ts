@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Message } from 'src/models/message.class';
+import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 
 @Component({
@@ -8,22 +9,20 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
   styleUrls: ['./message.component.scss'],
   providers: [MessageFirebaseService]
 })
-export class MessageComponent implements OnChanges {
+export class MessageComponent{
 
-  @Input() id: string = "";
-  message: Message | undefined;
+  @Input() message: Message | undefined;
+  @Output() messageTimestampEvent = new EventEmitter<number>();
 
   constructor(public messageFirebaseService: MessageFirebaseService) {
 
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['id']) {
-      this.getMessage();
-    }
-  }
+  formatTimestampToHHMM(timestamp: number) {
+    const date = new Date(timestamp);
+    const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits with leading zero
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // Ensure two digits with leading zero
 
-  getMessage() {
-    this.messageFirebaseService.getById(this.id);
+    return hours + ':' + minutes;
   }
 }
