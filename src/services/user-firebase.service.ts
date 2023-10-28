@@ -8,7 +8,7 @@ import { User } from '../models/user.class';
     providedIn: 'root'
 })
 export class UserFirebaseService {
-    
+
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
@@ -17,12 +17,12 @@ export class UserFirebaseService {
 
     public currentUser: User = new User(
         {
-        id: "",
-        fullName: "Guest",
-        firstName: "Guest",
-        lastName: "",
-        mail: "guest@guest.at",
-        avatar: ""
+            id: "",
+            fullName: "Guest",
+            firstName: "Guest",
+            lastName: "",
+            mail: "guest@guest.at",
+            avatar: ""
         }
     )
 
@@ -30,10 +30,10 @@ export class UserFirebaseService {
     }
 
     setCurrentUser(UserData: any) {
-        this.currentUser=new User(UserData);
+        this.currentUser = new User(UserData);
         console.log("current User:" + this.currentUser);
     }
- 
+
 
 
     /**
@@ -54,7 +54,7 @@ export class UserFirebaseService {
 
     /**
     * Updates Or Creates a user document in Firestore.
-    * Depending on if user.is i given
+    * Depending on if user.id is given
     * @param {User} user - The user object to be updated or created.
      */
     async update(user: User) {
@@ -75,8 +75,8 @@ export class UserFirebaseService {
      * @param user - new User
      * @param UID - UID from Authentication
      */
-    async addNewUserWithUID(user: User, UID: string){
-        setDoc(doc (this.firestore, "users" , UID), user.toJSON());
+    async addNewUserWithUID(user: User, UID: string) {
+        setDoc(doc(this.firestore, "users", UID), user.toJSON());
         console.log("user created with UID from Authentication");
     }
 
@@ -86,23 +86,30 @@ export class UserFirebaseService {
      * @param UID - Unique ID of User
      * @returns - User-Objekt
      */
-    async getUserByUID(UID:string){
-        const docRef = await doc(this.firestore , "users", UID);
-        const docSnap = await getDoc(docRef);
-        console.log(new User(docSnap.data()));
-        
-        return new User(docSnap.data()); 
+    async getUserByUID(UID: string) {
+        //EVTL ADD If LOADEDUSERS[UID]
+
+        //ELSE-->
+        if (UID != "") {
+
+            const docRef = await doc(this.firestore, "users", UID);
+            const docSnap = await getDoc(docRef);
+
+            return new User(docSnap.data());
+        }else{
+            return new User();
+        }
     }
 
     /**
      * Sets a User with a given UID to the current logged in User
      * @param UID - Unique ID of User
      */
-    async setUIDToCurrentUser(UID:string){
+    async setUIDToCurrentUser(UID: string) {
         console.log("Set UID TO current User" + UID);
-        const user =  await this.getUserByUID(UID);     
-  /*     console.log("User from UID");  
-        console.log(user); */  
+        const user = await this.getUserByUID(UID);
+        /*    console.log("User from UID");  
+              console.log(user); */
         this.currentUser = user;
     }
 

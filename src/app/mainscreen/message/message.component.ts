@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { Message } from 'src/models/message.class';
 import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
   selector: 'app-message',
@@ -9,14 +10,33 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
   styleUrls: ['./message.component.scss'],
   providers: [MessageFirebaseService]
 })
-export class MessageComponent{
+export class MessageComponent {
 
-  @Input() message: Message | undefined;
+  public _message: Message | undefined;
+  public autorName: string="";
   @Output() messageTimestampEvent = new EventEmitter<number>();
 
-  constructor(public messageFirebaseService: MessageFirebaseService) {
+  constructor(
+    public messageFirebaseService: MessageFirebaseService,
+    public userFirebaseService: UserFirebaseService
+  ) {
 
   }
+
+  @Input()
+  public set message(value: Message){
+   this._message=value;
+   this.setAutorName(this._message.autorId);
+   
+ }
+
+  async setAutorName(autorId: string){
+    const autorValues=await this.userFirebaseService.getUserByUID(autorId);
+    this.autorName=autorValues.firstName;
+  }
+  
+
+   
 
   formatTimestampToHHMM(timestamp: number) {
     const date = new Date(timestamp);

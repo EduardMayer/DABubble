@@ -10,35 +10,15 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 })
 export class ChannelComponent {
 
-  lastMessageTimestamp=0;
-
   constructor(public channelFirebaseService: ChannelFirebaseService) {
-  }
-
-  setLastMessageTimestamp(timestamp: number){
-    this.lastMessageTimestamp=timestamp;
-    console.log(timestamp);
-  }
-
-  channelMessages(){
-    
-    setTimeout(()=>{
-      //console.log('here is channeldata', this.channelData);
-      //console.log('here are messages', this.messages);
-       //this.channelInstance=this.channelFirebaseService.currentChannel;
-       //this.messages=this.channelFirebaseService.currentChannel.messages;
-       //console.log(this.channelInstance);
-    },2000)
+    channelFirebaseService.loadChannelMessages("F8tiKVNq6FePPOb4BDps");// to be changed to currentChannel
+    setTimeout(()=>console.log( channelFirebaseService.loadedChannelMessages),2000);
   }
 
 
-  /*
-      if (currentChannel) {
-        console.log(currentChannel.messages);
-        this.messages = currentChannel.messages;
-        //this.messages=JSON.parse(this.channelData.messages);
-      }
-  */
+
+
+
       
 
 

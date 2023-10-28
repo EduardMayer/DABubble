@@ -59,9 +59,6 @@ export class ChannelFirebaseService {
                 this.loadedChannels.push(channel);
             });
         });
-        setTimeout(() => {
-            this.loadChannelMessages(this.loadedChannels[0].id);
-        }, 1000)
         return this.unsubChannels;
     }
 
