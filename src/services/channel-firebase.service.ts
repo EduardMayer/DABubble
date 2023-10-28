@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
 
 
@@ -18,6 +18,7 @@ export class ChannelFirebaseService {
 
     constructor(private firestore: Firestore) {
         this.loadedChannelId = 0;
+        this.load();
     }
 
     get currentChannel() {
@@ -51,12 +52,28 @@ export class ChannelFirebaseService {
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
-                channel.id = doc.id;
+                debugger;
+
+                let colRef = this.getSingleDocRef(this.getColIdFromChannels(), doc.id);
+                updateDoc(colRef, {
+                  id: doc.id
+                });
+
+                /*channel.id = doc.id;*/
                 this.loadedChannels.push(channel);
             });
         });
         return this.unsubChannels;
     }
+
+    getColIdFromChannels() {
+        return 'channels'
+      }
+
+    getSingleDocRef(colId: any, docId: string) {
+        return doc(collection(this.firestore, colId), docId);
+    
+      }
 
     getById(channelId: string) {
         const channel = doc(collection(this.firestore, "channels"), channelId);
@@ -86,6 +103,20 @@ export class ChannelFirebaseService {
             console.log("channel updated");
         }
     }
+
+    async addChannel(item: any) {
+        debugger;
+        await addDoc(this.getRefChannels(), item).catch(
+          (err) => { console.log(err) }
+        ).then(
+          (docRef) => {
+            console.log('Document writen with ID: ', docRef);
+          })
+      }
+
+      getRefChannels() {
+        return collection(this.firestore, 'channels');
+      }
 
 
     /**

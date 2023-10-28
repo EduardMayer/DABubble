@@ -15,11 +15,11 @@ export class ChannelComponent {
   constructor(public channelFirebaseService: ChannelFirebaseService) {
     
     setTimeout(()=>{
-      console.log('here is channeldata', this.channelData);
-      console.log('here are messages', this.messages);
-      this.channelInstance=this.channelFirebaseService.currentChannel;
-      this.messages=this.channelFirebaseService.currentChannel.messages;
-      console.log(this.channelInstance);
+      //console.log('here is channeldata', this.channelData);
+      //console.log('here are messages', this.messages);
+       //this.channelInstance=this.channelFirebaseService.currentChannel;
+       //this.messages=this.channelFirebaseService.currentChannel.messages;
+       //console.log(this.channelInstance);
     },2000)
   }
 

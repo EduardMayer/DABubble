@@ -1,6 +1,6 @@
 .addChannelDialogContainer {
     height: 447px;
-    width: 900px;
+    width: 738px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -11,10 +11,39 @@
 
 }
 
+mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 100%;
+}
+
 .mat-mdc-dialog-surface {
     border-radius: 35px;
 }
 
+.formFieldChannelName {
+    width: 100%;
+}
+
+.formFieldChannelDescription {
+    width: 100%;
+}
+
+mat-form-field {
+    &:hover {
+        background-color: unset;
+    }
+}
+
+.channelNameInput {
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 58px;
+}
+
+.channelDescriptionInput {
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 68px;
+}
 .createChannelButton {
     width: 126px;
     height: 58px;
