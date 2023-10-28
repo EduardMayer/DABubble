@@ -55,6 +55,18 @@ export class AuthFirebaseService {
    * @returns {Promise} - Retruns Promise (User Objekt) if login was successfull. Otherwise a errormessage with the reason of failure.
    */
   login(email: string, password: string) {
+
+    //Restore Login
+    return signInWithEmailAndPassword(this.auth, email, password)
+    .then((result: any) => {
+      this.UserData = result.user;
+      this.ngZone.run(() => {
+        this.router.navigate(['/main']);
+      });
+    })
+
+
+    /*
     if (this.firebaseUserService.mailExists(email)) {
       signInWithEmailAndPassword(this.auth, email, password)
         .then((result: any) => {
@@ -69,6 +81,7 @@ export class AuthFirebaseService {
       console.log("Mail not found!");
       return false;
     }
+    */
   }
 
   /**
@@ -85,6 +98,26 @@ export class AuthFirebaseService {
  * @param {string} password - The password for the user's account.
  */
   register(email: string, password: string) {
+
+    //Restore
+    createUserWithEmailAndPassword(this.auth, email, password)
+    .then((result) => {
+      this.UserData = result.user;
+      //this.firebaseUserService.update(this.UserData);
+      this.firebaseUserService.setCurrentUser(this.UserData)
+      this.ngZone.run(() => {
+      //this.router.navigate(['/avatar']);
+      });
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode + " " + errorMessage);
+    });
+
+
+
+    /*
     if (!this.firebaseUserService.mailExists(email)) {
       createUserWithEmailAndPassword(this.auth, email, password)
         .then((result) => {
@@ -103,6 +136,7 @@ export class AuthFirebaseService {
     } else {
       console.log("Mail already exists");
     }
+    */
   }
 
   /**

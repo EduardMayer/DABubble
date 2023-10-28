@@ -118,6 +118,9 @@
         </div>
         <span (click)="loginWithGoogle()"> Anmeldung mit Google </span>
       </div>
+      <span *ngIf="loginFailed" id="loginFailed-container">
+        {{loginErrorMessage}}
+      </span>
 
       <div class="user-login-button-container">
         <button
