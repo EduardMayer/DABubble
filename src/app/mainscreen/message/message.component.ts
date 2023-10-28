@@ -14,6 +14,7 @@ export class MessageComponent {
 
   public _message: Message | undefined;
   public autorName: string="";
+  public autorAvatar: string="";
   @Output() messageTimestampEvent = new EventEmitter<number>();
 
   constructor(
@@ -32,7 +33,24 @@ export class MessageComponent {
 
   async setAutorName(autorId: string){
     const autorValues=await this.userFirebaseService.getUserByUID(autorId);
-    this.autorName=autorValues.firstName;
+    
+    if(autorValues){
+      this.autorName=autorValues.fullName;
+      this.autorAvatar=autorValues.avatar;
+
+      if(this.autorName==""){
+        this.autorName="Guest";
+      }
+
+      if(this.autorAvatar==""){
+        this.autorAvatar="assets/img/avatar/avatar1.svg";
+      }
+    }else{
+      this.autorName="Guest";
+      this.autorAvatar="assets/img/avatar/avatar1.svg";
+    }
+
+    console.log(this.autorAvatar);
   }
   
 

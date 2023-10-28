@@ -1,41 +1,62 @@
-.message-container{
+.message-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    flex-direction: column;
+    align-items: flex-start;
 
-    .message-head{
+    .message-img {
+        width: 70px;
+        height: 70px;
+        padding: 10px;
+        border-radius: 50%;
+    }
+
+    .message-content {
+        width: 100%;
         display: flex;
-        flex-direction: row;
-        gap: 16px;
-        div{
+        align-items: flex-start;
+        flex-direction: column;
+
+        .message-head {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+
+            div {
+                width: fit-content;
+            }
+
+        }
+
+        mat-card {
             width: fit-content;
-        }
+            background-color: #ECEEFE;
+            border-radius: 0 30px 30px 30px;
 
-    }
-
-    mat-card{
-        width: fit-content;
-        background-color: #ECEEFE;
-        border-radius: 0 30px 30px 30px;
-
-        mat-card-content{
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 24.55px;
+            mat-card-content {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24.55px;
+            }
         }
     }
-} 
 
-.inverted{
-    align-items: end;
-    .message-head{
-        flex-direction: row-reverse;
+
+}
+
+.inverted {
+    flex-direction: row-reverse;
+
+    .message-content {
+        align-items: end;
+
+        .message-head {
+            flex-direction: row-reverse;
+        }
+
+        mat-card {
+            border-radius: 30px 0 30px 30px;
+            background-color: #797EF3;
+        }
     }
-
-    mat-card{
-        border-radius: 30px 0 30px 30px;
-        background-color: #797EF3;
-    }
-
 }

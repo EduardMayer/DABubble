@@ -1,20 +1,26 @@
 <div class='message-container' *ngIf="_message">
-    <div class="message-head">
-        <div> {{ formatTimestampToHHMM(_message.timestamp) }}</div>
-        <div *ngIf="autorName!=''"><b>{{ autorName }}</b></div>
+    <img src="{{ autorAvatar }}" width="40px" height="40px" class="message-img" *ngIf="autorAvatar">
+    <div class="message-content">
+        <div class="message-head">
+            <div> {{ formatTimestampToHHMM(_message.timestamp) }}</div>
+            <div *ngIf="autorName!=''"><b>{{ autorName }}</b></div>
+        </div>
+        <mat-card>
+            <mat-card-content>{{ _message.content }}</mat-card-content>
+        </mat-card>
     </div>
-    <mat-card>
-        <mat-card-content>{{ _message.content }}</mat-card-content>
-    </mat-card>
 </div>
 
 
-<div class='message-container inverted'>
-    <div class="message-head">
-        <div>15:06</div>
-        <div><b>Guest</b></div>
+<div class='message-container inverted' *ngIf="_message">
+    <img src="{{ autorAvatar }}" class="message-img" *ngIf="autorAvatar">
+    <div class="message-content">
+        <div class="message-head">
+            <div> {{ formatTimestampToHHMM(_message.timestamp) }}</div>
+            <div *ngIf="autorName!=''"><b>{{ autorName }}</b></div>
+        </div>
+        <mat-card>
+            <mat-card-content>{{ _message.content }}</mat-card-content>
+        </mat-card>
     </div>
-    <mat-card>
-        <mat-card-content>Testantwort</mat-card-content>
-    </mat-card>
 </div>
