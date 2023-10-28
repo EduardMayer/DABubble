@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Channel } from 'src/models/channel.class';
 import { User } from 'src/models/user.class';
@@ -14,7 +14,7 @@ import { Message } from 'src/models/message.class';
   templateUrl: './test-module.component.html',
   styleUrls: ['./test-module.component.scss']
 })
-export class TestModuleComponent {
+export class TestModuleComponent implements OnInit{
 
   channels: any[] | undefined;
 
@@ -46,7 +46,9 @@ export class TestModuleComponent {
       "users": ["123123222123123", "askjdha222sje3ui312", "pseudoIds"]
     });
 
+
     //this.firebaseServiceThread.update(thread);
+
 
 
     //this.logRandomThread();
@@ -87,12 +89,22 @@ export class TestModuleComponent {
 
   }
 
+  ngOnInit(): void {
+   // this.createTestUser(); 
+  }
+
   logRandomThread(){
     this.firebaseServiceThread.getById("6ejabbzpRlUIfWzqEsjO");
     this.firebaseServiceThread.getById("Dv4FmZyNNrMbbtHo0Elz");
     setTimeout(()=>{
       console.log(this.firebaseServiceThread.loadedThread);
     },2000);
-    
+
+  }
+
+  createTestUser(){
+    const user = new User(); 
+    const UID = "ONU7LtimwEtSoaZJJuTXXXXsdysdaXX"; 
+    this.firebaseServiceUser.addNewUserWithUID(user, UID); 
   }
 }

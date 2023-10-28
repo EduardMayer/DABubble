@@ -15,25 +15,28 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit{
 
-  user: User = new User({
+  user: any = new User({
     birthdate: "2000-03-23", 
-    firstName: "Guest",
-    lastName: "User", 
+    firstName: " ",
+    lastName: " ", 
     id:"", 
     mail:"", 
     street:"", 
     zipCode:"", 
-    avatar: "assets/img/avatar/avatar1.svg", 
+    avatar: "", 
   }) ; 
 
   showHeaderMenu = false; 
-  showHeaderUserProfil = true; 
+  showHeaderUserProfil = false; 
 
   constructor(private authService:AuthFirebaseService , private userService:UserFirebaseService , private router:Router){}
 
-  ngOnInit(): void {
-    //Get current UserID from Local Storage 
-    //Get User from userService wirth UserID
+  async ngOnInit(): Promise<void> {
+    //console.log( this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid));
+    const user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
+    this.user = user; 
+    //console.log("onInitHeadfer");
+    //console.log(this.user);
   }
 
   logout(){

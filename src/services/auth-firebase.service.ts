@@ -31,12 +31,15 @@ export class AuthFirebaseService {
    * @param router - Angular Router
    * @param ngZone 
    */
-  constructor(private auth: Auth, private router: Router, public ngZone: NgZone) {
+  constructor(private auth: Auth, private router: Router, public ngZone: NgZone , private userService: UserFirebaseService) {
     onAuthStateChanged(this.auth, (user: any) => {
       if (user) {
         this.UserData = user;
         localStorage.setItem('user', JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem('user')!);
+        console.log(this.UserData.uid);
+        this.userService.setUIDToCurrentUser(this.UserData.uid);
+      
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);

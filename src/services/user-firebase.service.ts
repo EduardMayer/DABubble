@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, getDoc } from "firebase/firestore";
 import { User } from '../models/user.class';
 
 
@@ -31,7 +31,10 @@ export class UserFirebaseService {
 
     setCurrentUser(UserData: any) {
         this.currentUser=new User(UserData);
-      }
+        console.log("current User:" + this.currentUser);
+    }
+ 
+
 
     /**
     * Asynchronously loads user data from Firestore based on optional index parameters.
@@ -66,6 +69,42 @@ export class UserFirebaseService {
         }
     }
 
+    /**
+     * Creates a new User with a Custom ID. To create a new User you should take UID from Firebase Authentication.  
+     * 
+     * @param user - new User
+     * @param UID - UID from Authentication
+     */
+    async addNewUserWithUID(user: User, UID: string){
+        setDoc(doc (this.firestore, "users" , UID), user.toJSON());
+        console.log("user created with UID from Authentication");
+    }
+
+    /**
+     *Returns a User for a given User UID. 
+     * 
+     * @param UID - Unique ID of User
+     * @returns - User-Objekt
+     */
+    async getUserByUID(UID:string){
+        const docRef = await doc(this.firestore , "users", UID);
+        const docSnap = await getDoc(docRef);
+        console.log(new User(docSnap.data()));
+        
+        return new User(docSnap.data()); 
+    }
+
+    /**
+     * Sets a User with a given UID to the current logged in User
+     * @param UID - Unique ID of User
+     */
+    async setUIDToCurrentUser(UID:string){
+        console.log("Set UID TO current User" + UID);
+        const user =  await this.getUserByUID(UID);     
+  /*     console.log("User from UID");  
+        console.log(user); */  
+        this.currentUser = user;
+    }
 
 
     /**
