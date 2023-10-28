@@ -1,0 +1,75 @@
+.addChannelDialogContainer {
+    height: 447px;
+    width: 738px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: white;
+    border-radius: 35px;
+
+}
+
+mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 100%;
+}
+mat-dialog-container {
+    
+}
+
+.mat-mdc-dialog-surface {
+    border-radius: 35px;
+}
+
+.formFieldChannelName {
+    width: 100%;
+}
+
+.formFieldChannelDescription {
+    width: 100%;
+}
+
+mat-form-field {
+    &:hover {
+        background-color: unset;
+    }
+}
+
+.channelNameInput {
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 58px;
+}
+
+.channelDescriptionInput {
+    border: 1px solid black;
+    border-radius: 30px;
+    height: 68px;
+}
+.createChannelButton {
+    width: 126px;
+    height: 58px;
+    border-radius: 29px;
+    background-color: #444DF2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-top: 18px;
+
+    position: absolute;
+    right: 32px;
+    bottom: 28px;
+}
+
+.mat-mdc-dialog-container {
+    border-radius: 10px !important;
+ }
+
+ body .cdk-overlay-container .mat-mdc-dialog-container {
+    border-radius: 35px !important;
+}
+
+

@@ -29,7 +29,11 @@ import { TestModuleComponent } from './test-module/test-module.component';
 import { MessageComponent } from './mainscreen/message/message.component';
 import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { MatMenuModule } from '@angular/material/menu';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
+
+
 import { MessageEditComponent } from './mainscreen/channel/message-edit/message-edit.component';
 import { MessageCreateComponent } from './mainscreen/channel/message-create/message-create.component';
 
@@ -50,6 +54,7 @@ import { MessageCreateComponent } from './mainscreen/channel/message-create/mess
     TestModuleComponent,
     MessageComponent,
     AvatarChooseComponent,
+    AddChannelDialogComponent,
     MessageEditComponent,
     MessageCreateComponent
   ],
@@ -69,7 +74,8 @@ import { MessageCreateComponent } from './mainscreen/channel/message-create/mess
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule, 
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
