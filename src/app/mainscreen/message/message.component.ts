@@ -30,10 +30,15 @@ export class MessageComponent {
 
   async setUser(message: Message) {
     this.userName = "";
-    const user = await this.userFirebaseService.getById(message.autorId);
-    if (user) {
-      this.userName = user.firstName + " " + user.lastName;
+    if (message.autorId == "") {
+      this.userName = "Unknown";
+    } else {
+      const user = await this.userFirebaseService.getById(message.autorId);
+      if (user) {
+        this.userName = user.firstName + " " + user.lastName;
+      }
     }
+
   }
 
 
