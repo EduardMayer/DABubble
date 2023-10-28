@@ -9,6 +9,9 @@ import { Message } from 'src/models/message.class';
     providedIn: 'root'
 })
 export class ChannelFirebaseService {
+  updateChannelMessage(id: string, message: Message) {
+    throw new Error('Method not implemented.');
+  }
 
     public loadedChannels: Channel[] = [];
     private unsubChannels: any; //Whats the type?
@@ -71,6 +74,9 @@ export class ChannelFirebaseService {
             this.loadChannelMessages(this.loadedChannels[0].id);
         }, 1000)
         return this.unsubChannels;
+    }
+    loadChannelMessages(id: string) {
+        throw new Error('Method not implemented.');
     }
 
     getColIdFromChannels() {
