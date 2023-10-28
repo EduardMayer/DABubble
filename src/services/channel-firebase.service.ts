@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
 import { Message } from 'src/models/message.class';
 
@@ -70,7 +70,7 @@ export class ChannelFirebaseService {
     * @returns {Promise<void>} - A Promise that resolves when the messages have been loaded.
     */
     async loadChannelMessages(channelId: string) {
-        const q = query(collection(this.firestore, `channels/${channelId}/messages`));
+        const q = this.getChannelMessagesQuery(channelId);
         this.unsubChannel = onSnapshot(q, (querySnapshot: any) => {
             this.loadedChannelMessages = [];
             querySnapshot.forEach((doc: any) => {
@@ -83,11 +83,11 @@ export class ChannelFirebaseService {
     }
 
     getChannelMessagesQuery(channelId: string) {
-        return query(collection(this.firestore, `channels/${channelId}/messages`));
+        return query(collection(this.firestore, `channels/${channelId}/messages`), orderBy("timestamp", "desc"));
     }
 
     getById(channelId: string) {
-        const channel = doc(collection(this.firestore, "channels",), channelId);
+        const channel = doc(collection(this.firestore, "channels"), channelId);
         this.unsubChannel = onSnapshot(channel, (doc) => {
             this.loadedChannel = undefined;
             let docData = doc.data();

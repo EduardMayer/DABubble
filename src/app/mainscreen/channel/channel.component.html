@@ -1,10 +1,10 @@
-<mat-card id="channel" class="br-30">
-    <mat-card-content id="channel-content">channel</mat-card-content>
-
-    <div *ngIf="channelFirebaseService.currentChannel" class="chat-container">
-        <div *ngFor="let message of channelFirebaseService.loadedChannelMessages">
-            <app-message [message]="message" ></app-message>
-        </div>
+<mat-card id="channel" class="br-30" *ngIf="channelFirebaseService.currentChannel">
+    <mat-card-header>{{ channelFirebaseService.currentChannel.channelName }}</mat-card-header>
+    <mat-card-content id="channel-content"></mat-card-content>
+    <div class="chat-container">
+        <app-message *ngFor="let message of channelFirebaseService.loadedChannelMessages"
+            [message]="message"></app-message>
     </div>
+
     <app-message-create></app-message-create>
 </mat-card>

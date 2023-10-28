@@ -12,7 +12,6 @@ export class ChannelComponent {
 
   constructor(public channelFirebaseService: ChannelFirebaseService) {
     channelFirebaseService.loadChannelMessages("F8tiKVNq6FePPOb4BDps");// to be changed to currentChannel
-    setTimeout(()=>console.log( channelFirebaseService.loadedChannelMessages),2000);
   }
 
 

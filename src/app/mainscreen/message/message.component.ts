@@ -49,8 +49,6 @@ export class MessageComponent {
       this.autorName="Guest";
       this.autorAvatar="assets/img/avatar/avatar1.svg";
     }
-
-    console.log(this.autorAvatar);
   }
   
 
