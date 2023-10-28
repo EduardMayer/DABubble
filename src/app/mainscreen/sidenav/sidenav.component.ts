@@ -1,10 +1,4 @@
 import { Component } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { AddChannelDialogComponent } from 'src/app/add-channel-dialog/add-channel-dialog.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -15,8 +9,6 @@ export class SidenavComponent {
 
 unpackChannels = false;
 unpackMessages = false;
-
-constructor(public dialog: MatDialog) {}
 
 
   showChannels() {
@@ -36,21 +28,6 @@ constructor(public dialog: MatDialog) {}
       this.unpackMessages = false;
     }
   }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AddChannelDialogComponent, {
-      //data: {name: this.name},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
-    });
-  }
   }
 
 
-
-  
-
-  

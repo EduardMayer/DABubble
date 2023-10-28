@@ -21,9 +21,9 @@
                 <img class="pad-right17 workspaces" src="/assets/img/icons/workspaces.png">
                 <h3 class="myChannelsHeaderText">Channels</h3>
             </div>
-            <button (click)="openDialog()" mat-icon-button class="add">
+            <button mat-icon-button class="add">
                 <mat-icon>
-                    <img class="addImage" src="/assets/img/icons/add.png">
+                    <img class="addImage"  src="/assets/img/icons/add.png">
                 </mat-icon>
             </button>
 
@@ -41,29 +41,23 @@
                 <img class="pad-right17" src="/assets/img/icons/add_circle.png">
                 Channel hinzufügen
             </div>
+
         </div>
+
     </div>
 
-    <div class="myMessagesContainer">
-        <div (click)="showMessages()" class="myMessagesHeader">
+    <div (click)="showMessages()" class="myMessagesContainer">
+        <div class="myMessagesHeader">
             <img class="pad-right17 arrow_drop" src="/assets/img/icons/arrow_drop.png"
                 [src]="unpackMessages ? '/assets/img/icons/arrow_drop_down.png' : '/assets/img/icons/arrow_drop.png'">
             <img class="pad-right17 accountIcon" src="/assets/img/icons/accountIcon.png">
             <h3 class="myMessagesHeaderText">Direktnachrichten</h3>
         </div>
 
+
         <div class="myMessages" id="myMessages" *ngIf="unpackMessages">
-            <div class="message">
-                <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
-                <b>Frederick Beck(Du)</b>
-            </div>
-
-            <div class="message">
-                <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
-                <b>Frederick Beck(Du)</b>
-            </div>
+            Frederick Beck(Du)
         </div>
-
     </div>
 
 </mat-card>

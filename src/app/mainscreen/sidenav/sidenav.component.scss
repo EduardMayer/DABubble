@@ -100,31 +100,6 @@
     }
 }
 
-.myMessagesContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.message {
-    
-    width: 240px;
-    height: 60px;
-    border-radius: 37px;
-    margin-top: 8px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:hover {
-        background-color: rgba(155, 150, 250, 0.37);
-        cursor: pointer;
-    }
-}
-
 .addChannel {
     padding-top: 20px;
 
@@ -142,10 +117,6 @@
 
 .myMessages {
     display: flex;
-   flex-direction: column;
-}
-
-.avatar0 {
-    width: 50px;
-    padding-right: 23px;
+    justify-content: center;
+    align-items: center;
 }
