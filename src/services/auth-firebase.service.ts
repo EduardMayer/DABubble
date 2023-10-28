@@ -19,9 +19,6 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthFirebaseService {
-  createUserWithEmailAndPassword(emailInputValue: string, passwordInputValue: string) {
-    throw new Error('Method not implemented.');
-  }
 
 
   firebaseUserService = inject(UserFirebaseService);
