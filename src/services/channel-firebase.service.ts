@@ -59,8 +59,6 @@ export class ChannelFirebaseService {
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
-                debugger;
-
                 let colRef = this.getSingleDocRef(this.getColIdFromChannels(), doc.id);
                 updateDoc(colRef, {
                   id: doc.id
@@ -115,7 +113,6 @@ export class ChannelFirebaseService {
     }
 
     async addChannel(item: any) {
-        debugger;
         await addDoc(this.getRefChannels(), item).catch(
           (err) => { console.log(err) }
         ).then(
