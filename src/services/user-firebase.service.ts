@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, getDoc } from "firebase/firestore";
 import { User } from '../models/user.class';
 
 
@@ -8,7 +8,7 @@ import { User } from '../models/user.class';
     providedIn: 'root'
 })
 export class UserFirebaseService {
-    
+
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
@@ -17,12 +17,12 @@ export class UserFirebaseService {
 
     public currentUser: User = new User(
         {
-        id: "",
-        fullName: "Guest",
-        firstName: "Guest",
-        lastName: "",
-        mail: "guest@guest.at",
-        avatar: ""
+            id: "",
+            fullName: "Guest",
+            firstName: "Guest",
+            lastName: "",
+            mail: "guest@guest.at",
+            avatar: ""
         }
     )
 
@@ -30,8 +30,8 @@ export class UserFirebaseService {
     }
 
     setCurrentUser(UserData: any) {
-        this.currentUser=new User(UserData);
-      }
+        this.currentUser = new User(UserData);
+    }
 
     /**
     * Asynchronously loads user data from Firestore based on optional index parameters.
@@ -66,6 +66,17 @@ export class UserFirebaseService {
         }
     }
 
+
+    async getById(userId: string) {
+        const user = doc(collection(this.firestore, "users"), userId);
+        const docSnap = await getDoc(user);
+        if (docSnap.exists()) {
+            return new User(docSnap.data());
+        } else {
+            console.log(`User with id: ${userId} not found`);
+            return undefined;
+        }
+    };
 
 
     /**
