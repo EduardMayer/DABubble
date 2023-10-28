@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
 import { Message } from 'src/models/message.class';
 
@@ -9,9 +9,6 @@ import { Message } from 'src/models/message.class';
     providedIn: 'root'
 })
 export class ChannelFirebaseService {
-  updateChannelMessage(id: string, message: Message) {
-    throw new Error('Method not implemented.');
-  }
 
     public loadedChannels: Channel[] = [];
     private unsubChannels: any; //Whats the type?
@@ -25,7 +22,6 @@ export class ChannelFirebaseService {
 
     constructor(private firestore: Firestore) {
         this.loadedChannelId = 0;
-        this.load();
     }
 
     get currentChannel() {
@@ -59,29 +55,39 @@ export class ChannelFirebaseService {
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
-                let colRef = this.getSingleDocRef(this.getColIdFromChannels(), doc.id);
-                updateDoc(colRef, {
-                  id: doc.id
-                });
-
-                /*channel.id = doc.id;*/
+                channel.id = doc.id;
                 this.loadedChannels.push(channel);
             });
         });
+        setTimeout(() => {
+            this.loadChannelMessages(this.loadedChannels[0].id);
+        }, 1000)
         return this.unsubChannels;
     }
-    loadChannelMessages(id: string) {
-        throw new Error('Method not implemented.');
+
+
+    /**
+    * Asynchronously loads messages of the channels messages Subcollection from Firestore.
+    *
+    * @param {string} channelId - The ID of the channel from which to load messages.
+    * @returns {Promise<void>} - A Promise that resolves when the messages have been loaded.
+    */
+    async loadChannelMessages(channelId: string) {
+        const q = query(collection(this.firestore, `channels/${channelId}/messages`));
+        this.unsubChannel = onSnapshot(q, (querySnapshot: any) => {
+            this.loadedChannelMessages = [];
+            querySnapshot.forEach((doc: any) => {
+                if (doc.data()) {
+                    const message = new Message(doc.data());
+                    this.loadedChannelMessages.push(message);
+                }
+            })
+        });
     }
 
-    getColIdFromChannels() {
-        return 'channels'
-      }
-
-    getSingleDocRef(colId: any, docId: string) {
-        return doc(collection(this.firestore, colId), docId);
-    
-      }
+    getChannelMessagesQuery(channelId: string) {
+        return query(collection(this.firestore, `channels/${channelId}/messages`));
+    }
 
     getById(channelId: string) {
         const channel = doc(collection(this.firestore, "channels",), channelId);
@@ -112,18 +118,28 @@ export class ChannelFirebaseService {
         }
     }
 
-    async addChannel(item: any) {
-        await addDoc(this.getRefChannels(), item).catch(
-          (err) => { console.log(err) }
-        ).then(
-          (docRef) => {
-            console.log('Document writen with ID: ', docRef);
-          })
-      }
+    async updateChannelMessage(channelId: string, channelMessage: Message) {
+        console.log(channelId);
+        console.log(channelMessage);
+        if (channelId != "") {
+            console.log("here");
+            if (channelMessage.id == "") {
+                channelMessage.id = String(this.cyrb53(String(channelId) + String(channelMessage.content)));
+                const docInstance = doc(this.firestore, `channels/${channelId}/messages/${channelMessage.id}`);
+                await setDoc(docInstance, channelMessage.toJSON());
+                console.log("channelMessages updated");
 
-      getRefChannels() {
-        return collection(this.firestore, 'channels');
-      }
+            } else {
+                const docInstance = doc(this.firestore, `channels/${channelId}/messages`, channelMessage.id);
+                await updateDoc(docInstance, channelMessage.toJSON());
+                console.log("channelMessages updated");
+            }
+
+        }
+
+    }
+
+
 
 
     /**

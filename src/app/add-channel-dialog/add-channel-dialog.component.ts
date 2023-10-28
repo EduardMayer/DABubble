@@ -59,11 +59,8 @@ debugger;
 console.log(value);
 
 const newChannel = new Channel(value);
-  console.log(newChannel);
 
-let getPureJson = newChannel.toJSON();
-
-  this.firebaseChannel.addChannel(getPureJson);
+  this.firebaseChannel.updateChannel(newChannel);
 
   }
 }
