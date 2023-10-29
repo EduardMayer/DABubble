@@ -11,9 +11,9 @@ import { AuthFirebaseService } from 'src/services/auth-firebase.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  
-  constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) {}
-  
+
+  constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
+  newUser = this.userService.currentUser;
   user = new User();
   isNameInputActive = false;
   isEmailInputActive = false;
@@ -46,14 +46,14 @@ export class RegisterComponent {
     }
     return null;
   }
-  
+
 
   passwordValidator(control: FormControl): { [key: string]: boolean } | null {
     if (control.value) {
       const hasUppercase = /[A-Z]/.test(control.value);
       const hasLowercase = /[a-z]/.test(control.value);
       const hasSpecialCharacter = /[!@#$%^&*()_+]/.test(control.value);
-      
+
       if (!hasUppercase || !hasLowercase || !hasSpecialCharacter) {
         return { invalidPassword: true };
       }
@@ -70,24 +70,20 @@ export class RegisterComponent {
   }
 
 
- onSubmit() {
-  const nameInputValue = this.contactForm.get('nameInput')?.value || '';
-  const emailInputValue = this.contactForm.get('emailInput')?.value || '';
-  const passwordInputValue = this.contactForm.get('passwordInput')?.value || '';
+  onSubmit() {
+    const nameInputValue = this.contactForm.get('nameInput')?.value || '';
+    const emailInputValue = this.contactForm.get('emailInput')?.value || '';
+    const passwordInputValue = this.contactForm.get('passwordInput')?.value || '';
 
-  if (this.userService.mailExists(emailInputValue)) {
-    console.log("Die E-Mail-Adresse existiert bereits.");
-  } else {
-    this.user.fullName = nameInputValue;
-    this.user.mail = emailInputValue;
-    this.userService.update(this.user);
-
-    // Benutzerdaten über einen Query-Parameter an die nächste Komponente übergeben
-    this.router.navigate(['avatar'], {
-      queryParams: { user: JSON.stringify(this.user) }
-    });
+    if (this.userService.mailExists(emailInputValue)) {
+      console.log("Die E-Mail-Adresse existiert bereits.");
+    } else {
+      this.userService.currentUser.fullName = nameInputValue;
+      this.userService.currentUser.mail = emailInputValue;
+      //this.authService.register(emailInputValue, passwordInputValue);
+      this.userService.update(this.newUser);
+      this.router.navigate(['avatar']);
+    }
   }
-}
 
-  
 }

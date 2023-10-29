@@ -9,14 +9,14 @@
     <div class="avatar-box">
       <img [src]="user.avatar">
     </div>
-    <span>{{user.fullName}}</span>
+    <span>{{ userService.currentUser.fullName }}</span>
    
     <div class="choose-avatar-container">
       <div class="choose-avatar-text-box">
         Aus der Liste wählen
       </div>
       <div class="choose-avatar-box" *ngFor="let avatar of avatars">
-        <img [src]=" 'assets/img/avatar/'+ avatar" (click)="selectAvatar(avatar)">
+        <img [src]="'assets/img/avatar/'+ avatar" (click)="selectAvatar(avatar)">
     </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
   
 
   <div class="user-avatar-button-container">
-    <button
+    <button (click)="onSubmitAvatar()"
       class="blue-button"
       mat-raised-button
       color="primary"
