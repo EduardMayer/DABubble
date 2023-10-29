@@ -16,11 +16,9 @@ export class MainscreenComponent implements OnInit {
   sideNavOpen = true;
 
   seclectedChannel: string = "";
-  channelData: Channel[];
 
   constructor(public channelFirebaseService: ChannelFirebaseService,public userFirebaseService: UserFirebaseService , private authService: AuthFirebaseService) {
-    this.selectChannel("Alt");
-    this.channelData = channelFirebaseService.loadedChannels;
+    this.channelFirebaseService.load();
   }
 
   ngOnInit(): void {

@@ -32,9 +32,10 @@
         <div class="myChannelsDropdown" id="myChannelsDropdown" *ngIf="unpackChannels">
 
             <div class="myChannels">
-                # HTML<br>
-                # CSS<br>
-                # javascript<br>
+                <div class="pad-left40" *ngFor=" let channel of channelFirebaseService.loadedChannels" (click)="channelFirebaseService.selectChannel(channel.id)">
+                    #{{ channel.id }}
+                    #{{ channel.channelName }}
+                </div>
             </div>
 
             <div class="addChannel">

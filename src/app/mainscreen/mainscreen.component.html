@@ -1,10 +1,10 @@
-<div id="main-container">
+<div id="main-container" *ngIf="channelFirebaseService.loadedChannels">
     
     <app-header id="main-header"></app-header>
     
-    <div id="main-body">    
+    <div id="main-body" *ngIf="channelFirebaseService.loadedChannels">    
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
-        <app-channel *ngIf="channelOpen && channelFirebaseService.loadedChannels" id="main-channel"></app-channel>
+        <app-channel *ngIf="channelOpen && channelFirebaseService.selectedChannelId" id="main-channel"></app-channel>
         <!-- <app-channel *ngIf="!channelOpen" id="main-chat"></app-channel>-->
         <app-thread  [class.dsp-none] = "!threadOpen" id="main-thread"></app-thread>
     </div>

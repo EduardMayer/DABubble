@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AddChannelDialogComponent } from 'src/app/add-channel-dialog/add-channel-dialog.component';
+import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -16,7 +17,7 @@ export class SidenavComponent {
 unpackChannels = false;
 unpackMessages = false;
 
-constructor(public dialog: MatDialog) {}
+constructor(public dialog: MatDialog, public channelFirebaseService: ChannelFirebaseService) {}
 
 
   showChannels() {

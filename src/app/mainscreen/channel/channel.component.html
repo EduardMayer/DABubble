@@ -1,8 +1,8 @@
-<mat-card id="channel" class="br-30" *ngIf="channelFirebaseService.currentChannel  && userFirebaseService.currentUser.id!='' ">
-    <mat-card-header>{{ channelFirebaseService.currentChannel.channelName }}</mat-card-header>
+<mat-card id="channel" class="br-30" *ngIf="channelFirebaseService.selectedChannel  && userFirebaseService.currentUser.id!='' ">
+    <mat-card-header>{{ channelFirebaseService.selectedChannel.channelName }}</mat-card-header>
     <mat-card-content id="channel-content"></mat-card-content>
     <div class="chat-container">
-        <app-message *ngFor="let message of channelFirebaseService.loadedChannelMessages"
+        <app-message *ngFor="let message of channelFirebaseService.selectedChannelMessages"
             [message]="message"></app-message>
     </div>
 

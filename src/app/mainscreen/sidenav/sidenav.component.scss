@@ -66,12 +66,17 @@
 
 .pad-right17 {
     padding-right: 17px;
+}
 
+.pad-left40{
+    padding-left: 40px;
 }
 
 .myChannels {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+
 }
 
 .myMessagesHeader {

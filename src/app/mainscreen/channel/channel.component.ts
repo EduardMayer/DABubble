@@ -15,7 +15,10 @@ export class ChannelComponent {
     public channelFirebaseService: ChannelFirebaseService,
     public userFirebaseService: UserFirebaseService
     ) {
-    channelFirebaseService.loadChannelMessages("F8tiKVNq6FePPOb4BDps");// to be changed to currentChannel
+    if(channelFirebaseService.selectedChannel){
+      channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
+    }
+    
   }
 
 

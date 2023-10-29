@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
 import { Message } from 'src/models/message.class';
+import { User } from 'src/models/user.class';
+import { UserFirebaseService } from './user-firebase.service';
 
 
 @Injectable({
@@ -14,19 +16,29 @@ export class ChannelFirebaseService {
     private unsubChannels: any; //Whats the type?
 
     private unsubChannel: any;
-    public loadedChannel: Channel | undefined;
 
-    loadedChannelId: number;
-    loadedChannelMessages: Message[] = [];
+
+    channelUsers: User[] = [];
+    userService = inject(UserFirebaseService);
+
+    selectedChannelId: string | undefined;
+    selectedChannel: Channel | undefined;
+    selectedChannelMessages: Message[] = [];
+
     lastMessageTimestamp: number = 0;
 
     constructor(private firestore: Firestore) {
-        this.loadedChannelId = 0;
+        this.selectedChannelId = "F8tiKVNq6FePPOb4BDps";
     }
 
-    get currentChannel() {
-        return this.loadedChannels[this.loadedChannelId];
+    selectChannel(channelId: string) {
+        this.selectedChannelId = channelId;
+        this.loadChannelMessages(channelId);
+        const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
+        this.selectedChannel = this.loadedChannels[index];
+        this.loadChannelUsers(this.selectedChannel.users);
     }
+
 
     /**
     * Generates a Firestore query to retrieve channel data with optional index-based filtering.
@@ -72,14 +84,27 @@ export class ChannelFirebaseService {
     async loadChannelMessages(channelId: string) {
         const q = this.getChannelMessagesQuery(channelId);
         this.unsubChannel = onSnapshot(q, (querySnapshot: any) => {
-            this.loadedChannelMessages = [];
+            this.selectedChannelMessages = [];
             querySnapshot.forEach((doc: any) => {
                 if (doc.data()) {
                     const message = new Message(doc.data());
-                    this.loadedChannelMessages.push(message);
+                    this.selectedChannelMessages.push(message);
                 }
             })
         });
+    }
+
+    async loadChannelUsers(currentChannelUsers: string[]) {
+        if (currentChannelUsers.length > 0) {
+            console.log(currentChannelUsers);
+            console.log(currentChannelUsers.length);
+            currentChannelUsers.forEach((uid: string) => {
+                this.userService.getUserByUID(uid).
+                    then((user) => {
+                        this.channelUsers.push(user);
+                    });
+            })
+        }
     }
 
     getChannelMessagesQuery(channelId: string) {
@@ -89,11 +114,11 @@ export class ChannelFirebaseService {
     getById(channelId: string) {
         const channel = doc(collection(this.firestore, "channels"), channelId);
         this.unsubChannel = onSnapshot(channel, (doc) => {
-            this.loadedChannel = undefined;
+            this.selectedChannel = undefined;
             let docData = doc.data();
             if (docData) {
                 const channel = new Channel(docData);
-                this.loadedChannel = channel;
+                this.selectedChannel = channel;
             }
         })
     };

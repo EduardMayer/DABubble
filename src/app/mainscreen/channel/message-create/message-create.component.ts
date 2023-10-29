@@ -23,26 +23,27 @@ export class MessageCreateComponent {
 
   async createMessage() {
     this.message.content;
-    this.message.timestamp=Date.now();
+    this.message.timestamp = Date.now();
 
-    this.message.autorId=this.userFirebaseService.currentUser.id;
-    this.message.avatarSrc=this.userFirebaseService.currentUser.avatar;
-    if(!this.message.autorId){
-      this.message.autorId="";
+    this.message.autorId = this.userFirebaseService.currentUser.id;
+    this.message.avatarSrc = this.userFirebaseService.currentUser.avatar;
+    if (!this.message.autorId) {
+      this.message.autorId = "";
     }
 
-    if(!this.message.avatarSrc){
-      this.message.avatarSrc="assets/img/avatar/avatar1.svg";
+    if (!this.message.avatarSrc) {
+      this.message.avatarSrc = "assets/img/avatar/avatar1.svg";
     }
 
-    console.log(this.message.avatarSrc="./assets/img/avatar/avatar1.svg");
+    console.log(this.message.avatarSrc = "./assets/img/avatar/avatar1.svg");
 
     //let messageId = await this.firebaseMessageService.update(this.message);
     if (true) {
       //this.firebaseChannelService.currentChannel.messages.push(messageId);
       //this.firebaseChannelService.updateChannel(this.firebaseChannelService.currentChannel);
-      this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.currentChannel.id,this.message);
-
+      if (this.channelFirebaseService.selectedChannel) {
+        this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this.message);
+      }
     }
   }
 }
