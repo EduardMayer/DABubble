@@ -7,6 +7,7 @@
     margin: 0;
     border-radius: 30px;
     padding: 35px;
+    background-color: azure;
 }
 
 .align-bottom {
@@ -19,4 +20,21 @@
     height: 100%;
     display: flex;
     flex-direction: column-reverse;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+mat-card-header {
+    display: flex;
+
+    .header-title {
+        display: flex;
+    }
+
+
 }

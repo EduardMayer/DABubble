@@ -95,9 +95,8 @@ export class ChannelFirebaseService {
     }
 
     async loadChannelUsers(currentChannelUsers: string[]) {
+        this.channelUsers = [];
         if (currentChannelUsers.length > 0) {
-            console.log(currentChannelUsers);
-            console.log(currentChannelUsers.length);
             currentChannelUsers.forEach((uid: string) => {
                 this.userService.getUserByUID(uid).
                     then((user) => {

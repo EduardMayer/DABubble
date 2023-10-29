@@ -1,5 +1,14 @@
-<mat-card id="channel" class="br-30" *ngIf="channelFirebaseService.selectedChannel  && userFirebaseService.currentUser.id!='' ">
-    <mat-card-header>{{ channelFirebaseService.selectedChannel.channelName }}</mat-card-header>
+<mat-card id="channel" *ngIf="channelFirebaseService.selectedChannel  && userFirebaseService.currentUser.id!='' ">
+    <mat-card-header>
+        <div class="header-title" width="fit-content">
+            <div><h2># {{ channelFirebaseService.selectedChannel.channelName }}</h2></div>
+            <div></div>
+        </div>
+        <div class="user-avatar-list">
+            asd
+            <img class="avatar-img" *ngFor="let user of channelFirebaseService.channelUsers" src="{{ user.avatar }}">
+        </div>
+    </mat-card-header>
     <mat-card-content id="channel-content"></mat-card-content>
     <div class="chat-container">
         <app-message *ngFor="let message of channelFirebaseService.selectedChannelMessages"

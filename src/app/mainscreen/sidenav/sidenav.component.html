@@ -33,7 +33,6 @@
 
             <div class="myChannels">
                 <div class="pad-left40" *ngFor=" let channel of channelFirebaseService.loadedChannels" (click)="channelFirebaseService.selectChannel(channel.id)">
-                    #{{ channel.id }}
                     #{{ channel.channelName }}
                 </div>
             </div>
