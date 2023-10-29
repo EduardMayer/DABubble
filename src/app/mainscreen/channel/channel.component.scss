@@ -7,7 +7,6 @@
     margin: 0;
     border-radius: 30px;
     padding: 35px;
-    background-color: azure;
 }
 
 .align-bottom {
@@ -29,11 +28,13 @@
     object-fit: cover;
 }
 
-mat-card-header {
+.header {
     display: flex;
+    justify-content: space-between;
 
     .header-title {
         display: flex;
+        align-items: center;
     }
 
 

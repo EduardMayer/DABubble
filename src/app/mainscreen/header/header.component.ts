@@ -22,8 +22,7 @@ export class HeaderComponent implements OnInit{
     id:"", 
     mail:"", 
     street:"", 
-    zipCode:"", 
-    avatar: "", 
+    zipCode:""
   }) ; 
 
   showHeaderMenu = false; 

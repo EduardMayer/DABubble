@@ -25,7 +25,6 @@ export class UserFirebaseService {
                 firstName: "Guest",
                 lastName: "",
                 mail: "guest@guest.at",
-                avatar: ""
             }
         )
     }
@@ -92,7 +91,6 @@ export class UserFirebaseService {
 
         //ELSE-->
         if (UID != "") {
-
             const docRef = await doc(this.firestore, "users", UID);
             const docSnap = await getDoc(docRef);
             let user=new User(docSnap.data());
@@ -113,6 +111,7 @@ export class UserFirebaseService {
         /*    console.log("User from UID");  
               console.log(user); */
         this.currentUser = new User(user);
+        console.log(this.currentUser);
     }
 
 

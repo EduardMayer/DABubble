@@ -32,10 +32,8 @@ export class MessageCreateComponent {
     }
 
     if (!this.message.avatarSrc) {
-      this.message.avatarSrc = "assets/img/avatar/avatar1.svg";
+      this.message.avatarSrc = "assets/img/avatar/avatar0.svg";
     }
-
-    console.log(this.message.avatarSrc = "./assets/img/avatar/avatar1.svg");
 
     //let messageId = await this.firebaseMessageService.update(this.message);
     if (true) {

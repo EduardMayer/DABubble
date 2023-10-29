@@ -28,7 +28,10 @@ export class ChannelFirebaseService {
     lastMessageTimestamp: number = 0;
 
     constructor(private firestore: Firestore) {
-        this.selectedChannelId = "F8tiKVNq6FePPOb4BDps";
+        setTimeout(()=>{
+            this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT 
+        },2000)
+       
     }
 
     selectChannel(channelId: string) {
