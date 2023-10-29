@@ -1,22 +1,22 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-$headerImage-width: 300px; 
-$headerUser-width: 300px; 
+$headerImage-width: 300px;
+$headerUser-width: 300px;
 
 
-#header-container{
+#header-container {
     width: 100%;
-    gap:12px;
+    gap: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
-    position:relative;
+    position: relative;
 
-    #header-image-container{
+    #header-image-container {
         min-width: $headerImage-width;
     }
 
-    #header-searchfield{
+    #header-searchfield {
         flex-grow: 1;
         width: 50%;
         border-radius: 42px;
@@ -24,19 +24,23 @@ $headerUser-width: 300px;
         border: 0px;
         padding-left: 24px;
     }
-    #header-user{
+
+    #header-user {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap:12px;
+        gap: 12px;
         min-width: $headerUser-width;
-        #header-user-icon{
+
+        #header-user-icon {
             position: relative;
-            img{
+
+            img {
                 width: 50px;
                 border-radius: 50%;
             }
-            #header-status{
+
+            #header-status {
                 position: absolute;
                 bottom: 4px;
                 right: 4px;
@@ -51,84 +55,109 @@ $headerUser-width: 300px;
     }
 }
 
-.mat-mdc-menu-panel{
+.mat-mdc-menu-panel {
     border-radius: 30px !important;
 }
 
 
-$headerDropdownPositionTop: 100px; 
-$headerDropdownPositionRigth: 0px; 
+$headerDropdownPositionTop: 100px;
+$headerDropdownPositionRigth: 0px;
 
-#headerMenu{
+#headerMenu {
     width: 100px;
     position: absolute;
     background-color: white;
     border-radius: 30px 0px 30px 30px;
     top: $headerDropdownPositionTop;
-    right: $headerDropdownPositionRigth; 
+    right: $headerDropdownPositionRigth;
     z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:24px;
+    gap: 24px;
     padding: 24px;
     box-shadow: 0px 6px 10px 0px #00000033;
-    a{
+
+    a {
         cursor: pointer;
     }
 }
-#headerUserProfil{
+
+#headerUserProfil {
     padding: 24px;
     min-width: 100px;
     min-height: 100px;
     z-index: 1;
-    top:  $headerDropdownPositionTop;
-    right: $headerDropdownPositionRigth; 
+    top: $headerDropdownPositionTop;
+    right: $headerDropdownPositionRigth;
     position: absolute;
     background-color: white;
     border-radius: 30px 0px 30px 30px;
     box-shadow: 0px 6px 10px 0px #00000033;
-    #headerUserProfil-header{
+
+    #headerUserProfil-header {
         display: flex;
         justify-content: space-between;
     }
-    #headerUserProfil-image-container{
-        width: 100%; 
+
+    #headerUserProfil-image-container {
+        width: 100%;
         display: flex;
         justify-content: center;
-        img{
-            width: 30%; 
+
+        img {
+            width: 30%;
             border-radius: 50%;
         }
     }
-    #headerUserProfil-name{
+
+    #headerUserProfil-name {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    #status{
+
+    #status {
         display: flex;
         align-items: center;
-        gap:12px;
-        #statusIcon{
+        gap: 12px;
+
+        #statusIcon {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             background-color: green;
         }
-        #statusFont{
-            color: green; 
+
+        #statusFont {
+            color: green;
             margin: 0px;
         }
     }
-    #headerUserProfil-email{
+
+    #headerUserProfil-email {
         display: flex;
         flex-direction: column;
-    
-        #headerUserProfil-email-header{
+
+        #headerUserProfil-email-header {
             display: flex;
             gap: 12px;
         }
+    }
+}
+
+#headerUserProfil-EditMode {
+
+    .headerUserProfil-EditMode-Row {
+        display: flex;
+        align-items: center;
+        img{
+            width: 24px;
+            height: 24px;
+        }
+    }
+    input {
+        border-radius: 30px;
     }
 }

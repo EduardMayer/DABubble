@@ -57,8 +57,22 @@
             </div>
         </div>
         <div *ngIf="editUserMode" id="headerUserProfil-EditMode">
-
-            <button (click)="editUserMode=false">Abbrechen</button>
+            <div>
+                <div class="headerUserProfil-EditMode-Row">
+                    <img src="assets/img/icons/accountIcon.png" alt="">
+                    <h3>Vollständiger Name</h3>
+                </div>
+                <input type="text">
+            </div>
+            <div>
+                <div>
+                    <img src="assets/img/icons/mailblack.svg" alt="email">
+                    <h3>E-Mail-Adresse</h3>
+                </div>
+                <input type="email">
+            </div>
+            <button class="btn-white" (click)="editUserMode=false">Abbrechen</button>
+            <button class="btn-blue" (click)="editUser()">Speichern</button>
         </div>
     </div>
 </div>
