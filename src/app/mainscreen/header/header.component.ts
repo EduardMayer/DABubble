@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit{
 
   showHeaderMenu = false; 
   showHeaderUserProfil = false; 
+  editUserMode = false; 
 
   constructor(private authService:AuthFirebaseService , private userService:UserFirebaseService , private router:Router){}
 
@@ -51,5 +52,9 @@ export class HeaderComponent implements OnInit{
   showProfil(){
     this.showHeaderMenu = false;
     this.showHeaderUserProfil = true; 
+  }
+
+  editUser(){
+
   }
 }

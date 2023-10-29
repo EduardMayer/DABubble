@@ -107,4 +107,28 @@ $headerDropdownPositionRigth: 0px;
         justify-content: space-between;
         align-items: center;
     }
+    #status{
+        display: flex;
+        align-items: center;
+        gap:12px;
+        #statusIcon{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: green;
+        }
+        #statusFont{
+            color: green; 
+            margin: 0px;
+        }
+    }
+    #headerUserProfil-email{
+        display: flex;
+        flex-direction: column;
+    
+        #headerUserProfil-email-header{
+            display: flex;
+            gap: 12px;
+        }
+    }
 }

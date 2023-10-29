@@ -6,7 +6,7 @@
     <div id="header-user">
         <h1>{{user.firstName}} {{user.lastName}}</h1>
         <div *ngIf="user.avatar!=''" id="header-user-icon">
-            <img src="assets/img/avatar/avatar1.svg" alt="UserIcon">
+            <img src="{{user.avatar}}" alt="UserIcon">
             <div id="header-status"></div>
         </div>
         <div id="headerDropdown">
@@ -14,7 +14,6 @@
                 <mat-icon>expand_more</mat-icon>
             </button>
       
-            
            <!--  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>expand_more</mat-icon>
               </button>
@@ -36,20 +35,30 @@
         <div id="headerUserProfil-image-container">
             <img src="{{user.avatar}}" alt="">
         </div>
-        <div id="headerUserProfil-name">
-            <div>
-                <h2>{{user.firstName}} {{user.lastName}}</h2>
+        <div *ngIf="!editUserMode" id="headerUserProfil-ViewMode">
+            <div id="headerUserProfil-name">
+                <div>
+                    <h2>{{user.firstName}} {{user.lastName}}</h2>
+                </div>
+                <div>
+                    <a (click)="editUserMode=true">bearbeiten</a>
+                </div>
             </div>
-            <div>
-                <a>bearbeiten</a>
+            <div id="status">
+                <div id="statusIcon"></div>
+                <h4 id="statusFont">Status</h4>
+            </div>
+            <div id="headerUserProfil-email">
+                <div id="headerUserProfil-email-header">
+                    <img src="assets/img/icons/mailblack.svg" alt="mail">
+                    <h4>E-mail-Adresse</h4>
+                </div>
+                <h4>{{user.mail}}</h4>
             </div>
         </div>
-        <div>
-            <h4>Status</h4>
-        </div>
-        <div>
-            <h4>E-mail-Adresse</h4>
-            <h4>{{user.mail}}</h4>
+        <div *ngIf="editUserMode" id="headerUserProfil-EditMode">
+
+            <button (click)="editUserMode=false">Abbrechen</button>
         </div>
     </div>
 </div>
