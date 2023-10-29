@@ -36,6 +36,7 @@ import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dial
 
 import { MessageEditComponent } from './mainscreen/channel/message-edit/message-edit.component';
 import { MessageCreateComponent } from './mainscreen/channel/message-create/message-create.component';
+import { DateLineComponent } from './mainscreen/date-line/date-line.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MessageCreateComponent } from './mainscreen/channel/message-create/mess
     AvatarChooseComponent,
     AddChannelDialogComponent,
     MessageEditComponent,
-    MessageCreateComponent
+    MessageCreateComponent,
+    DateLineComponent
   ],
   imports: [
     BrowserModule,

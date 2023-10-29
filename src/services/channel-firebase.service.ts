@@ -25,13 +25,13 @@ export class ChannelFirebaseService {
     selectedChannel: Channel | undefined;
     selectedChannelMessages: Message[] = [];
 
-    lastMessageTimestamp: number = 0;
+    lastMessageTimeString: string = "01.01.1970";
 
     constructor(private firestore: Firestore) {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT 
-        },2000)
-       
+        }, 2000)
+
     }
 
     selectChannel(channelId: string) {
@@ -40,8 +40,27 @@ export class ChannelFirebaseService {
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
         this.loadChannelUsers(this.selectedChannel.users);
+        this.lastMessageTimeString = "01.01.1970";
     }
 
+
+    isNewDay(message: Message) {
+        let messageTimeString = this.formatDateToDmy(new Date(message.timestamp));
+
+        if (messageTimeString == this.lastMessageTimeString) {
+            return false;
+        } else {
+            this.lastMessageTimeString = messageTimeString;
+            return true;
+        }
+    }
+
+    formatDateToDmy(date: Date) {
+        const day = date.getDate().toString().padStart(2, '0');      // Get day and pad with leading zero if necessary
+        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary
+        const year = date.getFullYear();                              // Get year
+        return `${day}.${month}.${year}`;
+    }
 
     /**
     * Generates a Firestore query to retrieve channel data with optional index-based filtering.
@@ -103,6 +122,7 @@ export class ChannelFirebaseService {
             currentChannelUsers.forEach((uid: string) => {
                 this.userService.getUserByUID(uid).
                     then((user) => {
+                        if (user.avatar == "") { user.avatar = "assets/img/avatar/avatar0.svg" }
                         this.channelUsers.push(user);
                     });
             })

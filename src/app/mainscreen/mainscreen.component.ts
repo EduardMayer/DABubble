@@ -17,12 +17,11 @@ export class MainscreenComponent implements OnInit {
 
   seclectedChannel: string = "";
 
-  constructor(public channelFirebaseService: ChannelFirebaseService,public userFirebaseService: UserFirebaseService , private authService: AuthFirebaseService) {
+  constructor(public channelFirebaseService: ChannelFirebaseService, public userFirebaseService: UserFirebaseService, private authService: AuthFirebaseService) {
     this.channelFirebaseService.load();
   }
 
   ngOnInit(): void {
-    
   }
 
   selectChannel(channelName: string) {

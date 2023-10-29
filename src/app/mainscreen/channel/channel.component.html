@@ -7,17 +7,21 @@
             <div>Channel dropdown</div>
         </div>
         <div class="user-avatar-list">
-            <img class="avatar-img" *ngFor="let user of channelFirebaseService.channelUsers" src="{{ user.avatar }}">
-            <div *ngFor="let user of channelFirebaseService.channelUsers"> 
-            {{ user.id }}
-            {{ user.avatar }}
-         </div>
+            <img class="avatar-img" *ngFor="let user of channelFirebaseService.channelUsers" src="{{ user.avatar }}"
+                alt="avatar">
+            <div *ngFor="let user of channelFirebaseService.channelUsers">
+
+                {{ user.avatar }}
+            </div>
+            <img class="avatar-img" src="assets/img/icons/addmembers.svg" >
         </div>
     </div>
     <mat-card-content id="channel-content"></mat-card-content>
     <div class="chat-container">
-        <app-message *ngFor="let message of channelFirebaseService.selectedChannelMessages"
-            [message]="message"></app-message>
+        <div *ngFor="let message of channelFirebaseService.selectedChannelMessages">
+            <app-date-line *ngIf="channelFirebaseService.isNewDay(message)" [message]="message"></app-date-line>
+            <app-message [message]="message"></app-message>
+        </div>
     </div>
 
     <app-message-create></app-message-create>
