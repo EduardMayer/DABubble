@@ -1,4 +1,4 @@
-<mat-card id="channel" class="br-30" *ngIf="channelFirebaseService.currentChannel">
+<mat-card id="channel" class="br-30" *ngIf="channelFirebaseService.currentChannel  && userFirebaseService.currentUser.id!='' ">
     <mat-card-header>{{ channelFirebaseService.currentChannel.channelName }}</mat-card-header>
     <mat-card-content id="channel-content"></mat-card-content>
     <div class="chat-container">

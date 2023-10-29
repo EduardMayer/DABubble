@@ -11,6 +11,7 @@ export class MessageFirebaseService {
     public loadedMessage: Message | undefined;
     private unsubMessage: any;
     private unsubMessages: any;
+    public isOwnMessage: boolean = false;
 
     constructor(private firestore: Firestore) {
     }
@@ -71,33 +72,6 @@ export class MessageFirebaseService {
     };
 
 
-    /**
-    * Updates Or Creates a message document in Firestore.
-    * Depending on if message.is i given
-    * @param {Message} message - The message object to be updated or created.
-     */
-    async update(message: Message) {
-        if (message.id === "") {
-            message.timestamp = Date.now();
-            const docInstance = await addDoc(
-                collection(this.firestore, "messages"),
-                {
-                    "timestamp": String(message.timestamp),
-                    "content": String(message.content)
-                }
-            );
-            //setDoc(docInstance, message.toJSON());
-            console.log(docInstance.id);
-            return docInstance.id;
-        } else {
-            const docInstance = doc(this.firestore, 'messages', message.id);
-            let update = await updateDoc(docInstance, message.toJSON());
-            console.log("message updated " + update);
-            return message.id;
-        }
-    }
-
-
     cyrb53 = (str: string, seed = 0) => {
         let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
         for (let i = 0, ch; i < str.length; i++) {
@@ -118,15 +92,15 @@ export class MessageFirebaseService {
     * Unsubscribes from any active subscription.
     */
     ngOnDestroy() {
-        if(this.unsubMessages){
+        if (this.unsubMessages) {
             this.unsubMessages();
         }
 
-        if(this.unsubMessage){
+        if (this.unsubMessage) {
             this.unsubMessage();
         }
-       
-       
+
+
     }
 
 

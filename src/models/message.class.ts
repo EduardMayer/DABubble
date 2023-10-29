@@ -11,7 +11,6 @@ export class Message {
         this.timestamp = obj ? obj.timestamp : 0;
         this.autorId = obj ? obj.autorId : "";
         this.avatarSrc = obj ? obj.avatarSrc : "";
-        
     }
 
     toJSON() {

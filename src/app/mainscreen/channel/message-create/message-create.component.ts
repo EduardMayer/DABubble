@@ -15,7 +15,6 @@ export class MessageCreateComponent {
   message = new Message();
 
   constructor(
-    private MessageFirebaseService: MessageFirebaseService,
     private userFirebaseService: UserFirebaseService,
     public channelFirebaseService: ChannelFirebaseService
   ) {
@@ -23,9 +22,9 @@ export class MessageCreateComponent {
   }
 
   async createMessage() {
-    console.log(this.message.content);
     this.message.content;
     this.message.timestamp=Date.now();
+
     this.message.autorId=this.userFirebaseService.currentUser.id;
     this.message.avatarSrc=this.userFirebaseService.currentUser.avatar;
     if(!this.message.autorId){

@@ -15,18 +15,19 @@ export class UserFirebaseService {
     public loadedUser: User | undefined;
     private unsubUser: any;
 
-    public currentUser: User = new User(
-        {
-            id: "",
-            fullName: "Guest",
-            firstName: "Guest",
-            lastName: "",
-            mail: "guest@guest.at",
-            avatar: ""
-        }
-    )
+    public currentUser: User;
 
     constructor(private firestore: Firestore) {
+        this.currentUser = new User(
+            {
+                id: "",
+                fullName: "Guest",
+                firstName: "Guest",
+                lastName: "",
+                mail: "guest@guest.at",
+                avatar: ""
+            }
+        )
     }
 
     setCurrentUser(UserData: any) {
@@ -94,9 +95,10 @@ export class UserFirebaseService {
 
             const docRef = await doc(this.firestore, "users", UID);
             const docSnap = await getDoc(docRef);
-
-            return new User(docSnap.data());
-        }else{
+            let user=new User(docSnap.data());
+            user.id=docSnap.id;
+            return user;
+        } else {
             return new User();
         }
     }
@@ -110,7 +112,7 @@ export class UserFirebaseService {
         const user = await this.getUserByUID(UID);
         /*    console.log("User from UID");  
               console.log(user); */
-        this.currentUser = user;
+        this.currentUser = new User(user);
     }
 
 

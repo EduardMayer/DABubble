@@ -13,9 +13,9 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 export class MessageComponent {
 
   public _message: Message | undefined;
-  public autorName: string="";
-  public autorAvatar: string="";
-  @Output() messageTimestampEvent = new EventEmitter<number>();
+  public autorName: string = "";
+  public autorAvatar: string = "";
+  isOwnMessage: boolean=false;
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -25,34 +25,39 @@ export class MessageComponent {
   }
 
   @Input()
-  public set message(value: Message){
-   this._message=value;
-   this.setAutorName(this._message.autorId);
-   
- }
-
-  async setAutorName(autorId: string){
-    const autorValues=await this.userFirebaseService.getUserByUID(autorId);
-    
-    if(autorValues){
-      this.autorName=autorValues.fullName;
-      this.autorAvatar=autorValues.avatar;
-
-      if(this.autorName==""){
-        this.autorName="Guest";
-      }
-
-      if(this.autorAvatar==""){
-        this.autorAvatar="assets/img/avatar/avatar1.svg";
-      }
-    }else{
-      this.autorName="Guest";
-      this.autorAvatar="assets/img/avatar/avatar1.svg";
+  public set message(value: Message) {
+    this._message = value;
+    this.setAutorName(this._message.autorId);
+    if (this._message.autorId == this.userFirebaseService.currentUser.id) {
+      this.isOwnMessage=true;
+      document.getElementById(this._message.id)?.classList.add('inverted');
     }
   }
-  
 
-   
+
+
+  async setAutorName(autorId: string) {
+    const autorValues = await this.userFirebaseService.getUserByUID(autorId);
+
+    if (autorValues) {
+      this.autorName = autorValues.fullName;
+      this.autorAvatar = autorValues.avatar;
+
+      if (this.autorName == "") {
+        this.autorName = "Guest";
+      }
+
+      if (this.autorAvatar == "") {
+        this.autorAvatar = "assets/img/avatar/avatar1.svg";
+      }
+    } else {
+      this.autorName = "Guest";
+      this.autorAvatar = "assets/img/avatar/avatar1.svg";
+    }
+  }
+
+
+
 
   formatTimestampToHHMM(timestamp: number) {
     const date = new Date(timestamp);

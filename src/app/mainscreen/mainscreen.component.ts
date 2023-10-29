@@ -21,7 +21,6 @@ export class MainscreenComponent implements OnInit {
   constructor(public channelFirebaseService: ChannelFirebaseService,public userFirebaseService: UserFirebaseService , private authService: AuthFirebaseService) {
     this.selectChannel("Alt");
     this.channelData = channelFirebaseService.loadedChannels;
-    console.log(this.userFirebaseService.currentUser);
   }
 
   ngOnInit(): void {

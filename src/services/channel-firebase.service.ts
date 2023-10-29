@@ -116,10 +116,7 @@ export class ChannelFirebaseService {
     }
 
     async updateChannelMessage(channelId: string, channelMessage: Message) {
-        console.log(channelId);
-        console.log(channelMessage);
         if (channelId != "") {
-            console.log("here");
             if (channelMessage.id == "") {
                 channelMessage.id = String(this.cyrb53(String(channelId) + String(channelMessage.content)));
                 const docInstance = doc(this.firestore, `channels/${channelId}/messages/${channelMessage.id}`);
