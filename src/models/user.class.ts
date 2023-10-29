@@ -11,16 +11,16 @@ export class User {
     avatar: string;
 
     constructor(obj?: any) {
-        this.id = obj.id ? obj.id : "";
-        this.fullName = obj.fullName ? obj.fullName : "";
-        this.firstName = obj.firstName ? obj.firstName : "";
-        this.lastName = obj.lastName ? obj.lastName : "";
-        this.mail = obj.mail ? obj.mail : "";
-        this.birthDate = obj.birthDate ? obj.birthDate : "";
-        this.street = obj.street ? obj.street : "";
-        this.zipCode = obj.zipCode ? obj.zipCode : "";
-        this.city = obj.city ? obj.city : "";
-        this.avatar = obj.avatar ? obj.avatar : "assets/img/avatar/avatar0.svg";
+        this.id = obj ? obj.id : "";
+        this.fullName = obj ? obj.fullName : "";
+        this.firstName = obj ? obj.firstName : "";
+        this.lastName = obj ? obj.lastName : "";
+        this.mail = obj ? obj.mail : "";
+        this.birthDate = obj ? obj.birthDate : "";
+        this.street = obj ? obj.street : "";
+        this.zipCode = obj ? obj.zipCode : "";
+        this.city = obj ? obj.city : "";
+        this.avatar = obj ? obj.avatar : "assets/img/avatar/avatar0.svg";
     }
 
     toJSON() {
