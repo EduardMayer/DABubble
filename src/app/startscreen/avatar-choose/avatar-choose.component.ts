@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/models/user.class';
 import { StorageFirebaseService} from 'src/services/storage-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { Router} from '@angular/router';
 
 
 @Component({
@@ -10,9 +10,8 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   styleUrls: ['./avatar-choose.component.scss'],
 })
 export class AvatarChooseComponent implements OnInit {
-  user = new User();
+  user = this.userService.currentUser
   userName: string = '';
-  
 
   avatars: string[] = [
     'avatar1.svg',
@@ -23,8 +22,8 @@ export class AvatarChooseComponent implements OnInit {
     'avatar6.svg',
   ];
 
-  constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService,) {
-    this.user = new User();
+
+  constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService, private router: Router) {
     this.user.avatar = 'assets/img/avatar/avatar0.svg';
   }
   ngOnInit() {
@@ -50,7 +49,8 @@ export class AvatarChooseComponent implements OnInit {
   }
 
   onSubmitAvatar() {
-   
+    this.userService.update(this.user);
+    this.router.navigate(['']);
   }
   
 }

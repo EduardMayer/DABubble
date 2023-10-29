@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { User } from 'src/models/user.class';
+import { Router} from '@angular/router';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 
@@ -13,7 +12,7 @@ import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 export class RegisterComponent {
 
   constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
-  newUser = this.userService.currentUser;
+  
   isNameInputActive = false;
   isEmailInputActive = false;
   isPasswordInputActive = false;
@@ -79,8 +78,7 @@ export class RegisterComponent {
     } else {
       this.userService.currentUser.fullName = nameInputValue;
       this.userService.currentUser.mail = emailInputValue;
-      //this.authService.register(emailInputValue, passwordInputValue);
-      this.userService.update(this.newUser);
+      this.authService.register(emailInputValue, passwordInputValue);
       this.router.navigate(['avatar']);
     }
   }
