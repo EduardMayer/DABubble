@@ -14,7 +14,6 @@ export class RegisterComponent {
 
   constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
   newUser = this.userService.currentUser;
-  user = new User();
   isNameInputActive = false;
   isEmailInputActive = false;
   isPasswordInputActive = false;
