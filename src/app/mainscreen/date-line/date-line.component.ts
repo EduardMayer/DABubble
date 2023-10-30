@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Message } from 'src/models/message.class';
 
 @Component({
@@ -6,20 +6,25 @@ import { Message } from 'src/models/message.class';
   templateUrl: './date-line.component.html',
   styleUrls: ['./date-line.component.scss']
 })
-export class DateLineComponent {
+export class DateLineComponent{
 
   messageTimeString: String | undefined;
   currentDayTimeString: string = this.formatDateToDmy(new Date());
 
 
   @Input()
-  public set message(value: Message) {
-
+  public set messageTime(value: string) {
+    this.messageTimeString=value;
+  }
+  /*
     this.messageTimeString = this.formatDateToDmy(new Date(value.timestamp));
     if (this.messageTimeString == this.currentDayTimeString) {
       this.messageTimeString = "today";
     }
   }
+  */
+
+
 
   formatDateToDmy(date: Date) {
     const day = date.getDate().toString().padStart(2, '0');      // Get day and pad with leading zero if necessary

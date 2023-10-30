@@ -7,6 +7,8 @@ import { User } from 'src/models/user.class';
 import { UserFirebaseService } from './user-firebase.service';
 
 
+
+
 @Injectable({
     providedIn: 'root'
 })
@@ -26,6 +28,7 @@ export class ChannelFirebaseService {
     selectedChannelMessages: Message[] = [];
 
     lastMessageTimeString: string = "01.01.1970";
+    previousMessageTimeString: string = "01.01.1970";
 
     constructor(private firestore: Firestore) {
         setTimeout(() => {
@@ -40,27 +43,12 @@ export class ChannelFirebaseService {
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
         this.loadChannelUsers(this.selectedChannel.users);
-        this.lastMessageTimeString = "01.01.1970";
     }
 
 
-    isNewDay(message: Message) {
-        let messageTimeString = this.formatDateToDmy(new Date(message.timestamp));
 
-        if (messageTimeString == this.lastMessageTimeString) {
-            return false;
-        } else {
-            this.lastMessageTimeString = messageTimeString;
-            return true;
-        }
-    }
 
-    formatDateToDmy(date: Date) {
-        const day = date.getDate().toString().padStart(2, '0');      // Get day and pad with leading zero if necessary
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary
-        const year = date.getFullYear();                              // Get year
-        return `${day}.${month}.${year}`;
-    }
+
 
     /**
     * Generates a Firestore query to retrieve channel data with optional index-based filtering.
@@ -111,6 +99,11 @@ export class ChannelFirebaseService {
                 if (doc.data()) {
                     const message = new Message(doc.data());
                     this.selectedChannelMessages.push(message);
+                    if (this.selectedChannelMessages.length == 1) {
+                        //this.lastMessageTimeString = this.previousMessageTimeString = 
+                        //this.formatDateToDmy(new Date(this.selectedChannelMessages[0].timestamp));
+                    }
+
                 }
             })
         });
