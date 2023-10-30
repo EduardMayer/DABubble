@@ -35,6 +35,8 @@ import { MessageEditComponent } from './mainscreen/channel/message-edit/message-
 import { MessageCreateComponent } from './mainscreen/channel/message-create/message-create.component';
 import { DateLineComponent } from './mainscreen/date-line/date-line.component';
 import { IfChangedDirective } from './directives/if-changed.directive';
+import { BadgeComponent } from './mainscreen/message/badge/badge.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -57,7 +59,8 @@ import { IfChangedDirective } from './directives/if-changed.directive';
     MessageEditComponent,
     MessageCreateComponent,
     DateLineComponent,
-    IfChangedDirective
+    IfChangedDirective,
+    BadgeComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { IfChangedDirective } from './directives/if-changed.directive';
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule, 
     MatMenuModule,
-    MatDialogModule
+    MatDialogModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
