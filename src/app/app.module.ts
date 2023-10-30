@@ -28,15 +28,17 @@ import { PrivacyPolicyComponent } from './startscreen/privacy-policy/privacy-pol
 import { MessageComponent } from './mainscreen/message/message.component';
 import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
 import { MessageEditComponent } from './mainscreen/channel/message-edit/message-edit.component';
 import { MessageCreateComponent } from './mainscreen/channel/message-create/message-create.component';
 import { DateLineComponent } from './mainscreen/date-line/date-line.component';
 import { IfChangedDirective } from './directives/if-changed.directive';
 import { BadgeComponent } from './mainscreen/message/badge/badge.component';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ToolbarComponent } from './mainscreen/message/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MessageCreateComponent,
     DateLineComponent,
     IfChangedDirective,
-    BadgeComponent
+    BadgeComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -77,10 +80,11 @@ import {MatBadgeModule} from '@angular/material/badge';
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     MatMenuModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

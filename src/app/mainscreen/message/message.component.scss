@@ -28,7 +28,10 @@
 
         }
 
+        
+
         mat-card {
+            position: relative;
             width: fit-content;
             background-color: #ECEEFE;
             border-radius: 0 30px 30px 30px;
@@ -37,10 +40,18 @@
                 font-size: 18px;
                 font-weight: 400;
                 line-height: 24.55px;
+                padding: 20px;
+            }
+
+            app-toolbar {
+                position: absolute;
+                bottom: calc(100% + 10px);
+                left: 0;
+                z-index: 99;
             }
         }
 
-        .message-footer{
+        .message-footer {
             display: flex;
             align-items: center;
         }
@@ -62,6 +73,12 @@
         mat-card {
             border-radius: 30px 0 30px 30px;
             background-color: #797EF3;
+            color: white;
+
+            app-toolbar {
+                left: unset;
+                right: 0;
+            }
         }
     }
 }

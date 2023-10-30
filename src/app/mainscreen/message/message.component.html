@@ -1,11 +1,14 @@
+
 <div class='message-container' [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message">
     <img src="{{ autorAvatar }}" class="message-img" *ngIf="autorAvatar">
-    <div class="message-content">
+    <div class="message-content" (click)="toggleToolbar()">
         <div class="message-head">
             <div> {{ formatTimestampToHHMM(_message.timestamp) }}</div>
             <div *ngIf="autorName!=''"><b>{{ autorName }}</b></div>
         </div>
-        <mat-card>
+        
+        <mat-card> 
+            <app-toolbar *ngIf="showToolbar" [isOwnMessage]="isOwnMessage"></app-toolbar>
             <mat-card-content>{{ _message.content }}</mat-card-content>
         </mat-card>
         <div class='message-footer'>
@@ -13,5 +16,4 @@
             <img src="assets/img/icons/addreaction.svg">
         </div>
     </div>
-    
 </div>

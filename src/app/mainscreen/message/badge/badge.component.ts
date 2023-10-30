@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-badge',

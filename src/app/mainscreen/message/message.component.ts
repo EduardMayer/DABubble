@@ -15,7 +15,8 @@ export class MessageComponent {
   public _message: Message | undefined;
   public autorName: string = "";
   public autorAvatar: string = "";
-  isOwnMessage: boolean=false;
+  isOwnMessage: boolean = false;
+  showToolbar: boolean = false;
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -24,12 +25,20 @@ export class MessageComponent {
 
   }
 
+  toggleToolbar() {
+    if (this.showToolbar) {
+      this.showToolbar = false;
+    } else {
+      this.showToolbar = true;
+    }
+  }
+
   @Input()
   public set message(value: Message) {
     this._message = value;
     this.setAutorName(this._message.autorId);
     if (this._message.autorId == this.userFirebaseService.currentUser.id) {
-      this.isOwnMessage=true;
+      this.isOwnMessage = true;
       document.getElementById(this._message.id)?.classList.add('inverted');
     }
   }
