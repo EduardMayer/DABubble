@@ -29,7 +29,18 @@ export class MessageComponent {
     if (this.showToolbar) {
       this.showToolbar = false;
     } else {
+      this.closeAllOtherToolbars();
       this.showToolbar = true;
+    }
+  }
+
+  closeAllOtherToolbars() {
+    let openToolbars = document.getElementsByClassName("toolbar");
+    if (openToolbars) {
+      for (let index = 0; index < openToolbars.length; index++) {
+        const element = openToolbars[index];
+        element.remove();
+      }
     }
   }
 
