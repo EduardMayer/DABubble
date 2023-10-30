@@ -62,17 +62,19 @@
                     <img src="assets/img/icons/accountIcon.png" alt="">
                     <h3>Vollständiger Name</h3>
                 </div>
-                <input type="text">
+                <input type="text" value="{{user.firstName}} {{user.lastName}}">
             </div>
             <div>
-                <div>
+                <div class="headerUserProfil-EditMode-Row">
                     <img src="assets/img/icons/mailblack.svg" alt="email">
                     <h3>E-Mail-Adresse</h3>
                 </div>
-                <input type="email">
+                <input type="email" value="{{user.mail}}">
             </div>
-            <button class="btn-white" (click)="editUserMode=false">Abbrechen</button>
-            <button class="btn-blue" (click)="editUser()">Speichern</button>
+            <div id="headerUserProfil-EditMode-btn-container">
+                <button class="btn-white" (click)="editUserMode=false">Abbrechen</button>
+                <button class="btn-blue" (click)="editUser()">Speichern</button>
+            </div>
         </div>
     </div>
 </div>

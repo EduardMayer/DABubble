@@ -152,6 +152,7 @@ $headerDropdownPositionRigth: 0px;
     .headerUserProfil-EditMode-Row {
         display: flex;
         align-items: center;
+        gap: 12px; 
         img{
             width: 24px;
             height: 24px;
@@ -159,5 +160,18 @@ $headerDropdownPositionRigth: 0px;
     }
     input {
         border-radius: 30px;
+        color: #686868;
+        border: 1px solid #686868;
+        padding: 15px 20px 15px 20px;
+        font-family: 'Nunito', sans-serif;
+        width: calc(100% - 40px);
+    }
+    #headerUserProfil-EditMode-btn-container{
+        margin-top: 12px; 
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 24px; 
     }
 }
