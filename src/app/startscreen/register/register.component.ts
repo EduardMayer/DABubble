@@ -78,7 +78,9 @@ export class RegisterComponent {
     } else {
       this.userService.currentUser.fullName = nameInputValue;
       this.userService.currentUser.mail = emailInputValue;
-      this.authService.register(emailInputValue, passwordInputValue);
+      const registerResponse = this.authService.register(emailInputValue, passwordInputValue);
+      console.log("AuthResponse: ");
+      console.log(registerResponse);
       this.router.navigate(['avatar']);
     }
   }

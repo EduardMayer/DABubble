@@ -48,6 +48,9 @@ textarea {
     font-family: 'Nunito', sans-serif;
     border-radius: 30px;
     border: 1px solid white;
+    &:disabled{
+        opacity: 0.4;
+    }
 }
 .btn-white{
     background-color: white; 
@@ -56,5 +59,8 @@ textarea {
     font-family: 'Nunito', sans-serif;
     border-radius: 30px;
     border: 1px solid #444DF2;
+    &:disabled{
+        opacity: 0.4;
+    }
 }
 

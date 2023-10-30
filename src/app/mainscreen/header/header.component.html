@@ -13,8 +13,8 @@
             <button mat-icon-button (click)="toogleHeaderMenu()">
                 <mat-icon>expand_more</mat-icon>
             </button>
-      
-           <!--  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+
+            <!--  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>expand_more</mat-icon>
               </button>
             <mat-menu #menu="matMenu">
@@ -57,24 +57,26 @@
             </div>
         </div>
         <div *ngIf="editUserMode" id="headerUserProfil-EditMode">
-            <div>
-                <div class="headerUserProfil-EditMode-Row">
-                    <img src="assets/img/icons/accountIcon.png" alt="">
-                    <h3>Vollständiger Name</h3>
+            <form [formGroup]="editUserForm" (ngSubmit)="editUser()">
+                <div>
+                    <div class="headerUserProfil-EditMode-Row">
+                        <img src="assets/img/icons/accountIcon.png" alt="">
+                        <h3>Vollständiger Name</h3>
+                    </div>
+                    <input type="text" formControlName="nameInput">
                 </div>
-                <input type="text" value="{{user.firstName}} {{user.lastName}}">
-            </div>
-            <div>
-                <div class="headerUserProfil-EditMode-Row">
-                    <img src="assets/img/icons/mailblack.svg" alt="email">
-                    <h3>E-Mail-Adresse</h3>
+                <div>
+                    <div class="headerUserProfil-EditMode-Row">
+                        <img src="assets/img/icons/mailblack.svg" alt="email">
+                        <h3>E-Mail-Adresse</h3>
+                    </div>
+                    <input type="email" formControlName="emailInput">
                 </div>
-                <input type="email" value="{{user.mail}}">
-            </div>
-            <div id="headerUserProfil-EditMode-btn-container">
-                <button class="btn-white" (click)="editUserMode=false">Abbrechen</button>
-                <button class="btn-blue" (click)="editUser()">Speichern</button>
-            </div>
+                <div id="headerUserProfil-EditMode-btn-container">
+                    <button class="btn-white" (click)="editUserMode=false">Abbrechen</button>
+                    <button class="btn-blue" type="submit" [disabled]="!editUserForm.valid">Speichern</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

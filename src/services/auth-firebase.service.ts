@@ -100,7 +100,7 @@ export class AuthFirebaseService {
   register(email: string, password: string) {
 
     //Restore
-    createUserWithEmailAndPassword(this.auth, email, password)
+   createUserWithEmailAndPassword(this.auth, email, password)
     .then((result) => {
       this.UserData = result.user;
       //this.firebaseUserService.update(this.UserData);
@@ -108,6 +108,7 @@ export class AuthFirebaseService {
       this.ngZone.run(() => {
       //this.router.navigate(['/avatar']);
       });
+      
     })
     .catch((error) => {
       const errorCode = error.code;
