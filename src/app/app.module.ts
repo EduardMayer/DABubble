@@ -34,7 +34,7 @@ import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dial
 import { MessageCreateComponent } from './mainscreen/channel/message-form/message-create.component';
 import { DateLineComponent } from './mainscreen/date-line/date-line.component';
 import { IfChangedDirective } from './directives/if-changed.directive';
-import { BadgeComponent } from './mainscreen/message/reaction/reaction.component';
+import { ReactionComponent } from './mainscreen/message/reaction/reaction.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ToolbarComponent } from './mainscreen/message/toolbar/toolbar.component';
@@ -61,7 +61,7 @@ import { AddreactionComponent } from './mainscreen/message/addreaction/addreacti
     MessageCreateComponent,
     DateLineComponent,
     IfChangedDirective,
-    BadgeComponent,
+    ReactionComponent,
     ToolbarComponent,
     AddreactionComponent,
    

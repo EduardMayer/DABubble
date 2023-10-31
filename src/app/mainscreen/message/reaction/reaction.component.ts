@@ -5,6 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './reaction.component.html',
   styleUrls: ['./reaction.component.scss']
 })
-export class BadgeComponent {
+export class ReactionComponent {
   @Input() count: number = 1;
 }
