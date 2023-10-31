@@ -21,11 +21,10 @@ export class AvatarChooseComponent implements OnInit {
     'avatar5.svg',
     'avatar6.svg',
   ];
-
-
   constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService, private router: Router) {
     this.user.avatar = 'assets/img/avatar/avatar0.svg';
   }
+  
   ngOnInit() {
     
   }

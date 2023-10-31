@@ -12,7 +12,7 @@
         <app-register *ngIf="!showLogin && !imprint && !privacyPolicy"></app-register>
         <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>
         <app-privacy-policy *ngIf="privacyPolicy" (closePrivacyPolicyView)="closeImprintAndPrivacy()"></app-privacy-policy>
-    
+        
     <div id="startscreen-imprint-container">
         <a (click)="imprint = true" *ngIf="!imprint && !privacyPolicy">Impressum</a>
         <a (click)="privacyPolicy = true" *ngIf="!imprint && !privacyPolicy">Datenschutz</a>

@@ -98,10 +98,14 @@
 .warning-password {
     display: flex;
     width: 100%;
-    position: relative;
+    
     color: red;
     top: -20px;
     left: 0px;
+
+    #text {
+        margin-top: 20px; /* Verschiebt den Text um 20 Pixel nach unten */
+    }
 
 }
 
