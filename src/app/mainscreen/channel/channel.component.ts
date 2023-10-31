@@ -27,7 +27,13 @@ export class ChannelComponent {
   }
 
   getMessageTimeString(message: Message) {
-    return this.formatDateToDmy(new Date(message.timestamp));
+    const currentDay = this.formatDateToDmy(new Date());
+    const messageDmy = this.formatDateToDmy(new Date(message.timestamp));
+    if (currentDay == messageDmy) {
+      return "today";
+    } else {
+      return messageDmy;
+    }
   }
 
   formatDateToDmy(date: Date) {
