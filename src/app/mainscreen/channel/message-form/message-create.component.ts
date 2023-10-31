@@ -30,11 +30,15 @@ export class MessageCreateComponent {
   * @returns {Promise<void>}
   */
   async createMessage() {
-    this.message.timestamp = Date.now();
+    if (this.message.content) {
 
-    if (this.channelFirebaseService.selectedChannel) {
-      this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this.message);
-      this.message = new Message();
+
+      this.message.timestamp = Date.now();
+
+      if (this.channelFirebaseService.selectedChannel) {
+        this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this.message);
+        this.message = new Message();
+      }
     }
   }
 
@@ -63,7 +67,7 @@ export class MessageCreateComponent {
     this.message = message;
   }
 
-  calcHeight(value:string) {
+  calcHeight(value: string) {
     let numberOfLineBreaks = (value.match(/\n/g) || []).length;
     // min-height + lines x line-height + padding + border
     let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
