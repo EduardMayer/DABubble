@@ -3,6 +3,7 @@ import { Message } from 'src/models/message.class';
 import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { Reaction } from 'src/models/Reaction.class';
 
 @Component({
   selector: 'app-message',
@@ -17,6 +18,7 @@ export class MessageComponent {
   public autorAvatar: string = "";
   isOwnMessage: boolean = false;
   showToolbar: boolean = false;
+  reactions: Reaction[]=[];
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,

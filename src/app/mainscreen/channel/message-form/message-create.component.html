@@ -1,0 +1,21 @@
+<div class="msg-create-container">
+    <div class='option-icons'>
+        <div class="msg-mods">
+        <img src="assets/img/icons/add.svg">
+        <img src="assets/img/icons/addreaction.svg">
+        <img src="assets/img/icons/alternateemail.svg">
+    </div>
+    <div class="msg-send">
+        <img src="assets/img/icons/send.svg" (click)="createMessage()">
+    </div>
+    </div>    
+<textarea cdkTextareaAutosize
+    class="msg-write-container" 
+    [(ngModel)]="message.content"
+    *ngIf="channelFirebaseService.selectedChannel"
+    placeholder="Nachricht an #{{ channelFirebaseService.selectedChannel.channelName }}" (click)="createMessage()">
+</textarea>
+</div>
+
+
+

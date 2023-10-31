@@ -13,7 +13,6 @@ export class Chat {
         this.users = data.users || [];
     }
 
-
     toJSON() {
         return {
             id: this.id,

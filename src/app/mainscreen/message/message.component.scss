@@ -28,8 +28,6 @@
 
         }
 
-        
-
         mat-card {
             position: relative;
             width: fit-content;
@@ -41,6 +39,8 @@
                 font-weight: 400;
                 line-height: 24.55px;
                 padding: 20px;
+
+                white-space: pre-wrap;
             }
 
             app-toolbar {
