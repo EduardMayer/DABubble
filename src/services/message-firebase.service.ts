@@ -16,9 +16,6 @@ export class MessageFirebaseService {
     constructor(private firestore: Firestore) {
     }
 
-
-
-
     /**
     * Generates a Firestore query to retrieve message data with optional index-based filtering.
     *
