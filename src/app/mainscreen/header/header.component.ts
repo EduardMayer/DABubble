@@ -18,8 +18,7 @@ export class HeaderComponent implements OnInit{
 
   user: any = new User({
     birthdate: "2000-03-23", 
-    firstName: " ",
-    lastName: " ", 
+    fullName: "",
     id:"", 
     mail:"", 
     street:"", 
@@ -49,7 +48,7 @@ export class HeaderComponent implements OnInit{
     const user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
     this.user = user; 
     this.editUserForm.patchValue({
-      nameInput: this.user.firstName + " " +  this.user.lastName, 
+      nameInput: this.user.fullName, 
       emailInput: this.user.mail
     });
   }
@@ -98,9 +97,8 @@ export class HeaderComponent implements OnInit{
   editUser(){
     const nameinput = this.editUserForm.get("nameInput")?.value;  
     if(nameinput != null){
-      this.user.firstName = nameinput.split(" ", 2)[0]; 
-      this.user.lastName = nameinput.split(" ", 2)[1]; 
-
+      //this.user.firstName = nameinput.split(" ", 2)[0]; 
+      //this.user.lastName = nameinput.split(" ", 2)[1]; 
     }
     this.user.fullName =  this.editUserForm.get("nameInput");     
     this.user.mail = this.editUserForm.get("mailInput");  

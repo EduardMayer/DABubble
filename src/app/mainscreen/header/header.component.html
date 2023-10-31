@@ -4,7 +4,7 @@
     </div>
     <input id="header-searchfield" type="text" placeholder="Code learning durchsuchen">
     <div id="header-user">
-        <h1>{{user.firstName}} {{user.lastName}}</h1>
+        <h1>{{user.fullName}}</h1>
         <div *ngIf="user.avatar!=''" id="header-user-icon">
             <img src="{{user.avatar}}" alt="UserIcon">
             <div id="header-status"></div>
@@ -38,7 +38,7 @@
         <div *ngIf="!editUserMode" id="headerUserProfil-ViewMode">
             <div id="headerUserProfil-name">
                 <div>
-                    <h2>{{user.firstName}} {{user.lastName}}</h2>
+                    <h2>{{user.fullName}}</h2>
                 </div>
                 <div>
                     <a (click)="editUserMode=true">bearbeiten</a>

@@ -22,8 +22,6 @@ export class UserFirebaseService {
             {
                 id: "",
                 fullName: "Guest",
-                firstName: "Guest",
-                lastName: "",
                 mail: "guest@guest.at",
             }
         )
