@@ -51,9 +51,11 @@
 
 .user-register-passwort-hide{
     display: flex;
-    position: absolute; 
-    right: 75px;
-    top: 456px;
+    position: relative;
+    right: 15px;
+    top: -42px;
+    flex-direction: row-reverse;
+    height: 0.5px;
 
     
     img{
@@ -98,14 +100,11 @@
 .warning-password {
     display: flex;
     width: 100%;
-    
+    position: relative;
     color: red;
-    top: -20px;
+    top: -15px;
     left: 0px;
 
-    #text {
-        margin-top: 20px; /* Verschiebt den Text um 20 Pixel nach unten */
-    }
 
 }
 

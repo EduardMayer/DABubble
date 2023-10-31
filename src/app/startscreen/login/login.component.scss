@@ -96,11 +96,14 @@
     }
 }
 
-.user-register-passwort-hide {
+.user-register-passwort-hide{
     display: flex;
-    position: absolute; 
-    right: 75px;
-    top: 375px;
+    position: relative;
+    right: 15px;
+    top: -42px;
+    flex-direction: row-reverse;
+    height: 0.5px;
+
     
     img{
         width: 24px;
