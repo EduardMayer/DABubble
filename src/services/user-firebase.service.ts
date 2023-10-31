@@ -17,6 +17,8 @@ export class UserFirebaseService {
 
     public currentUser: User;
 
+    public registUser: User = new User();  
+
     constructor(private firestore: Firestore) {
         this.currentUser = new User(
             {
@@ -77,6 +79,12 @@ export class UserFirebaseService {
         setDoc(doc(this.firestore, "users", UID), user.toJSON());
         console.log("user created with UID from Authentication");
     }
+
+    async addRegistUserWithUID(UID: string) {
+        setDoc(doc(this.firestore, "users", UID), this.registUser.toJSON());
+        console.log("Registuser created with UID from Authentication");
+    }
+
 
     /**
      *Returns a User for a given User UID. 

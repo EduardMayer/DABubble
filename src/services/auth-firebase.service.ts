@@ -97,12 +97,13 @@ export class AuthFirebaseService {
  * @param {string} email - The email of the user to register.
  * @param {string} password - The password for the user's account.
  */
-  register(email: string, password: string) {
+  async register(email: string, password: string) {
 
     //Restore
-   createUserWithEmailAndPassword(this.auth, email, password)
+   await createUserWithEmailAndPassword(this.auth, email, password)
     .then((result) => {
       this.UserData = result.user;
+      this.userService.registUser.id = this.UserData.uid; 
       //this.firebaseUserService.update(this.UserData);
       this.firebaseUserService.setCurrentUser(this.UserData)
       this.ngZone.run(() => {

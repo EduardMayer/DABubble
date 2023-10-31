@@ -19,10 +19,7 @@ export class HeaderComponent implements OnInit{
   user: any = new User({
     birthdate: "2000-03-23", 
     fullName: "",
-    id:"", 
-    mail:"", 
-    street:"", 
-    zipCode:""
+    id:"",
   }) ; 
 
   showHeaderMenu = false; 

@@ -10,7 +10,7 @@ import { Router} from '@angular/router';
   styleUrls: ['./avatar-choose.component.scss'],
 })
 export class AvatarChooseComponent implements OnInit {
-  user = this.userService.currentUser
+  user = this.userService.registUser;
   userName: string = '';
 
   avatars: string[] = [

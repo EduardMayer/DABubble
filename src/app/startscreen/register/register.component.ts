@@ -68,7 +68,7 @@ export class RegisterComponent {
   }
 
 
-  onSubmit() {
+  async onSubmit() {
     const nameInputValue = this.contactForm.get('nameInput')?.value || '';
     const emailInputValue = this.contactForm.get('emailInput')?.value || '';
     const passwordInputValue = this.contactForm.get('passwordInput')?.value || '';
@@ -76,11 +76,12 @@ export class RegisterComponent {
     if (this.userService.mailExists(emailInputValue)) {
       console.log("Die E-Mail-Adresse existiert bereits.");
     } else {
-      this.userService.currentUser.fullName = nameInputValue;
-      this.userService.currentUser.mail = emailInputValue;
-      const registerResponse = this.authService.register(emailInputValue, passwordInputValue);
+      this.userService.registUser.fullName = nameInputValue;
+      this.userService.registUser.mail = emailInputValue;
+      const registerResponse = await this.authService.register(emailInputValue, passwordInputValue);
       console.log("AuthResponse: ");
       console.log(registerResponse);
+      this.userService.addRegistUserWithUID(this.userService.registUser.id); 
       this.router.navigate(['avatar']);
     }
   }
