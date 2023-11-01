@@ -59,17 +59,18 @@
             align-items: center;
         }
 
-        
+
     }
 
     &:hover {
         background-color: #ECEEFE;
-        .message-content{
+
+        .message-content {
             mat-card {
                 background-color: white;
             }
         }
-       
+
     }
 
     app-toolbar {
@@ -105,10 +106,14 @@
             }
         }
 
-        &:hover {
 
-            background-color: #ECEEFE;
+    }
 
+    &:hover {
+
+        background-color: #ECEEFE;
+
+        .message-content {
             mat-card {
                 background-color: #797EF3;
             }
