@@ -3,6 +3,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    position: relative;
 
     .message-img {
         width: 70px;
@@ -29,7 +30,6 @@
         }
 
         mat-card {
-            position: relative;
             width: fit-content;
             background-color: #ECEEFE;
             border-radius: 0 30px 30px 30px;
@@ -39,15 +39,24 @@
                 font-weight: 400;
                 line-height: 24.55px;
                 padding: 20px;
-
                 white-space: pre-wrap;
             }
 
             app-toolbar {
                 position: absolute;
                 bottom: calc(100% + 10px);
-                left: 0;
+                right: 0;
                 z-index: 99;
+            }
+
+
+        }
+
+        &:hover {
+            background-color: #ECEEFE;
+
+            mat-card {
+                background-color: white;
             }
         }
 
@@ -55,6 +64,13 @@
             display: flex;
             align-items: center;
         }
+    }
+
+    app-toolbar {
+        position: absolute;
+        transform: translateY(-50%);
+        z-index: 9;
+        margin: 16px;
     }
 
 
@@ -78,6 +94,14 @@
             app-toolbar {
                 left: unset;
                 right: 0;
+            }
+        }
+
+        &:hover {
+            background-color: #ECEEFE;
+
+            mat-card {
+                background-color: #797EF3;
             }
         }
     }

@@ -3,7 +3,7 @@ import { Message } from 'src/models/message.class';
 import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { Reaction } from 'src/models/Reaction.class';
+import { Reaction } from 'src/models/reaction.class';
 
 @Component({
   selector: 'app-message',
@@ -18,7 +18,7 @@ export class MessageComponent {
   public autorAvatar: string = "";
   isOwnMessage: boolean = false;
   showToolbar: boolean = false;
-  reactions: Reaction[]=[];
+  reactions: Reaction[] = [];
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -27,23 +27,12 @@ export class MessageComponent {
 
   }
 
-  toggleToolbar() {
-    if (this.showToolbar) {
-      this.showToolbar = false;
-    } else {
-      this.closeAllOtherToolbars();
-      this.showToolbar = true;
-    }
+  openToolbar() {
+    this.showToolbar = true;
   }
-
-  closeAllOtherToolbars() {
-    let openToolbars = document.getElementsByClassName("toolbar");
-    if (openToolbars) {
-      for (let index = 0; index < openToolbars.length; index++) {
-        const element = openToolbars[index];
-        element.remove();
-      }
-    }
+  
+  closeToolbar() {
+    this.showToolbar = false;
   }
 
   @Input()
