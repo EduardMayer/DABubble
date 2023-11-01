@@ -40,6 +40,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { ToolbarComponent } from './mainscreen/message/toolbar/toolbar.component';
 import { AddreactionComponent } from './mainscreen/message/addreaction/addreaction.component';
 import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-password.component';
+import { PickerModule } from "@ctrl/ngx-emoji-mart";
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-pa
     AddreactionComponent,
     ForgotPasswordComponent,
    
+    AddreactionComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-pa
     MatMenuModule,
     MatDialogModule,
     MatBadgeModule,
-    MatToolbarModule
+    MatToolbarModule,
+    PickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
