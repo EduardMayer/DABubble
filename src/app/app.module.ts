@@ -39,6 +39,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ToolbarComponent } from './mainscreen/message/toolbar/toolbar.component';
 import { AddreactionComponent } from './mainscreen/message/addreaction/addreaction.component';
+import { PickerModule } from "@ctrl/ngx-emoji-mart";
 
 
 @NgModule({
@@ -63,8 +64,7 @@ import { AddreactionComponent } from './mainscreen/message/addreaction/addreacti
     IfChangedDirective,
     ReactionComponent,
     ToolbarComponent,
-    AddreactionComponent,
-   
+    AddreactionComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +85,8 @@ import { AddreactionComponent } from './mainscreen/message/addreaction/addreacti
     MatMenuModule,
     MatDialogModule,
     MatBadgeModule,
-    MatToolbarModule
+    MatToolbarModule,
+    PickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

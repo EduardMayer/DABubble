@@ -1,1 +1,11 @@
-<div class='reaction-container'>Smiley Content</div>
+<!--
+<div #container class="emoji-picker-container reaction-container">      
+</div>
+-->
+  <emoji-mart
+      class="picker"
+      color="var(--str-chat__primary-color)"
+      title="Pick your emoji…"
+      emoji="point_up"
+      (emojiSelect)="emojiSelected($event)"
+    ></emoji-mart>

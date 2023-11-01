@@ -16,6 +16,7 @@ export class MessageCreateComponent {
   messageControl: FormControl = new FormControl();
   message = new Message();
   textarea: HTMLTextAreaElement | undefined;
+  showEmojiList: boolean = false;
 
   constructor(
     private userFirebaseService: UserFirebaseService,
@@ -40,6 +41,10 @@ export class MessageCreateComponent {
         this.message = new Message();
       }
     }
+  }
+
+  toggleEmojiList() {
+    this.showEmojiList = !this.showEmojiList;
   }
 
   /**
@@ -72,6 +77,11 @@ export class MessageCreateComponent {
     // min-height + lines x line-height + padding + border
     let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
     return newHeight;
+  }
+
+  handleEmojiSelection(selectedEmoji: Event) {
+    // Handle the selected emoji here, for example, log it to the console.
+    console.log(`Selected emoji: ${selectedEmoji}`);
   }
   /*
   ngAfterViewInit() {
