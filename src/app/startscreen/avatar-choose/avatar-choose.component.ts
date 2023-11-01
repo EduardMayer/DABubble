@@ -21,7 +21,7 @@ export class AvatarChooseComponent implements OnInit {
     'avatar5.svg',
     'avatar6.svg',
   ];
-  constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService, private router: Router) {
+  constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService, public router: Router) {
     this.user.avatar = 'assets/img/avatar/avatar0.svg';
   }
   
@@ -48,6 +48,7 @@ export class AvatarChooseComponent implements OnInit {
   }
 
   onSubmitAvatar() {
+    console.log('onSubmitAvatar called');
     this.userService.update(this.user);
     this.router.navigate(['']);
   }

@@ -12,6 +12,8 @@ export class StartscreenComponent implements OnInit{
   showLogin = true; 
   imprint = false; 
   privacyPolicy = false; 
+  showAvatar =false;
+  showRegister = false;
 
   constructor(private authService: AuthFirebaseService , private router: Router){}
 
@@ -24,6 +26,11 @@ export class StartscreenComponent implements OnInit{
   closeImprintAndPrivacy(){
     this.imprint = false; 
     this.privacyPolicy = false; 
+  }
+
+  closeRegister(){
+    this.showRegister = false; 
+    this.showAvatar = true; 
   }
 
 }
