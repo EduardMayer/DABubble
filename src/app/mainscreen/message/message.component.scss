@@ -1,9 +1,10 @@
 .message-container {
-    width: 100%;
+    width: calc(100% - 70px);
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
     position: relative;
+    padding: 0 35px 0 35px;
 
     .message-img {
         width: 70px;
@@ -52,18 +53,23 @@
 
         }
 
-        &:hover {
-            background-color: #ECEEFE;
-
-            mat-card {
-                background-color: white;
-            }
-        }
 
         .message-footer {
             display: flex;
             align-items: center;
         }
+
+        
+    }
+
+    &:hover {
+        background-color: #ECEEFE;
+        .message-content{
+            mat-card {
+                background-color: white;
+            }
+        }
+       
     }
 
     app-toolbar {
@@ -72,6 +78,8 @@
         z-index: 9;
         margin: 16px;
     }
+
+
 
 
 }
@@ -98,6 +106,7 @@
         }
 
         &:hover {
+
             background-color: #ECEEFE;
 
             mat-card {
@@ -105,4 +114,6 @@
             }
         }
     }
+
+
 }
