@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainscreenComponent } from './mainscreen/mainscreen.component';
 import { StartscreenComponent } from './startscreen/startscreen.component';
-import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose.component';
 import { authGuard } from 'src/guard/auth-guard.guard';
 
 const routes: Routes = [
