@@ -19,7 +19,6 @@ export class MessageComponent {
   public autorAvatar: string = "";
   isOwnMessage: boolean = false;
   showToolbar: boolean = false;
-  reactions: Reaction[] = [];
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -30,10 +29,30 @@ export class MessageComponent {
 
   }
 
+  handleEmojiSelection(selectedEmoji: string) {
+    // Handle the selected emoji here, for example, log it to the console.
+    console.log(`Selected emoji: ${selectedEmoji}`);
+    //this.message.content+=`selectedEmoji`;
+
+    let reactionId = this.message.getReactionId(selectedEmoji);
+    if (reactionId) {
+      this.message.reactions[reactionId].users.push(this.userFirebaseService.currentUser.id);
+    } else {
+      this.message.reactions.push(new Reaction(
+        {
+          name: selectedEmoji,
+          users: [this.userFirebaseService.currentUser.id]
+        }
+      )
+      )
+    }
+    console.log(this.message.reactions);
+  }
+
   openToolbar() {
     this.showToolbar = true;
   }
-  
+
   closeToolbar() {
     this.showToolbar = false;
   }
