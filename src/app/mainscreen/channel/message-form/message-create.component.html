@@ -14,7 +14,8 @@
     class="msg-write-container" 
     [(ngModel)]="message.content"
     *ngIf="channelFirebaseService.selectedChannel"
-    placeholder="Nachricht an #{{ channelFirebaseService.selectedChannel.channelName }}" (click)="createMessage()">
+    placeholder="Nachricht an #{{ channelFirebaseService.selectedChannel.channelName }}"
+    (click)="closeEmojiList()">
 </textarea>
 </div>
 

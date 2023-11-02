@@ -11,7 +11,6 @@ export class Reaction {
 
     toJSON() {
         return {
-            id: this.id,
             name: this.name,
             users: this.users
         }

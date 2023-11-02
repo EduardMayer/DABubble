@@ -46,10 +46,6 @@ export class ChannelFirebaseService {
     }
 
 
-
-
-
-
     /**
     * Generates a Firestore query to retrieve channel data with optional index-based filtering.
     *
@@ -99,11 +95,6 @@ export class ChannelFirebaseService {
                 if (doc.data()) {
                     const message = new Message(doc.data());
                     this.selectedChannelMessages.push(message);
-                    if (this.selectedChannelMessages.length == 1) {
-                        //this.lastMessageTimeString = this.previousMessageTimeString = 
-                        //this.formatDateToDmy(new Date(this.selectedChannelMessages[0].timestamp));
-                    }
-
                 }
             })
         });
@@ -168,9 +159,7 @@ export class ChannelFirebaseService {
                 await updateDoc(docInstance, channelMessage.toJSON());
                 console.log("channelMessages updated");
             }
-
         }
-
     }
 
 
