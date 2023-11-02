@@ -91,16 +91,19 @@ export class HeaderComponent implements OnInit{
   /**
    * Edit the current User and saves the changes in the firebase store. 
    */
-  editUser(){
+  async editUser(){
     const nameinput = this.editUserForm.get("nameInput")?.value;  
     if(nameinput != null){
       //this.user.firstName = nameinput.split(" ", 2)[0]; 
       //this.user.lastName = nameinput.split(" ", 2)[1]; 
     }
-    this.user.fullName =  this.editUserForm.get("nameInput");     
-    this.user.mail = this.editUserForm.get("mailInput");  
+    this.user.fullName =  this.editUserForm.get("nameInput")?.value;     
+    this.user.mail = this.editUserForm.get("emailInput")?.value;  
     this.userService.setCurrentUser(this.user); 
-    console.log("User Update in Firebase muss noch ergänzt werden!");
+    console.log("Current User after Edit:");
+    console.log(this.userService.currentUser);
+    // console.log("User Update in Firebase muss noch ergänzt werden!");
+    await this.authService.updateEmail(this.user.mail); 
     this.showHeaderUserProfil = false; 
     this.showHeaderMenu = false; 
 
