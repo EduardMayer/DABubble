@@ -9,7 +9,9 @@ import {
   signInWithPopup,
   signOut,
   sendEmailVerification,
-  User
+  User, 
+  updateEmail,
+  verifyBeforeUpdateEmail
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UserFirebaseService } from './user-firebase.service';
@@ -252,4 +254,49 @@ export class AuthFirebaseService {
   getErrorMessage(errorCode:string){
     return this.firebaseAuthErrorMessages[errorCode as keyof typeof this.firebaseAuthErrorMessages];
   }
+
+  async updateEmail(newEmail:string){
+
+    this.UserData.email = newEmail; 
+    this.sendEmailVerification(); 
+
+    verifyBeforeUpdateEmail(this.UserData, newEmail).then(() => {
+      // Email updated!
+      console.log("Email updated!");
+      this.userService.updateEmail(newEmail); 
+ 
+    }).catch((error) => {
+      console.log("ERROR at Email update!");
+      console.log(error.code);
+      console.log(error.message);
+      console.log(this.UserData);
+      
+      
+      
+    });
+/*
+    await updateEmail(this.UserData, newEmail).then(() => {
+      // Email updated!
+      console.log("Email updated!");
+      this.userService.updateEmail(newEmail); 
+ 
+    }).catch((error) => {
+      console.log("ERROR at Email update!");
+      console.log(error.code);
+      console.log(error.message);
+      console.log(this.UserData);
+      
+      
+      
+    });
+    */
+  }
+ async sendEmailVerification(){
+
+  sendEmailVerification(this.UserData)
+  .then(() => {
+    // Email verification sent!
+    // ...
+  });
+ }
 }
