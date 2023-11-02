@@ -44,15 +44,9 @@ export class StartscreenComponent implements OnInit{
     this.showForgotPassword = false;
   }
 
-  closeLogin() {
-    this.showLogin = false;
-    this.showForgotPassword = true;
-  }
-
   onForgotPasswordLinkClick() {
     this.showLogin = false;
     this.showForgotPassword = true;
   }
-
 
 }
