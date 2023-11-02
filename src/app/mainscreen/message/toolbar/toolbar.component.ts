@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { Reaction } from 'src/models/reaction.class';
+import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 
@@ -15,7 +16,8 @@ export class ToolbarComponent {
   showMessageOptions: boolean = false;
   showMessageReactions: boolean = false;
 
-  constructor(private userFirebaseService: UserFirebaseService){
+  constructor(private userFirebaseService: UserFirebaseService,
+    public messageFirebaseService: MessageFirebaseService){
     
   }
 

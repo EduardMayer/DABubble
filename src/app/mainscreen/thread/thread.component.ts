@@ -9,7 +9,6 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
 export class ThreadComponent {
 
 constructor(public messageFirebaseService: MessageFirebaseService)  {
-  debugger;
 console.log(this.messageFirebaseService.message);
 this.setmessage();
 
