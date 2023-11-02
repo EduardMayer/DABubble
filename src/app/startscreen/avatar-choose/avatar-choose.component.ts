@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StorageFirebaseService} from 'src/services/storage-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { Router} from '@angular/router';
@@ -21,8 +21,14 @@ export class AvatarChooseComponent implements OnInit {
     'avatar5.svg',
     'avatar6.svg',
   ];
-  constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService, private router: Router) {
+  constructor(private storageService: StorageFirebaseService, public userService: UserFirebaseService, public router: Router) {
     this.user.avatar = 'assets/img/avatar/avatar0.svg';
+  }
+
+  @Output() closeAvatarView = new EventEmitter<void>();
+
+  closeAvatar(){
+    this.closeAvatarView.emit(); 
   }
   
   ngOnInit() {
@@ -49,7 +55,6 @@ export class AvatarChooseComponent implements OnInit {
 
   onSubmitAvatar() {
     this.userService.update(this.user);
-    this.router.navigate(['']);
   }
   
 }

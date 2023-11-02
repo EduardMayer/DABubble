@@ -1,8 +1,32 @@
-<mat-toolbar class="toolbar" [ngClass]="{'inverted': isOwnMessage}" >
-    <mat-toolbar-row >
+<div *ngIf="showMessageReactions" class="message-reaction-options">
+    <app-addreaction></app-addreaction>
+</div>
+
+<mat-toolbar class="toolbar">
+    <mat-toolbar-row>
         <img src="assets/img/icons/checkmark.svg">
         <img src="assets/img/icons/handsup.svg">
-        <img src="assets/img/icons/addreaction.svg">
+        <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">
         <img src="assets/img/icons/answer.svg">
+
+        <div *ngIf="isOwnMessage" (blur)="hideOptions($event)" class="message-edit-container">
+            <button mat-icon-button (click)="toggleOptions($event)">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<div *ngIf="showMessageOptions" class="message-edit-options">
+    <button>
+        <mat-icon>edit</mat-icon>
+        <span>Nachricht bearbeiten</span>
+    </button>
+    <!--
+    <button>
+        <mat-icon>delete</mat-icon>
+        <span>Nachricht löschen</span>
+    </button>
+    -->
+</div>
+

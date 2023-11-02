@@ -1,10 +1,39 @@
-mat-toolbar{
+mat-toolbar {
     background-color: white;
     border: solid 1px #9747FF;
-
     border-radius: 25px 25px 25px 0px;
 }
 
-.inverted{
-    border-radius: 25px 25px 0px 25px;
+
+.message-edit-options {
+    position: absolute;
+    float: right;
+    background-color: white;
+    border-radius: 0px 30px 30px 30px;
+    width: 100%;
+    left: 90%;
+    top: 35px;
+
+    button {
+        cursor: pointer;
+        width: fit-content;
+        background-color: #ffffff;
+        border-radius: 30px 30px 30px 30px;
+        display: flex;
+        align-items: center;
+        width: calc(100% - 16px);
+        margin: 8px;
+        border: none;
+        padding: 8px;
+
+        &:hover {
+            background-color: #ECEEFE;
+            font-weight: 600;
+            color: #797EF3
+        }
+    }
+}
+
+message-reaction-options{
+
 }

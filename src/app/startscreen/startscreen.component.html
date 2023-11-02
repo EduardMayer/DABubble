@@ -5,11 +5,13 @@
         </div>
         <div id="startScreen-register" *ngIf="showLogin && !imprint && !privacyPolicy">
             <h3>Neu bei DABubble?</h3>
-            <a (click)="showLogin = false">Konto erstellen</a>
+            <a (click)="showLogin = false; showRegister = true">Konto erstellen</a>
         </div>
     </div>
-        <app-login *ngIf="showLogin && !imprint && !privacyPolicy"></app-login>
-        <app-register *ngIf="!showLogin && !imprint && !privacyPolicy"></app-register>
+        <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar"></app-login>
+        <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()"></app-register>
+        <app-avatar-choose *ngIf="showAvatar && !showLogin" (closeAvatarView)="closeAvatar()"></app-avatar-choose>
+        <app-forgot-password *ngIf="showForgotPasswort"></app-forgot-password>
         <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>
         <app-privacy-policy *ngIf="privacyPolicy" (closePrivacyPolicyView)="closeImprintAndPrivacy()"></app-privacy-policy>
         

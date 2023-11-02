@@ -4,9 +4,8 @@
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
-    margin: 0;
     border-radius: 30px;
-    padding: 35px;
+    padding: 35px 0px 35px 0px;
 }
 
 .align-bottom {
@@ -30,6 +29,7 @@
 }
 
 .header {
+    padding: 0px 35px 0px 35px;
     display: flex;
     justify-content: space-between;
 

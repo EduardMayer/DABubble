@@ -1,0 +1,45 @@
+.reaction-container {
+    background-color: white;
+    border: solid 1px black;
+    border-radius: 30px;
+    margin: 10px;
+    padding: 16px;
+}
+
+.emoji-picker-container {
+    position: relative;
+    width: 24px;
+    height: 24px;
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+
+        svg {
+            width: 24px;
+            height: 24px;
+
+            path {
+                fill: var(--str-chat__message-input-tools-color);
+            }
+        }
+    }
+
+    .picker {
+        z-index: 3;
+        position: absolute;
+        bottom: 100%;
+        transform: scale(0.8);
+        right: 0;
+        transform-origin: bottom right;
+    }
+
+    @media only screen and (min-device-width: 1024px) {
+        .picker {
+            transform: scale(1);
+        }
+    }
+}

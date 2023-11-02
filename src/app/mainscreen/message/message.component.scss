@@ -1,8 +1,10 @@
 .message-container {
-    width: 100%;
+    width: calc(100% - 70px);
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    position: relative;
+    padding: 0 35px 0 35px;
 
     .message-img {
         width: 70px;
@@ -29,7 +31,6 @@
         }
 
         mat-card {
-            position: relative;
             width: fit-content;
             background-color: #ECEEFE;
             border-radius: 0 30px 30px 30px;
@@ -39,23 +40,47 @@
                 font-weight: 400;
                 line-height: 24.55px;
                 padding: 20px;
-
                 white-space: pre-wrap;
             }
 
             app-toolbar {
                 position: absolute;
                 bottom: calc(100% + 10px);
-                left: 0;
+                right: 0;
                 z-index: 99;
             }
+
+
         }
+
 
         .message-footer {
             display: flex;
             align-items: center;
         }
+
+
     }
+
+    &:hover {
+        background-color: #ECEEFE;
+
+        .message-content {
+            mat-card {
+                background-color: white;
+            }
+        }
+
+    }
+
+    app-toolbar {
+        position: absolute;
+        transform: translateY(-50%);
+        z-index: 9;
+        margin: 16px;
+    }
+
+
 
 
 }
@@ -80,5 +105,20 @@
                 right: 0;
             }
         }
+
+
     }
+
+    &:hover {
+
+        background-color: #ECEEFE;
+
+        .message-content {
+            mat-card {
+                background-color: #797EF3;
+            }
+        }
+    }
+
+
 }

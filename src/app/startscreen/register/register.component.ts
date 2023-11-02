@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router} from '@angular/router';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -13,6 +13,8 @@ export class RegisterComponent {
 
   constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
   
+  @Output() closeRegisterView = new EventEmitter<void>();
+
   isNameInputActive = false;
   isEmailInputActive = false;
   isPasswordInputActive = false;
@@ -22,7 +24,7 @@ export class RegisterComponent {
   checkboxValue: boolean = false;
 
   contactForm = new FormGroup({
-    nameInput: new FormControl('', [
+    nameInput: new FormControl('',[
       Validators.required,
       Validators.minLength(5),
       this.nameValidator
@@ -36,6 +38,10 @@ export class RegisterComponent {
       this.passwordValidator,
     ]),
   });
+
+  closeRegister(){
+    this.closeRegisterView.emit(); 
+  }
 
   nameValidator(control: FormControl): { [key: string]: boolean } | null {
     const value = control.value;
@@ -82,7 +88,7 @@ export class RegisterComponent {
       console.log("AuthResponse: ");
       console.log(registerResponse);
       this.userService.addRegistUserWithUID(this.userService.registUser.id); 
-      this.router.navigate(['avatar']);
+      
     }
   }
 
