@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { Reaction } from 'src/models/Reaction.class';
+import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 
 @Component({
   selector: 'app-message',
@@ -22,7 +23,9 @@ export class MessageComponent {
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
-    public userFirebaseService: UserFirebaseService
+    public userFirebaseService: UserFirebaseService,
+    public threadFirebaseService: ThreadFirebaseService,
+
   ) {
 
   }

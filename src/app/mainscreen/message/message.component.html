@@ -1,5 +1,5 @@
 
-<div class='message-container' [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message">
+<div class='message-container' (click)="threadFirebaseService.openThread(_message)" [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message">
     <img src="{{ autorAvatar }}" class="message-img" *ngIf="autorAvatar">
     <div class="message-content" (click)="toggleToolbar()">
         <div class="message-head">

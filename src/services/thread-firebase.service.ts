@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
 import { Thread } from '../models/thread.class';
+import { ChannelFirebaseService } from './channel-firebase.service';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class ThreadFirebaseService {
     private unsubThreads: any; 
     private unsubThread: any; 
 
-    constructor(private firestore: Firestore) {
+    constructor(private firestore: Firestore, public channelFirebaseService: ChannelFirebaseService) {
     }
 
 
@@ -52,6 +53,13 @@ export class ThreadFirebaseService {
         });
     };
 
+    openThread(message: any) {
+        debugger;
+        console.log(message.id);
+        console.log(this.channelFirebaseService.selectedChannel?.channelName);
+    }
+
+    message: any;
 
     /**
     * Retrieves a thread by its unique identifier.
