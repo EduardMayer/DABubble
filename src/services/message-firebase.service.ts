@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc } from "firebase/firestore";
 import { Message } from '../models/message.class';
+import { ChannelFirebaseService } from './channel-firebase.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,8 +14,11 @@ export class MessageFirebaseService {
     private unsubMessages: any;
     public isOwnMessage: boolean = false;
 
-    constructor(private firestore: Firestore) {
+    constructor(private firestore: Firestore, public channelFirebaseService: ChannelFirebaseService) {
+
     }
+
+
 
     /**
     * Generates a Firestore query to retrieve message data with optional index-based filtering.
@@ -50,7 +54,18 @@ export class MessageFirebaseService {
     }
 
 
-    /**
+    openThread(message: any) {
+           debugger;
+          console.log(message.id);
+           console.log(this.channelFirebaseService.selectedChannel?.channelName);
+       this.message=  message;
+       console.log('Globally message is', this.message);
+
+        }
+    
+        message: any = {};
+
+        /**
     * Retrieves a message by its unique identifier.
     *
     * @param {string} messageId - The unique identifier of the thread to retrieve.
