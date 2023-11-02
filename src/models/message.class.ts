@@ -1,6 +1,6 @@
 export class Message {
     id: string;
-    content: Message;
+    content: string;
     timestamp: number;
     autorId: string;
     avatarSrc: string;

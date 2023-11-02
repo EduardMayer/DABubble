@@ -20,7 +20,7 @@ export class AddreactionComponent {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     this.emojiInput$?.next(event.emoji.native);
     const selectedEmoji = event.emoji.native;
-    console.log(selectedEmoji);
+    //console.log(selectedEmoji);
     this.emojiSelectedOutput.emit(selectedEmoji);
   }
 
