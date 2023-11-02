@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -9,6 +9,13 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+
+  @Output() forgotPasswordLinkClick = new EventEmitter<void>();
+
+  onForgotPasswordLinkClick() {
+    this.forgotPasswordLinkClick.emit();
+  }
+
   errorInfo: any = false;
   isInputActive = false;
   isPasswordInputActive = false;
@@ -30,13 +37,18 @@ export class LoginComponent implements OnInit {
   loginFailed = false; 
   loginErrorMessage = ""; 
 
+
   constructor(private authService: AuthFirebaseService) { }
+
+
+
 
   firebaseUserService = inject(UserFirebaseService);
 
   ngOnInit(): void {
     console.log('User Logged In: ' + this.authService.isLoggedIn());
   }
+  
 
   async login() {
     console.log(this.contactForm.value.emailInput);
@@ -92,4 +104,7 @@ export class LoginComponent implements OnInit {
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
+
+  
+
 }

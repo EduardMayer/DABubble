@@ -12,9 +12,9 @@ export class StartscreenComponent implements OnInit{
   showLogin = true; 
   imprint = false; 
   privacyPolicy = false; 
-  showAvatar =false;
+  showAvatar = false;
   showRegister = false;
-  showForgotPasswort = false;
+  showForgotPassword = false;
 
   constructor(private authService: AuthFirebaseService , private router: Router){}
 
@@ -37,6 +37,16 @@ export class StartscreenComponent implements OnInit{
   closeAvatar(){
     this.showLogin = true;
     this.showAvatar = false;
+  }
+
+  closeForgotPassword(){
+    this.showLogin = true;
+    this.showForgotPassword = false;
+  }
+
+  onForgotPasswordLinkClick() {
+    this.showLogin = false;
+    this.showForgotPassword = true;
   }
 
 }

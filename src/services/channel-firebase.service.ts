@@ -33,7 +33,7 @@ export class ChannelFirebaseService {
     constructor(private firestore: Firestore) {
         setTimeout(() => {
             this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT 
-        }, 2000)
+        }, 3000)
 
     }
 

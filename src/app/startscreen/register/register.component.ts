@@ -22,6 +22,9 @@ export class RegisterComponent {
   showPasswordImage: string = 'assets/img/icons/eye.png';
   hidePasswordImage: string = 'assets/img/icons/hideeye.png';
   checkboxValue: boolean = false;
+  registrationFailed = false; 
+  registrationErrorMessage = ""; 
+  
 
   contactForm = new FormGroup({
     nameInput: new FormControl('',[
@@ -39,9 +42,6 @@ export class RegisterComponent {
     ]),
   });
 
-  registrationFailed = false; 
-  registrationErrorMessage = ""; 
-  
 
   closeRegister(){
     this.closeRegisterView.emit(); 

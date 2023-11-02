@@ -1,4 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { Message } from 'src/models/message.class';
+import { Reaction } from 'src/models/reaction.class';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 
 @Component({
@@ -8,8 +11,36 @@ import { Component, Input } from '@angular/core';
 })
 export class ToolbarComponent {
   @Input() isOwnMessage: boolean | undefined;
+  @Input() message: Message | undefined;
   showMessageOptions: boolean = false;
   showMessageReactions: boolean = false;
+
+  constructor(private userFirebaseService: UserFirebaseService){
+    
+  }
+
+  handleEmojiSelection(selectedEmoji: string) {
+    // Handle the selected emoji here, for example, log it to the console.
+    console.log(`Selected emoji: ${selectedEmoji}`);
+    //this.message.content+=`selectedEmoji`;
+
+
+    if(this.message){
+      console.log(this.message);
+      let reactionId = this.message.getReactionId(selectedEmoji);
+      if (reactionId) {
+        this.message.reactions[reactionId].users.push(this.userFirebaseService.currentUser.id);
+      } else {
+        this.message.reactions.push(new Reaction(
+          {
+            name: selectedEmoji,
+            users: [this.userFirebaseService.currentUser.id]
+          }
+        )
+        )
+      }
+    }
+  }
 
   toggleOptions(event: Event) {
     event.stopPropagation();
