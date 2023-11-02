@@ -188,9 +188,14 @@
       >Ich stimme der <a href="#">Datenschutzerklärung</a> zu.</label
     >
   </div>
+  <div *ngIf="registrationFailed" class="warning-text">
+    <span class="registrationError">
+      {{registrationErrorMessage}}
+    </span>
+  </div>
   <div class="user-register-button-container">
     <button
-      (click)="closeRegister() ;onSubmit()"
+      (click)="onSubmit()"
       class="blue-button"
       mat-raised-button
       color="primary"

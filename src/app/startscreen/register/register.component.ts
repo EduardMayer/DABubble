@@ -39,6 +39,10 @@ export class RegisterComponent {
     ]),
   });
 
+  registrationFailed = false; 
+  registrationErrorMessage = ""; 
+  
+
   closeRegister(){
     this.closeRegisterView.emit(); 
   }
@@ -78,18 +82,26 @@ export class RegisterComponent {
     const nameInputValue = this.contactForm.get('nameInput')?.value || '';
     const emailInputValue = this.contactForm.get('emailInput')?.value || '';
     const passwordInputValue = this.contactForm.get('passwordInput')?.value || '';
+    let registerSuccessful = false; 
 
-    if (this.userService.mailExists(emailInputValue)) {
-      console.log("Die E-Mail-Adresse existiert bereits.");
-    } else {
-      this.userService.registUser.fullName = nameInputValue;
-      this.userService.registUser.mail = emailInputValue;
-      const registerResponse = await this.authService.register(emailInputValue, passwordInputValue);
-      console.log("AuthResponse: ");
-      console.log(registerResponse);
+    this.userService.registUser.fullName = nameInputValue;
+    this.userService.registUser.mail = emailInputValue;
+    await this.authService.register(emailInputValue, passwordInputValue)
+    .then(() => {
+      console.log("Registrierung erfolgreich. User wird angelegt");
       this.userService.addRegistUserWithUID(this.userService.registUser.id); 
-      
-    }
+      this.closeRegister();
+    })
+    .catch((error) => {
+      console.log("AuthResponse: ");
+      const errorCode = error.code;
+      console.log(errorCode);
+      if(errorCode != null && errorCode != undefined){
+        this.registrationErrorMessage = this.authService.getErrorMessage(errorCode); 
+        this.registrationFailed = true; 
+      }
+      return; 
+    });    
   }
 
 }
