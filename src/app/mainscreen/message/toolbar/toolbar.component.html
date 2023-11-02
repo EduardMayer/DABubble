@@ -1,5 +1,5 @@
 <div *ngIf="showMessageReactions" class="message-reaction-options">
-    <app-addreaction></app-addreaction>
+    <app-addreaction (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
 </div>
 
 <mat-toolbar class="toolbar">

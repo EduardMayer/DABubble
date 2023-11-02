@@ -53,7 +53,6 @@ export class MessageFirebaseService {
         });
     }
 
-
     openThread(message: any) {
            debugger;
           console.log(message.id);

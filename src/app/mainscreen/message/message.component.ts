@@ -3,7 +3,7 @@ import { Message } from 'src/models/message.class';
 import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { Reaction } from 'src/models/Reaction.class';
+import { Reaction } from 'src/models/reaction.class';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 
 @Component({

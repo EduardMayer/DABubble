@@ -1,4 +1,4 @@
-import { Reaction } from "./Reaction.class";
+import { Reaction } from "./reaction.class";
 
 export class Message {
     id: string;
@@ -14,7 +14,7 @@ export class Message {
         this.timestamp = obj ? obj.timestamp : 0;
         this.autorId = obj ? obj.autorId : "";
         this.avatarSrc = obj ? obj.avatarSrc : "";
-        this.reactions = obj ? obj.reaction : [];
+        this.reactions = obj ? obj.reactions : [];
     }
 
     toJSON() {
