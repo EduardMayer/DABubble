@@ -97,13 +97,20 @@ export class HeaderComponent implements OnInit{
       //this.user.firstName = nameinput.split(" ", 2)[0]; 
       //this.user.lastName = nameinput.split(" ", 2)[1]; 
     }
-    this.user.fullName =  this.editUserForm.get("nameInput")?.value;     
-    this.user.mail = this.editUserForm.get("emailInput")?.value;  
+    this.user.fullName =  this.editUserForm.get("nameInput")?.value; 
+    const mail = this.editUserForm.get("emailInput")?.value
+    if(this.user.mail != this.editUserForm.get("emailInput")?.value){
+      await this.authService.sendUpdateEmail(mail!);  
+      console.log("Email wird erst nach bestätigung geändert");
+    }
     this.userService.setCurrentUser(this.user); 
     console.log("Current User after Edit:");
     console.log(this.userService.currentUser);
     // console.log("User Update in Firebase muss noch ergänzt werden!");
-    await this.authService.updateEmail(this.user.mail); 
+
+  
+    
+
     this.showHeaderUserProfil = false; 
     this.showHeaderMenu = false; 
 

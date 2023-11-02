@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainscreenComponent } from './mainscreen/mainscreen.component';
 import { StartscreenComponent } from './startscreen/startscreen.component';
 import { authGuard } from 'src/guard/auth-guard.guard';
+import { ActionHandlerComponent } from './action-handler/action-handler.component';
 
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent, canActivate: [authGuard] },
+  { path: 'userMgmt', component: ActionHandlerComponent } 
 ]
   
 
