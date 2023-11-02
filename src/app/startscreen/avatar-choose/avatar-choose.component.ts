@@ -55,6 +55,7 @@ export class AvatarChooseComponent implements OnInit {
 
   onSubmitAvatar() {
     this.userService.update(this.user);
+    this.router.navigate(['main']);
   }
   
 }
