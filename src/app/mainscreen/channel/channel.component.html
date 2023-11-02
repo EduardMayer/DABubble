@@ -9,9 +9,6 @@
         <div class="user-avatar-list">
             <img class="avatar-img" *ngFor="let user of channelFirebaseService.channelUsers" src="{{ user.avatar }}"
                 alt="avatar">
-            <div *ngFor="let user of channelFirebaseService.channelUsers">
-                {{ user.avatar }}
-            </div>
             <img class="avatar-img" src="assets/img/icons/addmembers.svg">
         </div>
     </div>

@@ -32,13 +32,12 @@ export class MessageCreateComponent {
   */
   async createMessage() {
     if (this.message.content) {
-
-
       this.message.timestamp = Date.now();
-
       if (this.channelFirebaseService.selectedChannel) {
+        this.setMessageAutor();
         this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this.message);
         this.message = new Message();
+        this.showEmojiList = false;
       }
     }
   }
@@ -79,20 +78,10 @@ export class MessageCreateComponent {
     return newHeight;
   }
 
-  handleEmojiSelection(selectedEmoji: Event) {
+  handleEmojiSelection(selectedEmoji: string) {
     // Handle the selected emoji here, for example, log it to the console.
     console.log(`Selected emoji: ${selectedEmoji}`);
+    //this.message.content+=`selectedEmoji`;
+    this.message.content += selectedEmoji;
   }
-  /*
-  ngAfterViewInit() {
-    this.calcHeight->
-    if (this.textarea) {
-      this.textarea.addEventListener("keyup", () => {
-        if (this.textarea) {
-          this.textarea.style.height = this.calcHeight(this.textarea.value) + "px";
-        }
-      });
-    }
-  }
-  */
 }
