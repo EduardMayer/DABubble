@@ -59,8 +59,7 @@ export class AvatarChooseComponent implements OnInit {
     this.avatarSubmitted = true;
   
     setTimeout(() => {
-      this.avatarSubmitted = false;
-      this.router.navigate(['main']);
+    this.router.navigate(['main']);
     }, 1500);
   }
    
