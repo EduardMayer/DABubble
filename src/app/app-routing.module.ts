@@ -6,6 +6,7 @@ import { authGuard } from 'src/guard/auth-guard.guard';
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
 
 
+
 const routes: Routes = [
   //{ path: '', component: MainscreenComponent },
    /** FOR PROD */ 

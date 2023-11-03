@@ -26,7 +26,7 @@ export class RegisterComponent {
   checkboxValue: boolean = false;
   registrationFailed = false; 
   registrationErrorMessage = ""; 
-  createKonto: boolean = false;
+
   
 
   contactForm = new FormGroup({
@@ -93,10 +93,7 @@ export class RegisterComponent {
     .then(() => {
       console.log("Registrierung erfolgreich. User wird angelegt");
       this.userService.addRegistUserWithUID(this.userService.registUser.id);
-      this.createKonto = true;
-      setTimeout(() => {
-        this.closeRegister();
-      }, 1500);
+      this.closeRegister();
     })
     .catch((error) => {
       console.log("AuthResponse: ");
