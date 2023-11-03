@@ -20,8 +20,6 @@ export class ToolbarComponent {
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
-    private userFirebaseService: UserFirebaseService,
-    private channelFirebaseService: ChannelFirebaseService,
     public messageFirebaseService: MessageFirebaseService) {
 
   }
@@ -33,32 +31,6 @@ export class ToolbarComponent {
 
   handleEmojiSelection(selectedEmoji: string) {
     this.emojiSelectedOutput.emit(selectedEmoji);
-    /*
-    console.log(this.message);
-    if (this.message) {
-      let reactionId = this.message.getReactionId(selectedEmoji);
-
-      if (!this.message.reactions) {
-        this.message.reactions = [];
-      }
-
-      this.message.reactions.push(
-        new Reaction(
-          {
-            name: selectedEmoji,
-            users: [this.userFirebaseService.currentUser.id]
-          }
-        )
-      )
-
-      this.message.reactions.forEach((reaction: Reaction) => {
-        if (this.messageLocation == "channel" && this.channelFirebaseService.selectedChannel && this.message) {
-          let reactionPath = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${this.message.id}/reactions`;
-          this.messageFirebaseService.updateReaction(reaction, reactionPath);
-        }
-      });
-    }
-    */
   }
 
   toggleOptions(event: Event) {
@@ -82,7 +54,6 @@ export class ToolbarComponent {
     if (this.showMessageReactions) {
       this.showMessageReactions = false;
     } else {
-      console.log()
       this.showMessageReactions = true;
       this.hideOptions(event);
     }

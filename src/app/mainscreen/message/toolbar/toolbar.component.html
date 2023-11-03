@@ -4,8 +4,9 @@
 
 <mat-toolbar class="toolbar">
     <mat-toolbar-row>
-        <img src="assets/img/icons/checkmark.svg">
-        <img src="assets/img/icons/handsup.svg">
+        <img src="assets/img/icons/checkmark.svg" (click)="handleEmojiSelection('✅')">
+        <img src="assets/img/icons/handsup.svg" (click)="handleEmojiSelection('🙌')">
+        
         <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">
         <img *ngIf="message" src="assets/img/icons/answer.svg" (click)="messageFirebaseService.openThread(message)">
 

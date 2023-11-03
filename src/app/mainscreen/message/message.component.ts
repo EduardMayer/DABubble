@@ -24,9 +24,6 @@ export class MessageComponent {
   messageLocationPath: string | undefined;
   showMessageReactions: any;
 
-
-
-
   constructor(
     public messageFirebaseService: MessageFirebaseService,
     public userFirebaseService: UserFirebaseService,
@@ -48,14 +45,11 @@ export class MessageComponent {
   @Input() set messageLocationName(value: string) {
     this.messageLocation = value;
     this.messageLocationPath = this.getMessagePath(value);
-
   }
 
   handleEmojiSelection(selectedEmoji: string) {
-    console.log("handleEmojiSelection");
     const reactions = this.messageFirebaseService.loadedReactions;
     let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
-    console.log("FoundEmojiIndex:" + foundEmojiIndex);
     if (foundEmojiIndex == -1) {
       this.createReaction(selectedEmoji);
     } else {
@@ -86,6 +80,10 @@ export class MessageComponent {
     this.messageFirebaseService.updateReaction(newReaction, path);
   }
 
+
+  closeEmojiBar(){
+    this.showMessageReactions=false;
+  }
 
   //Unfinished: path for channelmessages is set
   getMessagePath(messageLocation: string) {
