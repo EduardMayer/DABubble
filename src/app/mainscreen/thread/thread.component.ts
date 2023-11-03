@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 
 @Component({
@@ -8,18 +9,12 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
 })
 export class ThreadComponent {
 
-constructor(public messageFirebaseService: MessageFirebaseService)  {
-  debugger;
-console.log(this.messageFirebaseService.message);
-this.setmessage();
+  answer: any;
+
+constructor(public messageFirebaseService: MessageFirebaseService, public channelFirebaseService: ChannelFirebaseService)  {
 
 }
 
-setmessage() {
-  setTimeout(() => {
-    console.log(this.messageFirebaseService.message);
 
-  }, 9000);
-}
 
 }

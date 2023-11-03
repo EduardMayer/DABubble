@@ -1,3 +1,15 @@
 <mat-card id="thread" class="br-30">
-    <mat-card-content id="thread-content">Thread </mat-card-content> <span>{{ messageFirebaseService.message?.content }}</span>
+    <mat-card-content id="thread-content">
+        <div class="threadHeader">
+            <div > <span>Thread</span> 
+                <span class="channelNameHeader" *ngIf="messageFirebaseService.message?.content"> # {{ channelFirebaseService.selectedChannel?.channelName }}</span>
+            </div>
+
+            <img class="closeIcon" src="assets/img/icons/closeIcon.png">
+
+        </div>
+
+
+        <input [ngModel]="answer">
+    </mat-card-content>
 </mat-card>

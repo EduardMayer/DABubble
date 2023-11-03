@@ -10,7 +10,6 @@ import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss'],
-  providers: [MessageFirebaseService]
 })
 export class MessageComponent {
 

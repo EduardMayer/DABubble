@@ -1,3 +1,32 @@
 #thread{
     height: 100%;
 }
+
+.threadHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+    height: 50px;
+}
+
+.closeIcon {
+    cursor: pointer;
+}
+
+::ng-deep .mat-mdc-card-content:first-child  {
+padding-top: unset !important;
+}
+
+::ng-deep .mat-mdc-card-content  {
+    padding: unset !important;
+    }
+
+
+    .channelNameHeader {
+       color: #444DF2;
+
+    }
