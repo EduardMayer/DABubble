@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { Reaction } from 'src/models/reaction.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
@@ -17,6 +17,7 @@ export class ToolbarComponent {
   @Input() messageLocation: string | undefined;
   showMessageOptions: boolean = false;
   showMessageReactions: boolean = false;
+  @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private userFirebaseService: UserFirebaseService,
@@ -31,8 +32,8 @@ export class ToolbarComponent {
 
 
   handleEmojiSelection(selectedEmoji: string) {
-
-
+    this.emojiSelectedOutput.emit(selectedEmoji);
+    /*
     console.log(this.message);
     if (this.message) {
       let reactionId = this.message.getReactionId(selectedEmoji);
@@ -57,6 +58,7 @@ export class ToolbarComponent {
         }
       });
     }
+    */
   }
 
   toggleOptions(event: Event) {

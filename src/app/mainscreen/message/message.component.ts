@@ -43,34 +43,67 @@ export class MessageComponent {
     }
   }
 
+
+
+
   handleEmojiSelection(selectedEmoji: string) {
-    // Handle the selected emoji here, for example, log it to the console.
-    console.log(`Selected emoji: ${selectedEmoji}`);
-    //this.message.content+=`selectedEmoji`;
+    const reactions = this.messageFirebaseService.loadedReactions;
+    let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
 
-    let reactionId = this.message.getReactionId(selectedEmoji);
-    if (reactionId && this._message) {
-      this._message.reactions[reactionId].users.push(this.userFirebaseService.currentUser.id);
-    } else {
-
-      console.log(this.message.id);
-
-      if (!this.message.reactions) {
-        this.message.reactions = [];
-      }
-      this.message.reactions.push(new Reaction(
+    if (!foundEmojiIndex) {
+      this.messageFirebaseService.loadedReactions.push(new Reaction(
         {
           name: selectedEmoji,
           users: [this.userFirebaseService.currentUser.id]
         }
-      )
-      )
+      ))
+    } else {
+      if (!this.messageFirebaseService.loadedReactions[foundEmojiIndex] || this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.length == 0) {
+        this.messageFirebaseService.loadedReactions.push(new Reaction(
+          {
+            name: selectedEmoji,
+            users: [this.userFirebaseService.currentUser.id]
+          }
+        ))
+      } else {
+        let foundUserIndex = this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.findIndex((userId) => userId = this.userFirebaseService.currentUser.id);
+        if (foundUserIndex) {
+          this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.splice(foundUserIndex, 1);
+        } else {
+          this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.push(this.userFirebaseService.currentUser.id)
+        }
+      }
     }
-    if (this.channelFirebaseService.selectedChannel && this._message) {
-      this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this._message);
-    }
-    console.log(this.message.reactions);
   }
+
+  /* if (foundEmoji) {
+     let user = reactions.find((reaction) => reaction.name == selectedEmoji);
+   }
+   
+
+
+   let reactionId = this.message.getReactionId(selectedEmoji);
+   if (reactionId && this._message) {
+     this._message.reactions[reactionId].users.push(this.userFirebaseService.currentUser.id);
+   } else {
+
+     console.log(this.message.id);
+
+     if (!this.message.reactions) {
+       this.message.reactions = [];
+     }
+     this.message.reactions.push(new Reaction(
+       {
+         name: selectedEmoji,
+         users: [this.userFirebaseService.currentUser.id]
+       }
+     )
+     )
+   }
+  
+   console.log(this.message.reactions);
+   */
+
 
   openToolbar() {
     this.showToolbar = true;
@@ -101,8 +134,6 @@ export class MessageComponent {
   }
 
 
-
-
   formatTimestampToHHMM(timestamp: number) {
     const date = new Date(timestamp);
     const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits with leading zero
@@ -111,3 +142,7 @@ export class MessageComponent {
     return hours + ':' + minutes;
   }
 }
+function elseif() {
+  throw new Error('Function not implemented.');
+}
+
