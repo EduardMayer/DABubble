@@ -14,11 +14,18 @@
 
             <mat-card-content>{{ _message.content }}</mat-card-content>
         </mat-card>
+
+
         <div class='message-footer'>
-            <div *ngFor="let reaction of messageFirebaseService.loadedReactions">
-                <app-reaction [reaction]="reaction"></app-reaction>
-                <img src="assets/img/icons/addreactionplus.svg">
+            <div *ngFor="let reaction of messageFirebaseService.loadedReactions" class="reaction-smileys">
+                <div class="emoji-container">
+                    <app-reaction [reaction]="reaction"></app-reaction>
+                </div>
             </div>
+            <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">
+        </div>
+        <div *ngIf="showMessageReactions" class="message-reaction-options">
+            <app-addreaction (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
         </div>
     </div>
 </div>

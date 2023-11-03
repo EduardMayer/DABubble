@@ -22,6 +22,7 @@ export class MessageComponent {
   showToolbar: boolean = false;
   messageLocation: string | undefined;
   messageLocationPath: string | undefined;
+  showMessageReactions: any;
 
 
 
@@ -115,9 +116,19 @@ export class MessageComponent {
     this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex]);
   }
 
+  toggleReactions(event: Event) {
+    event.stopPropagation();
+    if (this.showMessageReactions) {
+      this.showMessageReactions = false;
+    } else {
+      console.log()
+      this.showMessageReactions = true;
+    }
+  }
 
-  deleteReaction() {
-
+  hideReactions(event: Event) {
+    event.stopPropagation();
+    this.showMessageReactions = false;
   }
 
   /* if (foundEmoji) {
