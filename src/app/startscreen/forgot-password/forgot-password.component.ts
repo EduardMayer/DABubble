@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthFirebaseService } from 'src/services/auth-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 
 @Component({
@@ -11,6 +14,7 @@ export class ForgotPasswordComponent {
 
   @Output() closeForgotPasswordView = new EventEmitter<void>();
 
+  constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
 
   errorInfo: any = false;
   isInputActive = false;
