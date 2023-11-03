@@ -3,6 +3,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, getDoc } from "firebase/firestore";
 import { User } from '../models/user.class';
 import { getLocaleFirstDayOfWeek } from '@angular/common';
+import { AuthFirebaseService } from './auth-firebase.service';
 
 
 @Injectable({
@@ -113,7 +114,7 @@ export class UserFirebaseService {
      * @param UID - Unique ID of User
      */
     async setUIDToCurrentUser(UID: string) {
-        console.log("Set UID TO current User" + UID);
+        //console.log("Set UID TO current User" + UID);
         const user = await this.getUserByUID(UID);
         /*    console.log("User from UID");  
               console.log(user); */
@@ -130,6 +131,18 @@ export class UserFirebaseService {
         console.log("Current User for Edit Email:");
         console.log(this.currentUser);
         this.update(this.currentUser); 
+    }
+
+    async updateCurrentUserToFirebase(){
+        this.update(this.currentUser); 
+    }
+
+    async syncMail(email:string){
+        if(this.currentUser.mail != email){
+          this.currentUser.mail = email; 
+          this.updateCurrentUserToFirebase(); 
+          console.log("Email updated @ Login");
+        }
     }
 
 
