@@ -86,6 +86,7 @@ export class AuthFirebaseService implements OnInit {
   firebaseUserService = inject(UserFirebaseService);
   UserData: any;
 
+
   /**
    * Constructur provides the FirebaseAutentiction and create Observable that is triggerd on AuthStateChanges in Firebase.
    * 
@@ -102,7 +103,7 @@ export class AuthFirebaseService implements OnInit {
         JSON.parse(localStorage.getItem('user')!);
         //console.log(this.UserData.uid);
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
-        this.userService.syncMail(this.UserData.email); 
+        this.userService.syncMail(this.UserData.email);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -113,7 +114,7 @@ export class AuthFirebaseService implements OnInit {
   ngOnInit(): void {
     if (this.UserData.email != this.userService.currentUser.mail) {
       this.userService.currentUser.mail = this.UserData.email;
-      this.userService.updateCurrentUserToFirebase(); 
+      this.userService.updateCurrentUserToFirebase();
     }
   }
 
@@ -131,7 +132,7 @@ export class AuthFirebaseService implements OnInit {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then(async (result: any) => {
         this.UserData = result.user;
-        await this.userService.syncMail(this.UserData.email); 
+        await this.userService.syncMail(this.UserData.email);
         this.ngZone.run(() => {
           this.router.navigate(['/main']);
         });
@@ -269,4 +270,17 @@ export class AuthFirebaseService implements OnInit {
         console.error('Error verifying oobCode:', error);
       });
   }
+
+
+  resetPassword(email: string) {
+
+    sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        console.log("Password reset email sent");
+      })
+      .catch((error) => {
+        console.log(error.code , error.message);
+      });
+  }
 }
+
