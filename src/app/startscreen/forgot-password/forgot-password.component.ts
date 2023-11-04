@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { timeout } from 'rxjs';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
@@ -11,6 +12,8 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent {
+
+  emailSubmitted: boolean = false;
 
   @Output() closeForgotPasswordView = new EventEmitter<void>();
 
@@ -38,8 +41,17 @@ export class ForgotPasswordComponent {
     this.closeForgotPasswordView.emit(); 
   }
 
-  resetPassword(){
-    this.authService.resetPassword(this.email);
+  resetPassword() {
+    if (this.userService.mailExists(this.email)) {
+      this.authService.resetPassword(this.email);
+      this.emailSubmitted = true;
+      setTimeout(() => {
+        this.closeForgotPassword();
+      }, 1400);
+    } else {
+      console.log("User with the provided email does not exist.");
+    }
   }
+
 
 }
