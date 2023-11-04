@@ -1,4 +1,4 @@
-import { Injectable, Component, inject, NgZone } from '@angular/core';
+import { Injectable, Component, inject, NgZone, OnInit } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -21,7 +21,7 @@ import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthFirebaseService {
+export class AuthFirebaseService implements OnInit {
 
   private firebaseAuthErrorMessages = {
     'auth/argument-error': 'Fehler im Argument',
@@ -94,26 +94,29 @@ export class AuthFirebaseService {
    * @param ngZone 
    */
   constructor(private auth: Auth, private router: Router, public ngZone: NgZone, private userService: UserFirebaseService) {
-    onAuthStateChanged(this.auth, (user: any) => {
-      console.log("AuthStateChanged"); 
+    onAuthStateChanged(this.auth, async (user: any) => {
+      //console.log("AuthStateChanged"); 
       if (user) {
         this.UserData = user;
         localStorage.setItem('user', JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem('user')!);
-        console.log(this.UserData.uid);
-        this.userService.setUIDToCurrentUser(this.UserData.uid);
-        
-        if(this.UserData.email != this.userService.currentUser.mail){
-          this.userService.currentUser.mail = this.UserData.email;
-          //this.userService.update(this.userService.currentUser); 
-        }
-        
+        //console.log(this.UserData.uid);
+        await this.userService.setUIDToCurrentUser(this.UserData.uid);
+        this.userService.syncMail(this.UserData.email); 
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     })
   }
+
+  ngOnInit(): void {
+    if (this.UserData.email != this.userService.currentUser.mail) {
+      this.userService.currentUser.mail = this.UserData.email;
+      this.userService.updateCurrentUserToFirebase(); 
+    }
+  }
+
 
   /**
    * Login with Firebase
@@ -126,30 +129,13 @@ export class AuthFirebaseService {
 
     //Restore Login
     return signInWithEmailAndPassword(this.auth, email, password)
-      .then((result: any) => {
+      .then(async (result: any) => {
         this.UserData = result.user;
+        await this.userService.syncMail(this.UserData.email); 
         this.ngZone.run(() => {
           this.router.navigate(['/main']);
         });
       })
-
-
-    /*
-    if (this.firebaseUserService.mailExists(email)) {
-      signInWithEmailAndPassword(this.auth, email, password)
-        .then((result: any) => {
-          this.UserData = result.user;
-          this.firebaseUserService.setCurrentUser(this.UserData);
-          this.ngZone.run(() => {
-            this.router.navigate(['/main']);
-          });
-        })
-      return true;
-    } else {
-      console.log("Mail not found!");
-      return false;
-    }
-    */
   }
 
   /**
@@ -166,9 +152,6 @@ export class AuthFirebaseService {
  * @param {string} password - The password for the user's account.
  */
   async register(email: string, password: string) {
-
-
-
     return await createUserWithEmailAndPassword(this.auth, email, password)
       .then((result) => {
         this.UserData = result.user;
@@ -179,37 +162,6 @@ export class AuthFirebaseService {
           //this.router.navigate(['/avatar']);
         });
       })
-    /*
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode + " " + errorMessage);
-      return registerSuccessful = false; 
-    });
-    */
-
-
-
-    /*
-    if (!this.firebaseUserService.mailExists(email)) {
-      createUserWithEmailAndPassword(this.auth, email, password)
-        .then((result) => {
-          this.UserData = result.user;
-          //this.firebaseUserService.update(this.UserData);
-          this.firebaseUserService.setCurrentUser(this.UserData)
-          this.ngZone.run(() => {
-          //this.router.navigate(['/avatar']);
-          });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode + " " + errorMessage);
-        });
-    } else {
-      console.log("Mail already exists");
-    }
-    */
   }
 
   /**
@@ -293,12 +245,12 @@ export class AuthFirebaseService {
         */
   }
 
- async updateMail(newEmail:string){
+  async updateMail(newEmail: string) {
     await updateEmail(this.UserData, newEmail).then(() => {
       // Email updated!
-      console.log("Email updated!");
+      //console.log("Email updated!");
       //this.userService.updateEmail(newEmail); 
- 
+
     }).catch((error) => {
       console.log("ERROR at Email update!");
       console.log(error.code);
@@ -307,17 +259,14 @@ export class AuthFirebaseService {
     });
   }
 
-  async applyActionCode(code:string){
+  async applyActionCode(code: string) {
     await applyActionCode(this.auth, code)
-    .then(() => {
-    
-    })
-    .catch((error) => {
-      // Invalid or expired code
-      console.error('Error verifying oobCode:', error);
-    });
+      .then(() => {
+
+      })
+      .catch((error) => {
+        // Invalid or expired code
+        console.error('Error verifying oobCode:', error);
+      });
   }
 }
-
-
-

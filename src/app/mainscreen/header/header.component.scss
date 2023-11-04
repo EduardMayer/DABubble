@@ -87,8 +87,9 @@ $headerDropdownPositionRigth: 0px;
 #headerUserProfil {
     padding: 24px;
     min-width: 100px;
+    max-width: 500px;
     min-height: 100px;
-    z-index: 1;
+    z-index: 5;
     top: $headerDropdownPositionTop;
     right: $headerDropdownPositionRigth;
     position: absolute;
@@ -174,5 +175,8 @@ $headerDropdownPositionRigth: 0px;
         justify-content: center;
         align-items: center;
         gap: 24px; 
+    }
+    #headerUserProfil-EditMode-EditMailInfo{
+        color: red; 
     }
 }

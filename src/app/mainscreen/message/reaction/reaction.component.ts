@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Reaction } from 'src/models/reaction.class';
 
 @Component({
@@ -14,7 +14,12 @@ export class ReactionComponent {
   public set reaction(value: Reaction) {
     this.emoji = value.name;
     this.count = value.users.length;
-    console.log(this.emoji);
-    console.log(this.count);
+  }
+
+  @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
+
+  emojiSelected() {
+    console.log(this.emoji+"selected");
+    this.emojiSelectedOutput.emit(this.emoji);
   }
 }

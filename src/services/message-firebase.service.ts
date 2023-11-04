@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc, Timestamp } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc, Timestamp, deleteDoc } from "firebase/firestore";
 import { Message } from '../models/message.class';
 import { ChannelFirebaseService } from './channel-firebase.service';
 import { UserFirebaseService } from './user-firebase.service';
@@ -24,12 +24,24 @@ export class MessageFirebaseService {
 
     }
 
-    async updateReaction(reaction: Reaction, path: string) {
-        console.log(reaction);
-        const reactionId = (this.cyrb53(String(reaction.name) + new Date().getTime()));
-        const docInstance = doc(this.firestore, `${path}/${reactionId}`);
-        await setDoc(docInstance, reaction.toJSON());
-        console.log("channelMessages updated");
+    /**
+     * checks wether the reaction.path value ==""
+     * if yes, it creates a reaction else it updates
+     */
+    async updateReaction(reaction: Reaction, path?: string) {
+        if (reaction.path) {
+            const docInstance = doc(this.firestore, reaction.path);
+            updateDoc(docInstance, reaction.toJSON());
+        } else {
+            const reactionId = (this.cyrb53(String(reaction.name) + new Date().getTime()));
+            const docInstance = doc(this.firestore, `${path}/${reactionId}`);
+            await setDoc(docInstance, reaction.toJSON());
+            console.log("channelEmoji updated");
+        }
+    }
+
+    async deleteReaction(reaction: Reaction, path: string) {
+        await deleteDoc(doc(this.firestore, `${path}/${reaction.id}`));
     }
 
     async loadReactions(message: Message) {
@@ -43,6 +55,7 @@ export class MessageFirebaseService {
                     if (doc.data()) {
                         let reaction = new Reaction(doc.data());
                         reaction.id = doc.id;
+                        reaction.path = path + doc.id
                         this.loadedReactions.push(reaction);
                         console.log(this.loadedReactions);
                     }
@@ -50,19 +63,6 @@ export class MessageFirebaseService {
             });
         }
     }
-
-
-    /*
-    updateMessage(message,path){
-    
-    }
-    
-    updateFirebaseReaction(reaction,path){
-    
-    }
-    */
-
-
 
     /**
     * Generates a Firestore query to retrieve message data with optional index-based filtering.

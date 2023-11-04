@@ -56,8 +56,15 @@
 
 
         .message-footer {
+
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+
+            .reaction-smileys {
+                display: flex;
+                
+            }
         }
 
 

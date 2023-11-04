@@ -26,6 +26,9 @@ export class HeaderComponent implements OnInit{
   showHeaderUserProfil = false; 
   editUserMode = false; 
 
+  currentAuthMail = ""; 
+  currentUserInput = ""; 
+
   editUserForm = new FormGroup({
     nameInput: new FormControl( "" , [
       Validators.required, 
@@ -48,6 +51,8 @@ export class HeaderComponent implements OnInit{
       nameInput: this.user.fullName, 
       emailInput: this.user.mail
     });
+    this.currentAuthMail = this.authService.UserData.email
+    this.currentUserInput = this.user.mail; 
   }
 
   /**
@@ -99,13 +104,14 @@ export class HeaderComponent implements OnInit{
     }
     this.user.fullName =  this.editUserForm.get("nameInput")?.value; 
     const mail = this.editUserForm.get("emailInput")?.value
-    if(this.user.mail != this.editUserForm.get("emailInput")?.value){
+    if(this.currentAuthMail != this.editUserForm.get("emailInput")?.value){
       await this.authService.sendUpdateEmail(mail!);  
       console.log("Email wird erst nach bestätigung geändert");
     }
     this.userService.setCurrentUser(this.user); 
-    console.log("Current User after Edit:");
-    console.log(this.userService.currentUser);
+    this.userService.update(this.userService.currentUser);
+    //console.log("Current User after Edit:");
+    //console.log(this.userService.currentUser);
     // console.log("User Update in Firebase muss noch ergänzt werden!");
 
   
@@ -113,6 +119,16 @@ export class HeaderComponent implements OnInit{
 
     this.showHeaderUserProfil = false; 
     this.showHeaderMenu = false; 
+    this.authService.logout(); 
 
+  }
+
+  closeWithoutSave(){
+    this.editUserMode=false
+    this.editUserForm.patchValue({
+      nameInput: this.user.fullName, 
+      emailInput: this.user.mail
+    });
+    this.currentUserInput = this.user.mail; 
   }
 }

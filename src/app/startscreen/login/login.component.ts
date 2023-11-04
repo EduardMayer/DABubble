@@ -37,11 +37,7 @@ export class LoginComponent implements OnInit {
   loginFailed = false; 
   loginErrorMessage = ""; 
 
-
   constructor(private authService: AuthFirebaseService) { }
-
-
-
 
   firebaseUserService = inject(UserFirebaseService);
 
@@ -67,34 +63,12 @@ export class LoginComponent implements OnInit {
             this.loginFailed = true; 
           }
         });
-      }
-      
-      /*
-      .then(() => {
-        // Handle successful login
-        console.log('logged in successfully');
-      })
-      .catch((error) => {
-        // Handle login error here
-        console.error('Login failed:', error.message);
-      });
-      */
-    
+      }  
   }
 
   async guestLogin() {
     this.authService
       .login(this.guestLoginName, this.guestLoginPassword)
-    /*
-    .then((result) => {
-      // Handle successful login
-      console.log('logged in successfully');
-    })
-    .catch((error) => {
-      // Handle login error here
-      console.error('Login failed:', error.message);
-    });
-    */
   }
 
   loginWithGoogle() {

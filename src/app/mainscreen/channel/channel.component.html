@@ -15,7 +15,7 @@
     <mat-card-content id="channel-content"></mat-card-content>
     <div class="chat-container">
         <div *ngFor="let message of channelFirebaseService.selectedChannelMessages; let i = index">
-            <app-message [message]="message" [messageLocation]="'channel'"></app-message>
+            <app-message [message]="message" [messageLocationName]="'channel'"></app-message>
             <ng-template [appIfChanged]="getMessageTimeString(message)">
                 <app-date-line *ngIf="channelFirebaseService.selectedChannelMessages[i-1]"
                     [messageTime]="getMessageTimeString(channelFirebaseService.selectedChannelMessages[i-1])"></app-date-line>

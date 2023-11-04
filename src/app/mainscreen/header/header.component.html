@@ -70,10 +70,16 @@
                         <img src="assets/img/icons/mailblack.svg" alt="email">
                         <h3>E-Mail-Adresse</h3>
                     </div>
-                    <input type="email" formControlName="emailInput">
+                    <input type="email" formControlName="emailInput" [(ngModel)]="currentUserInput">
+                </div>
+                <div id="headerUserProfil-EditMode-EditMailInfo">
+                    <h3 *ngIf="currentUserInput != currentAuthMail">
+                        Achtung: Wenn Sie Ihre E-Mail-Adresse ändern, müssen Sie diese per Mail verifizieren. 
+                        Sie werden ausgeloggt und können sich nach Bestätigung mit ihrere neuen E-Mail Adresse anmelden.
+                    </h3>
                 </div>
                 <div id="headerUserProfil-EditMode-btn-container">
-                    <button class="btn-white" (click)="editUserMode=false">Abbrechen</button>
+                    <button class="btn-white" (click)="closeWithoutSave()">Abbrechen</button>
                     <button class="btn-blue" type="submit" [disabled]="!editUserForm.valid">Speichern</button>
                 </div>
             </form>

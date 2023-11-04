@@ -31,7 +31,7 @@
   
 
   <div class="user-avatar-button-container">
-    <button (click)="onSubmitAvatar() ; closeAvatar()"
+    <button (click)="onSubmitAvatar();"
       class="blue-button"
       mat-raised-button
       color="primary"
@@ -39,4 +39,10 @@
       Weiter
     </button>
   </div>
+
+  
 </mat-card>
+
+<div *ngIf="avatarSubmitted" class="success-message">
+  Konto erfolgreich erstellt!
+</div>

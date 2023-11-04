@@ -12,6 +12,7 @@ import { Router} from '@angular/router';
 export class AvatarChooseComponent implements OnInit {
   user = this.userService.registUser;
   userName: string = '';
+  avatarSubmitted: boolean = false;
 
   avatars: string[] = [
     'avatar1.svg',
@@ -55,7 +56,11 @@ export class AvatarChooseComponent implements OnInit {
 
   onSubmitAvatar() {
     this.userService.update(this.user);
-    this.router.navigate(['main']);
-  }
+    this.avatarSubmitted = true;
   
+    setTimeout(() => {
+    this.router.navigate(['main']);
+    }, 1500);
+  }
+   
 }

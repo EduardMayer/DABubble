@@ -11,6 +11,8 @@ import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 })
 export class RegisterComponent {
 
+  
+
   constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
   
   @Output() closeRegisterView = new EventEmitter<void>();
@@ -24,6 +26,7 @@ export class RegisterComponent {
   checkboxValue: boolean = false;
   registrationFailed = false; 
   registrationErrorMessage = ""; 
+
   
 
   contactForm = new FormGroup({
@@ -89,7 +92,7 @@ export class RegisterComponent {
     await this.authService.register(emailInputValue, passwordInputValue)
     .then(() => {
       console.log("Registrierung erfolgreich. User wird angelegt");
-      this.userService.addRegistUserWithUID(this.userService.registUser.id); 
+      this.userService.addRegistUserWithUID(this.userService.registUser.id);
       this.closeRegister();
     })
     .catch((error) => {
@@ -101,7 +104,7 @@ export class RegisterComponent {
         this.registrationFailed = true; 
       }
       return; 
-    });    
+    });   
   }
 
 }
