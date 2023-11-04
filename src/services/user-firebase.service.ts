@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, getDoc } from "firebase/firestore";
 import { User } from '../models/user.class';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 
 @Injectable({
@@ -103,6 +104,7 @@ export class UserFirebaseService {
             user.id=docSnap.id;
             return user;
         } else {
+            debugger;
             return new User();
         }
     }
@@ -118,6 +120,17 @@ export class UserFirebaseService {
               console.log(user); */
         this.currentUser = new User(user);
         console.log(this.currentUser);
+    }
+
+    updateEmail(newEmail:string){
+        console.log("newMail");
+        console.log(newEmail);
+        
+        
+        this.currentUser.mail = newEmail; 
+        console.log("Current User for Edit Email:");
+        console.log(this.currentUser);
+        this.update(this.currentUser); 
     }
 
 

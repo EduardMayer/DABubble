@@ -1,15 +1,67 @@
 <mat-card id="thread" class="br-30">
     <mat-card-content id="thread-content">
         <div class="threadHeader">
-            <div > <span>Thread</span> 
-                <span class="channelNameHeader" *ngIf="messageFirebaseService.message?.content"> # {{ channelFirebaseService.selectedChannel?.channelName }}</span>
+            <div> <span>Thread</span>
+                <span class="channelNameHeader" *ngIf="messageFirebaseService.message?.content">
+                    # {{channelFirebaseService.selectedChannel?.channelName }}</span>
             </div>
 
             <img class="closeIcon" src="assets/img/icons/closeIcon.png">
 
         </div>
 
+<!--[ngClass]="{'inverted': isOwnMessage}"-->
 
-        <input [ngModel]="answer">
+        <div class='message-container'  *ngIf="messageFirebaseService.message?.content" (mouseleave)="closeToolbar()" (mouseenter)="openToolbar()">
+            <app-toolbar *ngIf="showToolbar" [isOwnMessage]="showToolbar" [message]="messageFirebaseService.message"
+                [messageLocation]="messageLocation">
+            </app-toolbar>
+            <img src="{{ messageFirebaseService.message?.autorAvatar }}" class="message-img"
+                *ngIf="messageFirebaseService.message?.avatarSrc">
+            <div class="message-content" tabindex="0">
+                <div class="message-head">
+                    <div class="messageAuthor">{{userFirebase.getUserByUID(messageFirebaseService.message?.id)}}</div>
+                    <div> {{ formatTimestampToHHMM(messageFirebaseService.message.timestamp) }}</div>
+                    <div *ngIf="messageFirebaseService.message?.content!=''">
+                        <b>{{messageFirebaseService.message?.content}}</b>
+                    </div>
+                </div>
+
+                <mat-card>
+
+                    <mat-card-content>message content</mat-card-content>
+                </mat-card>
+
+                <div class='message-footer'>
+                    <div *ngFor="let reaction of messageFirebaseService.loadedReactions">
+                        <app-reaction [reaction]="reaction"></app-reaction>
+                        <img src="assets/img/icons/addreactionplus.svg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="msg-create-container">
+            <div class='option-icons'>
+                <div class="msg-mods">
+                    <img src="assets/img/icons/add.svg">
+                    <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiList()">
+                    <img src="assets/img/icons/alternateemail.svg">
+                </div>
+                <div class="msg-send">
+                    <img src="assets/img/icons/send.svg" (click)="sendAnswer()">
+                </div>
+            </div>
+            <textarea cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="answer.content"
+                *ngIf="channelFirebaseService.selectedChannel"
+                placeholder="Nachricht an #{{ channelFirebaseService.selectedChannel.channelName }}"
+                (click)="closeEmojiList()">
+            </textarea>
+        </div>
+
     </mat-card-content>
+
 </mat-card>

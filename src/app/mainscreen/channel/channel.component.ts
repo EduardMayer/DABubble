@@ -30,7 +30,7 @@ export class ChannelComponent {
     const currentDay = this.formatDateToDmy(new Date());
     const messageDmy = this.formatDateToDmy(new Date(message.timestamp));
     if (currentDay == messageDmy) {
-      return "today";
+      return "heute";
     } else {
       return messageDmy;
     }

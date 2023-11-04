@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Reaction } from 'src/models/reaction.class';
 
 @Component({
   selector: 'app-reaction',
@@ -6,5 +7,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./reaction.component.scss']
 })
 export class ReactionComponent {
-  @Input() count: number = 1;
+  emoji: string = "";
+  count: number | undefined;
+
+  @Input()
+  public set reaction(value: Reaction) {
+    this.emoji = value.name;
+    this.count = value.users.length;
+    console.log(this.emoji);
+    console.log(this.count);
+  }
 }

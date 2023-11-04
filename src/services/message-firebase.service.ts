@@ -1,22 +1,66 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, addDoc, Timestamp } from "firebase/firestore";
 import { Message } from '../models/message.class';
 import { ChannelFirebaseService } from './channel-firebase.service';
+import { UserFirebaseService } from './user-firebase.service';
+import { Reaction } from 'src/models/reaction.class';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MessageFirebaseService {
-    public loadedMessages: Message[] = [];
+
     public loadedMessage: Message | undefined;
+    public loadedMessages: Message[] = [];
     private unsubMessage: any;
     private unsubMessages: any;
     public isOwnMessage: boolean = false;
 
-    constructor(private firestore: Firestore, public channelFirebaseService: ChannelFirebaseService) {
+    private unsubReactions: any;
+    public loadedReactions: Reaction[] = [];
+
+    constructor(private firestore: Firestore, public channelFirebaseService: ChannelFirebaseService, private userFirebaseService: UserFirebaseService) {
 
     }
+
+    async updateReaction(reaction: Reaction, path: string) {
+        console.log(reaction);
+        const reactionId = (this.cyrb53(String(reaction.name) + new Date().getTime()));
+        const docInstance = doc(this.firestore, `${path}/${reactionId}`);
+        await setDoc(docInstance, reaction.toJSON());
+        console.log("channelMessages updated");
+    }
+
+    async loadReactions(message: Message) {
+        console.log(this.channelFirebaseService.selectedChannel);
+
+        if (this.channelFirebaseService.selectedChannel && message) {
+            const path = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${message.id}/reactions/`;
+            this.unsubReactions = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
+                this.loadedReactions = [];
+                querySnapshot.forEach((doc: any) => {
+                    if (doc.data()) {
+                        let reaction = new Reaction(doc.data());
+                        reaction.id = doc.id;
+                        this.loadedReactions.push(reaction);
+                        console.log(this.loadedReactions);
+                    }
+                })
+            });
+        }
+    }
+
+
+    /*
+    updateMessage(message,path){
+    
+    }
+    
+    updateFirebaseReaction(reaction,path){
+    
+    }
+    */
 
 
 
@@ -34,42 +78,32 @@ export class MessageFirebaseService {
             return query(collection(this.firestore, "messages"));
         }
     }
-
-    /**
-    * Asynchronously loads message data from Firestore based on optional index parameters.
-    *
-    * @param {any} indexName - (Optional) The name of the index to filter Messages.
-    * @param {String} indexValue - (Optional) The value to filter Messages by within the specified index.
-    */
-    async load(indexName?: any, indexValue: String = "") {
-        const q = this.getQuery(indexName, indexValue);
-        this.unsubMessages = onSnapshot(q, (querySnapshot) => {
-            this.loadedMessages = [];
-            querySnapshot.forEach((doc) => {
-                const message = new Message(doc.data());
-                message.id = doc.id;
-                this.loadedMessages.push(message);
-            });
-        });
+    openThread(message: any) {
+        //debugger;
+        console.log(message.id);
+        console.log(this.channelFirebaseService.selectedChannel?.channelName);
+        this.message = message;
+        console.log('Globally message is', this.message);
     }
 
+    checkIfOwnThread(): boolean {
+        // Überprüft, ob die ID der Nachricht mit der ID des aktuellen Benutzers übereinstimmt
+        if (this.message.id == this.userFirebaseService.currentUser.id) {
+            return true; // Bedingung ist erfüllt, gibt true zurück
+        } 
+        return false; // Bedingung ist nicht erfüllt, gibt false zurück
+    }
 
-    openThread(message: any) {
-          console.log(message.id);
-           console.log(this.channelFirebaseService.selectedChannel?.channelName);
-       this.message=  message;
-       console.log('Globally message is', this.message);
+    message: any = {};
+    isOwnThread: boolean = false;
 
-        }
-    
 
-        message: any = {};
-
-        /**
-    * Retrieves a message by its unique identifier.
-    *
-    * @param {string} messageId - The unique identifier of the thread to retrieve.
-    */
+    /**
+/**
+* Retrieves a message by its unique identifier.
+*
+* @param {string} messageId - The unique identifier of the thread to retrieve.
+*/
     getById(messageId: string) {
         const message = doc(collection(this.firestore, "messages"), messageId);
         this.unsubMessage = onSnapshot(message, (doc) => {
@@ -112,7 +146,9 @@ export class MessageFirebaseService {
             this.unsubMessage();
         }
 
-
+        if (this.unsubReactions) {
+            this.unsubReactions();
+        }
     }
 
 

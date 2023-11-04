@@ -1,11 +1,12 @@
-export class answer{
+export class Answer {
 
     id: string;
-    fullName:string;
+    fullName: string;
     mail: string;
     avatar: string;
-    channels: string[]; 
-    chats: string[]; 
+    channels: string[];
+    chats: string[];
+    content: string;
     answer: string;
 
     constructor(obj?: any) {
@@ -13,9 +14,11 @@ export class answer{
         this.fullName = obj ? obj.fullName : "";
         this.mail = obj ? obj.mail : "";
         this.avatar = obj ? obj.avatar : "assets/img/avatar/avatar0.svg";
-        this.channels = obj ? obj.channels : []; 
-        this.chats = obj ? obj.chats : []; 
-        this.answer = obj ? obj.answer: "";
+        this.channels = obj ? obj.channels : [];
+        this.chats = obj ? obj.chats : [];
+        this.content = obj ? obj.mail : "";
+
+        this.answer = obj ? obj.answer : "";
     }
 
     toJSON() {
@@ -23,9 +26,11 @@ export class answer{
             id: this.id,
             fullName: this.fullName,
             mail: this.mail,
-            avatar: this.avatar, 
-            channels: this.channels, 
-            chats: this.chats
+            avatar: this.avatar,
+            channels: this.channels,
+            chats: this.chats,
+            content: this.content,
+            answer: this.answer
         }
     }
 

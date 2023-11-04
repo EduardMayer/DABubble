@@ -1,4 +1,4 @@
-<div class='message-container' (click)="messageFirebaseService.openThread(_message)" [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message" (mouseleave)="closeToolbar()"
+<div class='message-container' [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message" (mouseleave)="closeToolbar()"
     (mouseenter)="openToolbar()">
     <app-toolbar *ngIf="showToolbar" [isOwnMessage]="isOwnMessage" [message]="_message"
         [messageLocation]="messageLocation"></app-toolbar>

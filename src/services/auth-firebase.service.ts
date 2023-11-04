@@ -9,7 +9,10 @@ import {
   signInWithPopup,
   signOut,
   sendEmailVerification,
-  User
+  User,
+  updateEmail,
+  verifyBeforeUpdateEmail,
+  applyActionCode
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UserFirebaseService } from './user-firebase.service';
@@ -75,7 +78,7 @@ export class AuthFirebaseService {
     'auth/user-cancelled': 'Benutzer abgebrochen',
     'auth/user-signed-out': 'Benutzer abgemeldet',
     'auth/uid-already-exists': 'UID existiert bereits',
-    'auth/missing-password': 'Bitte Passwort eingeben', 
+    'auth/missing-password': 'Bitte Passwort eingeben',
     'auth/invalid-login-credentials': "Ungültige Anmeldedaten. E-Mail oder Passwort falsch"
   };
 
@@ -90,15 +93,21 @@ export class AuthFirebaseService {
    * @param router - Angular Router
    * @param ngZone 
    */
-  constructor(private auth: Auth, private router: Router, public ngZone: NgZone , private userService: UserFirebaseService) {
+  constructor(private auth: Auth, private router: Router, public ngZone: NgZone, private userService: UserFirebaseService) {
     onAuthStateChanged(this.auth, (user: any) => {
+      console.log("AuthStateChanged"); 
       if (user) {
         this.UserData = user;
         localStorage.setItem('user', JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem('user')!);
         console.log(this.UserData.uid);
         this.userService.setUIDToCurrentUser(this.UserData.uid);
-      
+        
+        if(this.UserData.email != this.userService.currentUser.mail){
+          this.userService.currentUser.mail = this.UserData.email;
+          //this.userService.update(this.userService.currentUser); 
+        }
+        
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -117,12 +126,12 @@ export class AuthFirebaseService {
 
     //Restore Login
     return signInWithEmailAndPassword(this.auth, email, password)
-    .then((result: any) => {
-      this.UserData = result.user;
-      this.ngZone.run(() => {
-        this.router.navigate(['/main']);
-      });
-    })
+      .then((result: any) => {
+        this.UserData = result.user;
+        this.ngZone.run(() => {
+          this.router.navigate(['/main']);
+        });
+      })
 
 
     /*
@@ -158,18 +167,18 @@ export class AuthFirebaseService {
  */
   async register(email: string, password: string) {
 
-  
-    
+
+
     return await createUserWithEmailAndPassword(this.auth, email, password)
-    .then((result) => {
-      this.UserData = result.user;
-      this.userService.registUser.id = this.UserData.uid; 
-      //this.firebaseUserService.update(this.UserData);
-      this.firebaseUserService.setCurrentUser(this.UserData)
-      this.ngZone.run(() => {
-      //this.router.navigate(['/avatar']);
-      });
-    })
+      .then((result) => {
+        this.UserData = result.user;
+        this.userService.registUser.id = this.UserData.uid;
+        //this.firebaseUserService.update(this.UserData);
+        this.firebaseUserService.setCurrentUser(this.UserData)
+        this.ngZone.run(() => {
+          //this.router.navigate(['/avatar']);
+        });
+      })
     /*
     .catch((error) => {
       const errorCode = error.code;
@@ -249,7 +258,66 @@ export class AuthFirebaseService {
   }
 
 
-  getErrorMessage(errorCode:string){
+  getErrorMessage(errorCode: string) {
     return this.firebaseAuthErrorMessages[errorCode as keyof typeof this.firebaseAuthErrorMessages];
   }
+
+  async sendUpdateEmail(newEmail: string) {
+
+    //this.UserData.email = newEmail;
+
+    verifyBeforeUpdateEmail(this.UserData, newEmail).then(() => {
+
+      // Email updated!
+      console.log("E-Mail-Verifizierung wurde versendet!");
+      //this.userService.updateEmail(newEmail);
+
+    }).catch((error) => {
+      console.log("ERROR at Email update!");
+      console.log(error.code);
+      console.log(error.message);
+      console.log(this.UserData);
+    });
+    /*
+        await updateEmail(this.UserData, newEmail).then(() => {
+          // Email updated!
+          console.log("Email updated!");
+          this.userService.updateEmail(newEmail); 
+     
+        }).catch((error) => {
+          console.log("ERROR at Email update!");
+          console.log(error.code);
+          console.log(error.message);
+          console.log(this.UserData);
+        });
+        */
+  }
+
+ async updateMail(newEmail:string){
+    await updateEmail(this.UserData, newEmail).then(() => {
+      // Email updated!
+      console.log("Email updated!");
+      //this.userService.updateEmail(newEmail); 
+ 
+    }).catch((error) => {
+      console.log("ERROR at Email update!");
+      console.log(error.code);
+      console.log(error.message);
+      console.log(this.UserData);
+    });
+  }
+
+  async applyActionCode(code:string){
+    await applyActionCode(this.auth, code)
+    .then(() => {
+    
+    })
+    .catch((error) => {
+      // Invalid or expired code
+      console.error('Error verifying oobCode:', error);
+    });
+  }
 }
+
+
+

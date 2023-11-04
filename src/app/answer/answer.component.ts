@@ -1,19 +1,17 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Message } from 'src/models/message.class';
-import { MatCardModule } from '@angular/material/card';
-import { MessageFirebaseService } from 'src/services/message-firebase.service';
-import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { Reaction } from 'src/models/reaction.class';
-import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { MessageFirebaseService } from 'src/services/message-firebase.service';
+import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.scss'],
+  selector: 'app-answer',
+  templateUrl: './answer.component.html',
+  styleUrls: ['./answer.component.scss']
 })
-export class MessageComponent {
-
+export class AnswerComponent {
   public _message: Message | undefined;
   public autorName: string = "";
   public autorAvatar: string = "";

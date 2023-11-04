@@ -9,10 +9,10 @@
         </div>
     </div>
     
-        <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar"></app-login>
+    <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar && !showForgotPassword"(forgotPasswordLinkClick)="onForgotPasswordLinkClick()"></app-login>
         <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()"></app-register>
         <app-avatar-choose *ngIf="showAvatar && !showLogin" (closeAvatarView)="closeAvatar()"></app-avatar-choose>
-        <app-forgot-password *ngIf="showForgotPasswort"></app-forgot-password>
+        <app-forgot-password *ngIf="showForgotPassword" (closeForgotPasswordView)="closeForgotPassword()"></app-forgot-password>
         <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>
         <app-privacy-policy *ngIf="privacyPolicy" (closePrivacyPolicyView)="closeImprintAndPrivacy()"></app-privacy-policy>
 

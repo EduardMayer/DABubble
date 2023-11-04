@@ -1,4 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { Message } from 'src/models/message.class';
+import { Reaction } from 'src/models/reaction.class';
+import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { MessageFirebaseService } from 'src/services/message-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 
 @Component({
@@ -8,8 +13,51 @@ import { Component, Input } from '@angular/core';
 })
 export class ToolbarComponent {
   @Input() isOwnMessage: boolean | undefined;
+  @Input() message: Message | undefined;
+  @Input() messageLocation: string | undefined;
   showMessageOptions: boolean = false;
   showMessageReactions: boolean = false;
+
+  constructor(
+    private userFirebaseService: UserFirebaseService,
+    private channelFirebaseService: ChannelFirebaseService,
+    public messageFirebaseService: MessageFirebaseService) {
+
+  }
+
+  /*
+  updateReaction(message: Message, reactionId: number | null, selectedEmoji: string, messageType: string = "channel",path: string)
+  */
+
+
+  handleEmojiSelection(selectedEmoji: string) {
+
+
+    console.log(this.message);
+    if (this.message) {
+      let reactionId = this.message.getReactionId(selectedEmoji);
+
+      if (!this.message.reactions) {
+        this.message.reactions = [];
+      }
+
+      this.message.reactions.push(
+        new Reaction(
+          {
+            name: selectedEmoji,
+            users: [this.userFirebaseService.currentUser.id]
+          }
+        )
+      )
+
+      this.message.reactions.forEach((reaction: Reaction) => {
+        if (this.messageLocation == "channel" && this.channelFirebaseService.selectedChannel && this.message) {
+          let reactionPath = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${this.message.id}/reactions`;
+          this.messageFirebaseService.updateReaction(reaction, reactionPath);
+        }
+      });
+    }
+  }
 
   toggleOptions(event: Event) {
     event.stopPropagation();

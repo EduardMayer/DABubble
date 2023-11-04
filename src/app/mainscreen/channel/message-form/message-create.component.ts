@@ -46,6 +46,10 @@ export class MessageCreateComponent {
     this.showEmojiList = !this.showEmojiList;
   }
 
+  closeEmojiList() {
+    this.showEmojiList = false;
+  }
+
   /**
  * Sets the author and avatar information for a message.
  * This function populates the `autorId` and `avatarSrc` properties of the message object.
