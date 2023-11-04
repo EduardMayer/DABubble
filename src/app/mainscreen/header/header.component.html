@@ -2,7 +2,9 @@
     <div id="header-image-container">
         <img src="assets/img/logo/logo.svg" alt="DABubble Logo">
     </div>
-    <input id="header-searchfield" type="text" placeholder="Code learning durchsuchen">
+    <div id="searchbar">
+        <app-searchbar></app-searchbar>
+    </div>
     <div id="header-user">
         <h1>{{user.fullName}}</h1>
         <div *ngIf="user.avatar!=''" id="header-user-icon">

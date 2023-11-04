@@ -1,0 +1,24 @@
+#header-searchfield {
+    flex-grow: 1;
+    width: calc(100% - 24px);
+    border-radius: 42px;
+    height: 40px;
+    border: 0px;
+    padding-left: 24px;
+}
+#header-searchfield-results{
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    width: calc(100% - 24px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    p{
+        padding-left: 24px;
+        &:hover{
+            background: rgba(166, 166, 166, 0.456);
+        }
+    }
+}
