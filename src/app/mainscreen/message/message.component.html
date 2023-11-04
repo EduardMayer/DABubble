@@ -1,6 +1,5 @@
-
-<div class='message-container' (click)="messageFirebaseService.openThread(_message)" [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message"
-    (mouseleave)="closeToolbar();closeEmojiBar()" (mouseenter)="openToolbar()">
+<div class='message-container' [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message"
+    (mouseleave)="closeToolbar()" (mouseenter)="openToolbar()">
     <app-toolbar *ngIf="showToolbar" [isOwnMessage]="isOwnMessage" [message]="_message"
         [messageLocation]="messageLocation" (emojiSelectedOutput)="handleEmojiSelection($event)">
     </app-toolbar>
@@ -16,13 +15,17 @@
             <mat-card-content>{{ _message.content }}</mat-card-content>
         </mat-card>
 
-        <app-addreaction *ngIf="showMessageReactions" class="message-reaction-options"
-            (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
+        <app-addreaction 
+            *ngIf="showMessageReactions"
+            [isOpened]="showMessageReactions"
+            (emojiSelectedOutput)="handleEmojiSelection($event)" 
+            (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)">
+        </app-addreaction>
+
         <div class='message-footer'>
             <div *ngFor="let reaction of messageFirebaseService.loadedReactions" class="reaction-smileys">
                 <div class="emoji-container">
-                    <app-reaction [reaction]="reaction"
-                        (emojiSelectedOutput)="handleEmojiSelection($event)"></app-reaction>
+                    <app-reaction [reaction]="reaction" (emojiSelectedOutput)="handleEmojiSelection($event)" ></app-reaction>
                 </div>
             </div>
             <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">

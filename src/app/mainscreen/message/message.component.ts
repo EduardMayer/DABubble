@@ -21,7 +21,7 @@ export class MessageComponent {
   showToolbar: boolean = false;
   messageLocation: string | undefined;
   messageLocationPath: string | undefined;
-  showMessageReactions: any;
+  showMessageReactions: boolean = false;
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -44,6 +44,11 @@ export class MessageComponent {
   @Input() set messageLocationName(value: string) {
     this.messageLocation = value;
     this.messageLocationPath = this.getMessagePath(value);
+  }
+
+//Overthink this one
+  handleEmojiBarVisibility(isVisible: boolean) {
+      this.showMessageReactions = isVisible;
   }
 
   handleEmojiSelection(selectedEmoji: string) {
@@ -80,8 +85,8 @@ export class MessageComponent {
   }
 
 
-  closeEmojiBar(){
-    this.showMessageReactions=false;
+  closeEmojiBar() {
+    this.showMessageReactions = false;
   }
 
   //Unfinished: path for channelmessages is set
@@ -101,17 +106,20 @@ export class MessageComponent {
     return path;
   }
 
+
   updateReactionAddCurrentUser(reactionIndex: number) {
     console.log("updated Reaction, user added");
     this.messageFirebaseService.loadedReactions[reactionIndex].users.push(this.userFirebaseService.currentUser.id);
     this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex]);
   }
 
+
   updateReactionRemoveCurrentUser(reactionIndex: number, userIndex: number) {
     console.log("updated Reaction, user removed");
     this.messageFirebaseService.loadedReactions[reactionIndex].users.splice(userIndex, 1);
     this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex]);
   }
+
 
   toggleReactions(event: Event) {
     event.stopPropagation();
@@ -123,47 +131,22 @@ export class MessageComponent {
     }
   }
 
+
   hideReactions(event: Event) {
     event.stopPropagation();
     this.showMessageReactions = false;
   }
-
-  /* if (foundEmoji) {
-     let user = reactions.find((reaction) => reaction.name == selectedEmoji);
-   }
-   
-
-
-   let reactionId = this.message.getReactionId(selectedEmoji);
-   if (reactionId && this._message) {
-     this._message.reactions[reactionId].users.push(this.userFirebaseService.currentUser.id);
-   } else {
-
-     console.log(this.message.id);
-
-     if (!this.message.reactions) {
-       this.message.reactions = [];
-     }
-     this.message.reactions.push(new Reaction(
-       {
-         name: selectedEmoji,
-         users: [this.userFirebaseService.currentUser.id]
-       }
-     )
-     )
-   }
-  
-   console.log(this.message.reactions);
-   */
 
 
   openToolbar() {
     this.showToolbar = true;
   }
 
+
   closeToolbar() {
     this.showToolbar = false;
   }
+
 
   async setAutorName(autorId: string) {
     const autorValues = await this.userFirebaseService.getUserByUID(autorId);
@@ -185,6 +168,7 @@ export class MessageComponent {
     }
   }
 
+  
   formatTimestampToHHMM(timestamp: number) {
     const date = new Date(timestamp);
     const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits with leading zero

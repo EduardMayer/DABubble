@@ -9,7 +9,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   templateUrl: './mainscreen.component.html',
   styleUrls: ['./mainscreen.component.scss', '../../styles.scss']
 })
-export class MainscreenComponent implements OnInit {
+export class MainscreenComponent {
 
   channelOpen = true;
   threadOpen = true;
@@ -18,16 +18,18 @@ export class MainscreenComponent implements OnInit {
   seclectedChannel: string = "";
 
   constructor(public channelFirebaseService: ChannelFirebaseService, public userFirebaseService: UserFirebaseService, private authService: AuthFirebaseService) {
-    this.channelFirebaseService.load();
+    console.log("here");
+    setTimeout(() => {
+      if (this.userFirebaseService.currentUser.id) {
+        this.channelFirebaseService.load(this.userFirebaseService.currentUser.id);
+      }
+      console.log(this.userFirebaseService.currentUser.id);
+      setTimeout(() => {
+        this.channelFirebaseService.loadedChannels;
+      }, 2000);
+    }, 2000);
   }
 
-  ngOnInit(): void {
-  }
-
-  selectChannel(channelName: string) {
-    this.seclectedChannel = channelName;
-    this.channelFirebaseService.load("channelName", channelName);
-  }
 
   toggleSideNav() {
     this.sideNavOpen = !this.sideNavOpen;

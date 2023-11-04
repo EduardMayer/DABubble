@@ -13,8 +13,6 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   providers: [IfChangedService] // Provide the service at the component level
 })
 export class ChannelComponent {
-
-
   messageTimeString = "";
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
@@ -42,19 +40,6 @@ export class ChannelComponent {
     const year = date.getFullYear();                              // Get year
     return `${day}.${month}.${year}`;
   }
-  /*
-  isNewDay(message?: Message) {
-    if (message) {
-        let messageTimeString = this.formatDateToDmy(new Date(message.timestamp));
-        this.previousMessageTimeString = this.lastMessageTimeString;
-        if (messageTimeString == this.lastMessageTimeString) {
-            return false;
-        } else {
-            this.lastMessageTimeString = messageTimeString;
-            return true;
-        }
-    } else {
-        return false;
-    }
-    */
+
+
 }
