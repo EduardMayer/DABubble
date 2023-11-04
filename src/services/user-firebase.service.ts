@@ -27,6 +27,7 @@ export class UserFirebaseService {
                 id: "",
                 fullName: "Guest",
                 mail: "guest@guest.at",
+                channels: ["F8tiKVNq6FePPOb4BDps","O8ZTH8u2mAbFrrpNFaGp"]
             }
         )
     }
@@ -35,7 +36,6 @@ export class UserFirebaseService {
         this.currentUser = new User(UserData);
         console.log("current User:" + this.currentUser);
     }
-
 
 
     /**

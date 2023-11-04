@@ -26,6 +26,7 @@ export class ChannelFirebaseService {
     selectedChannelId: string | undefined;
     selectedChannel: Channel | undefined;
     selectedChannelMessages: Message[] = [];
+    unsubChannelMessages: any;
 
     lastMessageTimeString: string = "01.01.1970";
     previousMessageTimeString: string = "01.01.1970";
@@ -42,7 +43,6 @@ export class ChannelFirebaseService {
         this.loadChannelMessages(channelId);
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
-        this.loadChannelUsers(this.selectedChannel.users);
     }
 
 
@@ -53,26 +53,19 @@ export class ChannelFirebaseService {
     * @param {String} indexValue - (Optional) The value to filter channels by within the specified index.
     * @returns {Query} A Firestore query for channel data with optional filtering.
     */
-    getChannelQuery(indexName?: any, indexValue: String = "") {
-        if (indexName) {
-            return query(collection(this.firestore, "channels"), where(indexName, "==", indexValue));
-        } else {
-            return query(collection(this.firestore, "channels"));
-        }
+    getChannelQuery(userId: string) {
+        return query(collection(this.firestore, "channels"), where("users", 'array-contains', userId));
     }
 
-    /**
-    * Asynchronously loads channel data from Firestore based on optional index parameters.
-    *
-    * @param {any} indexName - (Optional) The name of the index to filter channels.
-    * @param {String} indexValue - (Optional) The value to filter channels by within the specified index.
-    */
-    async load(indexName?: any, indexValue: String = "") {
-        const q = this.getChannelQuery(indexName, indexValue);
+    async load(userId: string) {
+        console.log(userId);
+        const q = this.getChannelQuery(userId);
         this.unsubChannels = onSnapshot(q, (querySnapshot) => {
+            console.log(querySnapshot);
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
+
                 channel.id = doc.id;
                 this.loadedChannels.push(channel);
             });
@@ -89,7 +82,7 @@ export class ChannelFirebaseService {
     */
     async loadChannelMessages(channelId: string) {
         const q = this.getChannelMessagesQuery(channelId);
-        this.unsubChannel = onSnapshot(q, (querySnapshot: any) => {
+        this.unsubChannelMessages = onSnapshot(q, (querySnapshot: any) => {
             this.selectedChannelMessages = [];
             querySnapshot.forEach((doc: any) => {
                 if (doc.data()) {
@@ -99,6 +92,8 @@ export class ChannelFirebaseService {
             })
         });
     }
+
+
 
     async loadChannelUsers(currentChannelUsers: string[]) {
         this.channelUsers = [];
@@ -170,7 +165,17 @@ export class ChannelFirebaseService {
     * Unsubscribes from any active subscription.
     */
     ngOnDestroy() {
-        this.unsubChannels();
+        if (this.unsubChannels) {
+            this.unsubChannels();
+        }
+
+        if (this.unsubChannel) {
+            this.unsubChannel();
+        }
+
+        if (this.unsubChannelMessages) {
+            this.unsubChannelMessages()
+        }
     }
 
 
