@@ -146,6 +146,23 @@ export class UserFirebaseService {
         }
     }
 
+    async getUserForSearch(searchString:string){
+        console.log("search for: " + searchString);
+        
+        const q = query(collection(this.firestore, "users"), where("fullName", ">=", searchString));
+        console.log(q);
+        
+
+        const querySnapshot = await getDocs(q);
+        console.log(querySnapshot);
+        const findUsers: User[] = []; 
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    
+        });
+    }
+
 
     /**
      * Check if a given email exists in the array of loaded users.
