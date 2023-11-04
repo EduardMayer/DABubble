@@ -1,0 +1,4 @@
+<input id="header-searchfield" type="text" [(ngModel)]="searchText" placeholder="Code learning durchsuchen" (keyup)="sendData($event)">
+<div id="header-searchfield-results" *ngIf="searchResults.length > 1">
+    <p *ngFor="let result of searchResults; index as i">{{result}}</p>
+</div>

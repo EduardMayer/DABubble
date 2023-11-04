@@ -24,6 +24,13 @@ $headerUser-width: 300px;
         border: 0px;
         padding-left: 24px;
     }
+    #searchbar{
+        flex-grow: 1;
+        width: 50%;
+        border-radius: 42px;
+        height: 40px;
+        border: 0px;
+    }
 
     #header-user {
         display: flex;

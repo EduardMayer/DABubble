@@ -42,6 +42,7 @@ import { AddreactionComponent } from './mainscreen/message/addreaction/addreacti
 import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-password.component';
 import { PickerModule } from "@ctrl/ngx-emoji-mart";
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
+import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { ActionHandlerComponent } from './action-handler/action-handler.componen
     ForgotPasswordComponent,
    
     AddreactionComponent,
-        ActionHandlerComponent
+        ActionHandlerComponent,
+        SearchbarComponent
   ],
   imports: [
     BrowserModule,
