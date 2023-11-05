@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Channel } from 'src/models/channel.class';
+import { User } from 'src/models/user.class';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
@@ -10,7 +12,8 @@ export class SearchbarComponent implements OnInit{
 
   searchText: string = ""; 
   searchResults: string[] = []; 
-  searchResultsUsers: string[] = []; 
+  searchResultsUsers: User[] = []; 
+  searchResultsChannels: Channel[] = []; 
 
   testData: string[] = ["hallo", "Test", "Search"]; 
 
@@ -26,16 +29,36 @@ export class SearchbarComponent implements OnInit{
     if(this.searchText != ""){
       //console.log(this.searchText);
       this.searchResults = this.testData.filter(s => s.includes(this.searchText)); 
-      this.userService.getUserForSearch(this.searchText);
-      //console.log( this.searchResults); 
+      this.getUsers(); 
+      this.getChannels(); 
     }
     else{
       this.searchResults = []; 
+      this.searchResultsUsers = [];
     }
   }
 
   getUsers(){
-    
+    this.userService.getUserForSearch(this.searchText)
+        .then( (users) => {
+          this.searchResultsUsers = users; 
+        });
+  }
+  getChannels(){
+    this.userService.getChannelForSearch(this.searchText)
+    .then( (channels) => {
+      this.searchResultsChannels = channels; 
+    });
+  }
+
+  clickUser(index:any){
+    console.log("Send New Message to User with ID: ");
+    console.log(this.searchResultsUsers[index]);
+  }
+
+  clickChannel(index:any){
+    console.log("Click Channel with ID: ");
+    console.log(this.searchResultsChannels[index]);
   }
 
 }

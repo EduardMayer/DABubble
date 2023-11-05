@@ -4,6 +4,7 @@ import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, 
 import { User } from '../models/user.class';
 import { getLocaleFirstDayOfWeek } from '@angular/common';
 import { AuthFirebaseService } from './auth-firebase.service';
+import { Channel } from 'src/models/channel.class';
 
 
 @Injectable({
@@ -146,21 +147,33 @@ export class UserFirebaseService {
     }
 
     async getUserForSearch(searchString:string){
-        console.log("search for: " + searchString);
         
-        const q = query(collection(this.firestore, "users"), where("fullName", ">=", searchString));
-        console.log(q);
-        
-
+        const searchKeywords = searchString.split(" ");
+        const q = query(collection(this.firestore, "users") , 
+            where("fullName", ">=", searchString), 
+            where("fullName", "<=", searchString + '\uf8ff')) ;
         const querySnapshot = await getDocs(q);
-        console.log(querySnapshot);
         const findUsers: User[] = []; 
         querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-    
+            findUsers.push(new User(doc.data()))
         });
+        return findUsers; 
     }
+
+    async getChannelForSearch(searchString:string){
+        
+        const searchKeywords = searchString.split(" ");
+        const q = query(collection(this.firestore, "channels") , 
+            where("channelName", ">=", searchString), 
+            where("channelName", "<=", searchString + '\uf8ff')) ;
+        const querySnapshot = await getDocs(q);
+        const findChannels: Channel[] = []; 
+        querySnapshot.forEach((doc) => {
+            findChannels.push(new Channel(doc.data()))
+        });
+        return findChannels; 
+    }
+
 
 
     /**

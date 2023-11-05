@@ -1,4 +1,7 @@
 <input id="header-searchfield" type="text" [(ngModel)]="searchText" placeholder="Code learning durchsuchen" (keyup)="sendData($event)">
-<div id="header-searchfield-results" *ngIf="searchResults.length > 1">
-    <p *ngFor="let result of searchResults; index as i">{{result}}</p>
+<div id="header-searchfield-results" *ngIf="searchResults.length >= 1 || searchResultsUsers.length >= 1  || searchResultsChannels.length >= 1">
+<!--     <p *ngFor="let result of searchResults; index as i">{{result}}</p>-->    
+    <p *ngFor="let resultUsers of searchResultsUsers; index as i" (click)="clickUser(i)"> User - {{resultUsers.fullName}} - {{resultUsers.id}}</p>
+    <p *ngFor="let resultChannels of searchResultsChannels; index as i" (click)="clickChannel(i)"> Channel - {{resultChannels.channelName}} - {{resultChannels.id}}</p>
+
 </div>
