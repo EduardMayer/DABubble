@@ -35,6 +35,7 @@ export class SearchbarComponent implements OnInit{
     else{
       this.searchResults = []; 
       this.searchResultsUsers = [];
+      this.searchResultsChannels = [];
     }
   }
 
