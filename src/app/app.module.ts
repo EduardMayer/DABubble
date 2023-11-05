@@ -43,6 +43,7 @@ import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-pa
 import { PickerModule } from "@ctrl/ngx-emoji-mart";
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
 import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
+import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.comp
    
     AddreactionComponent,
         ActionHandlerComponent,
-        SearchbarComponent
+        SearchbarComponent,
+        ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

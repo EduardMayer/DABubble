@@ -33,10 +33,6 @@ export class ForgotPasswordComponent {
     return this.contactForm.invalid;
   }
 
-  passwordReset(){
-
-  }
-
   closeForgotPassword(){
     this.closeForgotPasswordView.emit(); 
   }
