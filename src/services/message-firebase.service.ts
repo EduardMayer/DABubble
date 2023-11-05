@@ -79,7 +79,7 @@ export class MessageFirebaseService {
         }
     }
     openThread(message: any) {
-        //debugger;
+        debugger;
         console.log(message.id);
         console.log(this.channelFirebaseService.selectedChannel?.channelName);
         this.message = message;
