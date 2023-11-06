@@ -58,10 +58,8 @@ export class ChannelFirebaseService {
     }
 
     async load(userId: string) {
-        console.log(userId);
         const q = this.getChannelQuery(userId);
         this.unsubChannels = onSnapshot(q, (querySnapshot) => {
-            console.log(querySnapshot);
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
@@ -69,7 +67,6 @@ export class ChannelFirebaseService {
                 this.loadedChannels.push(channel);
             });
         });
-        return this.unsubChannels;
     }
 
 

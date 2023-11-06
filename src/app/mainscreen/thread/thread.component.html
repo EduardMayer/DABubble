@@ -22,10 +22,8 @@
             </app-date-line>
         </div>
 
-        <app-message-create path="message-path"></app-message-create>
-        <div *ngIf="threadFirebaseService.message">
-            {{ threadFirebaseService.message.path }}
-        </div>
+        <app-message-create [path]="answersPath"></app-message-create>
+       
 
 
     </mat-card-content>

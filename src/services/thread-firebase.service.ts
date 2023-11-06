@@ -14,6 +14,7 @@ export class ThreadFirebaseService {
     message: Message;
     threadAnswers: Message[] = [];
     threadOpen: boolean = false;
+    path: string = "";
     private unsubThreads: any;
     private unsubThread: any;
 
@@ -26,9 +27,7 @@ export class ThreadFirebaseService {
     openThread(message: Message) {
         this.threadOpen = true;
         this.message = message;
-        this.message.path
-        console.log(this.message);
-        this.messageFirebaseService.loadAnswers(message);
+        this.message.path = this.path;
     }
 
     async updateThread(thread: Thread, path: string) {

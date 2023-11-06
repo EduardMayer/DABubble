@@ -46,9 +46,11 @@ export class MessageFirebaseService {
         }
     }
 
+
     async deleteReaction(reaction: Reaction, path: string) {
         await deleteDoc(doc(this.firestore, `${path}/${reaction.id}`));
     }
+
 
     async loadReactions(message: Message) {
         if (this.channelFirebaseService.selectedChannel && message) {
@@ -57,7 +59,7 @@ export class MessageFirebaseService {
                 this.loadedReactions = [];
                 querySnapshot.forEach((doc: any) => {
                     if (doc.data()) {
-                        let reaction = new Reaction(doc.data());path
+                        let reaction = new Reaction(doc.data()); path
                         reaction.id = doc.id;
                         reaction.path = path + doc.id
                         this.loadedReactions.push(reaction);
@@ -67,58 +69,40 @@ export class MessageFirebaseService {
         }
     }
 
+
     async loadAnswers(message: Message) {
-        console.log("loadingAnswers");
-        if (this.channelFirebaseService.selectedChannel && message) {
-            let path = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${message.id}/answers/`;
-            console.log(path);
-            this.unsubAnswers = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
-                this.loadedAnswers = [];
-                querySnapshot.forEach((doc: any) => {
-                    if (doc.data()) {
-                        let answer = new Message(doc.data());
-                        answer.id = doc.id;
-                        answer.path = path + doc.id;
-                        console.log(this.loadedAnswers);
-                    }
-                })
-            });
-        }
+        console.log(message);
+        let path = message.path + `/answers/`;
+
+        this.unsubAnswers = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
+            this.loadedAnswers = [];
+            querySnapshot.forEach((doc: any) => {
+                if (doc.data()) {
+                    let answer = new Message(doc.data());
+                    answer.id = doc.id;
+                    answer.path = path + doc.id;
+                    this.loadedAnswers.push(answer);
+                    console.log(this.loadedAnswers);
+                }
+            })
+        });
+
     }
 
-    /**
-    * Generates a Firestore query to retrieve message data with optional index-based filtering.
-    *
-    * @param {any} indexName - (Optional) The name of the index to filter Messages.
-    * @param {String} indexValue - (Optional) The value to filter Messages by within the specified index.
-    * @returns {Query} A Firestore query for message data with optional filtering.
-    */
-    getQuery(indexName?: any, indexValue: String = "") {
-        if (indexName) {
-            return query(collection(this.firestore, "messages"), where(indexName, "==", indexValue));
+
+    async createMessage(path: string, message: Message) {
+        if (message.id == "") {
+            message.id = String(this.cyrb53(String(path) + String(message.content)));
+            path = path + message.id;
+            const docInstance = doc(this.firestore, path);
+            await setDoc(docInstance, message.toJSON());
+            console.log("Message created");
         } else {
-            return query(collection(this.firestore, "messages"));
+            const docInstance = doc(this.firestore, path);
+            await updateDoc(docInstance, message.toJSON());
+            console.log("Message updated");
         }
     }
-
-
-    /**
-    * Retrieves a message by its unique identifier.
-    *
-    * @param {string} messageId - The unique identifier of the thread to retrieve.
-    */
-    getById(messageId: string) {
-        const message = doc(collection(this.firestore, "messages"), messageId);
-        this.unsubMessage = onSnapshot(message, (doc) => {
-            this.loadedMessage = undefined;
-            let docData = doc.data();
-            if (docData) {
-                const message = new Message(docData);
-                message.id = messageId;
-                this.loadedMessage = message;
-            }
-        })
-    };
 
 
     cyrb53 = (str: string, seed = 0) => {

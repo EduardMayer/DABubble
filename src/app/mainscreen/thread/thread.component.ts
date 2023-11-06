@@ -18,6 +18,8 @@ export class ThreadComponent {
   showToolbar: boolean = false;
   @Input() messageLocation: string | undefined;
   message: Message;
+  answersPath: string="";
+
 
 
   constructor(
@@ -26,6 +28,10 @@ export class ThreadComponent {
     public threadFirebaseService: ThreadFirebaseService,
     public userFirebase: UserFirebaseService) {
     this.message = this.threadFirebaseService.message;
+    if(channelFirebaseService.selectedChannel){
+      this.answersPath=`channels/${channelFirebaseService.selectedChannel.id}/messages/${this.message.id}/answers/`;
+    }
+   
   }
 
 
@@ -47,10 +53,6 @@ export class ThreadComponent {
 
   closeEmojiList() {
     this.showEmojiList = false;
-  }
-
-  sendAnswer() {
-
   }
 
   openToolbar() {

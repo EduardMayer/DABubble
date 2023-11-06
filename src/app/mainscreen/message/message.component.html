@@ -21,7 +21,8 @@
         </app-addreaction>
 
         <div class='message-footer'>
-            <div *ngIf="this.messageFirebaseService.loadedAnswers.length > 0" (click)="openThread()">
+            <div *ngIf="this.messageFirebaseService.loadedAnswers.length > 0 && messageLocation == 'channel'"
+                (click)="openThread()">
                 {{ this.messageFirebaseService.loadedAnswers.length }} Antworten
             </div>
 

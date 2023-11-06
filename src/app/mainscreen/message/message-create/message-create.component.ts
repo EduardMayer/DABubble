@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule } from '@angular/forms';
+import { MessageFirebaseService } from 'src/services/message-firebase.service';
 
 @Component({
   selector: 'app-message-create',
@@ -17,10 +18,18 @@ export class MessageCreateComponent {
   message = new Message();
   textarea: HTMLTextAreaElement | undefined;
   showEmojiList: boolean = false;
+  _path: string | undefined;
+
+
+  @Input()
+  public set path(value: string) {
+    this._path = value;
+  }
 
   constructor(
     private userFirebaseService: UserFirebaseService,
-    public channelFirebaseService: ChannelFirebaseService
+    public channelFirebaseService: ChannelFirebaseService,
+    private messageFirebaseService: MessageFirebaseService,
   ) { }
 
   /**
@@ -31,24 +40,29 @@ export class MessageCreateComponent {
   * @returns {Promise<void>}
   */
   async createMessage() {
+    console.log("Message create attempt");
     if (this.message.content) {
       this.message.timestamp = Date.now();
-      if (this.channelFirebaseService.selectedChannel) {
-        this.setMessageAutor();
-        this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this.message);
-        this.message = new Message();
-        this.showEmojiList = false;
+      this.setMessageAutor();
+      console.log(this._path);
+      if (this._path) {
+        this.messageFirebaseService.createMessage(this._path, this.message);
       }
+      this.message = new Message();
+      this.showEmojiList = false;
     }
   }
+
 
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }
 
+
   closeEmojiList() {
     this.showEmojiList = false;
   }
+
 
   /**
  * Sets the author and avatar information for a message.

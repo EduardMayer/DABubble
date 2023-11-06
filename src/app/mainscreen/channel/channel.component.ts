@@ -14,13 +14,15 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 })
 export class ChannelComponent {
   messageTime: string = "";
+  messagePath: string = "";
+
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
     public userFirebaseService: UserFirebaseService
-
   ) {
     if (channelFirebaseService.selectedChannel) {
       channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
+      this.messagePath=`channels/${channelFirebaseService.selectedChannel.id}/messages/`;
     }
   }
 
