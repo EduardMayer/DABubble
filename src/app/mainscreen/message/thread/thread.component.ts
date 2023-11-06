@@ -81,7 +81,7 @@ export class ThreadComponent {
     if (yesterdayDmy == timestampDmy) {
       return "gestern";
     } else if (delta < oneDayInMs) {
-      return this.formatTimestampToHHMM(timestamp) + " " + new Date(timestamp);
+      return this.formatTimestampToHHMM(timestamp);
     } else {
       const daysAgo = Math.floor(delta / oneDayInMs);
       return `vor ${daysAgo} Tagen`;
