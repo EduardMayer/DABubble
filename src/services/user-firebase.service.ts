@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { AfterViewInit, Injectable, OnInit } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, getDoc } from "firebase/firestore";
 import { User } from '../models/user.class';
@@ -10,8 +10,7 @@ import { Channel } from 'src/models/channel.class';
 @Injectable({
     providedIn: 'root'
 })
-export class UserFirebaseService {
-
+export class UserFirebaseService{
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
@@ -43,6 +42,7 @@ export class UserFirebaseService {
     * Asynchronously loads user data from Firestore based on optional index parameters.
     */
     async load() {
+       
         const q = query(collection(this.firestore, "users"));
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];
