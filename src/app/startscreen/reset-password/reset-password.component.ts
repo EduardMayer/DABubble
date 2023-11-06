@@ -12,6 +12,8 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 export class ResetPasswordComponent {
   contactForm: FormGroup;
   isInputActive = false;
+  imprint = false; 
+  privacyPolicy = false; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +41,11 @@ export class ResetPasswordComponent {
     });
   }
 
+  closeImprintAndPrivacy(){
+    this.imprint = false; 
+    this.privacyPolicy = false; 
+  }
+
   isButtonDisabled(): boolean {
     const passwordControl = this.contactForm.get('passwordInput');
     const passwordRepeatControl = this.contactForm.get('passwordRepeatInput');
@@ -59,4 +66,5 @@ export class ResetPasswordComponent {
       // Handle password update logic here
     }
   }
+  
 }
