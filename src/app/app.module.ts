@@ -31,7 +31,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
-import { MessageCreateComponent } from './mainscreen/channel/message-form/message-create.component';
+import { MessageCreateComponent } from './mainscreen/message/message-create/message-create.component';
 import { DateLineComponent } from './mainscreen/date-line/date-line.component';
 import { IfChangedDirective } from './directives/if-changed.directive';
 import { ReactionComponent } from './mainscreen/message/reaction/reaction.component';
@@ -44,6 +44,7 @@ import { PickerModule } from "@ctrl/ngx-emoji-mart";
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
 import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
+
 
 
 @NgModule({

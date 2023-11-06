@@ -2,20 +2,47 @@ import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
 import { Thread } from '../models/thread.class';
-import { ChannelFirebaseService } from './channel-firebase.service';
+import { MessageFirebaseService } from './message-firebase.service';
+import { Message } from 'src/models/message.class';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class ThreadFirebaseService {
-    public loadedThreads: Thread[] = [];
     public loadedThread: Thread | undefined;
-    private unsubThreads: any; 
-    private unsubThread: any; 
+    message: Message;
+    threadAnswers: Message[] = [];
+    threadOpen: boolean = false;
+    private unsubThreads: any;
+    private unsubThread: any;
 
-    constructor(private firestore: Firestore, public channelFirebaseService: ChannelFirebaseService) {
+
+
+    constructor(private firestore: Firestore, private messageFirebaseService: MessageFirebaseService) {
+        this.message = new Message;
     }
+
+    openThread(message: Message) {
+        this.threadOpen = true;
+        this.message = message;
+        this.message.path
+        console.log(this.message);
+        this.messageFirebaseService.loadAnswers(message);
+    }
+
+    async updateThread(thread: Thread, path: string) {
+        if (thread.id == "") {
+            const docInstance = doc(collection(this.firestore, path + "threads"));
+            setDoc(docInstance, thread.toJSON());
+            console.log("thread created");
+        } else {
+            const docInstance = doc(this.firestore, 'threads', thread.id);
+            updateDoc(docInstance, thread.toJSON());
+            console.log("thread updated");
+        }
+    }
+
 }
 
 
@@ -55,13 +82,13 @@ export class ThreadFirebaseService {
 //         });
 //     };
 
-    //openThread(message: any) {
-    //    debugger;
-    //    console.log(message.id);
-    //    console.log(this.channelFirebaseService.selectedChannel?.channelName);
-    //}
+//openThread(message: any) {
+//    debugger;
+//    console.log(message.id);
+//    console.log(this.channelFirebaseService.selectedChannel?.channelName);
+//}
 
-   // message: any;
+// message: any;
 
 //     /**
 //     * Retrieves a thread by its unique identifier.

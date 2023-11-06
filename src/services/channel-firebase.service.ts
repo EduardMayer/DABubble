@@ -65,7 +65,6 @@ export class ChannelFirebaseService {
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
-
                 channel.id = doc.id;
                 this.loadedChannels.push(channel);
             });
@@ -82,11 +81,14 @@ export class ChannelFirebaseService {
     */
     async loadChannelMessages(channelId: string) {
         const q = this.getChannelMessagesQuery(channelId);
+        let path = `channels/${channelId}/messages/`;
         this.unsubChannelMessages = onSnapshot(q, (querySnapshot: any) => {
             this.selectedChannelMessages = [];
             querySnapshot.forEach((doc: any) => {
                 if (doc.data()) {
-                    const message = new Message(doc.data());
+                    let message = new Message(doc.data());
+                    message.path = path + doc.id;
+                    message.id = doc.id;
                     this.selectedChannelMessages.push(message);
                 }
             })

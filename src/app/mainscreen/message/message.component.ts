@@ -47,7 +47,11 @@ export class MessageComponent {
     this.messageLocationPath = this.getMessagePath(value);
   }
 
-//Overthink this one
+
+  openThread(){
+    this.threadFirebaseService.threadOpen=true;
+  }
+
   handleEmojiBarVisibility(isVisible: boolean) {
       this.showMessageReactions = isVisible;
   }
@@ -92,13 +96,15 @@ export class MessageComponent {
 
   //Unfinished: path for channelmessages is set
   getMessagePath(messageLocation: string) {
-
     let path = "";
     if (messageLocation == 'channel') {
       if (this.channelFirebaseService.selectedChannel && this._message) {
         path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
       }
     } else if (messageLocation == 'thread') {
+      if (this.channelFirebaseService.selectedChannel && this._message) {
+        path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
+      }
 
     } else if (messageLocation == 'chat') {
 

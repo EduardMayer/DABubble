@@ -4,7 +4,7 @@
             <div>
                 <h2># {{ channelFirebaseService.selectedChannel.channelName }}</h2>
             </div>
-            <div>Channel dropdown</div>
+
         </div>
         <div class="user-avatar-list">
             <img class="avatar-img" *ngFor="let user of channelFirebaseService.channelUsers" src="{{ user.avatar }}"
@@ -13,17 +13,19 @@
         </div>
     </div>
     <mat-card-content id="channel-content"></mat-card-content>
+
     <div class="chat-container">
         <div *ngFor="let message of channelFirebaseService.selectedChannelMessages; let i = index">
             <app-message [message]="message" [messageLocationName]="'channel'"></app-message>
-            <ng-template [appIfChanged]="getMessageTimeString(message)">
+            <ng-template [appIfChanged]="getMessageTime(message)">
                 <app-date-line *ngIf="channelFirebaseService.selectedChannelMessages[i-1]"
-                    [messageTime]="getMessageTimeString(channelFirebaseService.selectedChannelMessages[i-1])"></app-date-line>
+                    [messageTime]="getMessageTime(channelFirebaseService.selectedChannelMessages[i-1])"></app-date-line>
             </ng-template>
         </div>
+
         <app-date-line
             *ngIf="channelFirebaseService.selectedChannelMessages[channelFirebaseService.selectedChannelMessages.length-1]"
-            [messageTime]="getMessageTimeString(channelFirebaseService.selectedChannelMessages[channelFirebaseService.selectedChannelMessages.length-1])">
+            [messageTime]="getMessageTime(channelFirebaseService.selectedChannelMessages[channelFirebaseService.selectedChannelMessages.length-1])">
         </app-date-line>
     </div>
 

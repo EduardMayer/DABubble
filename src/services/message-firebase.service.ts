@@ -20,6 +20,9 @@ export class MessageFirebaseService {
     private unsubReactions: any;
     public loadedReactions: Reaction[] = [];
 
+    private unsubAnswers: any;
+    public loadedAnswers: Message[] = [];
+
     constructor(
         private firestore: Firestore,
         public channelFirebaseService: ChannelFirebaseService,
@@ -48,19 +51,35 @@ export class MessageFirebaseService {
     }
 
     async loadReactions(message: Message) {
-        console.log(this.channelFirebaseService.selectedChannel);
-
         if (this.channelFirebaseService.selectedChannel && message) {
             const path = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${message.id}/reactions/`;
             this.unsubReactions = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
                 this.loadedReactions = [];
                 querySnapshot.forEach((doc: any) => {
                     if (doc.data()) {
-                        let reaction = new Reaction(doc.data());
+                        let reaction = new Reaction(doc.data());path
                         reaction.id = doc.id;
                         reaction.path = path + doc.id
                         this.loadedReactions.push(reaction);
-                        console.log(this.loadedReactions);
+                    }
+                })
+            })
+        }
+    }
+
+    async loadAnswers(message: Message) {
+        console.log("loadingAnswers");
+        if (this.channelFirebaseService.selectedChannel && message) {
+            let path = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${message.id}/answers/`;
+            console.log(path);
+            this.unsubAnswers = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
+                this.loadedAnswers = [];
+                querySnapshot.forEach((doc: any) => {
+                    if (doc.data()) {
+                        let answer = new Message(doc.data());
+                        answer.id = doc.id;
+                        answer.path = path + doc.id;
+                        console.log(this.loadedAnswers);
                     }
                 })
             });
@@ -82,15 +101,6 @@ export class MessageFirebaseService {
         }
     }
 
-    openThread(message: any) {
-        debugger;
-        console.log(message.id);
-        console.log(this.channelFirebaseService.selectedChannel?.channelName);
-        this.message = message;
-        console.log('Globally message is', this.message);
-    }
-
-    message: any = {};
 
     /**
     * Retrieves a message by its unique identifier.
