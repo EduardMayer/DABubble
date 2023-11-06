@@ -8,17 +8,20 @@
             <img class="closeIcon" src="assets/img/icons/close.svg">
         </div>
 
+
+        <app-message [message]="message" [messageLocationName]="'thread'"></app-message>
+
         <div class="chat-container">
-            <div *ngFor="let message of messageFirebaseService.loadedAnswers; let i = index">
-                <app-message [message]="message" [messageLocationName]="'thread'"></app-message>
-                <ng-template [appIfChanged]="getMessageTimeString(message)">
-                    <app-date-line *ngIf="messageFirebaseService.loadedAnswers[i-1]"
-                        [messageTime]="getMessageTimeString(messageFirebaseService.loadedAnswers[i-1])"></app-date-line>
+            <div *ngFor="let answer of threadFirebaseService.loadedAnswers; let i = index">
+                <app-message [message]="answer" [messageLocationName]="'thread'"></app-message>
+                <ng-template [appIfChanged]="getMessageTimeString(answer)">
+                    <app-date-line *ngIf="threadFirebaseService.loadedAnswers[i-1]"
+                        [messageTime]="getMessageTimeString(threadFirebaseService.loadedAnswers[i-1])"></app-date-line>
                 </ng-template>
             </div>
 
-            <app-date-line *ngIf="messageFirebaseService.loadedAnswers[messageFirebaseService.loadedAnswers.length-1]"
-                [messageTime]="getMessageTimeString(messageFirebaseService.loadedAnswers[messageFirebaseService.loadedAnswers.length-1])">
+            <app-date-line *ngIf="threadFirebaseService.loadedAnswers[threadFirebaseService.loadedAnswers.length-1]"
+                [messageTime]="getMessageTimeString(threadFirebaseService.loadedAnswers[threadFirebaseService.loadedAnswers.length-1])">
             </app-date-line>
         </div>
 

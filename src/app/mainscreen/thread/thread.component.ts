@@ -45,8 +45,6 @@ export class ThreadComponent {
     }
   }
 
-
-
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }

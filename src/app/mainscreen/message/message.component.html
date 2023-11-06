@@ -22,10 +22,9 @@
 
         <div class='message-footer'>
             <div *ngIf="this.messageFirebaseService.loadedAnswers.length > 0 && messageLocation == 'channel'"
-                (click)="openThread()">
+                (click)="threadFirebaseService.openThread(_message,this.messageFirebaseService.loadedAnswers)">
                 {{ this.messageFirebaseService.loadedAnswers.length }} Antworten
             </div>
-
 
             <div *ngFor="let reaction of messageFirebaseService.loadedReactions" class="reaction-smileys">
                 <div class="emoji-container">

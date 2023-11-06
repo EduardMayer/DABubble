@@ -71,7 +71,6 @@ export class MessageFirebaseService {
 
 
     async loadAnswers(message: Message) {
-        console.log(message);
         let path = message.path + `/answers/`;
 
         this.unsubAnswers = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
@@ -82,7 +81,6 @@ export class MessageFirebaseService {
                     answer.id = doc.id;
                     answer.path = path + doc.id;
                     this.loadedAnswers.push(answer);
-                    console.log(this.loadedAnswers);
                 }
             })
         });

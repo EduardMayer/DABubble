@@ -12,7 +12,7 @@ import { Message } from 'src/models/message.class';
 export class ThreadFirebaseService {
     public loadedThread: Thread | undefined;
     message: Message;
-    threadAnswers: Message[] = [];
+    public loadedAnswers: Message[] = [];
     threadOpen: boolean = false;
     path: string = "";
     private unsubThreads: any;
@@ -24,10 +24,11 @@ export class ThreadFirebaseService {
         this.message = new Message;
     }
 
-    openThread(message: Message) {
+    openThread(message: Message, loadedAnswers: Message[]) {
         this.threadOpen = true;
         this.message = message;
-        this.message.path = this.path;
+        this.loadedAnswers = loadedAnswers;
+        console.log(this.loadedAnswers);
     }
 
     async updateThread(thread: Thread, path: string) {

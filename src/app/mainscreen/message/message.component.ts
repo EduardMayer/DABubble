@@ -35,6 +35,7 @@ export class MessageComponent {
   public set message(value: Message) {
     this._message = value;
     this.messageFirebaseService.loadReactions(value);
+    this.messageFirebaseService.loadAnswers(value);
     this.setAutorName(this._message.autorId);
     if (this._message.autorId == this.userFirebaseService.currentUser.id) {
       this.isOwnMessage = true;
@@ -48,12 +49,8 @@ export class MessageComponent {
   }
 
 
-  openThread(){
-    this.threadFirebaseService.threadOpen=true;
-  }
-
   handleEmojiBarVisibility(isVisible: boolean) {
-      this.showMessageReactions = isVisible;
+    this.showMessageReactions = isVisible;
   }
 
   handleEmojiSelection(selectedEmoji: string) {
@@ -175,7 +172,7 @@ export class MessageComponent {
     }
   }
 
-  
+
   formatTimestampToHHMM(timestamp: number) {
     const date = new Date(timestamp);
     const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits with leading zero
