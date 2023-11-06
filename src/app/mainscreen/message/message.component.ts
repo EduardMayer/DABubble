@@ -23,6 +23,7 @@ export class MessageComponent {
   messageLocation: string | undefined;
   messageLocationPath: string | undefined;
   showMessageReactions: boolean = false;
+  givenTimestamp: string | undefined;
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -43,6 +44,11 @@ export class MessageComponent {
     }
   }
 
+  @Input()
+  public set timestampString(value: string) {
+    this.givenTimestamp = value;
+  }
+
   @Input() set messageLocationName(value: string) {
     this.messageLocation = value;
     this.messageLocationPath = this.getMessagePath(value);
@@ -52,6 +58,7 @@ export class MessageComponent {
   handleEmojiBarVisibility(isVisible: boolean) {
     this.showMessageReactions = isVisible;
   }
+
 
   handleEmojiSelection(selectedEmoji: string) {
     const reactions = this.messageFirebaseService.loadedReactions;
@@ -170,6 +177,16 @@ export class MessageComponent {
       this.autorName = "Guest";
       this.autorAvatar = "assets/img/avatar/avatar1.svg";
     }
+  }
+
+
+  getTimestamp(timestamp: number) {
+    if (this.givenTimestamp) {
+      return this.givenTimestamp;
+    } else {
+      return this.formatTimestampToHHMM(timestamp);
+    }
+
   }
 
 

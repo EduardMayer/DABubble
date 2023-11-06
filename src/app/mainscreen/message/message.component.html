@@ -6,8 +6,8 @@
     <img src="{{ autorAvatar }}" class="message-img" *ngIf="autorAvatar">
     <div class="message-content" tabindex="0">
         <div class="message-head">
-            <div> {{ formatTimestampToHHMM(_message.timestamp) }}</div>
             <div *ngIf="autorName!=''"><b>{{ autorName }}</b></div>
+            <div> {{ getTimestamp(_message.timestamp) }}</div>
         </div>
 
         <mat-card>

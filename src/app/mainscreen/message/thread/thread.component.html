@@ -1,0 +1,30 @@
+<mat-card id="thread" class="br-30" *ngIf="threadFirebaseService.message">
+    <mat-card-content id="thread-content">
+        <div class="threadHeader">
+            <div><span>Thread</span>
+                <span class="channelNameHeader">
+                    # {{channelFirebaseService.selectedChannel?.channelName }}</span>
+            </div>
+            <img class="closeIcon" src="assets/img/icons/close.svg">
+        </div>
+
+        <app-message [message]="threadFirebaseService.message" [messageLocationName]="'thread'"></app-message>
+
+        <div class="line-container" *ngIf="threadFirebaseService.loadedAnswers.length>0">
+            <div class="line"></div>
+            <div class='date'>{{ threadFirebaseService.loadedAnswers.length}} Antworten</div>
+        </div>
+
+        <div class="chat-container">
+            <div *ngFor="let answer of threadFirebaseService.loadedAnswers; let i = index">
+                <app-message [message]="answer" [timestampString]="formatTimeDelta(answer.timestamp)" [messageLocationName]="'thread'"></app-message>
+            </div>
+        </div>
+
+        <app-message-create [path]="answersPath"></app-message-create>
+
+
+
+    </mat-card-content>
+
+</mat-card>

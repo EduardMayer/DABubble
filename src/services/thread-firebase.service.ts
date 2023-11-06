@@ -28,7 +28,6 @@ export class ThreadFirebaseService {
         this.threadOpen = true;
         this.message = message;
         this.loadedAnswers = loadedAnswers;
-        console.log(this.loadedAnswers);
     }
 
     async updateThread(thread: Thread, path: string) {

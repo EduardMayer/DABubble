@@ -11,8 +11,6 @@ import { Reaction } from 'src/models/reaction.class';
 })
 export class MessageFirebaseService {
 
-    public loadedMessage: Message | undefined;
-    public loadedMessages: Message[] = [];
     private unsubMessage: any;
     private unsubMessages: any;
     public isOwnMessage: boolean = false;
@@ -25,8 +23,7 @@ export class MessageFirebaseService {
 
     constructor(
         private firestore: Firestore,
-        public channelFirebaseService: ChannelFirebaseService,
-        private userFirebaseService: UserFirebaseService
+        public channelFirebaseService: ChannelFirebaseService
     ) {
     }
 
@@ -84,7 +81,6 @@ export class MessageFirebaseService {
                 }
             })
         });
-
     }
 
 
@@ -133,6 +129,10 @@ export class MessageFirebaseService {
 
         if (this.unsubReactions) {
             this.unsubReactions();
+        }
+
+        if (this.unsubAnswers) {
+            this.unsubAnswers();
         }
     }
 
