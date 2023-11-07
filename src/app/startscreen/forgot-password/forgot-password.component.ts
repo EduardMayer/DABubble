@@ -38,6 +38,17 @@ export class ForgotPasswordComponent {
   }
 
   resetPassword() {
+    this.authService.resetPassword(this.email)
+    .then(()=> {
+      this.emailSubmitted = true;
+      setTimeout(() => {
+        this.closeForgotPassword();
+      }, 1400);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+    /*
     if (this.userService.mailExists(this.email)) {
       this.authService.resetPassword(this.email);
       this.emailSubmitted = true;
@@ -47,6 +58,8 @@ export class ForgotPasswordComponent {
     } else {
       console.log("User with the provided email does not exist.");
     }
+
+    */
   }
 
 

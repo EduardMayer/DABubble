@@ -18,8 +18,6 @@ export class SearchbarComponent implements OnInit{
 
   testData: string[] = ["hallo", "Test", "Search"]; 
 
-
-
   constructor(private userService:UserFirebaseService, private channelService:ChannelFirebaseService){}
 
   ngOnInit(): void {
@@ -88,8 +86,7 @@ export class SearchbarComponent implements OnInit{
   }
 
   clickChannel(index:any){
-    console.log("Click Channel with ID: ");
-    console.log(this.searchResultsChannels[index]);
+    this.channelService.selectChannel(this.searchResultsChannels[index].id); 
   }
 
 }

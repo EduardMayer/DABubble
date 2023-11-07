@@ -274,7 +274,7 @@ export class AuthFirebaseService implements OnInit {
 
   resetPassword(email: string) {
 
-    sendPasswordResetEmail(this.auth, email)
+    return sendPasswordResetEmail(this.auth, email)
       .then(() => {
         console.log("Password reset email sent");
       })

@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: '', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent, canActivate: [authGuard] },
   { path: 'userMgmt', component: ActionHandlerComponent },
-  { path: 'reset', component: ResetPasswordComponent },
+  { path: 'reset/:oobCode', component: ResetPasswordComponent },
 ]
   
 
