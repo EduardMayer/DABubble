@@ -263,7 +263,7 @@ export class AuthFirebaseService implements OnInit {
   async applyActionCode(code: string) {
     await applyActionCode(this.auth, code)
       .then(() => {
-
+        
       })
       .catch((error) => {
         // Invalid or expired code
@@ -282,5 +282,6 @@ export class AuthFirebaseService implements OnInit {
         console.log(error.code , error.message);
       });
   }
+
 }
 
