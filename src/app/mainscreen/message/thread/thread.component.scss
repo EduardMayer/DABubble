@@ -1,6 +1,23 @@
+//Revert default mat-card settings
+.mat-mdc-card-content:last-child{
+    padding: 0;
+}
+
+.mat-mdc-card-content:first-child{
+    padding: 0;
+}
+
+.mat-mdc-card-content{
+    padding:0;
+}
+
+
 #thread {
+    margin:0;
+    padding: 0;
     height: 100%;
 }
+
 
 .threadHeader {
     display: flex;
@@ -20,6 +37,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: calc(100% - 50px);
 }
 
 .closeIcon {

@@ -26,7 +26,6 @@ export class ThreadComponent {
     if (channelFirebaseService.selectedChannel) {
       this.answersPath = `channels/${channelFirebaseService.selectedChannel.id}/messages/${this.threadFirebaseService.message.id}/answers/`;
     }
-    console.log(this.threadFirebaseService.loadedAnswers);
   }
 
 

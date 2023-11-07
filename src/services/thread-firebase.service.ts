@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy } from "firebase/firestore";
 import { Thread } from '../models/thread.class';
 import { MessageFirebaseService } from './message-firebase.service';
 import { Message } from 'src/models/message.class';
@@ -12,22 +12,47 @@ import { Message } from 'src/models/message.class';
 export class ThreadFirebaseService {
     public loadedThread: Thread | undefined;
     message: Message;
-    public loadedAnswers: Message[] = [];
+    public loadedAnswers!: Message[];
     threadOpen: boolean = false;
     path: string = "";
     private unsubThreads: any;
     private unsubThread: any;
+    unsubAnswers: any;
 
 
 
-    constructor(private firestore: Firestore, private messageFirebaseService: MessageFirebaseService) {
+    constructor(
+        private firestore: Firestore
+    ) {
         this.message = new Message;
     }
 
-    openThread(message: Message, loadedAnswers: Message[]) {
+    openThread(message: Message) {
         this.threadOpen = true;
         this.message = message;
-        this.loadedAnswers = loadedAnswers;
+        this.path = message.path;
+        this.loadAnswers(message);
+    }
+
+    loadAnswersQuery(path: string) {
+        return query(collection(this.firestore, path), orderBy("timestamp"));
+    }
+
+
+    async loadAnswers(message: Message) {
+        let path = message.path + `/answers/`;
+
+        this.unsubAnswers = onSnapshot(this.loadAnswersQuery(path), (querySnapshot: any) => {
+            this.loadedAnswers = [];
+            querySnapshot.forEach((doc: any) => {
+                if (doc.data()) {
+                    let answer = new Message(doc.data());
+                    answer.id = doc.id;
+                    answer.path = path + doc.id;
+                    this.loadedAnswers.push(answer);
+                }
+            })
+        });
     }
 
     async updateThread(thread: Thread, path: string) {
@@ -39,6 +64,12 @@ export class ThreadFirebaseService {
             const docInstance = doc(this.firestore, 'threads', thread.id);
             updateDoc(docInstance, thread.toJSON());
             console.log("thread updated");
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.unsubAnswers) {
+            this.unsubAnswers();
         }
     }
 

@@ -5,6 +5,7 @@ import { Message } from '../models/message.class';
 import { ChannelFirebaseService } from './channel-firebase.service';
 import { UserFirebaseService } from './user-firebase.service';
 import { Reaction } from 'src/models/reaction.class';
+import { ThreadFirebaseService } from './thread-firebase.service';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,7 @@ export class MessageFirebaseService {
 
     constructor(
         private firestore: Firestore,
+        private threadFirebaseService: ThreadFirebaseService,
         public channelFirebaseService: ChannelFirebaseService
     ) {
     }
