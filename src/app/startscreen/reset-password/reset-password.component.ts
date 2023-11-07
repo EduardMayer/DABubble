@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
@@ -9,11 +9,12 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
   contactForm: FormGroup;
   isInputActive = false;
   imprint = false; 
   privacyPolicy = false; 
+  oobCode = ""; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +42,17 @@ export class ResetPasswordComponent {
     });
   }
 
+  ngOnInit(): void {
+    const queryParams = new URLSearchParams(window.location.search);
+    if(queryParams.get('oobCode') != null ){
+      this.oobCode = queryParams.get('oobCode')!;
+      console.log("Param");
+      
+    }
+    console.log("code from URL:");
+    console.log(this.oobCode);
+  }
+
   closeImprintAndPrivacy(){
     this.imprint = false; 
     this.privacyPolicy = false; 
@@ -65,17 +77,17 @@ export class ResetPasswordComponent {
     if (this.contactForm.valid) {
       const queryParams = new URLSearchParams(window.location.search);
       const oobCode = queryParams.get('oobCode');
-      const apiKey = queryParams.get('apiKey');
-      const mode = queryParams.get('mode');
+      //const apiKey = queryParams.get('apiKey');
+      //const mode = queryParams.get('mode');
       const newPassword = this.contactForm.get('passwordInput')!.value;
+
+
+    
 
       if (oobCode) {
         this.authService.applyActionCode(oobCode)
           .then(() => {
-            console.log(oobCode)
-            console.log(apiKey)
-            console.log(mode)
-          
+            console.log(oobCode)      
           })
           .catch(error => {
             console.error('Fehler bei der Passwortänderung:', error);
