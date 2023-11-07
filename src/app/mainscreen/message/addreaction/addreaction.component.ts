@@ -13,6 +13,7 @@ export class AddreactionComponent {
 
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
   @Output() emojiBarVisibilityOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
+  clickListener: any;
 
   constructor(private renderer: Renderer2, private el: ElementRef) { }
 
@@ -27,43 +28,40 @@ export class AddreactionComponent {
 
   ngAfterViewInit() {
     // Get the native element of the emoji-mart component
-    
-
     // Add a click event listener to the emoji-mart component
-    this.renderer.listen('document', 'click', (event: MouseEvent) => {
+    this.clickListener = this.renderer.listen('document', 'click', (event: MouseEvent) => {
       // Check if the event target is inside the emoji-mart element
 
       const emojiMartElement = this.el.nativeElement.querySelector('.picker');
       if (emojiMartElement.contains(event.target as Node)) {
         //Clicked inside emoji-mart element
         console.log('Clicked inside emoji-mart element');
-      }else{
+      } else {
         //Clicked outside emoji-mart element
         console.log('Clicked outside emoji-mart element');
-        this.emojiBarVisibilityOutput.emit(false); 
+        this.emojiBarVisibilityOutput.emit(false);
       }
     });
   }
-
-
-
-
-
-
-
-
 
   // Getter for isOpened property
   get isOpened(): boolean {
     return this._isOpened;
   }
 
-  
+
   emojiSelected(event: any) {
     this.emojiInput$?.next(event.emoji.native);
     const selectedEmoji = event.emoji.native;
     console.log(selectedEmoji);
     this.emojiSelectedOutput.emit(selectedEmoji);
   }
-  
+
+  ngOnDestroy() {
+    // Remove the event listener in the ngOnDestroy hook to prevent memory leaks
+    if (this.clickListener) {
+      this.clickListener();
+    }
+  }
+
 }

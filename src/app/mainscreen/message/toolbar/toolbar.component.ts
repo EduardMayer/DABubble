@@ -18,6 +18,7 @@ export class ToolbarComponent {
   showMessageReactions: boolean = false;
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
 
+
   constructor(
     public messageFirebaseService: MessageFirebaseService,
     public threadFirebaseService: ThreadFirebaseService) {

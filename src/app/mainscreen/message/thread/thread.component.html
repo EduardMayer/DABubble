@@ -16,7 +16,7 @@
     <div class="chat-container">
         <app-message [message]="threadFirebaseService.message" [messageLocationName]="'thread'"></app-message>
 
-        <div class="line-container" *ngIf="threadFirebaseService.loadedAnswers">
+        <div class="line-container" *ngIf="threadFirebaseService.loadedAnswers && threadFirebaseService.loadedAnswers.length>0">
             <div class="line"></div>
             <div class='date'>{{ threadFirebaseService.loadedAnswers.length}} Antworten</div>
         </div>
@@ -24,7 +24,7 @@
 
         <div *ngFor="let answer of threadFirebaseService.loadedAnswers; let i = index">
             <app-message [message]="answer" [timestampString]="formatTimeDelta(answer.timestamp)"
-                [messageLocationName]="'thread'"></app-message>
+                [messageLocationName]="'thread'" (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)"></app-message>
         </div>
     </div>
 
