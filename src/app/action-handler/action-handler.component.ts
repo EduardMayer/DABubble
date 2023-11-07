@@ -41,7 +41,7 @@ export class ActionHandlerComponent implements OnInit {
             }, 3000);
         }
         else if(mode == "resetPassword"){
-          this.router.navigate(['reset'] , { queryParams: { oobCode: oobCode }});
+          this.router.navigate(['reset', oobCode], { queryParams: { oobCode: oobCode }});
         }
     });
   }
