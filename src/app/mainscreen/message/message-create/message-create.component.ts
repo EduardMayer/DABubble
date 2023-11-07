@@ -54,6 +54,14 @@ export class MessageCreateComponent {
   }
 
 
+  getPlaceholder() {
+    if (this.channelFirebaseService.selectedChannel) {
+      return "Nachricht an #" + this.channelFirebaseService.selectedChannel.channelName;
+    }else{
+      return "Antworten";
+    }
+  }
+
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }
@@ -89,12 +97,6 @@ export class MessageCreateComponent {
     this.message = message;
   }
 
-  calcHeight(value: string) {
-    let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-    // min-height + lines x line-height + padding + border
-    let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
-    return newHeight;
-  }
 
   handleEmojiSelection(selectedEmoji: string) {
     // Handle the selected emoji here, for example, log it to the console.

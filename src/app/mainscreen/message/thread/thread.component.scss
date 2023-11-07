@@ -45,10 +45,12 @@
         width: 100%;
         height: calc(100% - 50px);
 
-        app-date-line{
+        app-date-line, .line-container{
             margin: 12px 35px 12px 35px;
         }
     }
+
+
 
 
     app-message-create {
