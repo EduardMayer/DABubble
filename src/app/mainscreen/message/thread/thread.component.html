@@ -1,11 +1,16 @@
 <mat-card id="thread" class="br-30" *ngIf="threadFirebaseService.message">
-
-    <div class="threadHeader">
-        <div><span>Thread</span>
-            <span class="channelNameHeader">
-                # {{channelFirebaseService.selectedChannel?.channelName }}</span>
+    <div class='header'>
+        <div class="header-title" width="fit-content">
+            <div>
+                <h2>Thread</h2>
+            </div>
+            <div>
+                <span class="channelNameHeader">
+                    # {{channelFirebaseService.selectedChannel?.channelName }}
+                </span>
+            </div>
         </div>
-        <img class="closeIcon" src="assets/img/icons/close.svg">
+        <img src="../../../../assets/img/icons/close.svg">
     </div>
 
     <div class="chat-container">

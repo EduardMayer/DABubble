@@ -1,44 +1,63 @@
 //Revert default mat-card settings
-.mat-mdc-card-content:last-child{
+.mat-mdc-card-content:last-child {
     padding: 0;
 }
 
-.mat-mdc-card-content:first-child{
+.mat-mdc-card-content:first-child {
     padding: 0;
 }
 
-.mat-mdc-card-content{
-    padding:0;
+.mat-mdc-card-content {
+    padding: 0;
 }
 
 
 #thread {
-    margin:0;
-    padding: 0;
     height: 100%;
-}
-
-
-.threadHeader {
+    flex-grow: 1;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    border-top-left-radius: 28px;
-    border-top-right-radius: 28px;
-    box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
-    height: 50px;
-    width: 100%;
-}
-
-
-.chat-container {
-    overflow-y: auto;
-    display: flex;
+    justify-content: flex-end;
     flex-direction: column;
-    width: 100%;
-    height: calc(100% - 50px);
+    border-radius: 30px;
+
+    .header {
+        box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+        padding: 0px 35px 0px 35px;
+        border-radius: 30px 30px 0 0;
+        margin-bottom: 35px;
+        display: flex;
+        justify-content: space-between;
+        
+
+
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+    }
+
+    .chat-container {
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: calc(100% - 50px);
+
+        app-date-line{
+            margin: 12px 35px 12px 35px;
+        }
+    }
+
+
+    app-message-create {
+        padding: 35px 35px 35px 35px;
+    }
 }
+
+
+
 
 .closeIcon {
     cursor: pointer;
