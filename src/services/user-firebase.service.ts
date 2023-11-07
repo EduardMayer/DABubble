@@ -30,6 +30,10 @@ export class UserFirebaseService{
                 channels: ["F8tiKVNq6FePPOb4BDps","O8ZTH8u2mAbFrrpNFaGp"]
             }
         )
+
+        this.load();
+
+
     }
 
     setCurrentUser(UserData: any) {
@@ -50,6 +54,8 @@ export class UserFirebaseService{
                 const user = new User(doc.data());
                 user.id = doc.id;
                 this.loadedUsers.push(user);
+                console.log('User is', user);
+                
             });
         });
     }

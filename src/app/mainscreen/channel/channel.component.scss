@@ -55,4 +55,92 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    position: relative;
+}
+
+.addmembers {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header {
+    padding: 0px 35px 0px 35px;
+    display: flex;
+    justify-content: space-between;
+
+    .header-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-avatar-list {
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+app-message-create {
+    padding: 0px 35px 0px 35px;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-0 {
+    width: 280px;
+    height: 394px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+::ng-deep div#mat-menu-panel-0 {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-0 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.menuUsersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuUsers {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.menuUsersImage {
+    padding-left: 20px;
+    width: 60px;
+}
+
+.menuUsersName {
+    padding-left: 20px;
+}
+
+.addMemberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.addMemberImage {
+    padding-left: 20px;
+    width: 30px;
+}
+
+.addMemberText {
+    padding-left: 20px;
 }

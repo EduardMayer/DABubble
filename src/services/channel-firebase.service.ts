@@ -37,7 +37,7 @@ export class ChannelFirebaseService {
         private generateIdService: GenerateIdService
         ) {
         setTimeout(() => {
-            this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT 
+            this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT     
         }, 3000)
 
     }
