@@ -33,6 +33,7 @@ export class ChatFirebaseService {
         }
     }
 
+
     /**
     * Asynchronously loads chat data from Firestore based on optional index parameters.
     *
@@ -51,6 +52,7 @@ export class ChatFirebaseService {
         });
     }
 
+    //MUSS überarbeitet werden
     getById(channelId: string) {
         const channel = doc(collection(this.firestore, "chats"), channelId);
         this.unsubChat = onSnapshot(channel, (doc) => {

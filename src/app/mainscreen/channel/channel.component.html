@@ -40,7 +40,6 @@
 
 
     </div>
-    <mat-card-content id="channel-content"></mat-card-content>
 
     <div class="chat-container">
         <div *ngFor="let message of channelFirebaseService.selectedChannelMessages; let i = index">
@@ -57,5 +56,5 @@
         </app-date-line>
     </div>
 
-    <app-message-create [path]="messagePath"></app-message-create>
+    <app-message-create [path]="messagePath" [currentLocation]="'channel'"></app-message-create>
 </mat-card>

@@ -16,14 +16,23 @@ export class MessageCreateComponent {
 
   messageControl: FormControl = new FormControl();
   message = new Message();
-  textarea: HTMLTextAreaElement | undefined;
   showEmojiList: boolean = false;
   _path: string | undefined;
+  location: string | undefined;
 
 
+  /**
+  * Setter for the 'path' property decorated with @Input().
+  * @param value - The new 'path' value (string).
+  */
   @Input()
   public set path(value: string) {
     this._path = value;
+  }
+
+  @Input()
+  public set currentLocation(value: string) {
+    this.location = value;
   }
 
   constructor(
@@ -40,11 +49,9 @@ export class MessageCreateComponent {
   * @returns {Promise<void>}
   */
   async createMessage() {
-    console.log("Message create attempt");
     if (this.message.content) {
       this.message.timestamp = Date.now();
       this.setMessageAutor();
-      console.log(this._path);
       if (this._path) {
         this.messageFirebaseService.createMessage(this._path, this.message);
       }
@@ -54,11 +61,28 @@ export class MessageCreateComponent {
   }
 
 
+  getPlaceholder() {
+    if (this.location == 'thread') {
+      return "Antworten";
+    } else if (this.location == "channel" && this.channelFirebaseService.selectedChannel) {
+      return "Nachricht an #" + this.channelFirebaseService.selectedChannel.channelName;
+    } else {
+      return "Nachricht scheiben";
+    }
+  }
+
+
+  /**
+   * Toggles the visibility of the emoji list.
+   */
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }
 
 
+  /**
+  * Closes the emoji list by setting its visibility to false.
+  */
   closeEmojiList() {
     this.showEmojiList = false;
   }
@@ -89,12 +113,6 @@ export class MessageCreateComponent {
     this.message = message;
   }
 
-  calcHeight(value: string) {
-    let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-    // min-height + lines x line-height + padding + border
-    let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
-    return newHeight;
-  }
 
   handleEmojiSelection(selectedEmoji: string) {
     // Handle the selected emoji here, for example, log it to the console.

@@ -9,7 +9,7 @@
 
         <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">
         <img *ngIf="message" src="assets/img/icons/answer.svg"
-            (click)="threadFirebaseService.openThread(message,this.messageFirebaseService.loadedAnswers)">
+            (click)="threadFirebaseService.openThread(message)">
 
         <div *ngIf="isOwnMessage" (blur)="hideOptions($event)" class="message-edit-container">
             <button mat-icon-button (click)="toggleOptions($event)">

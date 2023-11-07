@@ -119,7 +119,9 @@ export class HeaderComponent implements OnInit{
 
     this.showHeaderUserProfil = false; 
     this.showHeaderMenu = false; 
-    this.authService.logout(); 
+    if(this.currentAuthMail != this.editUserForm.get("emailInput")?.value){
+      this.authService.logout(); 
+    }
 
   }
 

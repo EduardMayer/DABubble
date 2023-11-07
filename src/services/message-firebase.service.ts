@@ -5,12 +5,13 @@ import { Message } from '../models/message.class';
 import { ChannelFirebaseService } from './channel-firebase.service';
 import { UserFirebaseService } from './user-firebase.service';
 import { Reaction } from 'src/models/reaction.class';
+import { ThreadFirebaseService } from './thread-firebase.service';
+import { GenerateIdService } from './generate-id.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MessageFirebaseService {
-
     private unsubMessage: any;
     private unsubMessages: any;
     public isOwnMessage: boolean = false;
@@ -23,32 +24,51 @@ export class MessageFirebaseService {
 
     constructor(
         private firestore: Firestore,
-        public channelFirebaseService: ChannelFirebaseService
+        public channelFirebaseService: ChannelFirebaseService,
+        private generateIdService: GenerateIdService
     ) {
     }
 
     /**
-     * checks wether the reaction.path value ==""
-     * if yes, it creates a reaction else it updates
-     */
+    * Updates a reaction in Firestore based on the provided reaction object and path (optional).
+    *
+    * If a path is provided in the reaction object, the existing Firestore document will be updated.
+    * If no path is provided, a new document will be created with a generated reaction ID in the specified path.
+    *
+    * @param {Reaction} reaction - The reaction object to be updated or added.
+    * @param {string} [path] - (Optional) The path to the Firestore document where the reaction should be updated or added.
+    * @returns {Promise<void>} A promise that resolves when the update or addition is complete.
+    */
     async updateReaction(reaction: Reaction, path?: string) {
         if (reaction.path) {
             const docInstance = doc(this.firestore, reaction.path);
             updateDoc(docInstance, reaction.toJSON());
         } else {
-            const reactionId = (this.cyrb53(String(reaction.name) + new Date().getTime()));
+            const reactionId = this.generateIdService.generateRandomId(20);
             const docInstance = doc(this.firestore, `${path}/${reactionId}`);
             await setDoc(docInstance, reaction.toJSON());
-            console.log("channelEmoji updated");
         }
     }
 
 
+    /**
+    * Deletes a reaction from Firestore based on its path and reaction object.
+    *
+    * @param {Reaction} reaction - The reaction object to be deleted.
+    * @param {string} path - The path to the Firestore document containing the reaction.
+    * @returns {Promise<void>} A promise that resolves when the deletion is complete.
+    */
     async deleteReaction(reaction: Reaction, path: string) {
         await deleteDoc(doc(this.firestore, `${path}/${reaction.id}`));
     }
 
 
+    /**
+    * Loads reactions for a specific message from Firestore.
+    *
+    * @param {Message} message - The message for which reactions are to be loaded.
+    * @returns {void}
+    */
     async loadReactions(message: Message) {
         if (this.channelFirebaseService.selectedChannel && message) {
             const path = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${message.id}/reactions/`;
@@ -67,9 +87,14 @@ export class MessageFirebaseService {
     }
 
 
+    /**
+     * Loads answers for a specific message from Firestore.
+     *
+     * @param {Message} message - The message for which answers are to be loaded.
+     * @returns {void}
+     */
     async loadAnswers(message: Message) {
         let path = message.path + `/answers/`;
-
         this.unsubAnswers = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
             this.loadedAnswers = [];
             querySnapshot.forEach((doc: any) => {
@@ -83,10 +108,19 @@ export class MessageFirebaseService {
         });
     }
 
-
+    /**
+    * Creates or updates a message in Firestore with the given path and message object.
+    *
+    * If the message has an empty ID, a new message will be created.
+    * If the message has an existing ID, the corresponding message will be updated.
+    *
+    * @param {string} path - The path to the Firestore document where the message should be created or updated.
+    * @param {Message} message - The message object to be created or updated.
+    * @returns {void}
+    */
     async createMessage(path: string, message: Message) {
         if (message.id == "") {
-            message.id = String(this.cyrb53(String(path) + String(message.content)));
+            message.id = this.generateIdService.generateRandomId(20);
             path = path + message.id;
             const docInstance = doc(this.firestore, path);
             await setDoc(docInstance, message.toJSON());
@@ -97,22 +131,6 @@ export class MessageFirebaseService {
             console.log("Message updated");
         }
     }
-
-
-    cyrb53 = (str: string, seed = 0) => {
-        let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-        for (let i = 0, ch; i < str.length; i++) {
-            ch = str.charCodeAt(i);
-            h1 = Math.imul(h1 ^ ch, 2654435761);
-            h2 = Math.imul(h2 ^ ch, 1597334677);
-        }
-        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
-        h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
-        h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-
-        return 4294967296 * (2097151 & h2) + (h1 >>> 0);
-    };
 
     /**
     * Lifecycle hook called when the component is about to be destroyed.

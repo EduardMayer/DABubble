@@ -22,7 +22,7 @@
 
         <div class='message-footer'>
             <div *ngIf="this.messageFirebaseService.loadedAnswers.length > 0 && messageLocation == 'channel'"
-                (click)="threadFirebaseService.openThread(_message,this.messageFirebaseService.loadedAnswers)">
+                (click)="threadFirebaseService.openThread(_message)">
                 {{ this.messageFirebaseService.loadedAnswers.length }} Antworten
             </div>
 

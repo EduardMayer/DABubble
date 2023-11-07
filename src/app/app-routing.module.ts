@@ -9,12 +9,12 @@ import { ResetPasswordComponent } from './startscreen/reset-password/reset-passw
 
 
 const routes: Routes = [
-  //{ path: '', component: ResetPasswordComponent },
   //{ path: '', component: MainscreenComponent },
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent, canActivate: [authGuard] },
-  { path: 'userMgmt', component: ActionHandlerComponent } 
+  { path: 'userMgmt', component: ActionHandlerComponent },
+  { path: 'reset/:oobCode', component: ResetPasswordComponent },
 ]
   
 
