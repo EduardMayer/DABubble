@@ -11,6 +11,7 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
   selector: 'app-message',
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss'],
+  providers: [MessageFirebaseService]
 })
 export class MessageComponent {
 
@@ -22,6 +23,9 @@ export class MessageComponent {
   messageLocation: string | undefined;
   messageLocationPath: string | undefined;
   showMessageReactions: boolean = false;
+  givenTimestamp: string | undefined;
+  @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
+  @Output() emojiBarVisibilityOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -34,6 +38,7 @@ export class MessageComponent {
   public set message(value: Message) {
     this._message = value;
     this.messageFirebaseService.loadReactions(value);
+    this.messageFirebaseService.loadAnswers(value);
     this.setAutorName(this._message.autorId);
     if (this._message.autorId == this.userFirebaseService.currentUser.id) {
       this.isOwnMessage = true;
@@ -41,18 +46,25 @@ export class MessageComponent {
     }
   }
 
+  @Input()
+  public set timestampString(value: string) {
+    this.givenTimestamp = value;
+  }
+
   @Input() set messageLocationName(value: string) {
     this.messageLocation = value;
     this.messageLocationPath = this.getMessagePath(value);
   }
 
-//Overthink this one
+
   handleEmojiBarVisibility(isVisible: boolean) {
-      this.showMessageReactions = isVisible;
+    this.showMessageReactions = isVisible;
+    this.emojiBarVisibilityOutput.emit(isVisible);
   }
 
   handleEmojiSelection(selectedEmoji: string) {
     const reactions = this.messageFirebaseService.loadedReactions;
+    this.emojiSelectedOutput.emit(selectedEmoji);
     let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
     if (foundEmojiIndex == -1) {
       this.createReaction(selectedEmoji);
@@ -72,7 +84,7 @@ export class MessageComponent {
 
 
   createReaction(selectedEmoji: string) {
-    //console.log("create Reaction: " + selectedEmoji);
+    console.log("create Reaction: " + selectedEmoji);
     const newReaction = new Reaction({
       name: selectedEmoji,
       users: [this.userFirebaseService.currentUser.id]
@@ -91,13 +103,15 @@ export class MessageComponent {
 
   //Unfinished: path for channelmessages is set
   getMessagePath(messageLocation: string) {
-
     let path = "";
     if (messageLocation == 'channel') {
       if (this.channelFirebaseService.selectedChannel && this._message) {
         path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
       }
     } else if (messageLocation == 'thread') {
+      if (this.channelFirebaseService.selectedChannel && this._message) {
+        path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
+      }
 
     } else if (messageLocation == 'chat') {
 
@@ -168,7 +182,17 @@ export class MessageComponent {
     }
   }
 
-  
+
+  getTimestamp(timestamp: number) {
+    if (this.givenTimestamp) {
+      return this.givenTimestamp;
+    } else {
+      return this.formatTimestampToHHMM(timestamp);
+    }
+
+  }
+
+
   formatTimestampToHHMM(timestamp: number) {
     const date = new Date(timestamp);
     const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits with leading zero

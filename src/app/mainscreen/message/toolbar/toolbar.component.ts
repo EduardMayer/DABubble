@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Message } from 'src/models/message.class';
-import { Reaction } from 'src/models/reaction.class';
-import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
-import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
+
 
 
 @Component({
@@ -19,9 +18,10 @@ export class ToolbarComponent {
   showMessageReactions: boolean = false;
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(
-    public messageFirebaseService: MessageFirebaseService) {
 
+  constructor(
+    public messageFirebaseService: MessageFirebaseService,
+    public threadFirebaseService: ThreadFirebaseService) {
   }
 
   /*

@@ -5,6 +5,7 @@ import { Channel } from '../models/channel.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { UserFirebaseService } from './user-firebase.service';
+import { GenerateIdService } from './generate-id.service';
 
 
 
@@ -31,7 +32,10 @@ export class ChannelFirebaseService {
     lastMessageTimeString: string = "01.01.1970";
     previousMessageTimeString: string = "01.01.1970";
 
-    constructor(private firestore: Firestore) {
+    constructor(
+        private firestore: Firestore,
+        private generateIdService: GenerateIdService
+        ) {
         setTimeout(() => {
             this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT 
         }, 3000)
@@ -58,19 +62,15 @@ export class ChannelFirebaseService {
     }
 
     async load(userId: string) {
-        console.log(userId);
         const q = this.getChannelQuery(userId);
         this.unsubChannels = onSnapshot(q, (querySnapshot) => {
-            console.log(querySnapshot);
             this.loadedChannels = [];
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
-
                 channel.id = doc.id;
                 this.loadedChannels.push(channel);
             });
         });
-        return this.unsubChannels;
     }
 
 
@@ -82,11 +82,14 @@ export class ChannelFirebaseService {
     */
     async loadChannelMessages(channelId: string) {
         const q = this.getChannelMessagesQuery(channelId);
+        let path = `channels/${channelId}/messages/`;
         this.unsubChannelMessages = onSnapshot(q, (querySnapshot: any) => {
             this.selectedChannelMessages = [];
             querySnapshot.forEach((doc: any) => {
                 if (doc.data()) {
-                    const message = new Message(doc.data());
+                    let message = new Message(doc.data());
+                    message.path = path + doc.id;
+                    message.id = doc.id;
                     this.selectedChannelMessages.push(message);
                 }
             })
@@ -131,20 +134,19 @@ export class ChannelFirebaseService {
      */
     async updateChannel(channel: Channel) {
         if (channel.id == "") {
+            channel.id=this.generateIdService.generateRandomId(20);
             const docInstance = doc(collection(this.firestore, "channels"));
             setDoc(docInstance, channel.toJSON());
-            console.log("channel created");
         } else {
             const docInstance = doc(this.firestore, 'channels', channel.id);
             updateDoc(docInstance, channel.toJSON());
-            console.log("channel updated");
         }
     }
 
     async updateChannelMessage(channelId: string, channelMessage: Message) {
         if (channelId != "") {
             if (channelMessage.id == "") {
-                channelMessage.id = String(this.cyrb53(String(channelId) + String(channelMessage.content)));
+                channelMessage.id = this.generateIdService.generateRandomId(20);
                 const docInstance = doc(this.firestore, `channels/${channelId}/messages/${channelMessage.id}`);
                 await setDoc(docInstance, channelMessage.toJSON());
                 console.log("channelMessages updated");
@@ -177,28 +179,4 @@ export class ChannelFirebaseService {
             this.unsubChannelMessages()
         }
     }
-
-
-    /**
-   * Calculates the Cyrb53 hash of the input string.
-   *
-   * @param {string} str - The input string to be hashed.
-   * @param {number} seed - An optional seed value to initialize the hash (default is 0).
-   * @returns {number} - The Cyrb53 hash value as a 32-bit unsigned integer.
-   */
-    cyrb53 = (str: string, seed = 0) => {
-        let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-        for (let i = 0, ch; i < str.length; i++) {
-            ch = str.charCodeAt(i);
-            h1 = Math.imul(h1 ^ ch, 2654435761);
-            h2 = Math.imul(h2 ^ ch, 1597334677);
-        }
-        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
-        h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
-        h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-
-        return 4294967296 * (2097151 & h2) + (h1 >>> 0);
-    };
-
 }

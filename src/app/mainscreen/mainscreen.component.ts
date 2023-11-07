@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
@@ -17,8 +18,12 @@ export class MainscreenComponent {
 
   seclectedChannel: string = "";
 
-  constructor(public channelFirebaseService: ChannelFirebaseService, public userFirebaseService: UserFirebaseService, private authService: AuthFirebaseService) {
-    console.log("here");
+  constructor(
+    public channelFirebaseService: ChannelFirebaseService,
+    public userFirebaseService: UserFirebaseService, 
+    private authService: AuthFirebaseService,
+    public threadFirebaseService: ThreadFirebaseService
+  ) {
     setTimeout(() => {
       if (this.userFirebaseService.currentUser.id) {
         this.channelFirebaseService.load(this.userFirebaseService.currentUser.id);

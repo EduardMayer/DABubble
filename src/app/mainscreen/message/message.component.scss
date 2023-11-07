@@ -113,20 +113,14 @@
                 right: 0;
             }
         }
-
-
     }
 
     &:hover {
-
         background-color: #ECEEFE;
-
         .message-content {
             mat-card {
                 background-color: #797EF3;
             }
         }
     }
-
-
 }

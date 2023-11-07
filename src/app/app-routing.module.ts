@@ -4,6 +4,7 @@ import { MainscreenComponent } from './mainscreen/mainscreen.component';
 import { StartscreenComponent } from './startscreen/startscreen.component';
 import { authGuard } from 'src/guard/auth-guard.guard';
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
+import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
 
 
 
@@ -12,7 +13,8 @@ const routes: Routes = [
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
   { path: 'main', component: MainscreenComponent, canActivate: [authGuard] },
-  { path: 'userMgmt', component: ActionHandlerComponent } 
+  { path: 'userMgmt', component: ActionHandlerComponent },
+  { path: 'reset/:oobCode', component: ResetPasswordComponent },
 ]
   
 

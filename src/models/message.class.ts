@@ -7,6 +7,7 @@ export class Message {
     autorId: string;
     avatarSrc: string;
     reactions: Reaction[];
+    path: string;
 
     constructor(obj?: any) {
         this.id = obj ? obj.id : "";
@@ -14,23 +15,17 @@ export class Message {
         this.timestamp = obj ? obj.timestamp : 0;
         this.autorId = obj ? obj.autorId : "";
         this.avatarSrc = obj ? obj.avatarSrc : "";
+        this.path = obj ? obj.path : "";
         this.reactions = obj ? obj.reactions : [];
     }
 
     toJSON() {
         return {
-            id: this.id,
             content: this.content,
             timestamp: this.timestamp,
             autorId: this.autorId,
             avatarSrc: this.avatarSrc,
             reactions: this.reactions
         }
-    }
-
-
-    //TBD iterates throught array an searches if Reaction exists
-    getReactionId(reactionName: string){
-        return null;
     }
 }

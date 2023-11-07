@@ -1,21 +1,78 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy } from "firebase/firestore";
 import { Thread } from '../models/thread.class';
-import { ChannelFirebaseService } from './channel-firebase.service';
+import { MessageFirebaseService } from './message-firebase.service';
+import { Message } from 'src/models/message.class';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class ThreadFirebaseService {
-    public loadedThreads: Thread[] = [];
     public loadedThread: Thread | undefined;
-    private unsubThreads: any; 
-    private unsubThread: any; 
+    message: Message;
+    public loadedAnswers!: Message[];
+    threadOpen: boolean = false;
+    path: string = "";
+    private unsubThreads: any;
+    private unsubThread: any;
+    unsubAnswers: any;
 
-    constructor(private firestore: Firestore, public channelFirebaseService: ChannelFirebaseService) {
+
+
+    constructor(
+        private firestore: Firestore
+    ) {
+        this.message = new Message;
     }
+
+    openThread(message: Message) {
+        this.threadOpen = true;
+        this.message = message;
+        this.path = message.path;
+        this.loadAnswers(message);
+    }
+
+    loadAnswersQuery(path: string) {
+        return query(collection(this.firestore, path), orderBy("timestamp"));
+    }
+
+
+    async loadAnswers(message: Message) {
+        let path = message.path + `/answers/`;
+
+        this.unsubAnswers = onSnapshot(this.loadAnswersQuery(path), (querySnapshot: any) => {
+            this.loadedAnswers = [];
+            querySnapshot.forEach((doc: any) => {
+                if (doc.data()) {
+                    let answer = new Message(doc.data());
+                    answer.id = doc.id;
+                    answer.path = path + doc.id;
+                    this.loadedAnswers.push(answer);
+                }
+            })
+        });
+    }
+
+    async updateThread(thread: Thread, path: string) {
+        if (thread.id == "") {
+            const docInstance = doc(collection(this.firestore, path + "threads"));
+            setDoc(docInstance, thread.toJSON());
+            console.log("thread created");
+        } else {
+            const docInstance = doc(this.firestore, 'threads', thread.id);
+            updateDoc(docInstance, thread.toJSON());
+            console.log("thread updated");
+        }
+    }
+
+    ngOnDestroy() {
+        if (this.unsubAnswers) {
+            this.unsubAnswers();
+        }
+    }
+
 }
 
 
@@ -55,13 +112,13 @@ export class ThreadFirebaseService {
 //         });
 //     };
 
-    //openThread(message: any) {
-    //    debugger;
-    //    console.log(message.id);
-    //    console.log(this.channelFirebaseService.selectedChannel?.channelName);
-    //}
+//openThread(message: any) {
+//    debugger;
+//    console.log(message.id);
+//    console.log(this.channelFirebaseService.selectedChannel?.channelName);
+//}
 
-   // message: any;
+// message: any;
 
 //     /**
 //     * Retrieves a thread by its unique identifier.

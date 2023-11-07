@@ -14,7 +14,7 @@ import { RegisterComponent } from './startscreen/register/register.component';
 import { SidenavComponent } from './mainscreen/sidenav/sidenav.component';
 import { HeaderComponent } from './mainscreen/header/header.component';
 import { ChannelComponent } from './mainscreen/channel/channel.component';
-import { ThreadComponent } from './mainscreen/thread/thread.component';
+import { ThreadComponent } from './mainscreen/message/thread/thread.component';
 import { ChatComponent } from './mainscreen/chat/chat.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -31,8 +31,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
-import { MessageCreateComponent } from './mainscreen/channel/message-form/message-create.component';
-import { DateLineComponent } from './mainscreen/date-line/date-line.component';
+import { MessageCreateComponent } from './mainscreen/message/message-create/message-create.component';
+import { DateLineComponent } from './mainscreen/message/date-line/date-line.component';
 import { IfChangedDirective } from './directives/if-changed.directive';
 import { ReactionComponent } from './mainscreen/message/reaction/reaction.component';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -42,9 +42,9 @@ import { AddreactionComponent } from './mainscreen/message/addreaction/addreacti
 import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-password.component';
 import { PickerModule } from "@ctrl/ngx-emoji-mart";
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
-import { AnswerComponent } from './answer/answer.component';
 import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
+
 
 
 @NgModule({
@@ -71,12 +71,10 @@ import { ResetPasswordComponent } from './startscreen/reset-password/reset-passw
     ToolbarComponent,
     AddreactionComponent,
     ForgotPasswordComponent,
-   
     AddreactionComponent,
-        ActionHandlerComponent,
-        AnswerComponent,
-        SearchbarComponent,
-        ResetPasswordComponent
+    ActionHandlerComponent,
+    SearchbarComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,37 @@
+<mat-card id="thread" class="br-30" *ngIf="threadFirebaseService.message">
+    <div class='header'>
+        <div class="header-title" width="fit-content">
+            <div>
+                <h2>Thread</h2>
+            </div>
+            <div>
+                <span class="channelNameHeader">
+                    # {{channelFirebaseService.selectedChannel?.channelName }}
+                </span>
+            </div>
+        </div>
+        <img src="../../../../assets/img/icons/close.svg">
+    </div>
+
+    <div class="chat-container">
+        <app-message [message]="threadFirebaseService.message" [messageLocationName]="'thread'"></app-message>
+
+        <div class="line-container" *ngIf="threadFirebaseService.loadedAnswers && threadFirebaseService.loadedAnswers.length>0">
+            <div class="line"></div>
+            <div class='date'>{{ threadFirebaseService.loadedAnswers.length}} Antworten</div>
+        </div>
+
+
+        <div *ngFor="let answer of threadFirebaseService.loadedAnswers; let i = index">
+            <app-message [message]="answer" [timestampString]="formatTimeDelta(answer.timestamp)"
+                [messageLocationName]="'thread'" (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)"></app-message>
+        </div>
+    </div>
+
+    <app-message-create [path]="answersPath" [currentLocation]="'thread'"></app-message-create>
+
+
+
+
+
+</mat-card>

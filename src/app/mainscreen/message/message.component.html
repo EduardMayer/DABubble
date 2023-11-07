@@ -1,13 +1,13 @@
-<div class='message-container' (click)="messageFirebaseService.openThread(_message)" [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message"
-    (mouseleave)="closeToolbar()" (mouseenter)="openToolbar()">
+<div class='message-container' [ngClass]="{'inverted': isOwnMessage}" *ngIf="_message" (mouseleave)="closeToolbar()"
+    (mouseenter)="openToolbar()">
     <app-toolbar *ngIf="showToolbar" [isOwnMessage]="isOwnMessage" [message]="_message"
         [messageLocation]="messageLocation" (emojiSelectedOutput)="handleEmojiSelection($event)">
     </app-toolbar>
     <img src="{{ autorAvatar }}" class="message-img" *ngIf="autorAvatar">
     <div class="message-content" tabindex="0">
         <div class="message-head">
-            <div> {{ formatTimestampToHHMM(_message.timestamp) }}</div>
             <div *ngIf="autorName!=''"><b>{{ autorName }}</b></div>
+            <div> {{ getTimestamp(_message.timestamp) }}</div>
         </div>
 
         <mat-card>
@@ -15,17 +15,21 @@
             <mat-card-content>{{ _message.content }}</mat-card-content>
         </mat-card>
 
-        <app-addreaction 
-            *ngIf="showMessageReactions"
-            [isOpened]="showMessageReactions"
-            (emojiSelectedOutput)="handleEmojiSelection($event)" 
+        <app-addreaction *ngIf="showMessageReactions" [isOpened]="showMessageReactions"
+            (emojiSelectedOutput)="handleEmojiSelection($event)"
             (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)">
         </app-addreaction>
 
         <div class='message-footer'>
+            <div *ngIf="this.messageFirebaseService.loadedAnswers.length > 0 && messageLocation == 'channel'"
+                (click)="threadFirebaseService.openThread(_message)">
+                {{ this.messageFirebaseService.loadedAnswers.length }} Antworten
+            </div>
+
             <div *ngFor="let reaction of messageFirebaseService.loadedReactions" class="reaction-smileys">
                 <div class="emoji-container">
-                    <app-reaction [reaction]="reaction" (emojiSelectedOutput)="handleEmojiSelection($event)" ></app-reaction>
+                    <app-reaction [reaction]="reaction"
+                        (emojiSelectedOutput)="handleEmojiSelection($event)"></app-reaction>
                 </div>
             </div>
             <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">

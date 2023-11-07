@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule } from '@angular/forms';
+import { MessageFirebaseService } from 'src/services/message-firebase.service';
 
 @Component({
   selector: 'app-message-create',
@@ -15,12 +16,29 @@ export class MessageCreateComponent {
 
   messageControl: FormControl = new FormControl();
   message = new Message();
-  textarea: HTMLTextAreaElement | undefined;
   showEmojiList: boolean = false;
+  _path: string | undefined;
+  location: string | undefined;
+
+
+  /**
+  * Setter for the 'path' property decorated with @Input().
+  * @param value - The new 'path' value (string).
+  */
+  @Input()
+  public set path(value: string) {
+    this._path = value;
+  }
+
+  @Input()
+  public set currentLocation(value: string) {
+    this.location = value;
+  }
 
   constructor(
     private userFirebaseService: UserFirebaseService,
-    public channelFirebaseService: ChannelFirebaseService
+    public channelFirebaseService: ChannelFirebaseService,
+    private messageFirebaseService: MessageFirebaseService,
   ) { }
 
   /**
@@ -33,22 +51,42 @@ export class MessageCreateComponent {
   async createMessage() {
     if (this.message.content) {
       this.message.timestamp = Date.now();
-      if (this.channelFirebaseService.selectedChannel) {
-        this.setMessageAutor();
-        this.channelFirebaseService.updateChannelMessage(this.channelFirebaseService.selectedChannel.id, this.message);
-        this.message = new Message();
-        this.showEmojiList = false;
+      this.setMessageAutor();
+      if (this._path) {
+        this.messageFirebaseService.createMessage(this._path, this.message);
       }
+      this.message = new Message();
+      this.showEmojiList = false;
     }
   }
 
+
+  getPlaceholder() {
+    if (this.location == 'thread') {
+      return "Antworten";
+    } else if (this.location == "channel" && this.channelFirebaseService.selectedChannel) {
+      return "Nachricht an #" + this.channelFirebaseService.selectedChannel.channelName;
+    } else {
+      return "Nachricht scheiben";
+    }
+  }
+
+
+  /**
+   * Toggles the visibility of the emoji list.
+   */
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }
 
+
+  /**
+  * Closes the emoji list by setting its visibility to false.
+  */
   closeEmojiList() {
     this.showEmojiList = false;
   }
+
 
   /**
  * Sets the author and avatar information for a message.
@@ -75,12 +113,6 @@ export class MessageCreateComponent {
     this.message = message;
   }
 
-  calcHeight(value: string) {
-    let numberOfLineBreaks = (value.match(/\n/g) || []).length;
-    // min-height + lines x line-height + padding + border
-    let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
-    return newHeight;
-  }
 
   handleEmojiSelection(selectedEmoji: string) {
     // Handle the selected emoji here, for example, log it to the console.
