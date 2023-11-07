@@ -24,6 +24,7 @@ export class ChannelComponent {
       channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
       this.messagePath=`channels/${channelFirebaseService.selectedChannel.id}/messages/`;
     }
+    //this.loadallChannelusers();
   }
 
   getMessageTime(message: Message) {
@@ -43,5 +44,33 @@ export class ChannelComponent {
     return `${day}.${month}.${year}`;
   }
 
+  openChannelUserPopup() {
+
+  }
+
+  userOnCurrentChannel: any = [];
+
+  loadallChannelusers() {
+    this.userFirebaseService.loadedUsers.forEach(user => {
+    
+      user.channels.forEach(channel => {
+        debugger;
+
+        console.log('channel of the user is', channel);
+        console.log('now selected channel is', this.channelFirebaseService.selectedChannel?.channelName);
+
+
+        if(channel === this.channelFirebaseService.selectedChannel?.channelName) {
+          this.userOnCurrentChannel.push(user);
+        }
+
+        
+      });
+
+      console.log(user);
+    });
+    console.log('all users fir in chasnnechannel', this.userOnCurrentChannel);
+    
+  }
 
 }

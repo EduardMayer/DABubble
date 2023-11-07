@@ -6,11 +6,39 @@
             </div>
 
         </div>
-        <div class="user-avatar-list">
-            <img class="avatar-img" *ngFor="let user of channelFirebaseService.channelUsers" src="{{ user.avatar }}"
-                alt="avatar">
-            <img class="avatar-img" src="assets/img/icons/addmembers.svg">
+
+
+        <div (click)="loadallChannelusers()" class="user-avatar-list" tabindex="0" mat-icon-button
+            [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <img class="avatar-img" *ngFor="let user of userFirebaseService.loadedUsers | slice:0:3; let i = index"
+                [style.left]="i * -10 + 'px'" [style.z-index]="3 - i" src="{{ user.avatar }}" alt="avatar">
+            <img class="addmembers" src="assets/img/icons/addmembers.svg">
         </div>
+
+
+        <mat-menu #menu="matMenu">
+
+
+            <div class="menuHeader">
+                <h3>Mitglieder</h3>
+                <img src="/assets/img/icons/close.svg">
+            </div>
+
+            <div class="menuUsersContainer">
+                <div class="menuUsers" *ngFor="let user of userOnCurrentChannel">
+                    <img class="menuUsersImage" src="{{ user.avatar }}">
+                    <span class="menuUsersName">{{user.fullName}}</span>
+                </div>
+            </div>
+
+            <div class="addMemberContainer">
+                <img class="addMemberImage" src="assets/img/icons/addmembers.svg">
+                <span class="addMemberText">Teilnehmer hinzufügen</span>
+            </div>
+
+        </mat-menu>
+
+
     </div>
     <mat-card-content id="channel-content"></mat-card-content>
 
