@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 
 @Component({
@@ -10,15 +11,19 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
   styleUrls: ['./add-channel-dialog.component.scss']
 })
 export class AddChannelDialogComponent {
-channelName: any;
-channelDescription: any;
-creatorChannel: any;
+  channelName: any;
+  channelDescription: any;
+  creatorChannel: any;
 
-channel = new Channel();
+  channel = new Channel();
 
-addChannelForm: FormGroup = new FormGroup({});
+  location: string | undefined;
 
-  constructor(private fb: FormBuilder, public firebaseChannel:ChannelFirebaseService) {
+  addChannelForm: FormGroup = new FormGroup({});
+
+  constructor(private fb: FormBuilder,
+    public firebaseChannel: ChannelFirebaseService,
+    private userFirebaseService: UserFirebaseService) {
     this.getInput();
   }
 
@@ -31,8 +36,13 @@ addChannelForm: FormGroup = new FormGroup({});
     ]
   };
 
-  getInput() {
 
+  @Input()
+  public set currentLocation(value: string) {
+    this.location = value;
+  }
+
+  getInput() {
     this.addChannelForm = this.fb.group({
       channelName: ['', [Validators.required, Validators.minLength(3)]],
       channelDescription: ['', [Validators.required, Validators.minLength(3)]]
@@ -55,12 +65,8 @@ console.log(value);*/
   }
 
   onSubmitNewChannel(value: any) {
-debugger;
-console.log(value);
-
-const newChannel = new Channel(value);
-
-  this.firebaseChannel.updateChannel(newChannel);
-
+    const newChannel = new Channel(value);
+    newChannel.users.push(this.userFirebaseService.currentUser.id);
+    this.firebaseChannel.updateChannel(newChannel);
   }
 }

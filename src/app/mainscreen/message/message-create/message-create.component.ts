@@ -16,9 +16,9 @@ export class MessageCreateComponent {
 
   messageControl: FormControl = new FormControl();
   message = new Message();
-  textarea: HTMLTextAreaElement | undefined;
   showEmojiList: boolean = false;
   _path: string | undefined;
+  location: string | undefined;
 
 
   /**
@@ -28,6 +28,11 @@ export class MessageCreateComponent {
   @Input()
   public set path(value: string) {
     this._path = value;
+  }
+
+  @Input()
+  public set currentLocation(value: string) {
+    this.location = value;
   }
 
   constructor(
@@ -57,10 +62,12 @@ export class MessageCreateComponent {
 
 
   getPlaceholder() {
-    if (this.channelFirebaseService.selectedChannel) {
+    if (this.location == 'thread') {
+      return "Antworten";
+    } else if (this.location == "channel" && this.channelFirebaseService.selectedChannel) {
       return "Nachricht an #" + this.channelFirebaseService.selectedChannel.channelName;
     } else {
-      return "Antworten";
+      return "Nachricht scheiben";
     }
   }
 
