@@ -24,6 +24,8 @@ export class MessageComponent {
   messageLocationPath: string | undefined;
   showMessageReactions: boolean = false;
   givenTimestamp: string | undefined;
+  @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
+  @Output() emojiBarVisibilityOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -57,11 +59,12 @@ export class MessageComponent {
 
   handleEmojiBarVisibility(isVisible: boolean) {
     this.showMessageReactions = isVisible;
+    this.emojiBarVisibilityOutput.emit(isVisible);
   }
-
 
   handleEmojiSelection(selectedEmoji: string) {
     const reactions = this.messageFirebaseService.loadedReactions;
+    this.emojiSelectedOutput.emit(selectedEmoji);
     let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
     if (foundEmojiIndex == -1) {
       this.createReaction(selectedEmoji);

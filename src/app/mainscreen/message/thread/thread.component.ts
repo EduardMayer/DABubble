@@ -47,6 +47,10 @@ export class ThreadComponent {
     this.showEmojiList = false;
   }
 
+  handleEmojiBarVisibility(isVisible: boolean) {
+    this.showEmojiList = isVisible;
+  }
+
   openToolbar() {
     this.showToolbar = true;
   }
