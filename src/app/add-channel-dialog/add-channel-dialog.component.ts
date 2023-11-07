@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
@@ -17,6 +17,8 @@ export class AddChannelDialogComponent {
 
   channel = new Channel();
 
+  location: string | undefined;
+
   addChannelForm: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder,
@@ -34,8 +36,13 @@ export class AddChannelDialogComponent {
     ]
   };
 
-  getInput() {
 
+  @Input()
+  public set currentLocation(value: string) {
+    this.location = value;
+  }
+
+  getInput() {
     this.addChannelForm = this.fb.group({
       channelName: ['', [Validators.required, Validators.minLength(3)]],
       channelDescription: ['', [Validators.required, Validators.minLength(3)]]
@@ -58,11 +65,8 @@ console.log(value);*/
   }
 
   onSubmitNewChannel(value: any) {
-    console.log(value);
-
     const newChannel = new Channel(value);
     newChannel.users.push(this.userFirebaseService.currentUser.id);
     this.firebaseChannel.updateChannel(newChannel);
-
   }
 }
