@@ -63,8 +63,28 @@ export class ResetPasswordComponent {
 
   newPassword() {
     if (this.contactForm.valid) {
-      // Handle password update logic here
+      const queryParams = new URLSearchParams(window.location.search);
+      const oobCode = queryParams.get('oobCode');
+      const apiKey = queryParams.get('apiKey');
+      const mode = queryParams.get('mode');
+      const newPassword = this.contactForm.get('passwordInput')!.value;
+
+      if (oobCode) {
+        this.authService.applyActionCode(oobCode)
+          .then(() => {
+            console.log(oobCode)
+            console.log(apiKey)
+            console.log(mode)
+          
+          })
+          .catch(error => {
+            console.error('Fehler bei der Passwortänderung:', error);
+            // Hier kannst du Fehlermeldungen anzeigen oder andere erforderliche Aktionen durchführen.
+          });
+      }
     }
   }
+  
+
   
 }
