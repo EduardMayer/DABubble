@@ -21,6 +21,10 @@ export class MessageCreateComponent {
   _path: string | undefined;
 
 
+  /**
+  * Setter for the 'path' property decorated with @Input().
+  * @param value - The new 'path' value (string).
+  */
   @Input()
   public set path(value: string) {
     this._path = value;
@@ -40,11 +44,9 @@ export class MessageCreateComponent {
   * @returns {Promise<void>}
   */
   async createMessage() {
-    console.log("Message create attempt");
     if (this.message.content) {
       this.message.timestamp = Date.now();
       this.setMessageAutor();
-      console.log(this._path);
       if (this._path) {
         this.messageFirebaseService.createMessage(this._path, this.message);
       }
@@ -57,16 +59,23 @@ export class MessageCreateComponent {
   getPlaceholder() {
     if (this.channelFirebaseService.selectedChannel) {
       return "Nachricht an #" + this.channelFirebaseService.selectedChannel.channelName;
-    }else{
+    } else {
       return "Antworten";
     }
   }
 
+
+  /**
+   * Toggles the visibility of the emoji list.
+   */
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }
 
 
+  /**
+  * Closes the emoji list by setting its visibility to false.
+  */
   closeEmojiList() {
     this.showEmojiList = false;
   }
