@@ -4,6 +4,7 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { FormControl } from '@angular/forms';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
+import { User } from 'src/models/user.class';
 
 @Component({
   selector: 'app-message-create',
@@ -15,8 +16,10 @@ export class MessageCreateComponent {
   messageControl: FormControl = new FormControl();
   message = new Message();
   showEmojiBar: boolean = false;
+  showUserSearch: boolean = false; 
   _path: string | undefined;
   location: string | undefined;
+  searchResultsUsers:User[] = []
 
 
   /**
@@ -37,6 +40,7 @@ export class MessageCreateComponent {
     private userFirebaseService: UserFirebaseService,
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
+
   ) { }
 
   /**
@@ -120,5 +124,45 @@ export class MessageCreateComponent {
     } else {
       this.message.content += selectedEmoji;
     }
+  }
+
+
+  toogleUserSearch(){
+    this.message.content += '@'; 
+  }
+
+
+  checkForAt(event:Event){
+    const messageArray: String[] = this.message.content.split(" "); 
+    let lastWord = messageArray[messageArray.length-1];
+    lastWord = lastWord.replaceAll("\n" , ""); 
+    if(lastWord.substring(0,1) == "@"){
+      const searchString = lastWord.substring(1,lastWord.length); 
+      console.log("SearchString:" + searchString);
+      if(searchString !== "" ){ 
+        this.showUserSearch = true; 
+        this.getUsers(searchString);
+      } 
+    }
+    else{
+      this.showUserSearch = false; 
+      this.searchResultsUsers = []; 
+    }
+
+  }
+
+  getUsers(searchString:string){
+   
+    this.searchResultsUsers = []; 
+    this.userFirebaseService.loadedUsers.forEach(user => {
+      if(user.fullName.toUpperCase().includes(searchString.toUpperCase())){  
+        this.searchResultsUsers.push(user); 
+      }
+    });
+  }
+
+  clickUser(index:number){
+    const name = this.searchResultsUsers[index].fullName
+    this.message.content += this.searchResultsUsers[index].fullName; 
   }
 }

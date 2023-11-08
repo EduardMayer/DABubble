@@ -272,7 +272,6 @@ export class AuthFirebaseService implements OnInit {
       });
   }
 
-
   resetPassword(email: string) {
 
     return sendPasswordResetEmail(this.auth, email)

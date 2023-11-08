@@ -39,3 +39,21 @@
         }
     }
 }
+
+
+#inputFieldUserSearch{
+    position: absolute;
+    bottom: 100px;
+    border: 1px solid #ADB0D9;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+    max-height: 200px;
+    overflow: scroll;
+    p{
+        margin: 0px;      
+    }
+}
