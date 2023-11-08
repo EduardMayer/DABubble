@@ -35,7 +35,6 @@ export class ToolbarComponent {
     } else {
       this.emojiSelectedOutput.emit(selectedEmoji);
     }
-
   }
 
   toggleOptions(event: Event) {

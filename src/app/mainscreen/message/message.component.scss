@@ -24,6 +24,7 @@
             display: flex;
             flex-direction: row;
             gap: 16px;
+            margin: 5px;
 
             div {
                 width: fit-content;
@@ -56,7 +57,7 @@
 
 
         .message-footer {
-
+            margin: 5px;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -64,6 +65,10 @@
             .reaction-smileys {
                 display: flex;
                 
+            }
+
+            img{
+                margin: 0 5px 0 5px;
             }
         }
 
@@ -83,14 +88,10 @@
 
     app-toolbar {
         position: absolute;
-        transform: translateY(-50%);
-        z-index: 9;
+        top: -32px;
+        z-index: 999;
         margin: 16px;
     }
-
-
-
-
 }
 
 .inverted {
@@ -117,6 +118,7 @@
 
     &:hover {
         background-color: #ECEEFE;
+
         .message-content {
             mat-card {
                 background-color: #797EF3;

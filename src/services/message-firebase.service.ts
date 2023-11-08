@@ -40,9 +40,14 @@ export class MessageFirebaseService {
     * @returns {Promise<void>} A promise that resolves when the update or addition is complete.
     */
     async updateReaction(reaction: Reaction, path?: string) {
+        
         if (reaction.path) {
             const docInstance = doc(this.firestore, reaction.path);
-            updateDoc(docInstance, reaction.toJSON());
+            if(reaction.users.length==0){
+                deleteDoc(docInstance);
+            }else{
+                updateDoc(docInstance, reaction.toJSON());
+            }
         } else {
             const reactionId = this.generateIdService.generateRandomId(20);
             const docInstance = doc(this.firestore, `${path}/${reactionId}`);

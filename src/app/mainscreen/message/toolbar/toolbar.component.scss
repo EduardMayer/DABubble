@@ -2,6 +2,7 @@ mat-toolbar {
     background-color: white;
     border: solid 1px #9747FF;
     border-radius: 25px 25px 25px 0px;
+    z-index: 99;
 }
 
 
@@ -32,8 +33,4 @@ mat-toolbar {
             color: #797EF3
         }
     }
-}
-
-message-reaction-options{
-
 }
