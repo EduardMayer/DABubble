@@ -10,10 +10,10 @@
                 </span>
             </div>
         </div>
-        <img src="../../../../assets/img/icons/close.svg">
+        <img src="../../../../assets/img/icons/close.svg" (click)="closeThread()">
     </div>
 
-    <div class="chat-container">
+    <div class="chat-container" *ngIf="threadFirebaseService.message">
         <app-message [message]="threadFirebaseService.message" [messageLocationName]="'thread'"></app-message>
 
         <div class="line-container" *ngIf="threadFirebaseService.loadedAnswers && threadFirebaseService.loadedAnswers.length>0">

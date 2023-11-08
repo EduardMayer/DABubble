@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { IfChangedService } from 'src/services/if-changed-service.service';
@@ -14,6 +14,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 })
 export class ThreadComponent {
 
+
   showEmojiList: boolean = false;
   showToolbar: boolean = false;
   answersPath: string = "";
@@ -23,11 +24,9 @@ export class ThreadComponent {
     public channelFirebaseService: ChannelFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
     public userFirebase: UserFirebaseService) {
-    if (channelFirebaseService.selectedChannel) {
-      this.answersPath = `channels/${channelFirebaseService.selectedChannel.id}/messages/${this.threadFirebaseService.message.id}/answers/`;
-    }
-  }
 
+    this.answersPath = this.getAnswersPath();
+  }
 
   getMessageTimeString(message: Message) {
     const currentDay = this.formatDateToDMY(new Date());
@@ -36,6 +35,14 @@ export class ThreadComponent {
       return "heute";
     } else {
       return messageDmy;
+    }
+  }
+
+  getAnswersPath() {
+    if (this.channelFirebaseService.selectedChannel && this.threadFirebaseService.message) {
+      return `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${this.threadFirebaseService.message.id}/answers/`;
+    } else {
+      return "";
     }
   }
 
@@ -57,6 +64,11 @@ export class ThreadComponent {
 
   closeToolbar() {
     this.showToolbar = false;
+  }
+
+  closeThread() {
+    this.threadFirebaseService.message = undefined;
+    this.threadFirebaseService.threadOpen = false;
   }
 
   formatDateToDMY(date: Date) {
@@ -88,7 +100,6 @@ export class ThreadComponent {
     } else {
       const daysAgo = Math.floor(delta / oneDayInMs);
       return `vor ${daysAgo} Tagen`;
-
     }
   }
 

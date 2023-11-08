@@ -48,7 +48,7 @@ export class MessageEditComponent {
     }
   }
 
-  closeEditMode(){
+  closeEditMode() {
     this.showEditMessageOutput.emit(false);
   }
 
@@ -68,28 +68,6 @@ export class MessageEditComponent {
     this.showEmojiBar = false;
   }
 
-
-  /**
-  * Sets the author and avatar information for a message.
-  * This function populates the `autorId` and `avatarSrc` properties of the message object.
-  * If the current user is not authenticated or lacks the required properties, default values are used.
-  * 
-  * @returns {void}
-  */
-  setMessageAutor() {
-    this.message.autorId = this.userFirebaseService.currentUser.id;
-
-    this.message.avatarSrc = this.userFirebaseService.currentUser.avatar;
-
-    if (!this.message.autorId) {
-      this.message.autorId = "";
-    }
-
-    if (!this.message.avatarSrc) {
-      this.message.avatarSrc = "assets/img/avatar/avatar0.svg";
-    }
-  }
-
   openMessage(message: Message) {
     this.message = message;
   }
@@ -97,10 +75,11 @@ export class MessageEditComponent {
 
   handleEmojiSelection(selectedEmoji: string) {
     if (selectedEmoji == "noSelection") {
-      console.log("noSelection");
       this.closeEmojiBar();
     } else {
-      this.message.content += selectedEmoji;
+      if (this._message) {
+        this._message.content += selectedEmoji;
+      }
     }
   }
 }

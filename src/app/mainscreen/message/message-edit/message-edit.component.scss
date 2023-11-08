@@ -6,7 +6,7 @@
     border-radius: 20px;
     padding: 20px;
 
-    .option-icons {
+    .options {
         z-index:9;
         position: absolute;
         bottom: 20px;
@@ -19,6 +19,11 @@
         msg-mods {
             display: flex;
             align-items: center;
+        }
+
+        .msg-submit-options{
+            display: flex;
+
         }
     }
 

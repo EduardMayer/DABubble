@@ -20,7 +20,7 @@ export class MainscreenComponent {
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
-    public userFirebaseService: UserFirebaseService, 
+    public userFirebaseService: UserFirebaseService,
     private authService: AuthFirebaseService,
     public threadFirebaseService: ThreadFirebaseService
   ) {
@@ -39,6 +39,4 @@ export class MainscreenComponent {
   toggleSideNav() {
     this.sideNavOpen = !this.sideNavOpen;
   }
-
-
 }
