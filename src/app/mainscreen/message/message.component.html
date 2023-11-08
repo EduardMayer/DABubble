@@ -16,8 +16,7 @@
         </mat-card>
 
         <app-addreaction *ngIf="showMessageReactions" [isOpened]="showMessageReactions"
-            (emojiSelectedOutput)="handleEmojiSelection($event)"
-            (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)">
+            (emojiSelectedOutput)="handleEmojiSelection($event)">
         </app-addreaction>
 
         <div class='message-footer'>

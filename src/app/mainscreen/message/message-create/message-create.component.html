@@ -1,9 +1,9 @@
-<app-addreaction *ngIf="showEmojiList" (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
+<app-addreaction *ngIf="showEmojiBar" (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
 <div class="msg-create-container">
     <div class='option-icons'>
         <div class="msg-mods">
         <img src="assets/img/icons/add.svg">
-        <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiList()">
+        <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
         <img src="assets/img/icons/alternateemail.svg">
     </div>
     <div class="msg-send">
@@ -15,7 +15,7 @@
     [(ngModel)]="message.content"
     *ngIf="channelFirebaseService.selectedChannel"
     placeholder="{{getPlaceholder()}}"
-    (click)="closeEmojiList()">
+    (click)="closeEmojiBar()">
 </textarea>
 </div>
 

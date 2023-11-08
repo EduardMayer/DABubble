@@ -56,27 +56,25 @@ export class MessageComponent {
     this.messageLocationPath = this.getMessagePath(value);
   }
 
-
-  handleEmojiBarVisibility(isVisible: boolean) {
-    this.showMessageReactions = isVisible;
-    this.emojiBarVisibilityOutput.emit(isVisible);
-  }
-
   handleEmojiSelection(selectedEmoji: string) {
     const reactions = this.messageFirebaseService.loadedReactions;
     this.emojiSelectedOutput.emit(selectedEmoji);
-    let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
-    if (foundEmojiIndex == -1) {
-      this.createReaction(selectedEmoji);
+    if (selectedEmoji == "noSelection") {
+      this.closeEmojiBar();
     } else {
-      if (!this.messageFirebaseService.loadedReactions[foundEmojiIndex] || this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.length == 0) {
-        this.updateReactionAddCurrentUser(foundEmojiIndex);
+      let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
+      if (foundEmojiIndex == -1) {
+        this.createReaction(selectedEmoji);
       } else {
-        let foundUserIndex = this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.findIndex((userId) => userId == this.userFirebaseService.currentUser.id);
-        if (foundUserIndex == -1) {
+        if (!this.messageFirebaseService.loadedReactions[foundEmojiIndex] || this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.length == 0) {
           this.updateReactionAddCurrentUser(foundEmojiIndex);
         } else {
-          this.updateReactionRemoveCurrentUser(foundEmojiIndex, foundUserIndex);
+          let foundUserIndex = this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.findIndex((userId) => userId == this.userFirebaseService.currentUser.id);
+          if (foundUserIndex == -1) {
+            this.updateReactionAddCurrentUser(foundEmojiIndex);
+          } else {
+            this.updateReactionRemoveCurrentUser(foundEmojiIndex, foundUserIndex);
+          }
         }
       }
     }
@@ -145,11 +143,6 @@ export class MessageComponent {
     }
   }
 
-
-  hideReactions(event: Event) {
-    event.stopPropagation();
-    this.showMessageReactions = false;
-  }
 
 
   openToolbar() {

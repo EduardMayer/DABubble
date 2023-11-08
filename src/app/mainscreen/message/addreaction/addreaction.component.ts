@@ -12,7 +12,6 @@ export class AddreactionComponent {
   @ViewChild('container', { static: true }) emojiMartElement: ElementRef | undefined;
 
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
-  @Output() emojiBarVisibilityOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
   clickListener: any;
 
   constructor(private renderer: Renderer2, private el: ElementRef) { }
@@ -39,7 +38,7 @@ export class AddreactionComponent {
       } else {
         //Clicked outside emoji-mart element
         console.log('Clicked outside emoji-mart element');
-        this.emojiBarVisibilityOutput.emit(false);
+        this.emojiSelectedOutput.emit("noSelection");
       }
     });
   }

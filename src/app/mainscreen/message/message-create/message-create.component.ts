@@ -2,9 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 
 @Component({
@@ -16,7 +14,7 @@ export class MessageCreateComponent {
 
   messageControl: FormControl = new FormControl();
   message = new Message();
-  showEmojiList: boolean = false;
+  showEmojiBar: boolean = false;
   _path: string | undefined;
   location: string | undefined;
 
@@ -56,7 +54,7 @@ export class MessageCreateComponent {
         this.messageFirebaseService.createMessage(this._path, this.message);
       }
       this.message = new Message();
-      this.showEmojiList = false;
+      this.showEmojiBar = false;
     }
   }
 
@@ -75,26 +73,27 @@ export class MessageCreateComponent {
   /**
    * Toggles the visibility of the emoji list.
    */
-  toggleEmojiList() {
-    this.showEmojiList = !this.showEmojiList;
+  toggleEmojiBar(event: Event) {
+    event.stopPropagation();
+    this.showEmojiBar = !this.showEmojiBar;
   }
 
 
   /**
-  * Closes the emoji list by setting its visibility to false.
+  * Closes the emoji list.
   */
-  closeEmojiList() {
-    this.showEmojiList = false;
+  closeEmojiBar() {
+    this.showEmojiBar = false;
   }
 
 
   /**
- * Sets the author and avatar information for a message.
- * This function populates the `autorId` and `avatarSrc` properties of the message object.
- * If the current user is not authenticated or lacks the required properties, default values are used.
- * 
- * @returns {void}
- */
+  * Sets the author and avatar information for a message.
+  * This function populates the `autorId` and `avatarSrc` properties of the message object.
+  * If the current user is not authenticated or lacks the required properties, default values are used.
+  * 
+  * @returns {void}
+  */
   setMessageAutor() {
     this.message.autorId = this.userFirebaseService.currentUser.id;
 
@@ -115,9 +114,11 @@ export class MessageCreateComponent {
 
 
   handleEmojiSelection(selectedEmoji: string) {
-    // Handle the selected emoji here, for example, log it to the console.
-    console.log(`Selected emoji: ${selectedEmoji}`);
-    //this.message.content+=`selectedEmoji`;
-    this.message.content += selectedEmoji;
+    if (selectedEmoji == "noSelection") {
+      console.log("noSelection");
+      this.closeEmojiBar();
+    } else {
+      this.message.content += selectedEmoji;
+    }
   }
 }
