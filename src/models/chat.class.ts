@@ -6,7 +6,6 @@ export class Chat {
     messages: string[];
     users: string[];
 
-
     constructor(data: any) {
         this.id = data.id || "";
         this.messages = data.messages || [];

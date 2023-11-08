@@ -30,7 +30,12 @@ export class ToolbarComponent {
 
 
   handleEmojiSelection(selectedEmoji: string) {
-    this.emojiSelectedOutput.emit(selectedEmoji);
+    if (selectedEmoji == "noSelection") {
+      this.showMessageReactions = false;
+    } else {
+      this.emojiSelectedOutput.emit(selectedEmoji);
+    }
+
   }
 
   toggleOptions(event: Event) {
