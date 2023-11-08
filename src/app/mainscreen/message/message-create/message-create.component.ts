@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -19,7 +19,10 @@ export class MessageCreateComponent {
   showUserSearch: boolean = false; 
   _path: string | undefined;
   location: string | undefined;
-  searchResultsUsers:User[] = []
+  searchResultsUsers:User[] = []; 
+
+  @ViewChild('textInput') textInput!: ElementRef;
+  @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
 
 
   /**
@@ -129,26 +132,47 @@ export class MessageCreateComponent {
 
   toogleUserSearch(){
     this.message.content += '@'; 
+    this.checkForAt(); 
   }
 
 
-  checkForAt(event:Event){
+  checkForAt(){
+
+    /*
+    const cursorStart = this.getcursorStartPosition(); 
+    if(cursorStart != undefined){
+      this.inputFieldUserSearch.nativeElement.style.left = cursorStart + "px"; 
+    }
+    */
+
     const messageArray: String[] = this.message.content.split(" "); 
     let lastWord = messageArray[messageArray.length-1];
     lastWord = lastWord.replaceAll("\n" , ""); 
     if(lastWord.substring(0,1) == "@"){
       const searchString = lastWord.substring(1,lastWord.length); 
-      console.log("SearchString:" + searchString);
+      //console.log("SearchString:" + searchString);
       if(searchString !== "" ){ 
         this.showUserSearch = true; 
         this.getUsers(searchString);
       } 
+      else{
+        this.showUserSearch = true; 
+        this.searchResultsUsers = this.userFirebaseService.loadedUsers;
+      }
     }
     else{
       this.showUserSearch = false; 
       this.searchResultsUsers = []; 
     }
+  }
 
+  getcursorStartPosition(){
+    const inputElement: HTMLInputElement = this.textInput.nativeElement;
+    const cursorPositionStart = inputElement.selectionStart;
+    const cursorPositionEnd = inputElement.selectionEnd;
+    //console.log(`Cursor start position: ${cursorPositionStart}`);
+    //console.log(`Cursor end position: ${cursorPositionEnd}`);
+    return cursorPositionStart; 
   }
 
   getUsers(searchString:string){

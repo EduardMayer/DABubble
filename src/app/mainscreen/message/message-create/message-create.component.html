@@ -11,11 +11,11 @@
         </div>
     </div>
     <div>
-        <textarea cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
+        <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
             *ngIf="channelFirebaseService.selectedChannel" placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()"
-            (keyup)="checkForAt($event)">
+            (keyup)="checkForAt()">
         </textarea>
-        <div id="inputFieldUserSearch" *ngIf="showUserSearch">
+        <div #inputFieldUserSearch id="inputFieldUserSearch" *ngIf="showUserSearch">
             <p *ngFor="let resultUsers of searchResultsUsers; index as i" (click)="clickUser(i)"> 
                 <img src="assets/img/icons/accountIcon.png" alt="UserIcon">  
                 &nbsp;- {{resultUsers.fullName}} ( {{resultUsers.id}} )
