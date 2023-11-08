@@ -1,0 +1,14 @@
+<app-addreaction *ngIf="showEmojiBar" (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
+<div class="msg-edit-container" *ngIf="_message">
+    <div class='option-icons'>
+        <div class="msg-mods">
+            <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
+        </div>
+        <div class="msg-send">
+            <img src="assets/img/icons/send.svg" (click)="saveMessage()">
+        </div>
+    </div>
+    <textarea cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="_message.content"
+        *ngIf="channelFirebaseService.selectedChannel"  (click)="closeEmojiBar()">
+</textarea>
+</div>

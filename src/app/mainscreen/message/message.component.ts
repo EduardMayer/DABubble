@@ -20,6 +20,7 @@ export class MessageComponent {
   public autorAvatar: string = "";
   isOwnMessage: boolean = false;
   showToolbar: boolean = false;
+  editMessage: boolean = false;
   messageLocation: string | undefined;
   messageLocationPath: string | undefined;
   showMessageReactions: boolean = false;
@@ -80,6 +81,17 @@ export class MessageComponent {
     }
   }
 
+  handleMessageEdit(editMessage: boolean) {
+    if (editMessage == false) {
+      this.editMessage = false;
+      console.log("edit No");
+    } else {
+      this.editMessage = true;
+      console.log("edit Yes");
+    }
+  }
+
+  
 
   createReaction(selectedEmoji: string) {
     console.log("create Reaction: " + selectedEmoji);

@@ -1,0 +1,41 @@
+.msg-edit-container {
+    position: relative;
+    width: calc(100% - 40px);
+    background-color: rgb(255, 255, 255);
+    border: solid 1px #ADB0D9;
+    border-radius: 20px;
+    padding: 20px;
+
+    .option-icons {
+        z-index:9;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        msg-mods {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .msg-write-container {
+        width: 100%;
+        margin-bottom: 36px;
+        border: none;
+        min-height: 30px;
+
+        textarea {
+            background-color: white;
+            border: none;
+            height: fit-content;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

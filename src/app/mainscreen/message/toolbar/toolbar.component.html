@@ -8,7 +8,9 @@
         <img src="assets/img/icons/handsup.svg" (click)="handleEmojiSelection('🙌')">
 
         <img src="assets/img/icons/addreactionplus.svg" (click)="toggleReactions($event)">
-        <img *ngIf="message" src="assets/img/icons/answer.svg"
+        <img 
+            *ngIf="message && messageLocation=='channel'" 
+            src="assets/img/icons/answer.svg" 
             (click)="threadFirebaseService.openThread(message)">
 
         <div *ngIf="isOwnMessage" (blur)="hideOptions($event)" class="message-edit-container">
@@ -20,14 +22,8 @@
 </mat-toolbar>
 
 <div *ngIf="showMessageOptions" class="message-edit-options">
-    <button>
+    <button (click)="handleMessageEdit()">
         <mat-icon>edit</mat-icon>
-        <span>Nachricht bearbeiten</span>
+        <span >Nachricht bearbeiten</span>
     </button>
-    <!--
-    <button>
-        <mat-icon>delete</mat-icon>
-        <span>Nachricht löschen</span>
-    </button>
-    -->
 </div>

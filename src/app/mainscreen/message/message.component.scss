@@ -55,6 +55,9 @@
 
         }
 
+        app-message-edit{
+            width: 100%;
+        }
 
         .message-footer {
             margin: 5px;
@@ -64,10 +67,14 @@
 
             .reaction-smileys {
                 display: flex;
-                
             }
 
-            img{
+            .answers-link {
+                color: #535AF1;
+                margin: 0 5px 0 5px;
+            }
+
+            img {
                 margin: 0 5px 0 5px;
             }
         }
@@ -88,7 +95,7 @@
 
     app-toolbar {
         position: absolute;
-        top: -32px;
+        top: -49px;
         z-index: 999;
         margin: 16px;
     }

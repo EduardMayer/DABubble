@@ -17,7 +17,7 @@ export class ToolbarComponent {
   showMessageOptions: boolean = false;
   showMessageReactions: boolean = false;
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
-
+  @Output() editMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     public messageFirebaseService: MessageFirebaseService,
@@ -28,6 +28,11 @@ export class ToolbarComponent {
   updateReaction(message: Message, reactionId: number | null, selectedEmoji: string, messageType: string = "channel",path: string)
   */
 
+
+  handleMessageEdit(){
+    this.editMessageOutput.emit(true);
+    console.log("here");
+  }
 
   handleEmojiSelection(selectedEmoji: string) {
     if (selectedEmoji == "noSelection") {

@@ -44,6 +44,7 @@ import { PickerModule } from "@ctrl/ngx-emoji-mart";
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
 import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
+import { MessageEditComponent } from './mainscreen/message/message-edit/message-edit.component';
 
 
 
@@ -64,7 +65,6 @@ import { ResetPasswordComponent } from './startscreen/reset-password/reset-passw
     MessageComponent,
     AvatarChooseComponent,
     AddChannelDialogComponent,
-    MessageCreateComponent,
     DateLineComponent,
     IfChangedDirective,
     ReactionComponent,
@@ -74,7 +74,9 @@ import { ResetPasswordComponent } from './startscreen/reset-password/reset-passw
     AddreactionComponent,
     ActionHandlerComponent,
     SearchbarComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    MessageCreateComponent,
+    MessageEditComponent
   ],
   imports: [
     BrowserModule,
