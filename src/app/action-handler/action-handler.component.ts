@@ -24,7 +24,7 @@ export class ActionHandlerComponent implements OnInit {
       console.log('oobCode:', oobCode);
       console.log('apiKey:', apiKey);
 
-      if(mode == "recoverEmail"){
+      if (mode == "recoverEmail") {
 
         if (oobCode) {
           this.authService.applyActionCode(oobCode);
@@ -33,16 +33,16 @@ export class ActionHandlerComponent implements OnInit {
           case "recoverEmail":
             this.userMessage = "Ihre Email-Adresse wurde erfolgreich zurückgesetzt"
             break;
-            case "verifyAndChangeEmail":
-              this.userMessage = "Ihre Email-Adresse wurde erfolgreich geändert"
-            }
-            setTimeout(() => {
-              this.router.navigate(['main']);
-            }, 3000);
+          case "verifyAndChangeEmail":
+            this.userMessage = "Ihre Email-Adresse wurde erfolgreich geändert"
         }
-        else if(mode == "resetPassword"){
-          this.router.navigate(['reset', oobCode], { queryParams: { oobCode: oobCode }});
-        }
+        setTimeout(() => {
+          this.router.navigate(['main']);
+        }, 3000);
+      }
+      else if (mode == "resetPassword") {
+        this.router.navigate(['reset', oobCode], { queryParams: { oobCode: oobCode } });
+      }
     });
   }
 

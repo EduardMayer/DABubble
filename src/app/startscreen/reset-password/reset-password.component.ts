@@ -12,9 +12,9 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 export class ResetPasswordComponent implements OnInit {
   contactForm: FormGroup;
   isInputActive = false;
-  imprint = false; 
-  privacyPolicy = false; 
-  oobCode = ""; 
+  imprint = false;
+  privacyPolicy = false;
+  oobCode = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,18 +44,18 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     const queryParams = new URLSearchParams(window.location.search);
-    if(queryParams.get('oobCode') != null ){
+    if (queryParams.get('oobCode') != null) {
       this.oobCode = queryParams.get('oobCode')!;
       console.log("Param");
-      
+
     }
     console.log("code from URL:");
     console.log(this.oobCode);
   }
 
-  closeImprintAndPrivacy(){
-    this.imprint = false; 
-    this.privacyPolicy = false; 
+  closeImprintAndPrivacy() {
+    this.imprint = false;
+    this.privacyPolicy = false;
   }
 
   isButtonDisabled(): boolean {
@@ -77,26 +77,20 @@ export class ResetPasswordComponent implements OnInit {
     if (this.contactForm.valid) {
       const queryParams = new URLSearchParams(window.location.search);
       const oobCode = queryParams.get('oobCode');
-      //const apiKey = queryParams.get('apiKey');
-      //const mode = queryParams.get('mode');
       const newPassword = this.contactForm.get('passwordInput')!.value;
 
-
-    
 
       if (oobCode) {
         this.authService.applyActionCode(oobCode)
           .then(() => {
-            console.log(oobCode)      
+            this.authService.confirmPasswordReset(oobCode, newPassword);
+            this.router.navigate(['']);
           })
-          .catch(error => {
-            console.error('Fehler bei der Passwortänderung:', error);
-            // Hier kannst du Fehlermeldungen anzeigen oder andere erforderliche Aktionen durchführen.
-          });
       }
     }
   }
-  
-
-  
 }
+
+
+
+

@@ -10,6 +10,7 @@ import {
   signOut,
   sendEmailVerification,
   User,
+  confirmPasswordReset,
   updateEmail,
   verifyBeforeUpdateEmail,
   applyActionCode
@@ -263,7 +264,7 @@ export class AuthFirebaseService implements OnInit {
   async applyActionCode(code: string) {
     await applyActionCode(this.auth, code)
       .then(() => {
-        
+
       })
       .catch((error) => {
         // Invalid or expired code
@@ -279,8 +280,17 @@ export class AuthFirebaseService implements OnInit {
         console.log("Password reset email sent");
       })
       .catch((error) => {
-        console.log(error.code , error.message);
+        console.log(error.code, error.message);
       });
+  }
+
+  async confirmPasswordReset(oobCode: string, newPassword: string) {
+    try {
+      await confirmPasswordReset(this.auth, oobCode, newPassword);
+      console.log('Passwort wurde erfolgreich zurückgesetzt.');
+    } catch (error) {
+      console.error('Fehler bei der Passwortänderung:', error);
+    }
   }
 
 }
