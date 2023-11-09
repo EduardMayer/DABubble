@@ -1,4 +1,5 @@
 <app-addreaction *ngIf="showEmojiBar" (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
+<app-user-search *ngIf="showUserSearch" [message]="message" (userName)="handleUserSearchResult($event)"></app-user-search>
 <div class="msg-create-container">
     <div class='option-icons'>
         <div class="msg-mods">
@@ -11,8 +12,6 @@
         </div>
     </div>
 
-    <app-user-search *ngIf="showUserSearch" [message]="message" (userName)="handleUserSearchResult($event)"></app-user-search>
-    
     <div>
         <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
             *ngIf="channelFirebaseService.selectedChannel" placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()"
