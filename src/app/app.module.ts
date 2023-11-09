@@ -45,7 +45,6 @@ import { ActionHandlerComponent } from './action-handler/action-handler.componen
 import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
 import { MessageEditComponent } from './mainscreen/message/message-edit/message-edit.component';
-import { UserSearchComponent } from './mainscreen/user-search/user-search.component';
 
 
 
@@ -77,8 +76,7 @@ import { UserSearchComponent } from './mainscreen/user-search/user-search.compon
     SearchbarComponent,
     ResetPasswordComponent,
     MessageCreateComponent,
-    MessageEditComponent,
-    UserSearchComponent
+    MessageEditComponent
   ],
   imports: [
     BrowserModule,
