@@ -30,10 +30,7 @@ export class UserFirebaseService{
                 channels: ["F8tiKVNq6FePPOb4BDps","O8ZTH8u2mAbFrrpNFaGp"]
             }
         )
-
         this.load();
-
-
     }
 
     setCurrentUser(UserData: any) {
