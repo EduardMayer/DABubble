@@ -54,8 +54,7 @@ export class UserFirebaseService{
                 const user = new User(doc.data());
                 user.id = doc.id;
                 this.loadedUsers.push(user);
-                console.log('User is', user);
-                
+                //console.log('User is', user); 
             });
         });
     }

@@ -105,6 +105,7 @@ export class AuthFirebaseService implements OnInit {
         //console.log(this.UserData.uid);
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
         this.userService.syncMail(this.UserData.email);
+        this.userService.load(); 
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);

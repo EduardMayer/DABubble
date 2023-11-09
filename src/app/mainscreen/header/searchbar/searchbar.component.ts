@@ -22,7 +22,7 @@ export class SearchbarComponent implements OnInit{
 
   ngOnInit(): void {
     //this.searchResults = ["Hallo", "Test", "Search"]; 
-    this.userService.load(); 
+    //this.userService.load(); 
   }
 
   sendData(event:Event){
