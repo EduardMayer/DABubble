@@ -4,22 +4,19 @@
         <div class="msg-mods">
             <img src="assets/img/icons/add.svg">
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
-            <img src="assets/img/icons/alternateemail.svg" (click)="toogleUserSearch()">
+            <img src="assets/img/icons/alternateemail.svg" (click)="toogleUserSearch($event)">
         </div>
         <div class="msg-send">
             <img src="assets/img/icons/send.svg" (click)="createMessage()">
         </div>
     </div>
+
+    <app-user-search *ngIf="showUserSearch" [message]="message" (userName)="handleUserSearchResult($event)"></app-user-search>
+    
     <div>
         <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
             *ngIf="channelFirebaseService.selectedChannel" placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()"
-            (keyup)="checkForAt()">
+            (keyup)="toogleUserSearch($event)">
         </textarea>
-        <div #inputFieldUserSearch id="inputFieldUserSearch" *ngIf="showUserSearch">
-            <p *ngFor="let resultUsers of searchResultsUsers; index as i" (click)="clickUser(i)"> 
-                <img src="assets/img/icons/accountIcon.png" alt="UserIcon">  
-                &nbsp;- {{resultUsers.fullName}} ( {{resultUsers.id}} )
-            </p>
-        </div>
     </div>
 </div>
