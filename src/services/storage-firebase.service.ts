@@ -29,15 +29,9 @@ export class StorageFirebaseService {
 
 
   async uploadFile(file: File, folder: string): Promise<string> {
-    if (!file) {
-      throw new Error('Invalid file');
-    }
-  
     let storageRef: StorageReference;
   
-    if (file.type.startsWith('image/')) {
-      storageRef = ref(this.storage, `${folder}/${file.name}`);
-    } else if (file.type === 'application/pdf') {
+    if (file.type.startsWith('image/') || file.type === 'application/pdf') {
       storageRef = ref(this.storage, `${folder}/${file.name}`);
     } else {
       throw new Error('Invalid file type');
@@ -54,9 +48,7 @@ export class StorageFirebaseService {
     }
   }
   
-
-
-
+  
   async deleteImage(imagePath: string): Promise<void> {
     try {
       const path = imagePath;

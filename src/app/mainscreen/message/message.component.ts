@@ -8,6 +8,8 @@ import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { User } from 'src/models/user.class';
 import { UserProfilService } from 'src/services/user-profil.service';
+import { StorageFirebaseService } from 'src/services/storage-firebase.service';
+
 
 @Component({
   selector: 'app-message',
@@ -37,7 +39,8 @@ export class MessageComponent {
     public userFirebaseService: UserFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
     private channelFirebaseService: ChannelFirebaseService, 
-    private userProfilService: UserProfilService
+    private userProfilService: UserProfilService,
+    private storageService: StorageFirebaseService,
   ) { }
 
   @Input()
