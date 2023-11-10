@@ -47,7 +47,7 @@ export class AvatarChooseComponent implements OnInit {
     const file = input.files[0];
 
     try {
-      const url = await this.storageService.uploadFile(file);
+      const url = await this.storageService.uploadIMGFile(file);
       this.user.avatar = url;
     } catch (error) {
       console.error('Error uploading image: ', error);

@@ -57,3 +57,18 @@
         margin: 0px;      
     }
 }
+
+.msg-mods{
+    display: flex;
+    align-items: flex-end;
+}
+.preview-file {
+    display: flex;
+    height: 60px;
+    object-fit: cover;
+    padding-left: 30px;
+
+    img{
+        border-radius: 30%;
+    }
+  }

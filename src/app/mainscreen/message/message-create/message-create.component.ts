@@ -5,6 +5,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { FormControl } from '@angular/forms';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { User } from 'src/models/user.class';
+import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 
 @Component({
   selector: 'app-message-create',
@@ -12,6 +13,8 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./message-create.component.scss']
 })
 export class MessageCreateComponent {
+
+  
 
   messageControl: FormControl = new FormControl();
   message = new Message();
@@ -21,6 +24,7 @@ export class MessageCreateComponent {
   location: string | undefined;
   searchResultsUsers: User[] = [];
   searchValue: string = "";
+  imagePreview: string = "";
 
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
@@ -44,6 +48,7 @@ export class MessageCreateComponent {
     private userFirebaseService: UserFirebaseService,
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
+    private storageService: StorageFirebaseService,
   ) { }
 
   /**
@@ -145,31 +150,62 @@ export class MessageCreateComponent {
     }
   }
 
+  handleUserSearchResult(user: User | boolean) {
+    if (user == false) {
+      this.showUserSearch = false;
+    } else if (user instanceof User) {
+      this.showUserSearch = false;
+      this.message.content += "@" + user.fullName;
+    }
 
-handleUserSearchResult(user: User | boolean) {
-  if (user == false) {
-    this.showUserSearch = false;
-  } else if (user instanceof User) {
-    this.showUserSearch = false;
-    this.message.content += "@" + user.fullName;
   }
-}
+    handleEmojiSelection(selectedEmoji: string) {
+      if (selectedEmoji == "noSelection") {
+        console.log("noSelection");
+        this.closeEmojiBar();
+      } else {
+        this.message.content += selectedEmoji;
+      }
+    }
 
-handleEmojiSelection(selectedEmoji: string) {
-  if (selectedEmoji == "noSelection") {
-    console.log("noSelection");
-    this.closeEmojiBar();
-  } else {
-    this.message.content += selectedEmoji;
+    getcursorStartPosition() {
+      const inputElement: HTMLInputElement = this.textInput.nativeElement;
+      const cursorPositionStart = inputElement.selectionStart;
+      const cursorPositionEnd = inputElement.selectionEnd;
+      //console.log(`Cursor start position: ${cursorPositionStart}`);
+      //console.log(`Cursor end position: ${cursorPositionEnd}`);
+      return cursorPositionStart;
+    }
+  
+
+    async uploadFile(input: HTMLInputElement) {
+      if (!input.files || input.files.length === 0) return;
+    
+      const file = input.files[0];
+    
+      try {
+        const url = await this.storageService.uploadFile(file);
+        const previewImageUrl = await this.storageService.getPreviewImageUrl(file);
+    
+        this.imagePreview = previewImageUrl;
+      } catch (error) {
+        console.error('Error uploading file: ', error);
+      }
+    }
+
+    async deleteImage() {
+      try {
+        await this.storageService.deleteImage(this.imagePreview);
+        this.imagePreview = '';
+      } catch (error) {
+        console.error('Fehler beim Löschen des Bildes: ', error);
+      }
+    }
+
+
+  getFileType(fileName: string): string {
+    const fileType = fileName.split('.').pop();
+    return fileType ? fileType.toUpperCase() : 'UNKNOWN';
   }
-}
 
-getcursorStartPosition() {
-  const inputElement: HTMLInputElement = this.textInput.nativeElement;
-  const cursorPositionStart = inputElement.selectionStart;
-  const cursorPositionEnd = inputElement.selectionEnd;
-  //console.log(`Cursor start position: ${cursorPositionStart}`);
-  //console.log(`Cursor end position: ${cursorPositionEnd}`);
-  return cursorPositionStart;
-}
 }

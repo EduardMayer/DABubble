@@ -3,19 +3,26 @@
 <div class="msg-create-container">
     <div class='option-icons'>
         <div class="msg-mods">
-            <img src="assets/img/icons/add.svg">
+            <input type="file" #fileInput style="display: none" (change)="uploadFile(fileInput)">
+            <img src="assets/img/icons/add.svg" (click)="fileInput.click()" >
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
             <img src="assets/img/icons/alternateemail.svg" (click)="toogleUserSearch($event)">
+            <div class="preview-file" *ngIf="imagePreview !== ''">
+                <img [src]="imagePreview" />
+                <button (click)="deleteImage()">Löschen</button>
+              </div>
         </div>
+       
         <div class="msg-send">
             <img src="assets/img/icons/send.svg" (click)="createMessage()">
         </div>
     </div>
 
     <div>
-        <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
-            *ngIf="channelFirebaseService.selectedChannel" placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()"
-            (keyup)="checkForAt()">
-        </textarea>
+    <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
+        *ngIf="channelFirebaseService.selectedChannel" placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()"
+        (keyup)="checkForAt()">
+    </textarea>
+
     </div>
 </div>
