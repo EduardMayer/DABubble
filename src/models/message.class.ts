@@ -6,6 +6,7 @@ export class Message {
     timestamp: number;
     autorId: string;
     avatarSrc: string;
+    fileSrc: string;
     reactions: Reaction[];
     path: string;
 
@@ -16,6 +17,7 @@ export class Message {
         this.autorId = obj ? obj.autorId : "";
         this.avatarSrc = obj ? obj.avatarSrc : "";
         this.path = obj ? obj.path : "";
+        this.fileSrc= obj ? obj.fileSrc : "";
         this.reactions = obj ? obj.reactions : [];
     }
 
@@ -25,7 +27,8 @@ export class Message {
             timestamp: this.timestamp,
             autorId: this.autorId,
             avatarSrc: this.avatarSrc,
-            reactions: this.reactions
+            reactions: this.reactions,
+            fileSrc: this.fileSrc
         }
     }
 }

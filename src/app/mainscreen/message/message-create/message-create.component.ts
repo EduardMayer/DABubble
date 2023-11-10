@@ -9,7 +9,7 @@ import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 
 @Component({
   selector: 'app-message-create',
-  templateUrl: './message-create.component.html',
+  templateUrl:'./message-create.component.html',
   styleUrls: ['./message-create.component.scss']
 })
 export class MessageCreateComponent {
@@ -24,7 +24,8 @@ export class MessageCreateComponent {
   location: string | undefined;
   searchResultsUsers: User[] = [];
   searchValue: string = "";
-  imagePreview: string = "";
+  file: string = "";
+  imageUrl?: string; 
 
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
@@ -63,10 +64,12 @@ export class MessageCreateComponent {
       this.message.timestamp = Date.now();
       this.setMessageAutor();
       if (this._path) {
+        this.message.fileSrc = this.file;
         this.messageFirebaseService.createMessage(this._path, this.message);
       }
       this.message = new Message();
       this.showEmojiBar = false;
+      this.file = '';
     }
   }
 
@@ -108,7 +111,7 @@ export class MessageCreateComponent {
   */
   setMessageAutor() {
     this.message.autorId = this.userFirebaseService.currentUser.id;
-
+     
     this.message.avatarSrc = this.userFirebaseService.currentUser.avatar;
 
     if (!this.message.autorId) {
@@ -180,23 +183,20 @@ export class MessageCreateComponent {
 
     async uploadFile(input: HTMLInputElement) {
       if (!input.files || input.files.length === 0) return;
-    
       const file = input.files[0];
     
       try {
-        const url = await this.storageService.uploadFile(file);
-        const previewImageUrl = await this.storageService.getPreviewImageUrl(file);
-    
-        this.imagePreview = previewImageUrl;
+        const url = await this.storageService.uploadFile(file, 'files');
+        this.file = url;
       } catch (error) {
         console.error('Error uploading file: ', error);
       }
     }
 
-    async deleteImage() {
+    async deleteFile() {
       try {
-        await this.storageService.deleteImage(this.imagePreview);
-        this.imagePreview = '';
+        await this.storageService.deleteImage(this.file);
+        this.file = '';
       } catch (error) {
         console.error('Fehler beim Löschen des Bildes: ', error);
       }

@@ -7,10 +7,10 @@
             <img src="assets/img/icons/add.svg" (click)="fileInput.click()" >
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
             <img src="assets/img/icons/alternateemail.svg" (click)="toogleUserSearch($event)">
-            <div class="preview-file" *ngIf="imagePreview !== ''">
-                <img [src]="imagePreview" />
-                <button (click)="deleteImage()">Löschen</button>
-              </div>
+            <div class="preview-file" *ngIf="file !== ''">
+                <img [src]="file" />
+                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt="" srcset="">
+            </div>
         </div>
        
         <div class="msg-send">

@@ -28,11 +28,20 @@ export class StorageFirebaseService {
   }
 
 
-  async uploadFile(file: File): Promise<string> {
-    if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'application/pdf') {
-      throw new Error('Only images and PDFs can be uploaded.');
+  async uploadFile(file: File, folder: string): Promise<string> {
+    if (!file) {
+      throw new Error('Invalid file');
     }
-    const storageRef = ref(this.storage, 'files/' + file.name);
+  
+    let storageRef: StorageReference;
+  
+    if (file.type.startsWith('image/')) {
+      storageRef = ref(this.storage, `${folder}/${file.name}`);
+    } else if (file.type === 'application/pdf') {
+      storageRef = ref(this.storage, `${folder}/${file.name}`);
+    } else {
+      throw new Error('Invalid file type');
+    }
   
     try {
       await this.uploadFileToStorage(storageRef, file);
@@ -44,18 +53,8 @@ export class StorageFirebaseService {
       throw error;
     }
   }
-
-  async getPreviewImageUrl(file: File): Promise<string> {
-    const storageRef = ref(this.storage, 'files/' + file.name);
   
-    try {
-      const url = await this.getDownloadUrl(storageRef);
-      return url;
-    } catch (error) {
-      console.error('Error getting preview image URL: ', error);
-      throw error;
-    }
-  }
+
 
 
   async deleteImage(imagePath: string): Promise<void> {
