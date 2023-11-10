@@ -163,6 +163,12 @@ export class UserFirebaseService{
         return findUsers; 
     }
 
+    setCurrentUserStatus(status:string){
+        this.currentUser.status = status; 
+        this.updateCurrentUserToFirebase(); 
+
+    }
+
     async getChannelForSearch(searchString:string){
         
         const searchKeywords = searchString.split(" ");

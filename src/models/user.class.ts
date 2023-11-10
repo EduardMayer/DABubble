@@ -5,6 +5,7 @@ export class User {
     avatar: string;
     channels: string[]; 
     chats: string[]; 
+    status: string; 
 
 
     constructor(obj?: any) {
@@ -14,6 +15,7 @@ export class User {
         this.avatar = obj ? obj.avatar : "assets/img/avatar/avatar0.svg";
         this.channels = obj ? obj.channels : []; 
         this.chats = obj ? obj.chats : []; 
+        this.status = obj ? obj.status : "offline"; 
     }
 
     toJSON() {
@@ -23,7 +25,8 @@ export class User {
             mail: this.mail,
             avatar: this.avatar, 
             channels: this.channels, 
-            chats: this.chats
+            chats: this.chats,
+            status: this.status
         }
     }
 }

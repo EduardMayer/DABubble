@@ -18,7 +18,7 @@ export class MainscreenComponent implements OnInit{
   threadOpen = true;
   sideNavOpen = true;
   userProfilOpen = false; 
-
+  userProfilUser = new User(); 
   seclectedChannel: string = "";
 
   constructor(
@@ -42,6 +42,7 @@ export class MainscreenComponent implements OnInit{
   ngOnInit(): void {
     this.UserProfilService.openUserProfil$.subscribe((user:User) =>{
       this.userProfilOpen = true; 
+      this.userProfilUser = user; 
     }); 
     this.UserProfilService.closeUserProfil$.subscribe(() =>{
       this.userProfilOpen = false; 

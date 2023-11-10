@@ -6,6 +6,8 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { Reaction } from 'src/models/reaction.class';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { User } from 'src/models/user.class';
+import { UserProfilService } from 'src/services/user-profil.service';
 
 @Component({
   selector: 'app-message',
@@ -14,6 +16,8 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
   providers: [MessageFirebaseService]
 })
 export class MessageComponent {
+
+  private autorUser = new User(); 
 
   public _message: Message | undefined;
   public autorName: string = "";
@@ -32,7 +36,8 @@ export class MessageComponent {
     public messageFirebaseService: MessageFirebaseService,
     public userFirebaseService: UserFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
-    private channelFirebaseService: ChannelFirebaseService
+    private channelFirebaseService: ChannelFirebaseService, 
+    private userProfilService: UserProfilService
   ) { }
 
   @Input()
@@ -169,6 +174,7 @@ export class MessageComponent {
 
   async setAutorName(autorId: string) {
     const autorValues = await this.userFirebaseService.getUserByUID(autorId);
+    this.autorUser = autorValues; 
 
     if (autorValues) {
       this.autorName = autorValues.fullName;
@@ -204,6 +210,10 @@ export class MessageComponent {
     const minutes = String(date.getMinutes()).padStart(2, '0'); // Ensure two digits with leading zero
 
     return hours + ':' + minutes;
+  }
+
+  openUserProfil(){
+    this.userProfilService.openUserProfil(this.autorUser); 
   }
 }
 

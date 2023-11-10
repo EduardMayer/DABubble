@@ -28,6 +28,12 @@
 
             div {
                 width: fit-content;
+                .message-username{
+                    &:hover{
+                        cursor: pointer;
+                        color: #797EF3;
+                    }
+                }
             }
 
         }

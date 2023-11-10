@@ -106,6 +106,7 @@ export class AuthFirebaseService implements OnInit {
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
         this.userService.syncMail(this.UserData.email);
         this.userService.load(); 
+        this.userService.setCurrentUserStatus("online"); 
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);

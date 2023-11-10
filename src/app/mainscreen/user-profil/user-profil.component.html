@@ -3,33 +3,33 @@
     <div id="UserProfilCard">
 
 
-    <div id="headerUserProfil-header">
-        <h3>Profil</h3>
-        <img (click)="close()" src="assets/img/icons/close.svg" alt="close">
-    </div>
-    <div id="headerUserProfil-image-container">
-        <img src="{{user.avatar}}" alt="">
-    </div>
-    <div id="headerUserProfil-ViewMode">
-        <div id="headerUserProfil-name">
-            <div>
-                <h2>{{user.fullName}}</h2>
+        <div id="headerUserProfil-header">
+            <h3>Profil</h3>
+            <img (click)="close()" src="assets/img/icons/close.svg" alt="close">
+        </div>
+        <div id="headerUserProfil-image-container">
+            <img src="{{user.avatar}}" alt="">
+        </div>
+        <div id="headerUserProfil-ViewMode">
+            <div id="headerUserProfil-name">
+                <div>
+                    <h2>{{user.fullName}}</h2>
+                </div>
+                <div>
+                    <a></a>
+                </div>
             </div>
-            <div>
-                <a>bearbeiten</a>
+            <div id="status">
+                <div id="statusIcon"></div>
+                <h4 id="statusFont">Status</h4>
+            </div>
+            <div id="headerUserProfil-email">
+                <div id="headerUserProfil-email-header">
+                    <img src="assets/img/icons/mailblack.svg" alt="mail">
+                    <h4>E-mail-Adresse</h4>
+                </div>
+                <h4>{{user.mail}}</h4>
             </div>
         </div>
-        <div id="status">
-            <div id="statusIcon"></div>
-            <h4 id="statusFont">Status</h4>
-        </div>
-        <div id="headerUserProfil-email">
-            <div id="headerUserProfil-email-header">
-                <img src="assets/img/icons/mailblack.svg" alt="mail">
-                <h4>E-mail-Adresse</h4>
-            </div>
-            <h4>{{user.mail}}</h4>
-        </div>
     </div>
-</div>
 </div>
