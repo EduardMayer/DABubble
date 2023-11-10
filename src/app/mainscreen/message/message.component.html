@@ -15,7 +15,7 @@
             <mat-card-content>
               {{ _message.content }}
               <ng-container *ngIf="_message.fileSrc">
-                <a [href]="_message.fileSrc" download="{{_message.fileSrc || 'downloaded_file'}}">
+                <a [href]="_message.fileSrc" target="_blank">
                   <img [src]="_message.fileSrc" alt="File Preview" style="max-width: 100%; max-height: 200px;">
                 </a>
               </ng-container>
