@@ -10,7 +10,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 })
 export class UserSearchComponent {
 
-  _message: Message | undefined;
+  _searchValue: string = "";
   showUserSearch = false;
   searchResultsUsers: User[] = [];
   clickListener: any;
@@ -22,56 +22,17 @@ export class UserSearchComponent {
   ) {
   }
 
-
-  @Input() set message(message: Message) {
-    this._message = message;
-
-    this.checkForAt();
-    this.getUsers("");
+  @Input() set searchValue(value: string) {
+    this._searchValue = value;
+    this.getUsers(this._searchValue);
   }
 
   @Output() userName: EventEmitter<User | boolean> = new EventEmitter<User | boolean>();
 
-
-
-
-  checkForAt() {
-
-    /*
-    const cursorStart = this.getcursorStartPosition(); 
-    if(cursorStart != undefined){
-      this.inputFieldUserSearch.nativeElement.style.left = cursorStart + "px"; 
-    }
-    */
-    if (this._message) {
-      const messageArray: String[] = this._message.content.split(" ");
-      let lastWord = messageArray[messageArray.length - 1];
-      lastWord = lastWord.replaceAll("\n", "");
-      if (lastWord.substring(0, 1) == "@") {
-        const searchString = lastWord.substring(1, lastWord.length);
-        //console.log("SearchString:" + searchString);
-        if (searchString !== "") {
-          this.showUserSearch = true;
-          this.getUsers(searchString);
-        }
-        else {
-          this.showUserSearch = true;
-          this.searchResultsUsers = this.userFirebaseService.loadedUsers;
-        }
-      }
-      else {
-        this.showUserSearch = false;
-        this.searchResultsUsers = [];
-      }
-    }
-  }
-
   clickUser(index: number) {
-    if (this._message) {
       this.userName.emit(this.searchResultsUsers[index]);
       //const name = this.searchResultsUsers[index].fullName
       //this._message.content += ;
-    }
   }
 
   getUsers(searchString: string) {
@@ -83,15 +44,13 @@ export class UserSearchComponent {
     });
   }
 
-
-
   ngAfterViewInit() {
     // Get the native element of the emoji-mart component
     // Add a click event listener to the emoji-mart component
     this.clickListener = this.renderer.listen('document', 'click', (event: MouseEvent) => {
       // Check if the event target is inside the emoji-mart element
 
-      const userSearchField = this.renderer.selectRootElement('#inputFieldUserSearch');
+      const userSearchField = this.el.nativeElement.querySelector('.user-search');
       if (userSearchField.contains(event.target as Node)) {
         //Clicked inside emoji-mart element
         console.log('Clicked inside the User-Selector element');

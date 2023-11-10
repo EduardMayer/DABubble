@@ -20,6 +20,7 @@ export class MessageCreateComponent {
   _path: string | undefined;
   location: string | undefined;
   searchResultsUsers: User[] = [];
+  searchValue: string = "";
 
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
@@ -123,30 +124,52 @@ export class MessageCreateComponent {
     event.stopPropagation();
   }
 
-  handleUserSearchResult(user: User | boolean) {
-    if (user == false) {
+  checkForAt() {
+    const messageArray: String[] = this.message.content.split(" ");
+    let lastWord = messageArray[messageArray.length - 1];
+    lastWord = lastWord.replaceAll("\n", "");
+    if (lastWord.substring(0, 1) == "@") {
+      const searchString = lastWord.substring(1, lastWord.length);
+      //console.log("SearchString:" + searchString);
+      if (searchString !== "") {
+        this.searchValue = searchString;
+        this.showUserSearch = true;
+      } else {
+        this.showUserSearch = true;
+        this.searchResultsUsers = this.userFirebaseService.loadedUsers;
+      }
+    }
+    else {
       this.showUserSearch = false;
-    } else if (user instanceof User) {
-      this.showUserSearch = false;
-      this.message.content += "@" + user.fullName;
+      this.searchResultsUsers = [];
     }
   }
 
-  handleEmojiSelection(selectedEmoji: string) {
-    if (selectedEmoji == "noSelection") {
-      console.log("noSelection");
-      this.closeEmojiBar();
-    } else {
-      this.message.content += selectedEmoji;
-    }
-  }
 
-  getcursorStartPosition() {
-    const inputElement: HTMLInputElement = this.textInput.nativeElement;
-    const cursorPositionStart = inputElement.selectionStart;
-    const cursorPositionEnd = inputElement.selectionEnd;
-    //console.log(`Cursor start position: ${cursorPositionStart}`);
-    //console.log(`Cursor end position: ${cursorPositionEnd}`);
-    return cursorPositionStart;
+handleUserSearchResult(user: User | boolean) {
+  if (user == false) {
+    this.showUserSearch = false;
+  } else if (user instanceof User) {
+    this.showUserSearch = false;
+    this.message.content += "@" + user.fullName;
   }
+}
+
+handleEmojiSelection(selectedEmoji: string) {
+  if (selectedEmoji == "noSelection") {
+    console.log("noSelection");
+    this.closeEmojiBar();
+  } else {
+    this.message.content += selectedEmoji;
+  }
+}
+
+getcursorStartPosition() {
+  const inputElement: HTMLInputElement = this.textInput.nativeElement;
+  const cursorPositionStart = inputElement.selectionStart;
+  const cursorPositionEnd = inputElement.selectionEnd;
+  //console.log(`Cursor start position: ${cursorPositionStart}`);
+  //console.log(`Cursor end position: ${cursorPositionEnd}`);
+  return cursorPositionStart;
+}
 }
