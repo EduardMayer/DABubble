@@ -55,7 +55,7 @@
         <div class="myMessages" id="myMessages" *ngIf="unpackMessages">
             <div class="message">
                 <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
-                <b>Frederick Beck(Du)</b>
+                <b (click)="openUserProfil(this.currentUser)">{{currentUser.fullName}} (Du)</b>
             </div>
 
             <div class="message">

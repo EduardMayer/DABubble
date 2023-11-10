@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
+import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { UserProfilService } from 'src/services/user-profil.service';
 
 @Component({
   selector: 'app-mainscreen',
   templateUrl: './mainscreen.component.html',
   styleUrls: ['./mainscreen.component.scss', '../../styles.scss']
 })
-export class MainscreenComponent {
+export class MainscreenComponent implements OnInit{
 
   channelOpen = true;
   threadOpen = true;
   sideNavOpen = true;
+  userProfilOpen = false; 
 
   seclectedChannel: string = "";
 
@@ -22,7 +25,8 @@ export class MainscreenComponent {
     public channelFirebaseService: ChannelFirebaseService,
     public userFirebaseService: UserFirebaseService,
     private authService: AuthFirebaseService,
-    public threadFirebaseService: ThreadFirebaseService
+    public threadFirebaseService: ThreadFirebaseService, 
+    private UserProfilService: UserProfilService
   ) {
     setTimeout(() => {
       if (this.userFirebaseService.currentUser.id) {
@@ -33,6 +37,15 @@ export class MainscreenComponent {
         this.channelFirebaseService.loadedChannels;
       }, 2000);
     }, 2000);
+  }
+
+  ngOnInit(): void {
+    this.UserProfilService.openUserProfil$.subscribe((user:User) =>{
+      this.userProfilOpen = true; 
+    }); 
+    this.UserProfilService.closeUserProfil$.subscribe(() =>{
+      this.userProfilOpen = false; 
+    })
   }
 
 

@@ -15,6 +15,11 @@
     <h4 *ngIf="!sideNavOpen">Workspace-Menü öffnen</h4>
 </div>
 
+<div *ngIf="userProfilOpen">
+    <app-user-profil></app-user-profil>
+</div>
+
+
 <!--
 EXAMPLE MESSAGE OUTPUT
 <app-message [id]="messageRef"></app-message>
