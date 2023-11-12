@@ -1,22 +1,21 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { User } from 'src/models/user.class';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
+import { Observable, map, startWith } from 'rxjs';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-message-create',
-  templateUrl:'./message-create.component.html',
+  templateUrl: './message-create.component.html',
   styleUrls: ['./message-create.component.scss']
 })
 export class MessageCreateComponent {
 
-  
-
-  messageControl: FormControl = new FormControl();
   message = new Message();
   showEmojiBar: boolean = false;
   showUserSearch: boolean = false;
@@ -25,10 +24,14 @@ export class MessageCreateComponent {
   searchResultsUsers: User[] = [];
   searchValue: string = "";
   file: string = "";
-  imageUrl?: string; 
+  imageUrl?: string;
+  showAutocomplete: boolean = false;
 
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
+
+  @Output() searchTerm: EventEmitter<string> = new EventEmitter();
+
 
 
   /**
@@ -50,6 +53,7 @@ export class MessageCreateComponent {
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
     private storageService: StorageFirebaseService,
+    private fb: FormBuilder
   ) { }
 
   /**
@@ -85,6 +89,43 @@ export class MessageCreateComponent {
   }
 
 
+
+  //Autocomplete Options
+  mentionConfig: { items: string[], triggerChar: string, dropUp: boolean } = {
+    items: this.getCurrentUsersAsStringArray(),
+    triggerChar: "@",
+    dropUp: true
+  };
+
+  getCurrentUsersAsStringArray() {
+    let usersByName: string[] = [];
+    this.userFirebaseService.loadedUsers.forEach((user) => {
+      usersByName.push(user.fullName);
+    });
+    return usersByName;
+  }
+
+
+  addATtoMsg() {
+
+    this.searchTerm.emit("@");
+    this.textInput.nativeElement.focus();
+    this.textInput.nativeElement.value += "@";
+
+    // Trigger input event to simulate user typing
+    var inputEvent = new Event('input', { bubbles: true });
+    this.textInput.nativeElement.dispatchEvent(inputEvent);
+
+    // Trigger change event to simulate value change
+    var changeEvent = new Event('change', { bubbles: true });
+    this.textInput.nativeElement.dispatchEvent(changeEvent);
+  }
+
+
+
+
+
+
   /**
    * Toggles the visibility of the emoji list.
    */
@@ -111,7 +152,7 @@ export class MessageCreateComponent {
   */
   setMessageAutor() {
     this.message.autorId = this.userFirebaseService.currentUser.id;
-     
+
     this.message.avatarSrc = this.userFirebaseService.currentUser.avatar;
 
     if (!this.message.autorId) {
@@ -131,6 +172,10 @@ export class MessageCreateComponent {
     this.showUserSearch = !this.showUserSearch;
     event.stopPropagation();
   }
+
+
+
+
 
   checkForAt() {
     const messageArray: String[] = this.message.content.split(" ");
@@ -153,54 +198,45 @@ export class MessageCreateComponent {
     }
   }
 
-  handleUserSearchResult(user: User | boolean) {
-    if (user == false) {
-      this.showUserSearch = false;
-    } else if (user instanceof User) {
-      this.showUserSearch = false;
-      this.message.content += "@" + user.fullName;
+  handleEmojiSelection(selectedEmoji: string) {
+    if (selectedEmoji == "noSelection") {
+      console.log("noSelection");
+      this.closeEmojiBar();
+    } else {
+      this.message.content += selectedEmoji;
     }
-
   }
-    handleEmojiSelection(selectedEmoji: string) {
-      if (selectedEmoji == "noSelection") {
-        console.log("noSelection");
-        this.closeEmojiBar();
-      } else {
-        this.message.content += selectedEmoji;
-      }
-    }
 
-    getcursorStartPosition() {
-      const inputElement: HTMLInputElement = this.textInput.nativeElement;
-      const cursorPositionStart = inputElement.selectionStart;
-      const cursorPositionEnd = inputElement.selectionEnd;
-      //console.log(`Cursor start position: ${cursorPositionStart}`);
-      //console.log(`Cursor end position: ${cursorPositionEnd}`);
-      return cursorPositionStart;
-    }
-  
+  getcursorStartPosition() {
+    const inputElement: HTMLInputElement = this.textInput.nativeElement;
+    const cursorPositionStart = inputElement.selectionStart;
+    const cursorPositionEnd = inputElement.selectionEnd;
+    //console.log(`Cursor start position: ${cursorPositionStart}`);
+    //console.log(`Cursor end position: ${cursorPositionEnd}`);
+    return cursorPositionStart;
+  }
 
-    async uploadFile(input: HTMLInputElement) {
-      if (!input.files || input.files.length === 0) return;
-      const file = input.files[0];
-    
-      try {
-        const url = await this.storageService.uploadFile(file, 'files');
-        this.file = url;
-      } catch (error) {
-        console.error('Error uploading file: ', error);
-      }
-    }
 
-    async deleteFile() {
-      try {
-        await this.storageService.deleteImage(this.file);
-        this.file = '';
-      } catch (error) {
-        console.error('Fehler beim Löschen des Bildes: ', error);
-      }
+  async uploadFile(input: HTMLInputElement) {
+    if (!input.files || input.files.length === 0) return;
+    const file = input.files[0];
+
+    try {
+      const url = await this.storageService.uploadFile(file, 'files');
+      this.file = url;
+    } catch (error) {
+      console.error('Error uploading file: ', error);
     }
+  }
+
+  async deleteFile() {
+    try {
+      await this.storageService.deleteImage(this.file);
+      this.file = '';
+    } catch (error) {
+      console.error('Fehler beim Löschen des Bildes: ', error);
+    }
+  }
 
 
   getFileType(fileName: string): string {

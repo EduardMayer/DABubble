@@ -47,6 +47,7 @@ import { ResetPasswordComponent } from './startscreen/reset-password/reset-passw
 import { MessageEditComponent } from './mainscreen/message/message-edit/message-edit.component';
 import { UserSearchComponent } from './mainscreen/user-search/user-search.component';
 import { UserProfilComponent } from './mainscreen/user-profil/user-profil.component';
+import { MentionModule } from 'angular-mentions';
 
 
 
@@ -102,7 +103,8 @@ import { UserProfilComponent } from './mainscreen/user-profil/user-profil.compon
     MatDialogModule,
     MatBadgeModule,
     MatToolbarModule,
-    PickerModule
+    PickerModule,
+    MentionModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

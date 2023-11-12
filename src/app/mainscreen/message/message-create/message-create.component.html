@@ -1,28 +1,29 @@
 <app-addreaction *ngIf="showEmojiBar" (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
-<app-user-search *ngIf="showUserSearch" [searchValue]="searchValue" (userName)="handleUserSearchResult($event)"></app-user-search>
 <div class="msg-create-container">
     <div class='option-icons'>
         <div class="msg-mods">
             <input type="file" #fileInput style="display: none" (change)="uploadFile(fileInput)">
-            <img src="assets/img/icons/add.svg" (click)="fileInput.click()" >
+            <img src="assets/img/icons/add.svg" (click)="fileInput.click()">
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
-            <img src="assets/img/icons/alternateemail.svg" (click)="toogleUserSearch($event)">
+            <img src="assets/img/icons/alternateemail.svg" (click)="addATtoMsg()">
             <div class="preview-file" *ngIf="file !== ''">
                 <img [src]="file" />
-                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt="" srcset="">
+                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt=""
+                    srcset="">
             </div>
         </div>
-       
+
         <div class="msg-send">
             <img src="assets/img/icons/send.svg" (click)="createMessage()">
         </div>
     </div>
 
     <div>
-    <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
-        *ngIf="channelFirebaseService.selectedChannel" placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()"
-        (keyup)="checkForAt()">
-    </textarea>
+        <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container"
+            [(ngModel)]="message.content" *ngIf="channelFirebaseService.selectedChannel"
+            placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()" [mentionConfig]="mentionConfig">
+            </textarea>
+
 
     </div>
 </div>
