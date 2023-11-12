@@ -16,10 +16,8 @@ import { GenerateIdService } from './generate-id.service';
 export class ChannelFirebaseService {
 
     public loadedChannels: Channel[] = [];
-    private unsubChannels: any; //Whats the type?
-
+    private unsubChannels: any;
     private unsubChannel: any;
-
 
     channelUsers: User[] = [];
     userService = inject(UserFirebaseService);
@@ -31,6 +29,7 @@ export class ChannelFirebaseService {
 
     lastMessageTimeString: string = "01.01.1970";
     previousMessageTimeString: string = "01.01.1970";
+    currentChannelMessagePath: string = ""
 
     constructor(
         private firestore: Firestore,
@@ -43,6 +42,7 @@ export class ChannelFirebaseService {
         this.loadChannelMessages(channelId);
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
+        this.currentChannelMessagePath = `channels/${channelId}/messages/`;
     }
 
 

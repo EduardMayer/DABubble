@@ -28,15 +28,6 @@ export class MainscreenComponent implements OnInit{
     public threadFirebaseService: ThreadFirebaseService, 
     private UserProfilService: UserProfilService
   ) {
-    setTimeout(() => {
-      if (this.userFirebaseService.currentUser.id) {
-        this.channelFirebaseService.load(this.userFirebaseService.currentUser.id);
-      }
-      console.log(this.userFirebaseService.currentUser.id);
-      setTimeout(() => {
-        this.channelFirebaseService.loadedChannels;
-      }, 2000);
-    }, 2000);
   }
 
   ngOnInit(): void {

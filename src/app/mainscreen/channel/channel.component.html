@@ -55,5 +55,5 @@
         </app-date-line>
     </div>
 
-    <app-message-create [path]="messagePath" [currentLocation]="'channel'"></app-message-create>
+    <app-message-create [path]="this.channelFirebaseService.currentChannelMessagePath" [currentLocation]="'channel'"></app-message-create>
 </mat-card>

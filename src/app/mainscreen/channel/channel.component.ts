@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
@@ -20,10 +20,6 @@ export class ChannelComponent {
     public channelFirebaseService: ChannelFirebaseService,
     public userFirebaseService: UserFirebaseService
   ) {
-    if (channelFirebaseService.selectedChannel) {
-      channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
-      this.messagePath=`channels/${channelFirebaseService.selectedChannel.id}/messages/`;
-    }
   }
 
   getMessageTime(message: Message) {
@@ -51,7 +47,7 @@ export class ChannelComponent {
 
   loadallChannelusers() {
     this.userFirebaseService.loadedUsers.forEach(user => {
-    
+
       user.channels.forEach(channel => {
         debugger;
 
@@ -59,17 +55,17 @@ export class ChannelComponent {
         console.log('now selected channel is', this.channelFirebaseService.selectedChannel?.channelName);
 
 
-        if(channel === this.channelFirebaseService.selectedChannel?.channelName) {
+        if (channel === this.channelFirebaseService.selectedChannel?.channelName) {
           this.userOnCurrentChannel.push(user);
         }
 
-        
+
       });
 
       console.log(user);
     });
     console.log('all users fir in chasnnechannel', this.userOnCurrentChannel);
-    
+
   }
 
 }

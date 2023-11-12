@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { UserFirebaseService } from './user-firebase.service';
 import { throwError } from 'rxjs';
 import { UserStatusFirebaseService } from './user-status-firebase.service';
+import { ChannelFirebaseService } from './channel-firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,7 @@ export class AuthFirebaseService implements OnInit {
 
 
   firebaseUserService = inject(UserFirebaseService);
+  channelFirebaseService = inject(ChannelFirebaseService);
   UserData: any;
 
 
@@ -107,6 +109,13 @@ export class AuthFirebaseService implements OnInit {
         this.userService.load();
         this.userService.setCurrentUserStatus("online");
         this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
+
+
+        //
+        this.channelFirebaseService.load(this.UserData.uid);
+        this.userService.currentUser.id = this.UserData.uid;
+        //
+
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);

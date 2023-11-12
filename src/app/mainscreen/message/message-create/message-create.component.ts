@@ -112,14 +112,6 @@ export class MessageCreateComponent {
   addATtoMsg() {
     this.textInput.nativeElement.value += "@";
   }
-
-
-  onTextInput(event: Event) {
-    console.log(event);
-    //const inputValue = (event.target as HTMLInputElement).value;
-    //console.log('Input Event:', inputValue);
-  }
-
  
   insAt() {
     if(this.mention){

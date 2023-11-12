@@ -89,4 +89,20 @@ export class SearchbarComponent implements OnInit{
     this.channelService.selectChannel(this.searchResultsChannels[index].id); 
   }
 
+
+  mentionConfig: { items: string[], triggerChar: string, dropUp: boolean } = {
+    items: this.getCurrentUsersAsStringArray(),
+    triggerChar: "@",
+    dropUp: false
+  };
+
+  getCurrentUsersAsStringArray() {
+    let usersByName: string[] = [];
+    this.userService.loadedUsers.forEach((user) => {
+      usersByName.push(user.fullName);
+    });
+    console.log(this.userService.loadedUsers);
+    return usersByName;
+
+  } 
 }

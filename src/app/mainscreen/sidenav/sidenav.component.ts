@@ -34,7 +34,6 @@ currentUser:User = new User();
 
 
   showChannels() {
-
     if(this.unpackChannels == false) {
       this.unpackChannels = true;
     } else {
