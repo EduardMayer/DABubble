@@ -10,6 +10,8 @@ import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MentionDirective } from 'angular-mentions';
 
+
+
 @Component({
   selector: 'app-message-create',
   templateUrl: './message-create.component.html',
@@ -241,7 +243,5 @@ export class MessageCreateComponent {
       console.error('Fehler beim Löschen der Datei: ', error);
     }
   }
-
-
 
 }

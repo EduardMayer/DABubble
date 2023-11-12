@@ -218,5 +218,10 @@ export class MessageComponent {
   openUserProfil(){
     this.userProfilService.openUserProfil(this.autorUser); 
   }
+
+  isPDF(fileName: string): boolean {
+    return fileName.toLowerCase().endsWith('.pdf');
+  }
+  
 }
 
