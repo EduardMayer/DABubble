@@ -29,7 +29,13 @@ currentUser:User = new User();
   ) {}
 
   ngOnInit(): void {
-    this.currentUser = this.userFirebaseService.currentUser; 
+   this.userFirebaseService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid)
+    .then((user) => { 
+        this.currentUser = user
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
 
@@ -62,6 +68,10 @@ currentUser:User = new User();
   }
 
   openUserProfil(user:User){
+    console.log("open user");
+    console.log(user);
+    
+    
     this.userProfilService.openUserProfil(user); 
   }
 }

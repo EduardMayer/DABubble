@@ -17,8 +17,8 @@
         max-width: 500px;
         min-height: 100px;
         background-color: white;
-        border-radius: 30px;
         padding: 24px;
+        box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
 
 
         #headerUserProfil-header {
@@ -62,8 +62,6 @@
             }
         }
         
-
-
         #headerUserProfil-email {
             display: flex;
             flex-direction: column;
@@ -72,7 +70,63 @@
                 display: flex;
                 gap: 12px;
             }
+            #headerUserProfil-email-address{
+                padding-left: 36px;
+                a{
+                    font-style: normal;
+                    color: #444DF2;
+                    margin-top: 0px;
+                    text-decoration: none;
+                }
+            }
         }
+
+        #headerUserProfil-message{
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            button{
+                display: flex;
+                justify-content: center;
+                align-items: center; 
+                gap:8px; 
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+#headerUserProfil-EditMode {
+
+    .headerUserProfil-EditMode-Row {
+        display: flex;
+        align-items: center;
+        gap: 12px; 
+        img{
+            width: 24px;
+            height: 24px;
+        }
+    }
+    input {
+        border-radius: 30px;
+        color: #686868;
+        border: 1px solid #686868;
+        padding: 15px 20px 15px 20px;
+        font-family: 'Nunito', sans-serif;
+        width: calc(100% - 40px);
+    }
+    #headerUserProfil-EditMode-btn-container{
+        margin-top: 12px; 
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 24px; 
+    }
+    #headerUserProfil-EditMode-EditMailInfo{
+        color: red; 
     }
 }
 
@@ -93,4 +147,22 @@
     #statusIcon {
         background-color: gray;
     }
+}
+
+.currentUserPosition{
+    /*
+    padding: 24px;
+    min-width: 100px;
+    max-width: 500px;
+    min-height: 100px;
+    z-index: 10;
+    */
+    top: 100px;
+    right: 24px;
+    position: absolute;
+    border-radius: 30px 0px 30px 30px;
+    
+}
+.otherUserPosition{
+    border-radius: 30px;
 }

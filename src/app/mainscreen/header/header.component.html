@@ -15,76 +15,10 @@
             <button mat-icon-button (click)="toogleHeaderMenu()">
                 <mat-icon>expand_more</mat-icon>
             </button>
-
-            <!--  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>expand_more</mat-icon>
-              </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Profil</button>
-                <button mat-menu-item (click)="logout()">Logout</button>
-            </mat-menu> -->
         </div>
     </div>
     <div id="headerMenu" *ngIf="showHeaderMenu">
         <a (click)="showProfil()">Profil</a>
         <a (click)="logout()">Logout</a>
-    </div>
-    <div id="headerUserProfil" *ngIf="showHeaderUserProfil">
-        <div id="headerUserProfil-header">
-            <h3>Profil</h3>
-            <img src="assets/img/icons/close.svg" alt="close" (click)="showHeaderUserProfil=false">
-        </div>
-        <div id="headerUserProfil-image-container">
-            <img src="{{user.avatar}}" alt="">
-        </div>
-        <div *ngIf="!editUserMode" id="headerUserProfil-ViewMode">
-            <div id="headerUserProfil-name">
-                <div>
-                    <h2>{{user.fullName}}</h2>
-                </div>
-                <div>
-                    <a (click)="editUserMode=true">bearbeiten</a>
-                </div>
-            </div>
-            <div id="status">
-                <div id="statusIcon"></div>
-                <h4 id="statusFont">Status</h4>
-            </div>
-            <div id="headerUserProfil-email">
-                <div id="headerUserProfil-email-header">
-                    <img src="assets/img/icons/mailblack.svg" alt="mail">
-                    <h4>E-mail-Adresse</h4>
-                </div>
-                <h4>{{user.mail}}</h4>
-            </div>
-        </div>
-        <div *ngIf="editUserMode" id="headerUserProfil-EditMode">
-            <form [formGroup]="editUserForm" (ngSubmit)="editUser()">
-                <div>
-                    <div class="headerUserProfil-EditMode-Row">
-                        <img src="assets/img/icons/accountIcon.png" alt="">
-                        <h3>Vollständiger Name</h3>
-                    </div>
-                    <input type="text" formControlName="nameInput">
-                </div>
-                <div>
-                    <div class="headerUserProfil-EditMode-Row">
-                        <img src="assets/img/icons/mailblack.svg" alt="email">
-                        <h3>E-Mail-Adresse</h3>
-                    </div>
-                    <input type="email" formControlName="emailInput" [(ngModel)]="currentUserInput">
-                </div>
-                <div id="headerUserProfil-EditMode-EditMailInfo">
-                    <h3 *ngIf="currentUserInput != currentAuthMail">
-                        Achtung: Wenn Sie Ihre E-Mail-Adresse ändern, müssen Sie diese per Mail verifizieren. 
-                        Sie werden ausgeloggt und können sich nach Bestätigung mit ihrere neuen E-Mail Adresse anmelden.
-                    </h3>
-                </div>
-                <div id="headerUserProfil-EditMode-btn-container">
-                    <button class="btn-white" (click)="closeWithoutSave()">Abbrechen</button>
-                    <button class="btn-blue" type="submit" [disabled]="!editUserForm.valid">Speichern</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>

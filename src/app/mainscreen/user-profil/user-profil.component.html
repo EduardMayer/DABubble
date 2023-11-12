@@ -1,8 +1,6 @@
 <div id="UserProfil">
 
-    <div id="UserProfilCard">
-
-
+    <div id="UserProfilCard" [class.currentUserPosition]="isCurrentUser" [class.otherUserPosition]="!isCurrentUser">
         <div id="headerUserProfil-header">
             <h3>Profil</h3>
             <img (click)="close()" src="assets/img/icons/close.svg" alt="close">
@@ -10,19 +8,17 @@
         <div id="headerUserProfil-image-container">
             <img src="{{user.avatar}}" alt="">
         </div>
-        <div id="headerUserProfil-ViewMode">
+        <div id="headerUserProfil-ViewMode" *ngIf="!editUserMode">
             <div id="headerUserProfil-name">
                 <div>
                     <h2>{{user.fullName}}</h2>
                 </div>
                 <div>
-                    <a></a>
+                    <a *ngIf="isCurrentUser" (click)="editUserMode=true">bearbeiten</a>
                 </div>
             </div>
-            <div id="status" 
-                [class.col-red] = "user.status === 'offline'" 
-                [class.col-green] = "user.status === 'online'" 
-                [class.col-gray] = "user.status !== 'online' && user.status !== 'offline'">
+            <div id="status" [class.col-red]="user.status === 'offline'" [class.col-green]="user.status === 'online'"
+                [class.col-gray]="user.status !== 'online' && user.status !== 'offline'">
                 <div id="statusIcon"></div>
                 <h4 id="statusFont">{{user.status}}</h4>
             </div>
@@ -31,8 +27,44 @@
                     <img src="assets/img/icons/mailblack.svg" alt="mail">
                     <h4>E-mail-Adresse</h4>
                 </div>
-                <h4>{{user.mail}}</h4>
+                <div  id="headerUserProfil-email-address">
+                    <a href="mailto:{{user.mail}}">{{user.mail}}</a>
+                </div>
             </div>
+            <div *ngIf="!isCurrentUser" id="headerUserProfil-message">
+                <button class="btn-blue">
+                    <img src="assets/img/icons/message.svg" alt="message">
+                    Nachricht
+                </button>
+            </div>
+        </div>
+        <div *ngIf="editUserMode && isCurrentUser" id="headerUserProfil-EditMode">
+            <form [formGroup]="editUserForm" (ngSubmit)="editUser()">
+                <div>
+                    <div class="headerUserProfil-EditMode-Row">
+                        <img src="assets/img/icons/accountIcon.png" alt="">
+                        <h3>Vollständiger Name</h3>
+                    </div>
+                    <input type="text" formControlName="nameInput">
+                </div>
+                <div>
+                    <div class="headerUserProfil-EditMode-Row">
+                        <img src="assets/img/icons/mailblack.svg" alt="email">
+                        <h3>E-Mail-Adresse</h3>
+                    </div>
+                    <input type="email" formControlName="emailInput" [(ngModel)]="currentUserInput">
+                </div>
+                <div id="headerUserProfil-EditMode-EditMailInfo">
+                    <h3 *ngIf="currentUserInput != currentAuthMail">
+                        Achtung: Wenn Sie Ihre E-Mail-Adresse ändern, müssen Sie diese per Mail verifizieren.
+                        Sie werden ausgeloggt und können sich nach Bestätigung mit ihrere neuen E-Mail Adresse anmelden.
+                    </h3>
+                </div>
+                <div id="headerUserProfil-EditMode-btn-container">
+                    <button class="btn-white" (click)="closeWithoutSave()">Abbrechen</button>
+                    <button class="btn-blue" type="submit" [disabled]="!editUserForm.valid">Speichern</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

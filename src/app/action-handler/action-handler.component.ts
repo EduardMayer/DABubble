@@ -22,8 +22,8 @@ export class ActionHandlerComponent implements OnInit {
       const oobCode = queryParams.get('oobCode');
       const apiKey = queryParams.get('apiKey');
 
-      if (mode == "recoverEmail") {
-        this.recoverEmail(oobCode!); 
+      if (mode == "verifyAndChangeEmail") {
+        this.verifyAndChangeEmail(oobCode!); 
       }
       else if (mode == "resetPassword") {
         this.router.navigate(['reset', oobCode], { queryParams: { oobCode: oobCode } });
@@ -35,7 +35,7 @@ export class ActionHandlerComponent implements OnInit {
    * Verify change or recover email an redirects to main after confirm. 
    * @param oobCode - oobCode from Url to verfy firebase change action. 
    */
-  recoverEmail(oobCode:string){
+  verifyAndChangeEmail(oobCode:string){
     if (oobCode) {
       this.authService.applyActionCode(oobCode);
     }
