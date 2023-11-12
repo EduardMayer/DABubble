@@ -48,6 +48,7 @@ import { MessageEditComponent } from './mainscreen/message/message-edit/message-
 import { UserSearchComponent } from './mainscreen/user-search/user-search.component';
 import { UserProfilComponent } from './mainscreen/user-profil/user-profil.component';
 import { MentionModule } from 'angular-mentions';
+import { getDatabase, provideDatabase } from '@angular/fire/database';
 
 
 
@@ -98,6 +99,7 @@ import { MentionModule } from 'angular-mentions';
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
+    provideDatabase(() => getDatabase()),
     BrowserAnimationsModule,
     MatMenuModule,
     MatDialogModule,

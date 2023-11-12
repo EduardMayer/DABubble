@@ -6,5 +6,6 @@ export const environment = {
     apiKey: 'AIzaSyD1r-PAOZNv13HuFqPGEjhc2l-oKzznAlI',
     authDomain: 'dabubble-aa8ad.firebaseapp.com',
     messagingSenderId: '73912220171',
+    databaseURL: "https://dabubble-aa8ad-default-rtdb.europe-west1.firebasedatabase.app"
   },
 };

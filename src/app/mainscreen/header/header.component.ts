@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit{
 
   async ngOnInit(): Promise<void> {
     //console.log( this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid));
-    const user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
-    this.user = user; 
+
+    this.user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
     this.editUserForm.patchValue({
       nameInput: this.user.fullName, 
       emailInput: this.user.mail
@@ -91,6 +91,7 @@ export class HeaderComponent implements OnInit{
   showProfil(){
     this.showHeaderMenu = false;
     this.showHeaderUserProfil = true; 
+
   }
 
   /**

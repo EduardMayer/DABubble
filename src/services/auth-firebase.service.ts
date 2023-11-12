@@ -18,6 +18,7 @@ import {
 import { Router } from '@angular/router';
 import { UserFirebaseService } from './user-firebase.service';
 import { throwError } from 'rxjs';
+import { UserStatusFirebaseService } from './user-status-firebase.service';
 
 @Injectable({
   providedIn: 'root'
@@ -95,7 +96,7 @@ export class AuthFirebaseService implements OnInit {
    * @param router - Angular Router
    * @param ngZone 
    */
-  constructor(private auth: Auth, private router: Router, public ngZone: NgZone, private userService: UserFirebaseService) {
+  constructor(private auth: Auth, private router: Router, public ngZone: NgZone, private userService: UserFirebaseService, private UserStatusService: UserStatusFirebaseService) {
     onAuthStateChanged(this.auth, async (user: any) => {
       //console.log("AuthStateChanged"); 
       if (user) {
@@ -107,6 +108,7 @@ export class AuthFirebaseService implements OnInit {
         this.userService.syncMail(this.UserData.email);
         this.userService.load(); 
         this.userService.setCurrentUserStatus("online"); 
+        this.UserStatusService.writeUserStatus(this.UserData.uid , "online"); 
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -146,6 +148,7 @@ export class AuthFirebaseService implements OnInit {
    * Loggout the User and redirect to startscreen. 
    */
   logout() {
+    this.UserStatusService.writeUserStatus(this.UserData.uid , "offline"); 
     signOut(this.auth).then(() => { this.router.navigate(['']) })
   }
 
