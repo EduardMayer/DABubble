@@ -61,7 +61,7 @@ export class MessageCreateComponent {
   * @returns {Promise<void>}
   */
   async createMessage() {
-    if (this.message.content) {
+    if (this.message.content || this.file) {
       this.message.timestamp = Date.now();
       this.setMessageAutor();
       if (this._path) {

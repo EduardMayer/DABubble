@@ -24,7 +24,6 @@ export class ChannelComponent {
       channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
       this.messagePath=`channels/${channelFirebaseService.selectedChannel.id}/messages/`;
     }
-    //this.loadallChannelusers();
   }
 
   getMessageTime(message: Message) {

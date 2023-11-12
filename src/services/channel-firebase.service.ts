@@ -35,11 +35,7 @@ export class ChannelFirebaseService {
     constructor(
         private firestore: Firestore,
         private generateIdService: GenerateIdService
-        ) {
-        setTimeout(() => {
-            this.selectChannel("F8tiKVNq6FePPOb4BDps"); // FOR DEVELOPMENT     
-        }, 3000)
-
+    ) {
     }
 
     selectChannel(channelId: string) {
@@ -134,7 +130,7 @@ export class ChannelFirebaseService {
      */
     async updateChannel(channel: Channel) {
         if (channel.id == "") {
-            channel.id=this.generateIdService.generateRandomId(20);
+            channel.id = this.generateIdService.generateRandomId(20);
             const docInstance = doc(collection(this.firestore, "channels"));
             setDoc(docInstance, channel.toJSON());
         } else {
