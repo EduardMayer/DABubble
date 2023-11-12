@@ -13,16 +13,14 @@ export class ThreadFirebaseService {
     public loadedThread: Thread | undefined;
     message?: Message;
     public loadedAnswers!: Message[];
-    threadOpen: boolean = false;
     path: string = "";
     unsubAnswers: any;
 
     constructor(
-        private firestore: Firestore
+        private firestore: Firestore,
     ) { }
 
     openThread(message: Message) {
-        this.threadOpen = true;
         this.message = message;
         this.path = message.path;
         this.loadAnswers(message);
@@ -34,7 +32,6 @@ export class ThreadFirebaseService {
 
     async loadAnswers(message: Message) {
         let path = message.path + `/answers/`;
-
         this.unsubAnswers = onSnapshot(this.loadAnswersQuery(path), (querySnapshot: any) => {
             this.loadedAnswers = [];
             querySnapshot.forEach((doc: any) => {

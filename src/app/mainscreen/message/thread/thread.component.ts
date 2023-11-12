@@ -24,8 +24,6 @@ export class ThreadComponent {
     public channelFirebaseService: ChannelFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
     public userFirebase: UserFirebaseService) {
-
-    this.answersPath = this.getAnswersPath();
   }
 
   getMessageTimeString(message: Message) {
@@ -38,12 +36,8 @@ export class ThreadComponent {
     }
   }
 
-  getAnswersPath() {
-    if (this.channelFirebaseService.selectedChannel && this.threadFirebaseService.message) {
-      return `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${this.threadFirebaseService.message.id}/answers/`;
-    } else {
-      return "";
-    }
+  getAnswersPath(){
+    return this.threadFirebaseService.message?.path+"/answers/";
   }
 
   toggleEmojiList() {
@@ -68,7 +62,6 @@ export class ThreadComponent {
 
   closeThread() {
     this.threadFirebaseService.message = undefined;
-    this.threadFirebaseService.threadOpen = false;
   }
 
   formatDateToDMY(date: Date) {
