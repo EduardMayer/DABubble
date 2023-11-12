@@ -17,6 +17,7 @@ import { MentionDirective } from 'angular-mentions';
 })
 export class MessageCreateComponent {
 
+  fileName: string = '';
   message = new Message();
   showEmojiBar: boolean = false;
   showUserSearch: boolean = false;
@@ -68,6 +69,7 @@ export class MessageCreateComponent {
       this.setMessageAutor();
       if (this._path) {
         this.message.fileSrc = this.file;
+        this.message.fileName = this.fileName;
         this.messageFirebaseService.createMessage(this._path, this.message);
       }
       this.message = new Message();
@@ -121,17 +123,12 @@ export class MessageCreateComponent {
   }
 
  
-
   insAt() {
     if(this.mention){
       this.mention.startSearch();
     }
 
   }
-
-
-
-
 
 
   /**
@@ -182,9 +179,6 @@ export class MessageCreateComponent {
   }
 
 
-
-
-
   checkForAt() {
     const messageArray: String[] = this.message.content.split(" ");
     let lastWord = messageArray[messageArray.length - 1];
@@ -224,32 +218,30 @@ export class MessageCreateComponent {
     return cursorPositionStart;
   }
 
-
   async uploadFile(input: HTMLInputElement) {
     if (!input.files || input.files.length === 0) return;
+
     const file = input.files[0];
 
     try {
-      const url = await this.storageService.uploadFile(file, 'files');
-      this.file = url;
+        const url = await this.storageService.uploadFile(file, 'files');
+        this.file = url;
+        this.fileName = file.name;
     } catch (error) {
-      console.error('Error uploading file: ', error);
+        console.error('Error uploading file: ', error);
     }
-  }
+}
+ 
 
   async deleteFile() {
     try {
       await this.storageService.deleteImage(this.file);
       this.file = '';
     } catch (error) {
-      console.error('Fehler beim Löschen des Bildes: ', error);
+      console.error('Fehler beim Löschen der Datei: ', error);
     }
   }
 
 
-  getFileType(fileName: string): string {
-    const fileType = fileName.split('.').pop();
-    return fileType ? fileType.toUpperCase() : 'UNKNOWN';
-  }
 
 }

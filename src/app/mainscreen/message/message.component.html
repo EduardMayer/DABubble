@@ -16,7 +16,7 @@
               {{ _message.content }}
               <ng-container *ngIf="_message.fileSrc">
                 <a [href]="_message.fileSrc" target="_blank">
-                  <img [src]="_message.fileSrc" alt="File Preview" style="max-width: 100%; max-height: 200px;">
+                  <img [src]="_message.fileSrc" alt="{{ _message.fileName }}" style="max-width: 100%; max-height: 200px;">
                 </a>
               </ng-container>
               

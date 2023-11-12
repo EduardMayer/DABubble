@@ -8,8 +8,9 @@
             <img src="assets/img/icons/alternateemail.svg" (click)="insAt()">
             <div class="preview-file" *ngIf="file !== ''">
                 <img [src]="file" />
-                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt=""
-                    srcset="">
+                <!-- Anzeigen des Dateinamens -->
+                {{ fileName }}
+                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt="" srcset="">
             </div>
         </div>
 

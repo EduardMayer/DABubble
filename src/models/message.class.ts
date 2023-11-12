@@ -7,6 +7,7 @@ export class Message {
     autorId: string;
     avatarSrc: string;
     fileSrc: string;
+    fileName: string;
     reactions: Reaction[];
     path: string;
 
@@ -18,6 +19,7 @@ export class Message {
         this.avatarSrc = obj ? obj.avatarSrc : "";
         this.path = obj ? obj.path : "";
         this.fileSrc= obj ? obj.fileSrc : "";
+        this.fileName= obj ? obj.fileName : "";
         this.reactions = obj ? obj.reactions : [];
     }
 
@@ -28,7 +30,8 @@ export class Message {
             autorId: this.autorId,
             avatarSrc: this.avatarSrc,
             reactions: this.reactions,
-            fileSrc: this.fileSrc
+            fileSrc: this.fileSrc,
+            fileName: this.fileName
         }
     }
 }
