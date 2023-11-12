@@ -98,17 +98,15 @@ export class AuthFirebaseService implements OnInit {
    */
   constructor(private auth: Auth, private router: Router, public ngZone: NgZone, private userService: UserFirebaseService, private UserStatusService: UserStatusFirebaseService) {
     onAuthStateChanged(this.auth, async (user: any) => {
-      //console.log("AuthStateChanged"); 
       if (user) {
         this.UserData = user;
         localStorage.setItem('user', JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem('user')!);
-        //console.log(this.UserData.uid);
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
         this.userService.syncMail(this.UserData.email);
-        this.userService.load(); 
-        this.userService.setCurrentUserStatus("online"); 
-        this.UserStatusService.writeUserStatus(this.UserData.uid , "online"); 
+        this.userService.load();
+        this.userService.setCurrentUserStatus("online");
+        this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -116,6 +114,9 @@ export class AuthFirebaseService implements OnInit {
     })
   }
 
+  /**
+   * Checks if mail from authentication is the same as in user firestore and syncs if not match. E.g. after email change.
+   */
   ngOnInit(): void {
     if (this.UserData.email != this.userService.currentUser.mail) {
       this.userService.currentUser.mail = this.UserData.email;
@@ -148,7 +149,7 @@ export class AuthFirebaseService implements OnInit {
    * Loggout the User and redirect to startscreen. 
    */
   logout() {
-    this.UserStatusService.writeUserStatus(this.UserData.uid , "offline"); 
+    this.UserStatusService.writeUserStatus(this.UserData.uid, "offline");
     signOut(this.auth).then(() => { this.router.navigate(['']) })
   }
 
@@ -216,48 +217,39 @@ export class AuthFirebaseService implements OnInit {
     });
   }
 
-
+  /**
+   * Returns the firebase errormessage for the given errorcode.
+   * @param errorCode - firebase errorcode
+   * @returns - firebase errormessage
+   */
   getErrorMessage(errorCode: string) {
     return this.firebaseAuthErrorMessages[errorCode as keyof typeof this.firebaseAuthErrorMessages];
   }
 
+  /**
+   * Send a a email for verification to the given email address.
+   * @param newEmail - new email adress
+   */
   async sendUpdateEmail(newEmail: string) {
 
-    //this.UserData.email = newEmail;
-
     verifyBeforeUpdateEmail(this.UserData, newEmail).then(() => {
-
-      // Email updated!
       console.log("E-Mail-Verifizierung wurde versendet!");
-      //this.userService.updateEmail(newEmail);
-
     }).catch((error) => {
       console.log("ERROR at Email update!");
       console.log(error.code);
       console.log(error.message);
       console.log(this.UserData);
     });
-    /*
-        await updateEmail(this.UserData, newEmail).then(() => {
-          // Email updated!
-          console.log("Email updated!");
-          this.userService.updateEmail(newEmail); 
-     
-        }).catch((error) => {
-          console.log("ERROR at Email update!");
-          console.log(error.code);
-          console.log(error.message);
-          console.log(this.UserData);
-        });
-        */
   }
 
+  /**
+   * Updates given email address in firebase authentication. 
+   * @param newEmail - new email adress
+   */
   async updateMail(newEmail: string) {
-    await updateEmail(this.UserData, newEmail).then(() => {
-      // Email updated!
-      //console.log("Email updated!");
-      //this.userService.updateEmail(newEmail); 
 
+    await updateEmail(this.UserData, newEmail).then(() => {
+      console.log("Email updated!");
     }).catch((error) => {
       console.log("ERROR at Email update!");
       console.log(error.code);
@@ -266,10 +258,14 @@ export class AuthFirebaseService implements OnInit {
     });
   }
 
+  /**
+   * Confirm action in firebase authentication user change with oobCode
+   * @param code - unique oobCode from firebase 
+   */
   async applyActionCode(code: string) {
     await applyActionCode(this.auth, code)
       .then(() => {
-
+        console.log("Confirm oobCode");
       })
       .catch((error) => {
         // Invalid or expired code
@@ -277,6 +273,11 @@ export class AuthFirebaseService implements OnInit {
       });
   }
 
+  /**
+   * Send email for verification to change the user password
+   * @param email - email adress of User
+   * @returns 
+   */
   resetPassword(email: string) {
 
     return sendPasswordResetEmail(this.auth, email)
@@ -288,6 +289,11 @@ export class AuthFirebaseService implements OnInit {
       });
   }
 
+  /**
+   * Confirm new Passwort and change passwort in firebase authentication
+   * @param oobCode - unique verification code from firebase
+   * @param newPassword - new password for user
+   */
   async confirmPasswordReset(oobCode: string, newPassword: string) {
     try {
       await confirmPasswordReset(this.auth, oobCode, newPassword);
@@ -296,6 +302,5 @@ export class AuthFirebaseService implements OnInit {
       console.error('Fehler bei der Passwortänderung:', error);
     }
   }
-
 }
 

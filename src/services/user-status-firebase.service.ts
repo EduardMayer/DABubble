@@ -11,8 +11,11 @@ export class UserStatusFirebaseService {
 
   constructor() { }
 
-
-
+  /**
+   * Creates or updates user status and set it offline on disconnect. 
+   * @param userId - unique user id
+   * @param status - status of user - e.g. "online", "offline". 
+   */
   writeUserStatus(userId:string, status:string) {
     const userStatusDatabaseRef = ref(this.database, 'userStatus/' + userId);
     set(userStatusDatabaseRef, {
@@ -24,12 +27,16 @@ export class UserStatusFirebaseService {
     });
   }
 
+  /**
+   * Returns the current user status for a given user id. 
+   * @param userId - unique user id
+   * @returns Promise<string> - current user status
+   */
   getUserStatus(userId:string) {
     const userStatusDatabaseRef = ref(this.database, 'userStatus/' + userId);
     return get(userStatusDatabaseRef).then((snapshot) => {
       if (snapshot.exists()) {
         const status = snapshot.val().status;
-        console.log(status);
         return status
       } else {
         return "Status not available"; // Or handle the absence of status as needed
@@ -39,7 +46,4 @@ export class UserStatusFirebaseService {
       return "Error fetching status";
     });
   }
-
-
-
 }

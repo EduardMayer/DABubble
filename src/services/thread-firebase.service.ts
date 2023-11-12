@@ -17,11 +17,9 @@ export class ThreadFirebaseService {
     path: string = "";
     unsubAnswers: any;
 
-
-
     constructor(
         private firestore: Firestore
-    ) {    }
+    ) { }
 
     openThread(message: Message) {
         this.threadOpen = true;
@@ -33,7 +31,6 @@ export class ThreadFirebaseService {
     loadAnswersQuery(path: string) {
         return query(collection(this.firestore, path), orderBy("timestamp"));
     }
-
 
     async loadAnswers(message: Message) {
         let path = message.path + `/answers/`;

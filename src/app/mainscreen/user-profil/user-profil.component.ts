@@ -16,18 +16,23 @@ export class UserProfilComponent implements OnInit{
 
   }
 
+  /**
+   * Gets the current user status when opening userProfil.
+   */
   ngOnInit(): void {
-    console.log("onInit");
     this.getStatus();
   }
 
-
-  
-
+  /**
+   * Close user profil
+   */
   close(){
     this.userProfilService.close(); 
   }
 
+  /**
+   * Gets the current user status from userStatusService. 
+   */
   getStatus(){
     this.userStatusService.getUserStatus(this.user.id)
       .then((result) => {

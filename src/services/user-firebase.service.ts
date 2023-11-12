@@ -10,7 +10,7 @@ import { Channel } from 'src/models/channel.class';
 @Injectable({
     providedIn: 'root'
 })
-export class UserFirebaseService{
+export class UserFirebaseService {
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
@@ -19,7 +19,7 @@ export class UserFirebaseService{
 
     public currentUser: User;
 
-    public registUser: User = new User();  
+    public registUser: User = new User();
 
     constructor(private firestore: Firestore) {
         this.currentUser = new User(
@@ -27,23 +27,25 @@ export class UserFirebaseService{
                 id: "",
                 fullName: "Guest",
                 mail: "guest@guest.at",
-                channels: ["F8tiKVNq6FePPOb4BDps","O8ZTH8u2mAbFrrpNFaGp"]
+                channels: ["F8tiKVNq6FePPOb4BDps", "O8ZTH8u2mAbFrrpNFaGp"]
             }
         )
         this.load();
     }
 
+    /**
+     * Sets the given Userdata to the current user. 
+     * @param UserData - User to be set to current user. 
+     */
     setCurrentUser(UserData: any) {
         this.currentUser = new User(UserData);
         console.log("current User:" + this.currentUser);
     }
 
-
     /**
     * Asynchronously loads user data from Firestore based on optional index parameters.
     */
     async load() {
-       
         const q = query(collection(this.firestore, "users"));
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];
@@ -51,7 +53,6 @@ export class UserFirebaseService{
                 const user = new User(doc.data());
                 user.id = doc.id;
                 this.loadedUsers.push(user);
-                //console.log('User is', user); 
             });
         });
     }
@@ -104,8 +105,8 @@ export class UserFirebaseService{
         if (UID != "") {
             const docRef = await doc(this.firestore, "users", UID);
             const docSnap = await getDoc(docRef);
-            let user=new User(docSnap.data());
-            user.id=docSnap.id;
+            let user = new User(docSnap.data());
+            user.id = docSnap.id;
             return user;
         } else {
             debugger;
@@ -126,64 +127,81 @@ export class UserFirebaseService{
         console.log(this.currentUser);
     }
 
-    updateEmail(newEmail:string){
-        console.log("newMail");
-        console.log(newEmail);
-        
-        
-        this.currentUser.mail = newEmail; 
-        console.log("Current User for Edit Email:");
-        console.log(this.currentUser);
-        this.update(this.currentUser); 
+    /**
+     * Updates given email adress for current User
+     * @param newEmail - new email
+     */
+    updateEmail(newEmail: string) {
+        this.currentUser.mail = newEmail;
+        this.update(this.currentUser);
     }
 
-    async updateCurrentUserToFirebase(){
-        this.update(this.currentUser); 
+    /**
+     * Update the current user in firestore database.
+     */
+    async updateCurrentUserToFirebase() {
+        this.update(this.currentUser);
     }
 
-    async syncMail(email:string){
-        if(this.currentUser.mail != email){
-          this.currentUser.mail = email; 
-          this.updateCurrentUserToFirebase(); 
-          console.log("Email updated @ Login");
+    /**
+     * Chechs if email is same as the given (authentication) and updates in firestore database.
+     * @param email - email adress of authentication
+     */
+    async syncMail(email: string) {
+        if (this.currentUser.mail != email) {
+            this.currentUser.mail = email;
+            this.updateCurrentUserToFirebase();
+            console.log("Email updated @ Login");
         }
     }
 
-    async getUserForSearch(searchString:string){
-        
+    /**
+     * Search for Substring in users fullname element and returns if its matches. 
+     * @param searchString - seachstring
+     * @returns [Users] - Array of find users. 
+     */
+    async getUserForSearch(searchString: string) {
+
         const searchKeywords = searchString.split(" ");
-        const q = query(collection(this.firestore, "users") , 
-            where("fullName", ">=", searchString), 
-            where("fullName", "<=", searchString + '\uf8ff')) ;
+        const q = query(collection(this.firestore, "users"),
+            where("fullName", ">=", searchString),
+            where("fullName", "<=", searchString + '\uf8ff'));
         const querySnapshot = await getDocs(q);
-        const findUsers: User[] = []; 
+        const findUsers: User[] = [];
         querySnapshot.forEach((doc) => {
             findUsers.push(new User(doc.data()))
         });
-        return findUsers; 
+        return findUsers;
     }
 
-    setCurrentUserStatus(status:string){
-        this.currentUser.status = status; 
-        this.updateCurrentUserToFirebase(); 
-
+    /**
+     * Sets the user status in currentUser and save it in firestore database.
+     * @param status - status of user 
+     */
+    setCurrentUserStatus(status: string) {
+        this.currentUser.status = status;
+        this.updateCurrentUserToFirebase();
     }
 
-    async getChannelForSearch(searchString:string){
-        
+
+    /**
+     * Search for Substring in channel names and returns if its matches. 
+     * @param searchString - seachstring
+     * @returns [Channels] - Array of find channels. 
+     */
+    async getChannelForSearch(searchString: string) {
+
         const searchKeywords = searchString.split(" ");
-        const q = query(collection(this.firestore, "channels") , 
-            where("channelName", ">=", searchString), 
-            where("channelName", "<=", searchString + '\uf8ff')) ;
+        const q = query(collection(this.firestore, "channels"),
+            where("channelName", ">=", searchString),
+            where("channelName", "<=", searchString + '\uf8ff'));
         const querySnapshot = await getDocs(q);
-        const findChannels: Channel[] = []; 
+        const findChannels: Channel[] = [];
         querySnapshot.forEach((doc) => {
             findChannels.push(new Channel(doc.data()))
         });
-        return findChannels; 
+        return findChannels;
     }
-
-
 
     /**
      * Check if a given email exists in the array of loaded users.

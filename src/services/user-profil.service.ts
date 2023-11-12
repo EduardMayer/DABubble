@@ -15,10 +15,17 @@ export class UserProfilService {
 
   constructor() { }
 
+  /**
+   * Triggers Observable to open userprofil for given user. 
+   * @param user - User to be displayed 
+   */
   openUserProfil(user:User){
     this.openUserProfilSubject.next(user);
   }
 
+  /**
+   * Triggers Observable to close any userprofil. 
+   */
   close(){
     this.closeUserProfilSubject.next();
   }
