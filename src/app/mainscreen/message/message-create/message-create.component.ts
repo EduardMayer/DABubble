@@ -1,13 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { User } from 'src/models/user.class';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
-import { Observable, map, startWith } from 'rxjs';
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MentionDirective } from 'angular-mentions';
 
 @Component({
@@ -52,8 +50,7 @@ export class MessageCreateComponent {
     private userFirebaseService: UserFirebaseService,
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
-    private storageService: StorageFirebaseService,
-    private fb: FormBuilder
+    private storageService: StorageFirebaseService
   ) { }
 
   /**
@@ -92,7 +89,6 @@ export class MessageCreateComponent {
 
 
   //Autocomplete Options
-  
   @ViewChild(MentionDirective) mention: MentionDirective | undefined;
   items: string[] = this.getCurrentUsersAsStringArray();
 
@@ -108,7 +104,7 @@ export class MessageCreateComponent {
       usersByName.push(user.fullName);
     });
     return usersByName;
-  }
+  } 
 
 
   addATtoMsg() {
@@ -127,7 +123,6 @@ export class MessageCreateComponent {
     if(this.mention){
       this.mention.startSearch();
     }
-
   }
 
 
@@ -145,6 +140,16 @@ export class MessageCreateComponent {
   */
   closeEmojiBar() {
     this.showEmojiBar = false;
+  }
+
+    
+  handleEmojiSelection(selectedEmoji: string) {
+    if (selectedEmoji == "noSelection") {
+      console.log("noSelection");
+      this.closeEmojiBar();
+    } else {
+      this.message.content += selectedEmoji;
+    }
   }
 
 
@@ -173,6 +178,8 @@ export class MessageCreateComponent {
     this.message = message;
   }
 
+
+  /*
   toogleUserSearch(event: Event) {
     this.showUserSearch = !this.showUserSearch;
     event.stopPropagation();
@@ -217,6 +224,7 @@ export class MessageCreateComponent {
     //console.log(`Cursor end position: ${cursorPositionEnd}`);
     return cursorPositionStart;
   }
+  */
 
   async uploadFile(input: HTMLInputElement) {
     if (!input.files || input.files.length === 0) return;
