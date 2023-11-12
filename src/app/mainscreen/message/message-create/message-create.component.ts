@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -8,6 +8,7 @@ import { User } from 'src/models/user.class';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MentionDirective } from 'angular-mentions';
 
 @Component({
   selector: 'app-message-create',
@@ -29,8 +30,6 @@ export class MessageCreateComponent {
 
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
-
-  @Output() searchTerm: EventEmitter<string> = new EventEmitter();
 
 
 
@@ -91,6 +90,10 @@ export class MessageCreateComponent {
 
 
   //Autocomplete Options
+  
+  @ViewChild(MentionDirective) mention: MentionDirective | undefined;
+  items: string[] = this.getCurrentUsersAsStringArray();
+
   mentionConfig: { items: string[], triggerChar: string, dropUp: boolean } = {
     items: this.getCurrentUsersAsStringArray(),
     triggerChar: "@",
@@ -107,18 +110,23 @@ export class MessageCreateComponent {
 
 
   addATtoMsg() {
-
-    this.searchTerm.emit("@");
-    this.textInput.nativeElement.focus();
     this.textInput.nativeElement.value += "@";
+  }
 
-    // Trigger input event to simulate user typing
-    var inputEvent = new Event('input', { bubbles: true });
-    this.textInput.nativeElement.dispatchEvent(inputEvent);
 
-    // Trigger change event to simulate value change
-    var changeEvent = new Event('change', { bubbles: true });
-    this.textInput.nativeElement.dispatchEvent(changeEvent);
+  onTextInput(event: Event) {
+    console.log(event);
+    //const inputValue = (event.target as HTMLInputElement).value;
+    //console.log('Input Event:', inputValue);
+  }
+
+ 
+
+  insAt() {
+    if(this.mention){
+      this.mention.startSearch();
+    }
+
   }
 
 

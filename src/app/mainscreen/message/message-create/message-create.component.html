@@ -5,7 +5,7 @@
             <input type="file" #fileInput style="display: none" (change)="uploadFile(fileInput)">
             <img src="assets/img/icons/add.svg" (click)="fileInput.click()">
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
-            <img src="assets/img/icons/alternateemail.svg" (click)="addATtoMsg()">
+            <img src="assets/img/icons/alternateemail.svg" (click)="insAt()">
             <div class="preview-file" *ngIf="file !== ''">
                 <img [src]="file" />
                 <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt=""
@@ -21,7 +21,9 @@
     <div>
         <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container"
             [(ngModel)]="message.content" *ngIf="channelFirebaseService.selectedChannel"
-            placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar()" [mentionConfig]="mentionConfig">
+            placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar();" 
+            [mention]="items"
+            [mentionConfig]="mentionConfig">
             </textarea>
 
 
