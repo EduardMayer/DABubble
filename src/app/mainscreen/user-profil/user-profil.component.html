@@ -19,9 +19,12 @@
                     <a></a>
                 </div>
             </div>
-            <div id="status">
+            <div id="status" 
+                [class.col-red] = "user.status === 'offline'" 
+                [class.col-green] = "user.status === 'online'" 
+                [class.col-gray] = "user.status !== 'online' && user.status !== 'offline'">
                 <div id="statusIcon"></div>
-                <h4 id="statusFont">Status</h4>
+                <h4 id="statusFont">{{user.status}}</h4>
             </div>
             <div id="headerUserProfil-email">
                 <div id="headerUserProfil-email-header">

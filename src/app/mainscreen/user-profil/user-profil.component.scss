@@ -53,14 +53,16 @@
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                background-color: green;
+                //background-color: green;
             }
 
             #statusFont {
-                color: green;
+                //color: green;
                 margin: 0px;
             }
         }
+        
+
 
         #headerUserProfil-email {
             display: flex;
@@ -71,5 +73,24 @@
                 gap: 12px;
             }
         }
+    }
+}
+
+.col-red{
+    color: red;
+    #statusIcon {
+        background-color: red
+    }
+}
+.col-green{
+    color: green;
+    #statusIcon {
+        background-color: green;
+    }
+}
+.col-gray{
+    color: gray;
+    #statusIcon {
+        background-color: gray;
     }
 }
