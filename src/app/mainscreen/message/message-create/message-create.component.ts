@@ -8,6 +8,8 @@ import { User } from 'src/models/user.class';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 import { MentionDirective } from 'angular-mentions';
 
+
+
 @Component({
   selector: 'app-message-create',
   templateUrl: './message-create.component.html',
@@ -249,7 +251,5 @@ export class MessageCreateComponent {
       console.error('Fehler beim Löschen der Datei: ', error);
     }
   }
-
-
 
 }
