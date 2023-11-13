@@ -9,7 +9,7 @@ import { IntroComponent } from './startscreen/intro/intro.component';
 
 
 const routes: Routes = [
-  { path: '', component: IntroComponent },
+  //{ path: '', component: IntroComponent },
   //{ path: '', component: MainscreenComponent },
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
