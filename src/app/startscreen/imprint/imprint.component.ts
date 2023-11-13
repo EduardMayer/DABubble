@@ -9,11 +9,14 @@ export class ImprintComponent {
 
   @Output() closeImprintView = new EventEmitter<void>();
 
-
-
-  closeImprint(){
-    this.closeImprintView.emit(); 
-  }
-
+  /**
+ * Emits an event to signal the closing of the imprint view.
+ * 
+ * @emits closeImprintView
+ * @returns {void}
+ */
+closeImprint() {
+  this.closeImprintView.emit();
+}
 
 }

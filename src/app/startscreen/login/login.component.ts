@@ -12,6 +12,12 @@ export class LoginComponent implements OnInit {
 
   @Output() forgotPasswordLinkClick = new EventEmitter<void>();
 
+  /**
+ * Handles the click event on the forgot password link by emitting the `forgotPasswordLinkClick` event.
+ * 
+ * @emits forgotPasswordLinkClick
+ * @returns {void}
+ */
   onForgotPasswordLinkClick() {
     this.forgotPasswordLinkClick.emit();
   }
@@ -34,18 +40,29 @@ export class LoginComponent implements OnInit {
     ]),
   });
 
-  loginFailed = false; 
-  loginErrorMessage = ""; 
+  loginFailed = false;
+  loginErrorMessage = "";
 
   constructor(private authService: AuthFirebaseService) { }
 
   firebaseUserService = inject(UserFirebaseService);
 
+  /**
+  * Angular lifecycle hook called after component initialization.
+  * Logs whether a user is logged in.
+  * 
+  * @returns {void}
+  */
   ngOnInit(): void {
     console.log('User Logged In: ' + this.authService.isLoggedIn());
   }
-  
 
+  /**
+   * Initiates the login process with the provided email and password.
+   * Handles login failures by displaying error messages.
+   * 
+   * @returns {void}
+   */
   async login() {
     console.log(this.contactForm.value.emailInput);
     console.log(this.contactForm.value.passwordInput);
@@ -53,32 +70,47 @@ export class LoginComponent implements OnInit {
       this.contactForm.value.emailInput != null &&
       this.contactForm.value.passwordInput != null
     ) {
-        this.authService.login(this.contactForm.value.emailInput,this.contactForm.value.passwordInput)
+      this.authService.login(this.contactForm.value.emailInput, this.contactForm.value.passwordInput)
         .catch((error) => {
           const errorCode = error.code;
           console.log(errorCode);
-          
-          if(errorCode != null && errorCode != undefined){
-            this.loginErrorMessage = this.authService.getErrorMessage(errorCode); 
-            this.loginFailed = true; 
+
+          if (errorCode != null && errorCode != undefined) {
+            this.loginErrorMessage = this.authService.getErrorMessage(errorCode);
+            this.loginFailed = true;
           }
         });
-      }  
+    }
   }
 
+  /**
+ * Initiates a guest login process.
+ * 
+ * @returns {void}
+ */
   async guestLogin() {
     this.authService
       .login(this.guestLoginName, this.guestLoginPassword)
   }
 
+  /**
+ * Initiates the login process using Google authentication.
+ * 
+ * @returns {void}
+ */
   loginWithGoogle() {
     this.authService.GoogleAuth();
   }
 
+  /**
+ * Toggles the visibility of the password input.
+ * 
+ * @returns {void}
+ */
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  
+
 
 }

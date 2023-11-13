@@ -19,32 +19,64 @@ export class StartscreenComponent implements OnInit{
 
   constructor(private authService: AuthFirebaseService , private router: Router){}
 
+
+  /**
+ * Angular lifecycle hook called after component initialization.
+ * Redirects to the 'main' route if the user is already logged in and the login session is not expired.
+ * 
+ * @returns {void}
+ */
   ngOnInit(): void {
     if(this.authService.isLoggedIn() && !this.authService.loginExprired()){
       this.router.navigateByUrl('main'); 
     }
   }
 
+  /**
+ * Closes the imprint and privacy policy views by setting their respective flags to false.
+ * 
+ * @returns {void}
+ */
   closeImprintAndPrivacy(){
     this.imprint = false; 
     this.privacyPolicy = false; 
   }
 
+  /**
+ * Closes the registration view and shows the avatar view.
+ * 
+ * @returns {void}
+ */
   closeRegister(){
     this.showRegister = false; 
     this.showAvatar = true; 
   }
 
+  /**
+ * Closes the avatar view and shows the login view.
+ * 
+ * @returns {void}
+ */
   closeAvatar(){
     this.showLogin = true;
     this.showAvatar = false;
   }
 
+  /**
+ * Closes the forgot password view and shows the login view.
+ * 
+ * @returns {void}
+ */
   closeForgotPassword(){
     this.showLogin = true;
     this.showForgotPassword = false;
   }
 
+  /**
+ * Shows the forgot password view and hides the login view.
+ * 
+ * @returns {void}
+ */
   onForgotPasswordLinkClick() {
     this.showLogin = false;
     this.showForgotPassword = true;

@@ -170,9 +170,15 @@ export class MessageCreateComponent {
     }
   }
 
-  openMessage(message: Message) {
-    this.message = message;
-  }
+  /**
+ * Opens a message and sets it as the current message.
+ * 
+ * @param {Message} message - The message to be opened.
+ * @returns {void}
+ */
+openMessage(message: Message) {
+  this.message = message;
+}
 
 
   /*
@@ -222,44 +228,59 @@ export class MessageCreateComponent {
   }
   */
 
-  async uploadFile(input: HTMLInputElement) {
-    if (!input.files || input.files.length === 0) return;
-    const file = input.files[0];
-
-    try {
-      const isPdf = this.isPdfFile(file);
-      if (!this.isFileSizeValid(file)) {
-        throw new Error('File is too large. Maximum file size is 500 KB.');
-      }
-      const url = await this.storageService.uploadFile(file, 'files');
-      this.file = url;
-      this.fileName = file.name;
-      if (isPdf) {
-        this.fileIMG = 'assets/img/icons/pdf-icon2.svg';
-      } else {
-        this.fileIMG = url;
-      }
-
-    } catch (error) {
-      console.error('Error uploading file: ', error);
+/**
+ * Uploads a file, validates its type and size, and updates the component properties accordingly.
+ * 
+ * @param {HTMLInputElement} input
+ * @returns {Promise<void>}
+ */
+async uploadFile(input: HTMLInputElement) {
+  if (!input.files || !input.files.length) return;
+  const file = input.files[0];
+  try {
+    if (!this.isFileSizeValid(file)) {
+      throw new Error('File is too large. Maximum file size is 500 KB.');
     }
+    const url = await this.storageService.uploadFile(file, 'files');
+    this.file = url;
+    this.fileName = file.name;
+    this.fileIMG = this.isPdfFile(file) ? 'assets/img/icons/pdf-icon2.svg' : url;
+  } catch (error) {
+    console.error('Error uploading file: ', error);
   }
+}
 
-  isPdfFile(file: File): boolean {
-    return file.type === 'application/pdf';
+ /**
+ * Checks if a given file is a PDF based on its type.
+ * 
+ * @param {File} file - The file to be checked.
+ * @returns {boolean} - True if the file is a PDF, false otherwise.
+ */
+isPdfFile(file: File): boolean {
+  return file.type === 'application/pdf';
+}
+
+  /**
+ * Checks if the size of a given file is within the allowed limit (500 KB).
+ * 
+ * @param {File} file - The file to be checked.
+ * @returns {boolean} - True if the file size is valid, false otherwise.
+ */
+isFileSizeValid(file: File): boolean {
+  return file.size <= 500000;
+}
+
+  /**
+ * Deletes the currently stored file from the storage service.
+ * 
+ * @returns {Promise<void>}
+ */
+async deleteFile() {
+  try {
+    await this.storageService.deleteImage(this.file);
+    this.file = '';
+  } catch (error) {
+    console.error('Error deleting file: ', error);
   }
-
-  isFileSizeValid(file: File): boolean {
-    return file.size <= 500000;
-  }
-
-  async deleteFile() {
-    try {
-      await this.storageService.deleteImage(this.file);
-      this.file = '';
-    } catch (error) {
-      console.error('Fehler beim Löschen der Datei: ', error);
-    }
-  }
-
+}
 }

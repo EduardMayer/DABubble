@@ -22,44 +22,49 @@ export class ForgotPasswordComponent {
   errorInfo: any = false;
   isInputActive = false;
   isEmailInputActive = false;
- 
+
 
   contactForm = new FormGroup({
     emailInput: new FormControl('', [Validators.required, Validators.email]),
   });
 
 
-  isButtonDisabled(){
+  /**
+ * Checks if the contact form is invalid, determining whether the associated button should be disabled.
+ * 
+ * @returns {boolean} - True if the contact form is invalid, indicating that the button should be disabled; false otherwise.
+ */
+  isButtonDisabled() {
     return this.contactForm.invalid;
   }
-
-  closeForgotPassword(){
-    this.closeForgotPasswordView.emit(); 
+  /**
+ * Emits an event to signal the closing of the forgot password view.
+ * 
+ * @emits closeForgotPasswordView
+ * @returns {void}
+ */
+  closeForgotPassword() {
+    this.closeForgotPasswordView.emit();
   }
 
+  /**
+  * Initiates the password reset process using the provided email.
+  * Marks the email as submitted, and closes the forgot password view after a delay upon successful reset.
+  * 
+  * @returns {void}
+  */
   resetPassword() {
     this.authService.resetPassword(this.email)
-    .then(()=> {
-      this.emailSubmitted = true;
-      setTimeout(() => {
-        this.closeForgotPassword();
-      }, 1400);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-    /*
-    if (this.userService.mailExists(this.email)) {
-      this.authService.resetPassword(this.email);
-      this.emailSubmitted = true;
-      setTimeout(() => {
-        this.closeForgotPassword();
-      }, 1400);
-    } else {
-      console.log("User with the provided email does not exist.");
-    }
+      .then(() => {
+        this.emailSubmitted = true;
 
-    */
+        setTimeout(() => {
+          this.closeForgotPassword();
+        }, 1400);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
 

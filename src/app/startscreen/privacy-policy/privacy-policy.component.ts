@@ -11,9 +11,15 @@ export class PrivacyPolicyComponent {
 
 
 
-  closePrivacyPolicy(){
-    this.closePrivacyPolicyView.emit(); 
-  }
+  /**
+ * Emits an event to signal the closing of the privacy policy view.
+ * 
+ * @emits closePrivacyPolicyView
+ * @returns {void}
+ */
+closePrivacyPolicy() {
+  this.closePrivacyPolicyView.emit();
+}
 
 
 }

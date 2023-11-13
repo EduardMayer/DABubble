@@ -42,6 +42,12 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
+  /**
+ * Angular lifecycle hook called after component initialization.
+ * Retrieves the 'oobCode' query parameter from the URL and logs it to the console if present.
+ * 
+ * @returns {void}
+ */
   ngOnInit(): void {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.get('oobCode') != null) {
@@ -53,11 +59,21 @@ export class ResetPasswordComponent implements OnInit {
     console.log(this.oobCode);
   }
 
+  /**
+ * Closes the imprint and privacy policy views by setting their respective flags to false.
+ * 
+ * @returns {void}
+ */
   closeImprintAndPrivacy() {
     this.imprint = false;
     this.privacyPolicy = false;
   }
 
+  /**
+ * Determines whether the "New Password" button should be disabled based on form validation.
+ * 
+ * @returns {boolean} - True if the button should be disabled; false otherwise.
+ */
   isButtonDisabled(): boolean {
     const passwordControl = this.contactForm.get('passwordInput');
     const passwordRepeatControl = this.contactForm.get('passwordRepeatInput');
@@ -73,6 +89,12 @@ export class ResetPasswordComponent implements OnInit {
     return true;
   }
 
+  /**
+ * Resets the user's password using the provided 'oobCode' and new password.
+ * Navigates to the home page after successful password reset.
+ * 
+ * @returns {void}
+ */
   newPassword() {
     if (this.contactForm.valid) {
       const queryParams = new URLSearchParams(window.location.search);
