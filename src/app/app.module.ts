@@ -49,6 +49,7 @@ import { UserSearchComponent } from './mainscreen/user-search/user-search.compon
 import { UserProfilComponent } from './mainscreen/user-profil/user-profil.component';
 import { MentionModule } from 'angular-mentions';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { IntroComponent } from './startscreen/intro/intro.component';
 
 
 
@@ -82,7 +83,8 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
     MessageCreateComponent,
     MessageEditComponent,
     UserSearchComponent,
-    UserProfilComponent
+    UserProfilComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,

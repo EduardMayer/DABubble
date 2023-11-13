@@ -5,10 +5,11 @@ import { StartscreenComponent } from './startscreen/startscreen.component';
 import { authGuard } from 'src/guard/auth-guard.guard';
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
-
+import { IntroComponent } from './startscreen/intro/intro.component';
 
 
 const routes: Routes = [
+  { path: '', component: IntroComponent },
   //{ path: '', component: MainscreenComponent },
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
