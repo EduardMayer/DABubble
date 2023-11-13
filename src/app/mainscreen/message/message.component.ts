@@ -20,7 +20,6 @@ import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 export class MessageComponent {
 
   private autorUser = new User(); 
-
   public _message: Message | undefined;
   public autorName: string = "";
   public autorAvatar: string = "";

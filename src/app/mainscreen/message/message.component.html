@@ -16,15 +16,14 @@
               {{ _message.content }}
               <ng-container *ngIf="_message.fileSrc">
                 <ng-container *ngIf="isPDF(_message.fileName); else normalPath">
-                  <!-- Wenn es sich um eine PDF handelt -->
-                  <a [href]="_message.fileSrc" download="{{ _message.fileName }}" target="_blank">
-                    <img [src]="'assets/img/icons/pdf-icon2.svg'" alt="{{ _message.fileName }}" style="max-width: 100%; max-height: 50px;">
-                    {{ _message.fileName }}
-                  </a>
-                  
+                  <div class="pdf-box">
+                    <a [href]="_message.fileSrc" download="{{ _message.fileName }}" target="_blank">
+                      <img [src]="'assets/img/icons/pdf-icon2.svg'" alt="{{ _message.fileName }}" style="max-width: 100%; max-height: 40px;">
+                      {{ _message.fileName }}
+                    </a>
+                  </div>
                 </ng-container>
                 <ng-template #normalPath>
-                  <!-- Wenn es sich nicht um eine PDF handelt -->
                   <a [href]="_message.fileSrc" download="{{ _message.fileName }}" target="_blank">
                     <img [src]="_message.fileSrc" alt="{{ _message.fileName }}" style="max-width: 100%; max-height: 200px;">
                   </a>

@@ -139,5 +139,21 @@
         }
     }
 
+
+    .pdf-box{
+        
+        a{
+            color: black;
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+
+
+            &:hover{
+                color: white;
+            }
+        }
+    }
+
     
 }

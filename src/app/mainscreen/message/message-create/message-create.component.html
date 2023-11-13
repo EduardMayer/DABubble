@@ -7,12 +7,11 @@
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
             <img src="assets/img/icons/alternateemail.svg" (click)="insAt()">
             <div class="preview-file" *ngIf="file !== ''">
-                <img [src]="file" />
-                <!-- Anzeigen des Dateinamens -->
-                {{ fileName }}
+                <img [src]="fileIMG"/>
+                <span>{{ fileName }}</span>
                 <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt="" srcset="">
             </div>
-        </div>
+          </div>
 
         <div class="msg-send">
             <img src="assets/img/icons/send.svg" (click)="createMessage()">

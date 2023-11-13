@@ -28,9 +28,11 @@ export class MessageCreateComponent {
   file: string = "";
   imageUrl?: string;
   showAutocomplete: boolean = false;
+  fileIMG: any;
 
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('inputFieldUserSearch') inputFieldUserSearch!: ElementRef;
+
 
 
 
@@ -106,15 +108,15 @@ export class MessageCreateComponent {
       usersByName.push(user.fullName);
     });
     return usersByName;
-  } 
+  }
 
 
   addATtoMsg() {
     this.textInput.nativeElement.value += "@";
   }
- 
+
   insAt() {
-    if(this.mention){
+    if (this.mention) {
       this.mention.startSearch();
     }
   }
@@ -136,7 +138,7 @@ export class MessageCreateComponent {
     this.showEmojiBar = false;
   }
 
-    
+
   handleEmojiSelection(selectedEmoji: string) {
     if (selectedEmoji == "noSelection") {
       console.log("noSelection");
@@ -222,18 +224,34 @@ export class MessageCreateComponent {
 
   async uploadFile(input: HTMLInputElement) {
     if (!input.files || input.files.length === 0) return;
-
     const file = input.files[0];
 
     try {
-        const url = await this.storageService.uploadFile(file, 'files');
-        this.file = url;
-        this.fileName = file.name;
+      const isPdf = this.isPdfFile(file);
+      if (!this.isFileSizeValid(file)) {
+        throw new Error('File is too large. Maximum file size is 500 KB.');
+      }
+      const url = await this.storageService.uploadFile(file, 'files');
+      this.file = url;
+      this.fileName = file.name;
+      if (isPdf) {
+        this.fileIMG = 'assets/img/icons/pdf-icon2.svg';
+      } else {
+        this.fileIMG = url;
+      }
+
     } catch (error) {
-        console.error('Error uploading file: ', error);
+      console.error('Error uploading file: ', error);
     }
-}
- 
+  }
+
+  isPdfFile(file: File): boolean {
+    return file.type === 'application/pdf';
+  }
+
+  isFileSizeValid(file: File): boolean {
+    return file.size <= 500000;
+  }
 
   async deleteFile() {
     try {

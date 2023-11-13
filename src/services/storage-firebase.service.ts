@@ -5,7 +5,6 @@ import { Storage, ref, uploadBytes, getDownloadURL, StorageReference, deleteObje
   providedIn: 'root',
 })
 export class StorageFirebaseService {
-  private uploadCounter: number = 0;
   constructor(private storage: Storage) {}
   
 
@@ -31,11 +30,12 @@ export class StorageFirebaseService {
 
  async uploadFile(file: File, folder: string): Promise<string> {
     let storageRef: StorageReference;
+    const timestamp = new Date().getTime();
 
     if (file.type.startsWith('image/') || file.type === 'application/pdf') {
-      const fileName = `${file.name}_${this.uploadCounter}`;
+      const fileName = `${file.name}_${timestamp}`;
       storageRef = ref(this.storage, `${folder}/${fileName}`);
-      this.uploadCounter++;
+      
     } else {
       throw new Error('Invalid file type');
     }
@@ -72,6 +72,8 @@ export class StorageFirebaseService {
   async getDownloadUrl(storageRef: StorageReference): Promise<string> {
     return getDownloadURL(storageRef);
   }
+
+
 
   
 }
