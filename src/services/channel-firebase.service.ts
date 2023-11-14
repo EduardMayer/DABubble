@@ -155,7 +155,9 @@ export class ChannelFirebaseService {
         }
     }
 
-
+    getSelectedChannelID(){
+        return this.selectedChannelId; 
+    }
 
 
     /**

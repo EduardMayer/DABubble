@@ -28,6 +28,7 @@
 }
 
 .add {
+   
     &:hover {
         filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);
         transform: scale(1.1);
@@ -72,11 +73,62 @@
     padding-left: 40px;
 }
 
+.pad-left60{
+    padding-left: 60px;
+}
+
 .myChannels {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    gap:6px; 
 
+    .myChannels-channel{
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap:12px; 
+        width: fit-content;
+        padding: 0px 12px 0px 12px;
+        border-radius: 30px;
+
+        .myChannels-channel-icon{
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            font-size: 24px;
+            margin: 0px;
+        }
+
+        .myChannels-channel-name{
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            margin: 0px;
+
+        }
+        &:hover{
+           color: #535AF1;
+           background-color: #ECEEFE; 
+           font-family: 'Nunito', sans-serif;
+           font-weight: 400;
+           .myChannels-channel-icon{
+            font-weight: 400;
+            }
+            .myChannels-channel-name{
+                font-weight: 400;
+            } 
+        }
+    }
+    .myChannels-channel-selected{
+        color: #535AF1; 
+        background-color: #ECEEFE; 
+        .myChannels-channel-icon{
+            font-weight: 400;
+        }
+        .myChannels-channel-name{
+            font-weight: 400;
+        } 
+    }
 }
 
 .myMessagesHeader {
@@ -131,12 +183,13 @@
 }
 
 .addChannel {
+    
     padding-top: 20px;
-
+  /*
     display: flex;
     justify-content: center;
     align-items: center;
-
+*/
 
     &:hover {
         filter: invert(11%) sepia(100%) saturate(9000%) hue-rotate(-108deg);

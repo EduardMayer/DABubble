@@ -21,6 +21,8 @@ unpackChannels = false;
 unpackMessages = false;
 currentUser:User = new User(); 
 
+selectedChannelID = ""; 
+
   constructor(
       public dialog: MatDialog, 
       public channelFirebaseService: ChannelFirebaseService, 
