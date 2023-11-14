@@ -9,7 +9,7 @@
         </div>
     </div>
     
-    <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar && !showForgotPassword"(forgotPasswordLinkClick)="onForgotPasswordLinkClick()"></app-login>
+    <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar && !showForgotPassword"(forgotPasswordLinkClick)="onForgotPasswordLinkClick()" style="width: 100%"></app-login>
         <app-intro></app-intro>
         <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()"></app-register>
         <app-avatar-choose *ngIf="showAvatar && !showLogin" (closeAvatarView)="closeAvatar()"></app-avatar-choose>
@@ -19,5 +19,9 @@
     <div id="startscreen-imprint-container">
         <a (click)="imprint = true" *ngIf="!imprint && !privacyPolicy">Impressum</a>
         <a (click)="privacyPolicy = true" *ngIf="!imprint && !privacyPolicy">Datenschutz</a>
+    </div>
+    <div id="startScreen-register-mobile" *ngIf="showLogin && !imprint && !privacyPolicy">
+        <h3>Neu bei DABubble?</h3>
+        <a (click)="showLogin = false; showRegister = true">Konto erstellen</a>
     </div>
 </div>

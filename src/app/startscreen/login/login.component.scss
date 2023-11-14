@@ -115,6 +115,8 @@
 
   p {
     margin: 0px 15px;
+    font-size: 18px;
+    font-weight: bold;
   }
   margin-bottom: 56px;
 }
@@ -122,10 +124,12 @@
 .user-seperation-bar {
   width: 100%;
   border-bottom: 1px solid rgba(173, 176, 217, 1);
+
 }
 
 .user-google-login {
   display: flex;
+  white-space: nowrap;
   background-color: rgb(236, 238, 254);
   padding: 11px 32px;
   border-radius: 100px;
@@ -136,6 +140,7 @@
   cursor: pointer;
   font-size: 18px;
   color: rgba(68, 77, 242, 1);
+  border: 1px solid transparent;
 
   &:hover {
     border: 1px solid rgba(68, 77, 242, 1);
@@ -155,6 +160,7 @@
 }
 
 .blue-button {
+  font-family: 'Nunito', sans-serif;
   border-radius: 25px;
   padding: 12px 25px;
   height: 49px;
@@ -169,15 +175,19 @@
 
 .white-button {
   border-radius: 25px;
+  font-family: 'Nunito', sans-serif;
+  white-space: nowrap;
   padding: 12px 25px;
   height: 49px;
   font-size: 18px;
   border: 1px solid rgba(68, 77, 242, 1) !important ;
+  font-weight: bold;
+  color: rgba(68, 77, 242, 1)!important;
 
   &:hover {
     background-color: rgba(68, 77, 242, 1) !important;
     transition: background-color 0.15s ease-in-out;
-    color: white;
+    color: white !important;
   }
 }
 
@@ -189,4 +199,49 @@
   color: red;
   text-align: center;
   padding-bottom: 24px;
+}
+
+
+
+@media screen and (max-width: 640px) {
+
+  app-login{
+    width: 100%;
+  }
+
+  .user-login-container{
+    padding: 35px 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .user-login-title{
+    gap: 20px;
+
+    h1{
+      font-size: 32px;
+    }
+  }
+  .user-login-box{
+    margin-bottom: 30px;
+  }
+
+  .user-login-input-container{
+    margin-top: 20px;
+    max-width: none;
+  }
+
+  .user-login-password-restore{
+    margin-bottom: 20px;
+  }
+
+  .user-login-seperation{
+    margin-bottom: 20px;
+  }
+
+  .user-google-login{
+    margin-bottom: 20px;
+    padding: 6px 32px;
+  }
+
 }
