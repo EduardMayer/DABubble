@@ -153,3 +153,48 @@
 .br-30 {
   border-radius: 30px;
 }
+
+
+@media screen and (max-width: 640px) {
+
+
+  .user-register-container{
+    padding: 20px 20px 30px 20px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 190px;
+  }
+
+  .user-register-title{
+    
+    gap: 15px;
+
+    h1{
+      font-size: 32px;
+    }
+
+    b{
+      font-size: 17px;
+    }
+  }
+
+  .user-uper-icon-title{
+    img{
+      left: 30px;
+    }
+  }
+
+  .user-uper-register-title{
+    left: 20px;
+  }
+
+  .user-register-input-container{
+    margin-top: 20px;
+    width: 100%;
+    max-width: none;
+  }
+
+  .blue-button{
+    margin-top: 30px;
+  }
+}

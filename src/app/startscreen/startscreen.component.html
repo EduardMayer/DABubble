@@ -11,7 +11,7 @@
     
     <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar && !showForgotPassword"(forgotPasswordLinkClick)="onForgotPasswordLinkClick()" class="app-login"></app-login>
         <app-intro></app-intro>
-        <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()"></app-register>
+        <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()" class="app-register"></app-register>
         <app-avatar-choose *ngIf="showAvatar && !showLogin" (closeAvatarView)="closeAvatar()"></app-avatar-choose>
         <app-forgot-password *ngIf="showForgotPassword" (closeForgotPasswordView)="closeForgotPassword()"></app-forgot-password>
         <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>

@@ -67,6 +67,11 @@
     display: none;
   }
 
+  #startScreen-container{
+    display: flex;
+    justify-content: center;
+  }
+
   #startScreen-register-mobile{
     display: flex;
     align-items: center;
@@ -91,7 +96,7 @@
 
   .uper-startscreen-container {
     justify-content: center;
-    padding-top: 92px;
+    margin-top: 92px;
     padding-bottom: 30px;
   }
   
@@ -100,6 +105,10 @@
   }
 
   .app-login{
+    width: 100%;
+  }
+
+  .app-register{
     width: 100%;
   }
 
