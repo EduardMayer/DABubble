@@ -32,15 +32,33 @@ export class SearchbarComponent implements OnInit {
   options: string[] = [];
   filteredOptions$: Observable<string[]> = new Observable();
 
+
   ngOnInit() {
-    console.log(this.getCurrentUsersAsStringArray());
-    let usersString = this.getCurrentUsersAsStringArray();
-    this.options = usersString;
+
+    let usersString = this.getUsersAsStringArray();
+    let channelsString = this.getChannelsAsStringArray();
+    this.options = channelsString.concat(usersString);
 
     this.filteredOptions$ = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
+  }
+
+  getUsersAsStringArray() {
+    let usersByName: string[] = [];
+    this.userService.loadedUsers.forEach((user) => {
+      usersByName.push("@" + user.fullName);
+    });
+    return usersByName;
+  }
+
+  getChannelsAsStringArray() {
+    let channelsByName: string[] = [];
+    this.channelService.loadedChannels.forEach((channel) => {
+      channelsByName.push("#" + channel.channelName);
+    });
+    return channelsByName;
   }
 
   private _filter(value: string): string[] {
@@ -59,13 +77,6 @@ export class SearchbarComponent implements OnInit {
 
 
 
-
-  /*
-    ngOnInit(): void {
-      //this.searchResults = ["Hallo", "Test", "Search"]; 
-      //this.userService.load(); 
-    }
-  */
 
   sendData(event: Event) {
     if (this.searchText != "") {

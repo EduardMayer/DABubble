@@ -1,12 +1,21 @@
-<div id="header-searchfield-container">
+<div id="header-searchfield-container" *ngIf="searchResultsChannels && searchResultsUsers">
     <input id="header-searchfield" 
     type="text" [(ngModel)]="searchText" 
     placeholder="Code learning durchsuchen" 
-    [mentionConfig]="mentionConfig">
+    [matAutocomplete]="auto"
+    [formControl]="myControl"
+    matInput
+    >
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">{{option}}</mat-option>
+    </mat-autocomplete>
     <img id="header-searchfield-icon" src="/assets/img/icons/search_gray.svg" alt="search" >
 </div>
 
-<form class="example-form" *ngIf="searchResultsChannels && searchResultsUsers">
+
+<!--
+
+<form  class="example-form" *ngIf="searchResultsChannels && searchResultsUsers">
     <mat-form-field class="example-full-width">
       <mat-label>Number</mat-label>
       <input type="text"
@@ -18,8 +27,12 @@
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">{{option}}</mat-option>
       </mat-autocomplete>
+      <img id="header-searchfield-icon" src="/assets/img/icons/search_gray.svg" alt="search" >
     </mat-form-field>
   </form>
+
+-->
+
 
 <!--
 <div id="header-searchfield-results" *ngIf="searchResults.length >= 1 || searchResultsUsers.length >= 1  || searchResultsChannels.length >= 1">  

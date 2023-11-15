@@ -64,8 +64,6 @@ export class ChannelComponent {
 
   userOnCurrentChannel: User[] = [];
 
-
-
   loadallChannelusers() {
     this.userFirebaseService.loadedUsers.forEach(user => {
 
@@ -83,7 +81,6 @@ export class ChannelComponent {
           console.log('now selected channel is', this.channelFirebaseService.selectedChannel?.channelName);
         });
       }
-      console.log(user);
     });
     console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
 
