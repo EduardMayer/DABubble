@@ -6,6 +6,21 @@
     <img id="header-searchfield-icon" src="/assets/img/icons/search_gray.svg" alt="search" >
 </div>
 
+<form class="example-form" *ngIf="searchResultsChannels && searchResultsUsers">
+    <mat-form-field class="example-full-width">
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
 <!--
 <div id="header-searchfield-results" *ngIf="searchResults.length >= 1 || searchResultsUsers.length >= 1  || searchResultsChannels.length >= 1">  
 <p *ngFor="let resultUsers of searchResultsUsers; index as i" (click)="clickUser(i)"> 

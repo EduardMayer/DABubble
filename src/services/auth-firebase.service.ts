@@ -110,12 +110,6 @@ export class AuthFirebaseService implements OnInit {
         this.userService.setCurrentUserStatus("online");
         this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
 
-
-        //
-        this.channelFirebaseService.load(this.UserData.uid);
-        this.userService.currentUser.id = this.UserData.uid;
-        //
-
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);

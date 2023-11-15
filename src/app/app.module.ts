@@ -50,6 +50,7 @@ import { UserProfilComponent } from './mainscreen/user-profil/user-profil.compon
 import { MentionModule } from 'angular-mentions';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { IntroComponent } from './startscreen/intro/intro.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -108,7 +109,8 @@ import { IntroComponent } from './startscreen/intro/intro.component';
     MatBadgeModule,
     MatToolbarModule,
     PickerModule,
-    MentionModule 
+    MentionModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

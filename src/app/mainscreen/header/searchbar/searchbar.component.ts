@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
 import { User } from 'src/models/user.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
@@ -9,49 +11,90 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.scss']
 })
-export class SearchbarComponent implements OnInit{
+export class SearchbarComponent implements OnInit {
 
-  searchText: string = ""; 
-  searchResults: string[] = []; 
-  searchResultsUsers: User[] = []; 
-  searchResultsChannels: Channel[] = []; 
+  searchText: string = "";
+  searchResults: string[] = [];
+  searchResultsUsers: User[] = [];
+  searchResultsChannels: Channel[] = [];
 
-  testData: string[] = ["hallo", "Test", "Search"]; 
+  testData: string[] = ["hallo", "Test", "Search"];
 
-  constructor(private userService:UserFirebaseService, private channelService:ChannelFirebaseService){}
+  constructor(
+    private userService: UserFirebaseService,
+    private channelService: ChannelFirebaseService
+  ) { }
 
-  ngOnInit(): void {
-    //this.searchResults = ["Hallo", "Test", "Search"]; 
-    //this.userService.load(); 
+
+
+
+  myControl = new FormControl('');
+  options: string[] = [];
+  filteredOptions$: Observable<string[]> = new Observable();
+
+  ngOnInit() {
+    console.log(this.getCurrentUsersAsStringArray());
+    let usersString = this.getCurrentUsersAsStringArray();
+    this.options = usersString;
+
+    this.filteredOptions$ = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
   }
 
-  sendData(event:Event){
-    if(this.searchText != ""){
-      //console.log(this.searchText);
-      this.searchResults = this.testData.filter(s => s.includes(this.searchText)); 
-      this.getUsers(); 
-      this.getChannels(); 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+  /*
+    ngOnInit(): void {
+      //this.searchResults = ["Hallo", "Test", "Search"]; 
+      //this.userService.load(); 
     }
-    else{
-      this.searchResults = []; 
+  */
+
+  sendData(event: Event) {
+    if (this.searchText != "") {
+      //console.log(this.searchText);
+      this.searchResults = this.testData.filter(s => s.includes(this.searchText));
+      this.getUsers();
+      this.getChannels();
+    }
+    else {
+      this.searchResults = [];
       this.searchResultsUsers = [];
       this.searchResultsChannels = [];
     }
   }
 
-  async getUsers(){
-   
-    this.searchResultsUsers = []; 
+  async getUsers() {
+
+    this.searchResultsUsers = [];
     console.log("Loaded Users:");
     console.log(this.userService.loadedUsers);
 
     this.userService.loadedUsers.forEach(user => {
-      if(user.fullName.toUpperCase().includes(this.searchText.toUpperCase())){  
-        this.searchResultsUsers.push(user); 
+      if (user.fullName.toUpperCase().includes(this.searchText.toUpperCase())) {
+        this.searchResultsUsers.push(user);
+        this.options.push(user.fullName);
       }
     });
-    
-    
+
+
     /*
     this.userService.getUserForSearch(this.searchText)
         .then( (users) => {
@@ -59,34 +102,26 @@ export class SearchbarComponent implements OnInit{
         });
     */
   }
-  getChannels(){
-   
-
-    this.searchResultsChannels = []; 
+  getChannels() {
+    this.searchResultsChannels = [];
     console.log("Loaded Channels:");
     console.log(this.channelService.loadedChannels);
 
     this.channelService.loadedChannels.forEach(channel => {
-      if(channel.channelName.toUpperCase().includes(this.searchText.toUpperCase())){  
-        this.searchResultsChannels.push(channel); 
+      if (channel.channelName.toUpperCase().includes(this.searchText.toUpperCase())) {
+        this.searchResultsChannels.push(channel);
+        this.options.push(channel.channelName);
       }
     });
-    
-    /*
-    this.userService.getChannelForSearch(this.searchText)
-    .then( (channels) => {
-      this.searchResultsChannels = channels; 
-    });
-    */ 
   }
 
-  clickUser(index:any){
+  clickUser(index: any) {
     console.log("Send New Message to User with ID: ");
     console.log(this.searchResultsUsers[index]);
   }
 
-  clickChannel(index:any){
-    this.channelService.selectChannel(this.searchResultsChannels[index].id); 
+  clickChannel(index: any) {
+    this.channelService.selectChannel(this.searchResultsChannels[index].id);
   }
 
 
@@ -101,8 +136,7 @@ export class SearchbarComponent implements OnInit{
     this.userService.loadedUsers.forEach((user) => {
       usersByName.push(user.fullName);
     });
-    console.log(this.userService.loadedUsers);
     return usersByName;
 
-  } 
+  }
 }
