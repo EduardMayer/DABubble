@@ -43,6 +43,11 @@
   }
 }
 
+.username-box{
+  font-size: 32px;
+  font-weight: 700;
+}
+
 .choose-avatar-container {
   display: flex;
   flex-wrap: wrap;
@@ -121,6 +126,7 @@
   background-color: white;
   color: rgba(68, 77, 242, 1);
   cursor: pointer;
+  white-space: nowrap;
 
   &:hover {
     background-color: rgba(68, 77, 242, 1) !important;
@@ -170,4 +176,67 @@
   box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
   animation: slide-in 0.4s ease-in-out, slide-out 0.4s ease-in-out 1.5s;
   font-weight: 700;
+}
+
+
+@media screen and (max-width: 640px) {
+
+  .user-avatar-container{
+    margin: 0px 16px;
+    padding: 26px 21px;
+  }
+
+  .user-avatar-title {
+    gap: 24px;
+    
+    h1 {
+      font-size: 32px;
+      font-weight: bold;
+      max-width: 218px;
+    }
+  }
+
+  .user-uper-avatar-title{
+
+    img{
+      position: absolute;
+      left: 20px;
+      top: 35px;}
+    
+  }
+
+  .avatar-box{
+    padding: 0px;
+    img{
+      max-width: 120px;
+      max-height: 120px;
+    }
+  }
+
+  .choose-avatar-container{
+    gap: 0px;
+    justify-content: space-between;
+  }
+
+  .choose-avatar-text-box{
+    padding-left: 0px;
+    margin-bottom: 16px;
+  }
+
+  .choose-avatar-box{
+    
+    img{
+      max-height: 56px;
+      max-width: 56px;
+    }
+}
+
+.choose-avatar-upload-container{
+  gap: 5px;
+  padding-left: 0px;
+  margin-top: 24px;
+  justify-content: space-between;
+}
+
+
 }
