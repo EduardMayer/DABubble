@@ -65,25 +65,30 @@ export class SearchbarComponent implements OnInit {
   }
 
   selectOption(name: string) {
-    console.log(name);
-
     let atIndex = name.indexOf('@');
     if (atIndex !== -1) {
       name = name.slice(0, atIndex) + name.slice(atIndex + 1);
+      this.openChatWithUserByName(name);
     }
 
     atIndex = name.indexOf('#');
     if (atIndex !== -1) {
       name = name.slice(0, atIndex) + name.slice(atIndex + 1);
-      console.log(this.channelService.loadedChannels);
-      console.log(name);
-      let channel = this.channelService.loadedChannels.find((channel) => name === channel.channelName);
-      if(channel){
-        this.channelService.selectChannel(channel.id);
-      }else{
-        console.warn("No Channel found");
-      }
+      this.selectChannelByName(name);
     }
+  }
+
+  selectChannelByName(name: string) {
+    let channel = this.channelService.loadedChannels.find((channel) => name === channel.channelName);
+    if (channel) {
+      this.channelService.selectChannel(channel.id);
+    } else {
+      console.warn("No Channel found");
+    }
+  }
+
+  openChatWithUserByName(name: string){
+
   }
 
 
