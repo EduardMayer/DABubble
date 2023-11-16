@@ -40,7 +40,6 @@ export class MainscreenComponent implements OnInit {
       this.userProfilOpen = true;
       this.userProfilUser = user;
 
-
       if (this.userFirebaseService.loadedUsers.length == 0) {
         this.userFirebaseService.load();
       }

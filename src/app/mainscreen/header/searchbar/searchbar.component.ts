@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
@@ -11,22 +11,21 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.scss']
 })
+
+
 export class SearchbarComponent implements OnInit {
+
+  @Output() selectionEvent = new EventEmitter<string>();
 
   searchText: string = "";
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
 
-  testData: string[] = ["hallo", "Test", "Search"];
-
   constructor(
     private userService: UserFirebaseService,
     private channelService: ChannelFirebaseService
   ) { }
-
-
-
 
   myControl = new FormControl('');
   options: string[] = [];
@@ -34,9 +33,8 @@ export class SearchbarComponent implements OnInit {
 
 
   ngOnInit() {
-
-    let usersString = this.getUsersAsStringArray();
-    let channelsString = this.getChannelsAsStringArray();
+    let usersString = this.getUsersAsStringArray('@');
+    let channelsString = this.getChannelsAsStringArray('#');
     this.options = channelsString.concat(usersString);
 
     this.filteredOptions$ = this.myControl.valueChanges.pipe(
@@ -45,27 +43,47 @@ export class SearchbarComponent implements OnInit {
     );
   }
 
-  getUsersAsStringArray() {
+  getUsersAsStringArray(prefix = '') {
     let usersByName: string[] = [];
     this.userService.loadedUsers.forEach((user) => {
-      usersByName.push("@" + user.fullName);
+      usersByName.push(prefix + user.fullName);
     });
     return usersByName;
   }
 
-  getChannelsAsStringArray() {
+  getChannelsAsStringArray(prefix = '') {
     let channelsByName: string[] = [];
     this.channelService.loadedChannels.forEach((channel) => {
-      channelsByName.push("#" + channel.channelName);
+      channelsByName.push(prefix + channel.channelName);
     });
     return channelsByName;
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
 
+  selectOption(name: string) {
+    console.log(name);
+
+    let atIndex = name.indexOf('@');
+    if (atIndex !== -1) {
+      name = name.slice(0, atIndex) + name.slice(atIndex + 1);
+    }
+
+    atIndex = name.indexOf('#');
+    if (atIndex !== -1) {
+      name = name.slice(0, atIndex) + name.slice(atIndex + 1);
+      console.log(this.channelService.loadedChannels);
+      console.log(name);
+      let channel = this.channelService.loadedChannels.find((channel) => name === channel.channelName);
+      if(channel){
+        this.channelService.selectChannel(channel.id);
+      }else{
+        console.warn("No Channel found");
+      }
+    }
   }
 
 
@@ -77,6 +95,12 @@ export class SearchbarComponent implements OnInit {
 
 
 
+
+
+
+
+
+  testData: string[] = ["hallo", "Test", "Search"];
 
   sendData(event: Event) {
     if (this.searchText != "") {
@@ -126,28 +150,12 @@ export class SearchbarComponent implements OnInit {
     });
   }
 
-  clickUser(index: any) {
-    console.log("Send New Message to User with ID: ");
-    console.log(this.searchResultsUsers[index]);
-  }
+
 
   clickChannel(index: any) {
     this.channelService.selectChannel(this.searchResultsChannels[index].id);
   }
 
 
-  mentionConfig: { items: string[], triggerChar: string, dropUp: boolean } = {
-    items: this.getCurrentUsersAsStringArray(),
-    triggerChar: "@",
-    dropUp: false
-  };
 
-  getCurrentUsersAsStringArray() {
-    let usersByName: string[] = [];
-    this.userService.loadedUsers.forEach((user) => {
-      usersByName.push(user.fullName);
-    });
-    return usersByName;
-
-  }
 }
