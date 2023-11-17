@@ -1,4 +1,4 @@
 <div class="message" *ngIf="user">
-    <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
+    <img class="avatar0" src="{{user.avatar}}">
     <b (click)="openUserProfil(user)">{{user.fullName}}</b>
 </div>

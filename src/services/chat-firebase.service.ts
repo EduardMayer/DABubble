@@ -40,6 +40,7 @@ export class ChatFirebaseService {
         const index = this.loadedChats.findIndex(chat => chat.id === chatId);
         this.selectedChat = this.loadedChats[index];
         this.currentChatMessagePath = `channels/${chatId}/messages/`;
+        console.log("Chat selected"+this.selectedChat);
     }
 
 

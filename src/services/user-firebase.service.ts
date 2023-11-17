@@ -100,16 +100,20 @@ export class UserFirebaseService {
      */
     async getUserByUID(UID: string) {
         //EVTL ADD If LOADEDUSERS[UID]
+        let user = this.loadedUsers.find(user => user.id === UID);
 
-        //ELSE-->
-        if (UID != "") {
-            const docRef = await doc(this.firestore, "users", UID);
-            const docSnap = await getDoc(docRef);
-            let user = new User(docSnap.data());
-            user.id = docSnap.id;
+        if (user) {
             return user;
         } else {
-            return new User();
+            if (UID != "") {
+                const docRef = await doc(this.firestore, "users", UID);
+                const docSnap = await getDoc(docRef);
+                let user = new User(docSnap.data());
+                user.id = docSnap.id;
+                return user;
+            } else {
+                return new User();
+            }
         }
     }
 

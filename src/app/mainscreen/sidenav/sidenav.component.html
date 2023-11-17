@@ -29,11 +29,10 @@
         <div class="myChannelsDropdown pad-left60" id="myChannelsDropdown" *ngIf="unpackChannels">
 
             <div class="myChannels">
-                <div class="myChannels-channel" 
-                    *ngFor=" let channel of channelFirebaseService.loadedChannels" 
+                <div class="myChannels-channel" *ngFor=" let channel of channelFirebaseService.loadedChannels"
                     (click)="channelFirebaseService.selectChannel(channel.id)"
                     [class.myChannels-channel-selected]="channelFirebaseService.getSelectedChannelID()===channel.id">
-                    <h2 class="myChannels-channel-icon">#</h2> 
+                    <h2 class="myChannels-channel-icon">#</h2>
                     <h3 class="myChannels-channel-name">{{ channel.channelName }}</h3>
                 </div>
             </div>
@@ -54,10 +53,12 @@
         </div>
 
         <div class="myMessages" id="myMessages" *ngIf="unpackMessages">
-        </div>
 
-        <app-chat-view *ngFor="let chat of chatFirebaseService.loadedChats" [uId]="chatFirebaseService.getChatPartner(chat)"></app-chat-view>
-        
+
+            <app-chat-view *ngFor="let chat of chatFirebaseService.loadedChats"
+                [uId]="chatFirebaseService.getChatPartner(chat)">
+            </app-chat-view>
+        </div>
         <!--
             <div class="message" *ngFor="let chat of chatFirebaseService.loadedChats">
                 <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
@@ -70,9 +71,9 @@
             </div>
         </div>
 
-        -->    
-    
-      <!--   <div class="addChannel">
+        -->
+
+        <!--   <div class="addChannel">
             <img class="pad-right17" src="/assets/img/icons/add_circle.png">
             Leute hinzufügen
         </div> -->
@@ -80,7 +81,7 @@
         <!--
             <app-user-search *ngIf="showUserSearch" [message]="message" (userName)="handleUserSearchResult($event)"></app-user-search>
         -->
-        
+
 
     </div>
 

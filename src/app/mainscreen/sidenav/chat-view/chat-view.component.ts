@@ -19,9 +19,6 @@ export class ChatViewComponent {
 
   }
 
-
-
-
   @Input() set uId(value: string) {
     console.log(value);
     this.user = null; // Reset user to null while loading
@@ -47,6 +44,9 @@ openUserProfil(user:User){
   this.userProfilService.openUserProfil(user); 
 }
 */
+  selectChat(){
+
+  }
 
   async openUserProfil(user: User) {
     this.userProfilService.openUserProfil(user);
