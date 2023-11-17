@@ -1,48 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddChannelDialogComponent } from 'src/app/add-channel-dialog/add-channel-dialog.component';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { User } from 'src/models/user.class';
 import { UserProfilService } from 'src/services/user-profil.service';
+import { MessageFirebaseService } from 'src/services/message-firebase.service';
+import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss', '../../../styles.scss']
 })
-export class SidenavComponent implements OnInit{
+export class SidenavComponent implements OnInit {
 
-unpackChannels = false;
-unpackMessages = false;
-currentUser:User = new User(); 
+  unpackChannels = false;
+  unpackMessages = false;
+  currentUser: User = new User();
 
-selectedChannelID = ""; 
+  selectedChannelID = "";
 
   constructor(
-      public dialog: MatDialog, 
-      public channelFirebaseService: ChannelFirebaseService, 
-      private userFirebaseService: UserFirebaseService, 
-      private userProfilService: UserProfilService
-  ) {}
+    public dialog: MatDialog,
+    public channelFirebaseService: ChannelFirebaseService,
+    public chatFirebaseService: ChatFirebaseService,
+    private userFirebaseService: UserFirebaseService,
+    private userProfilService: UserProfilService
+  ) { }
 
   ngOnInit(): void {
-   this.userFirebaseService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid)
-    .then((user) => { 
+    this.userFirebaseService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid)
+      .then((user) => {
         this.currentUser = user
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
 
   showChannels() {
-    if(this.unpackChannels == false) {
+    if (this.unpackChannels == false) {
       this.unpackChannels = true;
     } else {
       this.unpackChannels = false;
@@ -51,7 +54,7 @@ selectedChannelID = "";
 
 
   showMessages() {
-    if(this.unpackMessages == false) {
+    if (this.unpackMessages == false) {
       this.unpackMessages = true;
     } else {
       this.unpackMessages = false;
@@ -69,17 +72,10 @@ selectedChannelID = "";
     });
   }
 
-  openUserProfil(user:User){
-    console.log("open user");
-    console.log(user);
-    
-    
-    this.userProfilService.openUserProfil(user); 
-  }
+
 }
 
 
 
-  
 
-  
+

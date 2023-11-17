@@ -54,9 +54,14 @@
         </div>
 
         <div class="myMessages" id="myMessages" *ngIf="unpackMessages">
-            <div class="message">
+        </div>
+
+        <app-chat-view *ngFor="let chat of chatFirebaseService.loadedChats" [uId]="chatFirebaseService.getChatPartner(chat)"></app-chat-view>
+        
+        <!--
+            <div class="message" *ngFor="let chat of chatFirebaseService.loadedChats">
                 <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
-                <b (click)="openUserProfil(this.currentUser)">{{currentUser.fullName}} (Du)</b>
+                <b (click)="openUserProfil(this.chatFirebaseService.getChatPartner(chat))">{{currentUser.fullName}} (Du)</b>
             </div>
 
             <div class="message">
@@ -65,6 +70,7 @@
             </div>
         </div>
 
+        -->    
     
       <!--   <div class="addChannel">
             <img class="pad-right17" src="/assets/img/icons/add_circle.png">

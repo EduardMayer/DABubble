@@ -51,6 +51,7 @@ import { MentionModule } from 'angular-mentions';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { IntroComponent } from './startscreen/intro/intro.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ChatViewComponent } from './mainscreen/sidenav/chat-view/chat-view.component';
 
 
 
@@ -85,7 +86,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MessageEditComponent,
     UserSearchComponent,
     UserProfilComponent,
-    IntroComponent
+    IntroComponent,
+    ChatViewComponent
   ],
   imports: [
     BrowserModule,

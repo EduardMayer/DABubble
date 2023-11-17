@@ -20,7 +20,7 @@ export class ChannelFirebaseService {
     private unsubChannel: any;
 
     channelUsers: User[] = [];
-    userService = inject(UserFirebaseService);
+    
 
     selectedChannelId: string | undefined;
     selectedChannel: Channel | undefined;
@@ -31,7 +31,10 @@ export class ChannelFirebaseService {
     previousMessageTimeString: string = "01.01.1970";
     currentChannelMessagePath: string = ""
 
-    constructor(
+
+    userService = inject(UserFirebaseService);
+    //in consturctor?
+    constructor( 
         private firestore: Firestore,
         private generateIdService: GenerateIdService
     ) {

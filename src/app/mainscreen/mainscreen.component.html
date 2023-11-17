@@ -4,7 +4,9 @@
     
     <div id="main-body" *ngIf="channelFirebaseService.loadedChannels.length>0">    
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
-        <app-channel *ngIf="channelOpen && channelFirebaseService.selectedChannelId" id="main-channel"></app-channel>
+        <app-chat *ngIf="chatFirebaseService.selectedChat" id="main-chat"></app-chat>
+        <app-channel *ngIf="channelFirebaseService.selectedChannelId" id="main-channel"></app-channel>
+        
         <!-- <app-channel *ngIf="!channelOpen" id="main-chat"></app-channel>-->
         <app-thread id="main-thread" *ngIf="threadFirebaseService.message"></app-thread>
     </div>

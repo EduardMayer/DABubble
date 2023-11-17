@@ -109,7 +109,6 @@ export class UserFirebaseService {
             user.id = docSnap.id;
             return user;
         } else {
-            debugger;
             return new User();
         }
     }

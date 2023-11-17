@@ -1,0 +1,21 @@
+.message {
+    
+    width: 240px;
+    height: 60px;
+    border-radius: 37px;
+    margin-top: 8px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &:hover {
+        background-color: rgba(155, 150, 250, 0.37);
+        cursor: pointer;
+    }
+
+    .avatar0 {
+        width: 50px;
+        padding-right: 23px;
+    }
+}

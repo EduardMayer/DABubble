@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Channel } from 'src/models/channel.class';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfilService } from 'src/services/user-profil.service';
@@ -27,7 +26,8 @@ export class MainscreenComponent implements OnInit {
     public userFirebaseService: UserFirebaseService,
     private authService: AuthFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
-    private UserProfilService: UserProfilService
+    private UserProfilService: UserProfilService,
+    public chatFirebaseService: ChatFirebaseService
   ) {
     this.userFirebaseService.load().then(() => {
       this.channelFirebaseService.load(this.userFirebaseService.currentUser.id);
@@ -52,6 +52,9 @@ export class MainscreenComponent implements OnInit {
     this.UserProfilService.closeUserProfil$.subscribe(() => {
       this.userProfilOpen = false;
     });
+
+
+    console.log(this.chatFirebaseService.loadedChat)
   }
 
 

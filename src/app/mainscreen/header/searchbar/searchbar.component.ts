@@ -2,8 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
+import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
@@ -24,10 +26,10 @@ export class SearchbarComponent implements OnInit {
 
   constructor(
     private userService: UserFirebaseService,
-    private channelService: ChannelFirebaseService
-  ) { }
+    private channelService: ChannelFirebaseService,
+    private chatService: ChatFirebaseService) { }
 
-  myControl = new FormControl('');
+  headerControl = new FormControl('');
   options: string[] = [];
   filteredOptions$: Observable<string[]> = new Observable();
 
@@ -37,7 +39,7 @@ export class SearchbarComponent implements OnInit {
     let channelsString = this.getChannelsAsStringArray('#');
     this.options = channelsString.concat(usersString);
 
-    this.filteredOptions$ = this.myControl.valueChanges.pipe(
+    this.filteredOptions$ = this.headerControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
@@ -87,7 +89,26 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
-  openChatWithUserByName(name: string){
+  openChatWithUserByName(name: string) {
+    const currentUser = this.userService.currentUser;
+    let chatPartner = this.userService.loadedUsers.find((user) => (user.fullName === name))
+    console.log(chatPartner);
+    console.log(currentUser);
+
+    const chatToSelect = this.chatService.loadedChats.find((chat) => chat.users.includes(name));
+    if (chatToSelect) {
+      this.chatService.loadChatMessages(chatToSelect.id);
+    } else {
+      let chat = new Chat({
+        users: [chatPartner?.id, currentUser.id]
+      });
+
+      this.chatService.update(chat);
+      this.chatService.selectChat(chat.id);
+      setTimeout(()=>{
+        console.log(this.chatService.selectedChat);
+      },400)
+    }
 
   }
 
