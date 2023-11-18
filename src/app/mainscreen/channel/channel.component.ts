@@ -179,8 +179,8 @@ export class ChannelComponent {
 
   addUserToChannel(event: Event) {
     event.stopPropagation();
-debugger;
-    if(this.newAddedToChannelUser.fullName) {
+    debugger;
+    if (this.newAddedToChannelUser.fullName) {
       let newAddedToChannelUserToJson = this.newAddedToChannelUser.toJSON();
 
       this.userFirebaseService.update(this.newAddedToChannelUser);
@@ -188,7 +188,7 @@ debugger;
       this.newAddedToChannelUser.fullName = '';
       this.closeMenus();
     }
-   
+
 
   }
 
@@ -216,14 +216,14 @@ debugger;
     if (this.menuTrigger) {
       this.menuTrigger.closeMenu();
     }
-      if (this.addMemberTrigger) {
-        this.addMemberTrigger.openMenu();
-      }
-  
+    if (this.addMemberTrigger) {
+      this.addMemberTrigger.openMenu();
+    }
+
   }
 
   cancelSelection() {
-      this.newAddedToChannelUser.fullName = '';
+    this.newAddedToChannelUser.fullName = '';
 
   }
 
