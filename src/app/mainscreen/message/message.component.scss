@@ -105,6 +105,33 @@
         z-index: 999;
         margin: 16px;
     }
+
+    .pdf-box{
+        
+        a{
+            color: black;
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+
+
+            &:hover{
+                color: blue;
+            }
+        }
+    }
+
+    
+    .img-box{
+        max-width: 100%; 
+        max-height: 200px;
+
+        &:hover{
+            scale: 1.02;
+        }
+    
+    }
+
 }
 
 .inverted {
@@ -139,21 +166,4 @@
         }
     }
 
-
-    .pdf-box{
-        
-        a{
-            color: black;
-            display: flex;
-            text-decoration: none;
-            align-items: center;
-
-
-            &:hover{
-                color: white;
-            }
-        }
-    }
-
-    
 }
