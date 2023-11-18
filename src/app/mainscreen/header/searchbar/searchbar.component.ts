@@ -91,23 +91,28 @@ export class SearchbarComponent implements OnInit {
 
   openChatWithUserByName(name: string) {
     const currentUser = this.userService.currentUser;
-    let chatPartner = this.userService.loadedUsers.find((user) => (user.fullName === name))
-    console.log(chatPartner);
-    console.log(currentUser);
+    var chatPartner = this.userService.loadedUsers.find((user) => (user.fullName === name));
+    if (chatPartner) {
+      var chatPartnerId=chatPartner.id;
+    }
 
-    const chatToSelect = this.chatService.loadedChats.find((chat) => chat.users.includes(name));
-    if (chatToSelect) {
-      this.chatService.loadChatMessages(chatToSelect.id);
-    } else {
-      let chat = new Chat({
-        users: [chatPartner?.id, currentUser.id]
-      });
+    if (chatPartner?.id) {
+      const chatToSelect = this.chatService.loadedChats.find((chat) => (chat.users.includes(chatPartnerId) && chat.users.includes(currentUser.id)));
 
-      this.chatService.update(chat);
-      this.chatService.selectChat(chat.id);
-      setTimeout(()=>{
-        console.log(this.chatService.selectedChat);
-      },400)
+
+
+      if (chatToSelect) {
+        this.chatService.selectChat(chatToSelect.id);
+      } else {
+        let chat = new Chat({
+          users: [chatPartner?.id, currentUser.id]
+        });
+
+        this.chatService.update(chat).then(() => {
+          this.chatService.selectChat(chat.id)
+        });
+
+      }
     }
 
   }

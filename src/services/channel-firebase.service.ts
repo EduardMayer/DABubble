@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy, getDoc } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
@@ -20,7 +20,7 @@ export class ChannelFirebaseService {
     private unsubChannel: any;
 
     channelUsers: User[] = [];
-    
+
 
     selectedChannelId: string | undefined;
     selectedChannel: Channel | undefined;
@@ -34,7 +34,7 @@ export class ChannelFirebaseService {
 
     userService = inject(UserFirebaseService);
     //in consturctor?
-    constructor( 
+    constructor(
         private firestore: Firestore,
         private generateIdService: GenerateIdService
     ) {
@@ -96,7 +96,6 @@ export class ChannelFirebaseService {
     }
 
 
-
     async loadChannelUsers(currentChannelUsers: string[]) {
         this.channelUsers = [];
         if (currentChannelUsers.length > 0) {
@@ -110,9 +109,11 @@ export class ChannelFirebaseService {
         }
     }
 
+
     getChannelMessagesQuery(channelId: string) {
         return query(collection(this.firestore, `channels/${channelId}/messages`), orderBy("timestamp", "desc"));
     }
+
 
     getById(channelId: string) {
         const channel = doc(collection(this.firestore, "channels"), channelId);
@@ -126,6 +127,7 @@ export class ChannelFirebaseService {
         })
     };
 
+
     /**
     * Updates Or Creates a channel document in Firestore.
     * Depending on if channel.is i given
@@ -133,14 +135,31 @@ export class ChannelFirebaseService {
      */
     async updateChannel(channel: Channel) {
         if (channel.id == "") {
-            channel.id = this.generateIdService.generateRandomId(20);
+            this.createChannel(channel);
+        } else {
+            this.modifyChannel(channel);
+        }
+    }
+
+
+    async modifyChannel(channel: Channel) {
+        const docInstance = doc(this.firestore, 'channels', channel.id);
+        updateDoc(docInstance, channel.toJSON());
+    }
+
+
+    async createChannel(channel: Channel) {
+        channel.id = this.generateIdService.generateRandomId(20);
+        let channelExists = await this.checkChannelExists(channel.channelName);
+
+        if (!channelExists) {
             const docInstance = doc(collection(this.firestore, "channels"));
             setDoc(docInstance, channel.toJSON());
         } else {
-            const docInstance = doc(this.firestore, 'channels', channel.id);
-            updateDoc(docInstance, channel.toJSON());
+            console.warn("Channel wurde nicht erstellt, weil bereits ein Channel mit diesem Namen existiert");
         }
     }
+
 
     async updateChannelMessage(channelId: string, channelMessage: Message) {
         if (channelId != "") {
@@ -158,8 +177,31 @@ export class ChannelFirebaseService {
         }
     }
 
-    getSelectedChannelID(){
-        return this.selectedChannelId; 
+
+    getChannelQueryByName(channelName: string) {
+        return query(collection(this.firestore, "channels"), where("channelName", '==', channelName));
+    }
+
+    async checkChannelExists(channelName: string): Promise<boolean> {
+        let query = this.getChannelQueryByName(channelName);
+
+        return getDocs(query)
+            .then((docs) => {
+                let docId = "";
+                docs.forEach((doc) => {
+                    docId = doc.id;
+                })
+
+                if (docId == "") {
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+    }
+
+    getSelectedChannelID() {
+        return this.selectedChannelId;
     }
 
 

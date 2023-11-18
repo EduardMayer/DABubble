@@ -6,6 +6,7 @@ import { Message } from 'src/models/message.class';
 import { GenerateIdService } from './generate-id.service';
 import { UserFirebaseService } from './user-firebase.service';
 import { Observable, Subject } from 'rxjs';
+import { User } from 'src/models/user.class';
 
 
 @Injectable({
@@ -43,21 +44,20 @@ export class ChatFirebaseService {
         this.selectedChatSubject.next(newSelectedChat);
     }
 
-    selectChat(chatId: string) {
+    async selectChat(chatId: string) {
         this.selectedChatId = chatId;
         this.loadChatMessages(chatId);
         const index = this.loadedChats.findIndex(chat => chat.id === chatId);
         this.selectedChat = this.loadedChats[index];
-        this.updateSelectedChat(this.selectedChat);
+        await this.updateSelectedChat(this.selectedChat);
         this.currentChatMessagePath = `chats/${chatId}/messages/`;
-        console.log("Chat selected");
-        console.log(this.selectedChat);
     }
 
 
     getChatMessagesQuery(chatId: string) {
         return query(collection(this.firestore, `chats/${chatId}/messages`), orderBy("timestamp", "desc"));
     }
+
 
     async loadChatMessages(chatId: string) {
         const q = this.getChatMessagesQuery(chatId);
@@ -81,15 +81,53 @@ export class ChatFirebaseService {
     * @param {Chat} chat - The chat object to be updated or created.
     */
     async update(chat: Chat) {
-        console.log(chat);
         if (chat.id == "") {
-            chat.id = this.generateIdService.generateRandomId(20);
+            await this.createChat(chat);
+        } else {
+            await this.modifyChat(chat);
+        }
+
+        return chat;
+    }
+
+    async createChat(chat: Chat) {
+        chat.id = this.generateIdService.generateRandomId(20);
+        let chatExists = await this.checkChatExists(chat.users);
+
+        if (!chatExists) {
             const docInstance = doc(collection(this.firestore, "chats"));
             setDoc(docInstance, chat.toJSON());
         } else {
-            const docInstance = doc(this.firestore, 'chats', chat.id);
-            updateDoc(docInstance, chat.toJSON());
+            console.warn("Chat wurde nicht erstellt, weil bereits ein Chat mit diesen Nutzern existiert");
         }
+    }
+
+
+    async modifyChat(chat: Chat) {
+        const docInstance = doc(this.firestore, 'chats', chat.id);
+        updateDoc(docInstance, chat.toJSON());
+    }
+
+    getChatQueryByUsers(users: string[]) {
+        return query(collection(this.firestore, "channels"), where("users", 'array-contains', users));
+    }
+
+    async checkChatExists(users: string[]): Promise<boolean> {
+        let query = this.getChatQueryByUsers(users);
+
+        return getDocs(query)
+            .then((docs) => {
+                let docId = "";
+                docs.forEach((doc) => {
+                    docId = doc.id;
+                })
+
+                if (docId == "") {
+                    return false;
+                } else {
+                    return true;
+                }
+            });
     }
 
 
