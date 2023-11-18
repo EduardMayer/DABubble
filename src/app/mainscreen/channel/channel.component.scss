@@ -26,17 +26,17 @@
             border-radius: 30px;
             margin-right: 22px;
 
-&:hover {
-    background-color: #ECEEFE;
-    cursor: pointer;
-}
+            &:hover {
+                background-color: #ECEEFE;
+                cursor: pointer;
+            }
 
         }
     }
 
-  .amoundOfUsersInChannel {
+    .amoundOfUsersInChannel {
         font-size: 20px;
-    padding-left: 10px;
+        padding-left: 10px;
     }
 
     .chat-container {
@@ -138,7 +138,7 @@ app-message-create {
 
 .close {
     padding-right: 45px;
-cursor: pointer;    
+    cursor: pointer;
 }
 
 ::ng-deep .menuHeader.ng-tns-c2786309385-1 {

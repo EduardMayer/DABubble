@@ -56,7 +56,7 @@
 
 
             <app-chat-view *ngFor="let chat of chatFirebaseService.loadedChats"
-                [uId]="chatFirebaseService.getChatPartner(chat)">
+                [uId]="chatFirebaseService.getChatPartner(chat)" (click)="chatFirebaseService.selectChat(chat.id)">
             </app-chat-view>
         </div>
         <!--

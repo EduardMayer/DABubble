@@ -1,4 +1,26 @@
-CHAT WORKS!
-<mat-card id="chat" class="br-30">
-    <mat-card-content id="chat-content">Chat</mat-card-content>
+<mat-card id="chat" *ngIf="chatFirebaseService.selectedChat  && userFirebaseService.currentUser.id!='' ">
+    <div class='header'>
+        <div class="header-title" width="fit-content">
+            <div>
+                <h2> {{ chatPartner.fullName }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <div *ngFor="let message of chatFirebaseService.selectedChatMessages; let i = index">
+            <app-message [message]="message" [messageLocationName]="'chat'"></app-message>
+            <ng-template [appIfChanged]="getMessageTime(message)">
+                <app-date-line *ngIf="chatFirebaseService.selectedChatMessages[i-1]"
+                    [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[i-1])"></app-date-line>
+            </ng-template>
+        </div>
+
+        <app-date-line
+            *ngIf="chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1]"
+            [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1])">
+        </app-date-line>
+    </div>
+
+    <app-message-create [path]="messagePath" [currentLocation]="'Chat'"></app-message-create>
 </mat-card>

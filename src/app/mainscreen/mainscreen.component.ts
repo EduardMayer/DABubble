@@ -53,8 +53,6 @@ export class MainscreenComponent implements OnInit {
       this.userProfilOpen = false;
     });
 
-
-    console.log(this.chatFirebaseService.loadedChat)
   }
 
 

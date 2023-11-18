@@ -5,6 +5,7 @@ import { Chat } from '../models/chat.class';
 import { Message } from 'src/models/message.class';
 import { GenerateIdService } from './generate-id.service';
 import { UserFirebaseService } from './user-firebase.service';
+import { Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -33,14 +34,24 @@ export class ChatFirebaseService {
 
     }
 
+    private selectedChatSubject = new Subject<Chat>();
+    // This is the observable that components can subscribe to
+    selectedChat$: Observable<Chat> = this.selectedChatSubject.asObservable();
+
+    // This is a sample method to update the selected chat
+    updateSelectedChat(newSelectedChat: Chat) {
+        this.selectedChatSubject.next(newSelectedChat);
+    }
 
     selectChat(chatId: string) {
         this.selectedChatId = chatId;
         this.loadChatMessages(chatId);
         const index = this.loadedChats.findIndex(chat => chat.id === chatId);
         this.selectedChat = this.loadedChats[index];
+        this.updateSelectedChat(this.selectedChat);
         this.currentChatMessagePath = `channels/${chatId}/messages/`;
-        console.log("Chat selected"+this.selectedChat);
+        console.log("Chat selected");
+        console.log(this.selectedChat);
     }
 
 
@@ -117,12 +128,12 @@ export class ChatFirebaseService {
 
 
     /* NO FOR LOOP SINCE there can only be two chat partners */
-    getChatPartner(chat: Chat): string{
-        if(chat.users[0]!=this.userService.currentUser.id){
+    getChatPartner(chat: Chat): string {
+        if (chat.users[0] != this.userService.currentUser.id) {
             return chat.users[0];
-        }else if (chat.users[1]!=this.userService.currentUser.id){
+        } else if (chat.users[1] != this.userService.currentUser.id) {
             return chat.users[1];
-        }else{
+        } else {
             return "";
         }
     }

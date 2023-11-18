@@ -27,25 +27,10 @@ export class ChatViewComponent {
     this.userFirebaseService.getUserByUID(value)
       .then((loadedUser: User) => {
         this.user = loadedUser;
-        console.log(this.user);
       })
       .catch((error) => {
         console.error('Error loading user:', error);
       });
-  }
-
-
-  /*
-openUserProfil(user:User){
-  console.log("open user");
-  console.log(user);
-  
-  
-  this.userProfilService.openUserProfil(user); 
-}
-*/
-  selectChat(){
-
   }
 
   async openUserProfil(user: User) {

@@ -176,89 +176,42 @@ export class MessageCreateComponent {
  * @param {Message} message - The message to be opened.
  * @returns {void}
  */
-openMessage(message: Message) {
-  this.message = message;
-}
-
-
-  /*
-  toogleUserSearch(event: Event) {
-    this.showUserSearch = !this.showUserSearch;
-    event.stopPropagation();
+  openMessage(message: Message) {
+    this.message = message;
   }
 
 
-  checkForAt() {
-    const messageArray: String[] = this.message.content.split(" ");
-    let lastWord = messageArray[messageArray.length - 1];
-    lastWord = lastWord.replaceAll("\n", "");
-    if (lastWord.substring(0, 1) == "@") {
-      const searchString = lastWord.substring(1, lastWord.length);
-      //console.log("SearchString:" + searchString);
-      if (searchString !== "") {
-        this.searchValue = searchString;
-        this.showUserSearch = true;
-      } else {
-        this.showUserSearch = true;
-        this.searchResultsUsers = this.userFirebaseService.loadedUsers;
+  /**
+   * Uploads a file, validates its type and size, and updates the component properties accordingly.
+   * 
+   * @param {HTMLInputElement} input
+   * @returns {Promise<void>}
+   */
+  async uploadFile(input: HTMLInputElement) {
+    if (!input.files || !input.files.length) return;
+    const file = input.files[0];
+    try {
+      if (!this.isFileSizeValid(file)) {
+        throw new Error('File is too large. Maximum file size is 500 KB.');
       }
-    }
-    else {
-      this.showUserSearch = false;
-      this.searchResultsUsers = [];
-    }
-  }
-
-  handleEmojiSelection(selectedEmoji: string) {
-    if (selectedEmoji == "noSelection") {
-      console.log("noSelection");
-      this.closeEmojiBar();
-    } else {
-      this.message.content += selectedEmoji;
+      const url = await this.storageService.uploadFile(file, 'files');
+      this.file = url;
+      this.fileName = file.name;
+      this.fileIMG = this.isPdfFile(file) ? 'assets/img/icons/pdf-icon2.svg' : url;
+    } catch (error) {
+      console.error('Error uploading file: ', error);
     }
   }
 
-  getcursorStartPosition() {
-    const inputElement: HTMLInputElement = this.textInput.nativeElement;
-    const cursorPositionStart = inputElement.selectionStart;
-    const cursorPositionEnd = inputElement.selectionEnd;
-    //console.log(`Cursor start position: ${cursorPositionStart}`);
-    //console.log(`Cursor end position: ${cursorPositionEnd}`);
-    return cursorPositionStart;
-  }
+  /**
+  * Checks if a given file is a PDF based on its type.
+  * 
+  * @param {File} file - The file to be checked.
+  * @returns {boolean} - True if the file is a PDF, false otherwise.
   */
-
-/**
- * Uploads a file, validates its type and size, and updates the component properties accordingly.
- * 
- * @param {HTMLInputElement} input
- * @returns {Promise<void>}
- */
-async uploadFile(input: HTMLInputElement) {
-  if (!input.files || !input.files.length) return;
-  const file = input.files[0];
-  try {
-    if (!this.isFileSizeValid(file)) {
-      throw new Error('File is too large. Maximum file size is 500 KB.');
-    }
-    const url = await this.storageService.uploadFile(file, 'files');
-    this.file = url;
-    this.fileName = file.name;
-    this.fileIMG = this.isPdfFile(file) ? 'assets/img/icons/pdf-icon2.svg' : url;
-  } catch (error) {
-    console.error('Error uploading file: ', error);
+  isPdfFile(file: File): boolean {
+    return file.type === 'application/pdf';
   }
-}
-
- /**
- * Checks if a given file is a PDF based on its type.
- * 
- * @param {File} file - The file to be checked.
- * @returns {boolean} - True if the file is a PDF, false otherwise.
- */
-isPdfFile(file: File): boolean {
-  return file.type === 'application/pdf';
-}
 
   /**
  * Checks if the size of a given file is within the allowed limit (500 KB).
@@ -266,21 +219,21 @@ isPdfFile(file: File): boolean {
  * @param {File} file - The file to be checked.
  * @returns {boolean} - True if the file size is valid, false otherwise.
  */
-isFileSizeValid(file: File): boolean {
-  return file.size <= 500000;
-}
+  isFileSizeValid(file: File): boolean {
+    return file.size <= 500000;
+  }
 
   /**
- * Deletes the currently stored file from the storage service.
- * 
- * @returns {Promise<void>}
- */
-async deleteFile() {
-  try {
-    await this.storageService.deleteImage(this.file);
-    this.file = '';
-  } catch (error) {
-    console.error('Error deleting file: ', error);
+  * Deletes the currently stored file from the storage service.
+  * 
+  * @returns {Promise<void>}
+  */
+  async deleteFile() {
+    try {
+      await this.storageService.deleteImage(this.file);
+      this.file = '';
+    } catch (error) {
+      console.error('Error deleting file: ', error);
+    }
   }
-}
 }

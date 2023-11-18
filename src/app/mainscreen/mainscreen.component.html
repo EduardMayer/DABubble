@@ -4,7 +4,7 @@
     
     <div id="main-body" *ngIf="channelFirebaseService.loadedChannels.length>0">    
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
-        <app-chat *ngIf="chatFirebaseService.selectedChat" id="main-chat"></app-chat>
+        <app-chat *ngIf="chatFirebaseService.selectedChatId" id="main-chat"></app-chat>
         <app-channel *ngIf="channelFirebaseService.selectedChannelId" id="main-channel"></app-channel>
         
         <!-- <app-channel *ngIf="!channelOpen" id="main-chat"></app-channel>-->
@@ -20,9 +20,3 @@
 <div *ngIf="userProfilOpen">
     <app-user-profil [user]="userProfilUser"></app-user-profil>
 </div>
-
-<!--
-EXAMPLE MESSAGE OUTPUT
-<app-message [id]="messageRef"></app-message>
-<app-message [id]="messageRef2"></app-message>
--->

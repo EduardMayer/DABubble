@@ -1,0 +1,353 @@
+#chat {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-radius: 30px;
+
+    .header {
+        box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+        padding: 0px 35px 0px 35px;
+        border-radius: 30px 30px 0 0;
+        display: flex;
+        justify-content: space-between;
+
+        .header-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar-list {
+            display: flex;
+            align-items: center;
+
+            padding: 11px;
+            border-radius: 30px;
+            margin-right: 22px;
+
+            &:hover {
+                background-color: #ECEEFE;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .amoundOfUsersInChannel {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+
+    .chat-container {
+        overflow-y: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+        
+        app-date-line {
+            margin: 12px 35px 12px 35px;
+        }
+    }
+
+    app-message-create {
+        padding: 35px 35px 35px 35px;
+    }
+}
+
+
+.align-bottom {
+    position: sticky;
+    bottom: 0;
+}
+
+.chat-container {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+}
+
+.addmembers {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header {
+    padding: 0px 35px 0px 35px;
+    display: flex;
+    justify-content: space-between;
+
+    .header-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-avatar-list {
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+app-message-create {
+    padding: 0px 35px 0px 35px;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+::ng-deep div#mat-menu-panel-0 {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuHeaderText {
+    padding-left: 45px;
+}
+
+.close {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerText {
+    padding-left: 45px;
+}
+
+.closeMenu {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+.resultUserImages {
+    width: 20px;
+    border-radius: 15px;
+}
+
+.menuUsersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuUsers {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.menuUsersImage {
+    padding-left: 20px;
+    width: 60px;
+}
+
+.menuUsersName {
+    padding-left: 20px;
+}
+
+.addMemberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.addMemberImage {
+    padding-left: 20px;
+    width: 30px;
+}
+
+.addMemberInMenu {
+    display: flex;
+    align-items: center;
+    padding-top: 21px;
+    cursor: pointer;
+}
+
+
+.addMemberText {
+    padding-left: 20px;
+}
+
+.containerOfInput {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    padding-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputContainer {
+    width: 75%;
+    height: 42px;
+}
+
+.memberNameInput {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 1px solid #797EF3;
+}
+
+.inputAvatar {
+    width: 28px;
+    height: 25px;
+    border-radius: 15px;
+}
+
+.inputContent {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background-color: #ECEEFE;
+    border-radius: 25px;
+    height: 35%;
+    width: 39%;
+    top: 39px;
+    left: 77px;
+
+    position: absolute;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 280px;
+}
+
+#header-searchfield-results {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 12px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+#header-searchfield-results-Menu {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 68px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    width: 496px !important;
+    height: 310px !important;
+    min-width: unset !important;
+    max-width: unset !important;
+
+    border-top-left-radius: 35px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 35px !important;
+    border-bottom-left-radius: 35px !important;
+
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 100%;
+}
+
+.channelName {
+    color: #797EF3;
+    padding-left: 45px;
+}
+
+.addSelection {
+    background-color: #444DF2;
+    height: 54px;
+    width: 125px;
+    border-radius: 30px;
+    color: white;
+    border: unset;
+    position: absolute;
+    right: 57px;
+    bottom: 78px;
+
+    &:hover {
+        opacity: 0.85;
+        cursor: pointer;
+    }
+
+}
+
+.inputContainerMaster {
+    width: 100%;
+}
+
+.cancelSelection {}
