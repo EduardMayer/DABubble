@@ -5,12 +5,14 @@ import { Chat } from 'src/models/chat.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
+import { IfChangedService } from 'src/services/if-changed-service.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss', '../../../styles.scss']
+  styleUrls: ['./chat.component.scss', '../../../styles.scss'],
+  providers: [IfChangedService]
 })
 export class ChatComponent {
 

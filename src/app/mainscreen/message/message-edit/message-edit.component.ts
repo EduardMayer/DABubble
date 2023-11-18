@@ -19,7 +19,6 @@ export class MessageEditComponent {
   @Output() showEditMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private userFirebaseService: UserFirebaseService,
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
   ) {

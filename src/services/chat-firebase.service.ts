@@ -49,7 +49,7 @@ export class ChatFirebaseService {
         const index = this.loadedChats.findIndex(chat => chat.id === chatId);
         this.selectedChat = this.loadedChats[index];
         this.updateSelectedChat(this.selectedChat);
-        this.currentChatMessagePath = `channels/${chatId}/messages/`;
+        this.currentChatMessagePath = `chats/${chatId}/messages/`;
         console.log("Chat selected");
         console.log(this.selectedChat);
     }
@@ -61,7 +61,7 @@ export class ChatFirebaseService {
 
     async loadChatMessages(chatId: string) {
         const q = this.getChatMessagesQuery(chatId);
-        let path = `channels/${chatId}/messages/`;
+        let path = `chats/${chatId}/messages/`;
         this.unsubChatMessages = onSnapshot(q, (querySnapshot: any) => {
             this.selectedChatMessages = [];
             querySnapshot.forEach((doc: any) => {
@@ -103,13 +103,6 @@ export class ChatFirebaseService {
     }
 
 
-    /**
-    * Generates a Firestore query to retrieve channel data with optional index-based filtering.
-    *
-    * @param {any} indexName - (Optional) The name of the index to filter channels.
-    * @param {String} indexValue - (Optional) The value to filter channels by within the specified index.
-    * @returns {Query} A Firestore query for channel data with optional filtering.
-    */
     getChannelQuery(userId: string) {
         return query(collection(this.firestore, "chats"), where("users", 'array-contains', userId));
     }
@@ -119,9 +112,9 @@ export class ChatFirebaseService {
         this.unsubChats = onSnapshot(q, (querySnapshot) => {
             this.loadedChats = [];
             querySnapshot.forEach((doc) => {
-                const channel = new Chat(doc.data());
-                channel.id = doc.id;
-                this.loadedChats.push(channel);
+                const chat = new Chat(doc.data());
+                chat.id = doc.id;
+                this.loadedChats.push(chat);
             });
         })
     }
@@ -146,8 +139,8 @@ export class ChatFirebaseService {
 
     //MUSS überarbeitet werden
     getById(chatId: string) {
-        const channel = doc(collection(this.firestore, "chats"), chatId);
-        this.unsubChat = onSnapshot(channel, (doc) => {
+        const chat = doc(collection(this.firestore, "chats"), chatId);
+        this.unsubChat = onSnapshot(chat, (doc) => {
             this.loadedChat = undefined;
             let docData = doc.data();
             if (docData) {

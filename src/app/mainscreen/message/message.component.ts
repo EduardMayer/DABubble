@@ -118,7 +118,6 @@ export class MessageComponent {
     this.showMessageReactions = false;
   }
 
-  //Unfinished: path for channelmessages is set
   getMessagePath(messageLocation: string) {
     let path = "";
     if (messageLocation == 'channel') {
@@ -131,7 +130,9 @@ export class MessageComponent {
       }
 
     } else if (messageLocation == 'chat') {
-
+      if (this.channelFirebaseService.selectedChannel && this._message) {
+        path = "chats/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
+      }
     }
 
     return path;
