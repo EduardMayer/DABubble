@@ -1,8 +1,12 @@
 <mat-card id="channel" *ngIf="channelFirebaseService.selectedChannel  && userFirebaseService.currentUser.id!='' ">
     <div class='header'>
         <div class="header-title" width="fit-content">
-            <div>
+            <div class="header-title-container"  (mouseover)="hoverTitle=true" (mouseout)="hoverTitle=false" (click)="showEditChannel = true">
                 <h2># {{ channelFirebaseService.selectedChannel.channelName }}</h2>
+                <div class="header-title-container-icons" >
+                    <img *ngIf="!hoverTitle" src="assets/img/icons/arrow_down_black.svg" alt="dropdown_black">
+                    <img *ngIf="hoverTitle" src="assets/img/icons/arrow_down_blue.svg" alt="dropdown_blue">
+                </div>
             </div>
         </div>
 
@@ -18,6 +22,7 @@
 
             <img [matMenuTriggerFor]="addMember"  #addMemberTrigger="matMenuTrigger" class="addmembers" src="assets/img/icons/addmembers.svg">
         </div>
+        <app-edit-channel *ngIf="showEditChannel" (closeEvent)="closeEditDialog()"></app-edit-channel>
     </div>
 
 

@@ -29,6 +29,9 @@ export class ChannelComponent {
   memberName: string = "";
   newAddedToChannelUser = new User();
 
+  hoverTitle = false; 
+  showEditChannel: boolean = false; 
+
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
     public userFirebaseService: UserFirebaseService
@@ -229,6 +232,10 @@ export class ChannelComponent {
 
   clickChannel(index: any) {
     this.channelFirebaseService.selectChannel(this.searchResultsChannels[index].id);
+  }
+
+  closeEditDialog(){
+    this.showEditChannel = false; 
   }
 
 }

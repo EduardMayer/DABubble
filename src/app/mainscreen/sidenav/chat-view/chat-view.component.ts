@@ -3,15 +3,17 @@ import { User } from 'src/models/user.class';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { UserStatusFirebaseService } from 'src/services/user-status-firebase.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.component.html',
   styleUrls: ['./chat-view.component.scss']
 })
-export class ChatViewComponent implements OnInit{
+export class ChatViewComponent{
 
-  user: User | undefined | null;
+  user: User = new User(); 
+  refreshIntervall = 5000; 
 
   constructor(
     private userFirebaseService: UserFirebaseService,
@@ -23,7 +25,7 @@ export class ChatViewComponent implements OnInit{
 
   @Input() set uId(value: string) {
     console.log(value);
-    this.user = null; // Reset user to null while loading
+    //this.user = null; // Reset user to null while loading
 
     // Use Promise<User> directly, as getUserByUID returns a Promise<User>
     this.userFirebaseService.getUserByUID(value)
@@ -33,6 +35,7 @@ export class ChatViewComponent implements OnInit{
         this.userStatusService.getUserStatus(value)
         .then((result) => {
           this.user!.status = result;
+          this.checkStatus(); 
         })
         .catch((error) => {
           console.log(error);
@@ -44,11 +47,26 @@ export class ChatViewComponent implements OnInit{
    
   }
 
-  ngOnInit(): void {
-    
-  }
-
   async openUserProfil(user: User) {
     this.userProfilService.openUserProfil(user);
   }
+
+  /**
+   * Refreshes the user status in a defined intervall. 
+   */
+  checkStatus(){
+    setInterval(() => {
+      if(this.user.id != null || this.user.id != undefined ){
+        this.userStatusService.getUserStatus(this.user.id)
+        .then((result) => {
+          this.user!.status = result;
+          //console.log(this.user.id +  " " + result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+    }, this.refreshIntervall);
+  }
+
 }

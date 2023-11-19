@@ -52,6 +52,8 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { IntroComponent } from './startscreen/intro/intro.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChatViewComponent } from './mainscreen/sidenav/chat-view/chat-view.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-channel.component';
 
 
 
@@ -87,7 +89,8 @@ import { ChatViewComponent } from './mainscreen/sidenav/chat-view/chat-view.comp
     UserSearchComponent,
     UserProfilComponent,
     IntroComponent,
-    ChatViewComponent
+    ChatViewComponent,
+    EditChannelComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +115,8 @@ import { ChatViewComponent } from './mainscreen/sidenav/chat-view/chat-view.comp
     MatToolbarModule,
     PickerModule,
     MentionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule, 
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
