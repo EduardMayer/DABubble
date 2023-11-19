@@ -70,6 +70,7 @@
   #startScreen-container{
     display: flex;
     justify-content: center;
+    height: unset;
   }
 
   #startScreen-register-mobile{
@@ -96,7 +97,7 @@
 
   .uper-startscreen-container {
     justify-content: center;
-    margin-top: 92px;
+    //margin-top: 92px;
     padding-bottom: 30px;
   }
   
@@ -113,6 +114,10 @@
   }
 
   .app-avatar{
+    width: 100%;
+  }
+
+  .app-forgot{
     width: 100%;
   }
 }

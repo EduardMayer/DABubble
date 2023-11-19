@@ -184,6 +184,7 @@
   .user-avatar-container{
     margin: 0px 16px;
     padding: 26px 21px;
+    margin-bottom: 100px;
   }
 
   .user-avatar-title {
@@ -238,5 +239,12 @@
   justify-content: space-between;
 }
 
+
+.success-message {
+  padding: 20px 30px;
+  max-width: 323px;
+  font-size: 22px;
+  top: 880px;
+}
 
 }
