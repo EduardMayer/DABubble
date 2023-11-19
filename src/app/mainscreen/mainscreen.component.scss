@@ -1,11 +1,11 @@
-$sideNav-width: 300px; 
+$sideNav-width: 300px;
 $thread-width: 600px;
 
-app-channel{
+app-channel, app-chat {
     flex-grow: 1;
 }
 
-#main-container{
+#main-container {
     display: flex;
     flex-direction: column;
 
@@ -13,28 +13,28 @@ app-channel{
     max-height: calc(100vh - 48px);
     padding: 24px;
 
-    #main-body{
-        
+    #main-body {
+
         display: flex;
         justify-content: space-between;
-        gap:12px; 
+        gap: 12px;
         height: calc(100% - 100px);
-        #main-sidebar{
-           width: $sideNav-width;
-        }
-        #main-channel{
 
+        #main-sidebar {
+            width: $sideNav-width;
         }
-        #main-chat{
-            
-        }
-        #main-thread{
+
+        #main-channel {}
+
+        #main-chat {}
+
+        #main-thread {
             width: $thread-width;
         }
     }
 }
 
-#workspace{
+#workspace {
     position: fixed;
     left: -125px;
     bottom: 30vh;
@@ -44,12 +44,13 @@ app-channel{
     border-radius: 30px 30px 0px 0px;
     padding-left: 18px;
     padding-right: 18px;
-    box-shadow: 11px 28px 77px 0px rgba(0,0,0,0.75);
+    box-shadow: 11px 28px 77px 0px rgba(0, 0, 0, 0.75);
     background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    &:hover{
+
+    &:hover {
         color: #535AF1;
         cursor: pointer;
     }
