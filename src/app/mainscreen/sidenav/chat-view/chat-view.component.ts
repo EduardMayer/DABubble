@@ -1,20 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfilService } from 'src/services/user-profil.service';
+import { UserStatusFirebaseService } from 'src/services/user-status-firebase.service';
 
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.component.html',
   styleUrls: ['./chat-view.component.scss']
 })
-export class ChatViewComponent {
+export class ChatViewComponent implements OnInit{
 
   user: User | undefined | null;
 
   constructor(
     private userFirebaseService: UserFirebaseService,
-    private userProfilService: UserProfilService
+    private userProfilService: UserProfilService, 
+    private userStatusService: UserStatusFirebaseService
   ) {
 
   }
@@ -27,10 +29,23 @@ export class ChatViewComponent {
     this.userFirebaseService.getUserByUID(value)
       .then((loadedUser: User) => {
         this.user = loadedUser;
+        //Get Userstatus
+        this.userStatusService.getUserStatus(value)
+        .then((result) => {
+          this.user!.status = result;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       })
       .catch((error) => {
         console.error('Error loading user:', error);
       });
+   
+  }
+
+  ngOnInit(): void {
+    
   }
 
   async openUserProfil(user: User) {

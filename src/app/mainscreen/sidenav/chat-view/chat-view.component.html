@@ -1,4 +1,8 @@
 <div class="message" *ngIf="user">
-    <img class="avatar0" src="{{user.avatar}}">
-    <b (click)="openUserProfil(user)">{{user.fullName}}</b>
+    <div *ngIf="user.avatar!=''" id="header-user-icon">
+        <img  class="avatar0" src="{{user.avatar}}" alt="UserIcon">
+        <div id="header-status" [class.col-red]="user.status === 'offline'" [class.col-green]="user.status === 'online'"
+        [class.col-gray]="user.status !== 'online' && user.status !== 'offline'"></div>
+    </div>
+    <b>{{user.fullName}}</b>
 </div>
