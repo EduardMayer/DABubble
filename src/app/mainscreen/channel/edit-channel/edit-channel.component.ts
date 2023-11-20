@@ -24,4 +24,9 @@ export class EditChannelComponent implements OnInit {
     this.closeEvent.emit(); 
   }
 
+  leaveChannel(){
+    this.channelFirebaseService.leaveSelectedChannel(); 
+    this.close(); 
+  }
+
 }

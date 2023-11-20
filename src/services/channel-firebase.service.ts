@@ -204,6 +204,21 @@ export class ChannelFirebaseService {
         return this.selectedChannelId;
     }
 
+    leaveSelectedChannel(){
+
+        if(this.selectedChannel != null){
+            const userID =  this.userService.currentUser.id; 
+            const userIndex = this.selectedChannel.users.indexOf(userID); 
+            const loadedChannelIndex = this.loadedChannels.indexOf(this.selectedChannel)
+            this.selectedChannel.users.splice(userIndex, 1); 
+            this.loadedChannels.splice(loadedChannelIndex , 1); 
+            this.updateChannel( this.selectedChannel); 
+            if(this.loadedChannels.length > 0){
+                this.selectChannel(this.loadedChannels[0].id); 
+            }
+        }
+    }
+
 
     /**
     * Lifecycle hook called when the component is about to be destroyed.
