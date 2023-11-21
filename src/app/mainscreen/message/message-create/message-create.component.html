@@ -4,6 +4,7 @@
         <div class="msg-mods">
             <input type="file" #fileInput style="display: none" (change)="uploadFile(fileInput)">
             <img src="assets/img/icons/add.svg" (click)="fileInput.click()">
+            <img src="assets/img/icons/strips_grey.svg">
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
             <img src="assets/img/icons/alternateemail.svg" (click)="insAt()">
             <div class="preview-file" *ngIf="file !== ''">
@@ -24,7 +25,7 @@
             placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar();" 
             [mention]="items"
             [mentionConfig]="mentionConfig">
-            </textarea>
+        </textarea>
 
 
     </div>
