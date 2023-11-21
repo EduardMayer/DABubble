@@ -11,6 +11,8 @@ export class EditChannelComponent implements OnInit {
 
   @Output() closeEvent = new EventEmitter<any>();
   channel = new Channel(); 
+  editChannelDescription = false; 
+  editChannelName = false; 
 
   constructor(private channelFirebaseService: ChannelFirebaseService){}
 
@@ -29,4 +31,10 @@ export class EditChannelComponent implements OnInit {
     this.close(); 
   }
 
+  saveChannelName(){
+    this.editChannelName = false; 
+  }
+  saveChannelDescription(){
+    this.editChannelDescription = false; 
+  }
 }

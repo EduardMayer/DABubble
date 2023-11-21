@@ -3,14 +3,62 @@
         <h2># {{ channel.channelName }}</h2>
         <img src="assets/img/icons/close.svg" alt="close" (click)="close()">
     </div>
-    <div id="edit-channel-name-container-viewMode">
+    <div id="edit-channel-name-container-viewMode" *ngIf="!editChannelName">
         <div class="dsp-flex-row-spaceBtwn">
             <h3>Channel Name</h3>
-            <a>bearbeiten</a>
+            <a (click)="editChannelName = !editChannelName">bearbeiten</a>
         </div>
         <h2># {{ channel.channelName }}</h2>
     </div>
-    <div>
+    <div id="edit-channel-name-container-editMode" *ngIf="editChannelName">
+        <div class="dsp-flex-row-spaceBtwn">
+            <h3>Channel Name</h3>
+            <a (click)="saveChannelName()">Speichern</a>
+        </div>
+        <div id="edit-channel-name-container-editMode-input">
+            <input type="text">
+           <div id="edit-channel-name-container-editMode-input-icon">
+                <h2>#</h2>
+           </div>
+        </div>
+    </div>
+
+
+
+    <div id="edit-channel-description-container-viewMode"  *ngIf="!editChannelDescription">
+        <div class="dsp-flex-row-spaceBtwn">
+            <h3>Beschreibung</h3>
+            <a (click)="editChannelDescription = !editChannelDescription">bearbeiten</a>
+        </div>
+        <h2>Hier die Beschreibung des Channel</h2>
+        <div class="divider-container">
+            <div class="divider"></div>
+        </div>
+        <div>
+            <h3>Erstellt von</h3>
+            <h2>Name</h2>
+        </div>
+    </div>
+    <div id="edit-channel-description-container-editMode" *ngIf="editChannelDescription">
+        <div class="dsp-flex-row-spaceBtwn">
+            <h3>Beschreibung</h3>
+            <a (click)="saveChannelDescription()">Speichern</a>
+        </div>
+        <div id="edit-channel-description-container-editMode-input">
+            <input type="text">
+        </div>
+        <div class="divider-container">
+            <div class="divider"></div>
+        </div>
+        <div>
+            <h3>Erstellt von</h3>
+            <h2>Name</h2>
+        </div>
+    </div>
+
+
+
+    <div id="edit-channel-leaveChannel">
         <button (click)="leaveChannel()">Channel verlassen</button>
     </div>
 </div>

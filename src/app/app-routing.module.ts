@@ -5,6 +5,7 @@ import { StartscreenComponent } from './startscreen/startscreen.component';
 import { authGuard } from 'src/guard/auth-guard.guard';
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
+import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-channel.component';
 
 const routes: Routes = [
   //{ path: '', component: MainscreenComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'main', component: MainscreenComponent, canActivate: [authGuard] },
   { path: 'userMgmt', component: ActionHandlerComponent },
   { path: 'reset/:oobCode', component: ResetPasswordComponent },
+  { path: 'editChannel', component: EditChannelComponent }
 ]
   
 
