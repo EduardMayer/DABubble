@@ -1,6 +1,12 @@
 #sidenav {
     height: 100%;
+    overflow-y: scroll;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+  }
+
 
 .sidenavHeader {
     display: flex;
