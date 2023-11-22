@@ -27,7 +27,6 @@ export class MessageComponent {
   showToolbar: boolean = false;
   editMessage: boolean = false;
   messageLocation: string | undefined;
-  messageLocationPath: string | undefined;
   showMessageReactions: boolean = false;
   givenTimestamp: string | undefined;
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
@@ -61,7 +60,6 @@ export class MessageComponent {
 
   @Input() set messageLocationName(value: string) {
     this.messageLocation = value;
-    this.messageLocationPath = this.getMessagePath(value);
   }
 
   handleEmojiSelection(selectedEmoji: string) {
@@ -108,7 +106,7 @@ export class MessageComponent {
     }
     )
     this.messageFirebaseService.loadedReactions.push(newReaction);
-    let path = this.messageLocationPath + "/reactions";
+    let path = this._message?.path + "/reactions";
 
     this.messageFirebaseService.updateReaction(newReaction, path);
   }
@@ -118,8 +116,11 @@ export class MessageComponent {
     this.showMessageReactions = false;
   }
 
+
+  /*
   getMessagePath(messageLocation: string) {
     let path = "";
+    console.log(this._message);
     if (messageLocation == 'channel') {
       if (this.channelFirebaseService.selectedChannel && this._message) {
         path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
@@ -137,6 +138,7 @@ export class MessageComponent {
 
     return path;
   }
+  */
 
 
   updateReactionAddCurrentUser(reactionIndex: number) {

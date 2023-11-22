@@ -87,11 +87,4 @@ export class ChatComponent {
   ngOnDestroy() {
     this.selectedChatSubscription.unsubscribe();
   }
-
-
-
-
-
-
-
 }
