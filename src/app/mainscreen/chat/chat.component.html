@@ -1,4 +1,4 @@
-<mat-card id="chat" *ngIf="chatFirebaseService.selectedChat  && userFirebaseService.currentUser.id!='' && chatPartner ">
+<mat-card id="chat" *ngIf="chatFirebaseService.selectedChat$  && userFirebaseService.currentUser.id!='' && chatPartner ">
     <div class='header'>
         <div class="header-title" width="fit-content">
             <div>
@@ -40,6 +40,4 @@
             </div>
         </ng-template>
     </div>
-
-
 </mat-card>

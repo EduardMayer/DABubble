@@ -32,7 +32,6 @@ export class ChatFirebaseService {
         private generateIdService: GenerateIdService,
         private userService: UserFirebaseService
     ) {
-
     }
 
     private selectedChatSubject = new Subject<Chat>();
@@ -136,8 +135,12 @@ export class ChatFirebaseService {
     * Unsubscribes from any active subscription.
     */
     ngOnDestroy() {
-        this.unsubChats();
-        this.unsubChat();
+        if (this.unsubChats) {
+            this.unsubChats();
+        }
+        if (this.unsubChatMessages) {
+            this.unsubChatMessages();
+        }
     }
 
 

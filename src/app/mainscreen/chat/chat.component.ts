@@ -21,8 +21,7 @@ export class ChatComponent {
   memberName: string = "";
 
   chatPartner: User | undefined;
-  selectedChat: Chat | undefined;
-  currentSelectedChat = new Observable();
+  selectedChat: Chat | undefined = undefined;
 
   private selectedChatSubscription: Subscription;
 
@@ -30,6 +29,12 @@ export class ChatComponent {
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService
   ) {
+    //On init the Observable Value doesnt change but gets set so it has toe be done once
+    this.selectedChat = this.chatFirebaseService.selectedChat;
+    if (this.selectedChat) {
+      this.loadChat(this.selectedChat);
+    }
+
     this.selectedChatSubscription = this.chatFirebaseService.selectedChat$.subscribe((chat) => {
       this.selectedChat = chat;
       // Perform actions when the selected chat changes in the chat component
@@ -38,28 +43,20 @@ export class ChatComponent {
     });
   }
 
-  /*
-    if (chatFirebaseService.selectedChat) {
-      
-      chatFirebaseService.loadChatMessages(chatFirebaseService.selectedChat.id);
-      this.messagePath = `chats/${chatFirebaseService.selectedChat.id}/messages/`;
-      this.userFirebaseService.getUserByUID(this.chatFirebaseService.getChatPartner(chatFirebaseService.selectedChat))
-        .then((chatPartner) => {
-          this.chatPartner = chatPartner;
-        })
-    }
-    */
 
+  private async loadChat(newSelectedChat: Chat) {
+    if (newSelectedChat != null) {
+      this.chatFirebaseService.loadChatMessages(newSelectedChat.id);
+      this.messagePath = `chats/${newSelectedChat.id}/messages/`;
 
-  private loadChat(newSelectedChat: Chat) {
-    this.chatFirebaseService.loadChatMessages(newSelectedChat.id);
-    this.messagePath = `chats/${newSelectedChat.id}/messages/`;
-
-    this.userFirebaseService
-      .getUserByUID(this.chatFirebaseService.getChatPartner(newSelectedChat))
-      .then((chatPartner) => {
+      try {
+        const chatPartner = await this.userFirebaseService.getUserByUID(this.chatFirebaseService.getChatPartner(newSelectedChat));
         this.chatPartner = chatPartner;
-      });
+      } catch (error) {
+        // Handle errors here
+        console.error("Error loading chat:", error);
+      }
+    }
   }
 
 
@@ -87,10 +84,8 @@ export class ChatComponent {
 
   testData: string[] = ["hallo", "Test", "Search"];
 
-
-  ngOnInit(): void {
-    //this.searchResults = ["Hallo", "Test", "Search"]; 
-    //this.userService.load(); 
+  ngOnDestroy() {
+    this.selectedChatSubscription.unsubscribe();
   }
 
 
