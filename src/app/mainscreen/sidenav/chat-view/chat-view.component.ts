@@ -24,8 +24,6 @@ export class ChatViewComponent{
   }
 
   @Input() set uId(value: string) {
-    console.log(value);
-    //this.user = null; // Reset user to null while loading
 
     // Use Promise<User> directly, as getUserByUID returns a Promise<User>
     this.userFirebaseService.getUserByUID(value)

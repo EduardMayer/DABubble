@@ -1,4 +1,4 @@
-<mat-card id="chat" *ngIf="chatFirebaseService.selectedChat  && userFirebaseService.currentUser.id!='' ">
+<mat-card id="chat" *ngIf="chatFirebaseService.selectedChat  && userFirebaseService.currentUser.id!='' && chatPartner ">
     <div class='header'>
         <div class="header-title" width="fit-content">
             <div>
@@ -7,20 +7,39 @@
         </div>
     </div>
 
-    <div class="chat-container">
-        <div *ngFor="let message of chatFirebaseService.selectedChatMessages; let i = index">
-            <app-message [message]="message" [messageLocationName]="'chat'"></app-message>
-            <ng-template [appIfChanged]="getMessageTime(message)">
-                <app-date-line *ngIf="chatFirebaseService.selectedChatMessages[i-1]"
-                    [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[i-1])"></app-date-line>
-            </ng-template>
-        </div>
+    <div class="chat-container" >
+        <app-message-create [path]="messagePath" [currentLocation]="'Chat'"></app-message-create>
 
-        <app-date-line
-            *ngIf="chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1]"
-            [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1])">
-        </app-date-line>
+        <ng-container *ngIf="chatFirebaseService.selectedChatMessages.length>0; else emptyChat">
+
+            <div *ngFor="let message of chatFirebaseService.selectedChatMessages; let i = index">
+                <app-message [message]="message" [messageLocationName]="'chat'"></app-message>
+                <ng-template [appIfChanged]="getMessageTime(message)">
+                    <app-date-line *ngIf="chatFirebaseService.selectedChatMessages[i-1]"
+                        [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[i-1])"></app-date-line>
+                </ng-template>
+            </div>
+
+            <app-date-line
+                *ngIf="chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1]"
+                [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1])">
+            </app-date-line>
+        </ng-container>
+
+        <ng-template #emptyChat>
+            <!-- add- Profile Link-->
+            <div class="user-display">
+                <div class='user-header'>
+                    <img src="{{chatPartner.avatar}}">
+                    <div></div>
+                    <h3>{{ chatPartner.fullName }}</h3>
+                </div>
+                <div class="user-text">
+                    Diese Unterhaltung findet nur zwischen <a href="#">@{{ chatPartner.fullName }}</a> und dir statt.
+                </div>
+            </div>
+        </ng-template>
     </div>
 
-    <app-message-create [path]="messagePath" [currentLocation]="'Chat'"></app-message-create>
+
 </mat-card>

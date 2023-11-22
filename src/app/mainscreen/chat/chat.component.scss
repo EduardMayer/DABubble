@@ -44,10 +44,28 @@
         display: flex;
         flex-direction: column-reverse;
         width: 100%;
-        
+
         app-date-line {
             margin: 12px 35px 12px 35px;
         }
+
+        .user-display {
+            margin: 12px 35px 12px 35px;
+
+            .user-header {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+
+                img {
+                    height: 70px;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+
     }
 
     app-message-create {

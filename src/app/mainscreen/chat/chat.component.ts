@@ -20,7 +20,7 @@ export class ChatComponent {
   messagePath: string = "";
   memberName: string = "";
 
-  chatPartner: User = new User();
+  chatPartner: User | undefined;
   selectedChat: Chat | undefined;
   currentSelectedChat = new Observable();
 
