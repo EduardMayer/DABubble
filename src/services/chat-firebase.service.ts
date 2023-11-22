@@ -81,7 +81,7 @@ export class ChatFirebaseService {
     */
     async update(chat: Chat) {
         if (chat.id == "") {
-            await this.createChat(chat);
+            chat = await this.createChat(chat);
         } else {
             await this.modifyChat(chat);
         }
@@ -99,6 +99,8 @@ export class ChatFirebaseService {
         } else {
             console.warn("Chat wurde nicht erstellt, weil bereits ein Chat mit diesen Nutzern existiert");
         }
+
+        return chat;
     }
 
 

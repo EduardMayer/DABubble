@@ -89,32 +89,52 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+  getChatPartnerByName(name: string) {
+    return this.userService.loadedUsers.find((user) => (user.fullName === name));
+  }
+
   openChatWithUserByName(name: string) {
-    const currentUser = this.userService.currentUser;
-    var chatPartner = this.userService.loadedUsers.find((user) => (user.fullName === name));
+    let chatPartner = this.getChatPartnerByName(name);
     if (chatPartner) {
-      var chatPartnerId=chatPartner.id;
+      this.startChat(chatPartner.id);
+    } else {
+      console.warn("Chat Partner not found");
     }
 
-    if (chatPartner?.id) {
-      const chatToSelect = this.chatService.loadedChats.find((chat) => (chat.users.includes(chatPartnerId) && chat.users.includes(currentUser.id)));
+  }
 
 
+  startChat(chatPartnerId: string) {
+    const currentUser = this.userService.currentUser;
+    const chatToSelect = this.chatService.loadedChats.find((chat) => (chat.users.includes(chatPartnerId) && chat.users.includes(currentUser.id)));
 
-      if (chatToSelect) {
-        this.chatService.selectChat(chatToSelect.id);
-      } else {
-        let chat = new Chat({
-          users: [chatPartner?.id, currentUser.id]
-        });
-
-        this.chatService.update(chat).then(() => {
-          this.chatService.selectChat(chat.id)
-        });
-
-      }
+    if (chatToSelect) {
+      this.chatService.selectChat(chatToSelect.id);
+    } else {
+      this.createChat(chatPartnerId, currentUser.id)
     }
+  }
 
+
+  /**
+   * Initiates a new chat between the current user and a specified chat partner.
+   *
+   * @param {string} userId - The ID of the current user initiating the chat.
+   * @param {string} chatPartnerId - The ID of the chat partner to start the chat with.
+
+   * @throws {Error} If there is an issue updating the chat or opening the chat with the partner.
+   */
+  createChat(userId: string, chatPartnerId: string) {
+    let chat = new Chat({
+      users: [userId, chatPartnerId]
+    });
+
+    this.chatService.update(chat).then((chat) => {
+      this.chatService.loadedChats.unshift(chat);
+      this.startChat(chatPartnerId);
+    }).catch((error) => {
+      throw new Error(`Failed to start chat: ${error.message}`);
+    });
   }
 
 
