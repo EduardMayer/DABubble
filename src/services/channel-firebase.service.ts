@@ -6,6 +6,7 @@ import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { UserFirebaseService } from './user-firebase.service';
 import { GenerateIdService } from './generate-id.service';
+import { ChatFirebaseService } from './chat-firebase.service';
 
 
 
@@ -36,13 +37,15 @@ export class ChannelFirebaseService {
     //in consturctor?
     constructor(
         private firestore: Firestore,
-        private generateIdService: GenerateIdService
+        private generateIdService: GenerateIdService,
+        private chatFirebaseService: ChatFirebaseService
     ) {
     }
 
     selectChannel(channelId: string) {
         this.selectedChannelId = channelId;
         this.loadChannelMessages(channelId);
+        this.chatFirebaseService.selectedChat = undefined;
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
         this.currentChannelMessagePath = `channels/${channelId}/messages/`;
@@ -204,17 +207,17 @@ export class ChannelFirebaseService {
         return this.selectedChannelId;
     }
 
-    leaveSelectedChannel(){
+    leaveSelectedChannel() {
 
-        if(this.selectedChannel != null){
-            const userID =  this.userService.currentUser.id; 
-            const userIndex = this.selectedChannel.users.indexOf(userID); 
+        if (this.selectedChannel != null) {
+            const userID = this.userService.currentUser.id;
+            const userIndex = this.selectedChannel.users.indexOf(userID);
             const loadedChannelIndex = this.loadedChannels.indexOf(this.selectedChannel)
-            this.selectedChannel.users.splice(userIndex, 1); 
-            this.loadedChannels.splice(loadedChannelIndex , 1); 
-            this.updateChannel( this.selectedChannel); 
-            if(this.loadedChannels.length > 0){
-                this.selectChannel(this.loadedChannels[0].id); 
+            this.selectedChannel.users.splice(userIndex, 1);
+            this.loadedChannels.splice(loadedChannelIndex, 1);
+            this.updateChannel(this.selectedChannel);
+            if (this.loadedChannels.length > 0) {
+                this.selectChannel(this.loadedChannels[0].id);
             }
         }
     }
