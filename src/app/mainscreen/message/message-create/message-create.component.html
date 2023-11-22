@@ -1,5 +1,5 @@
 <app-addreaction *ngIf="showEmojiBar" (emojiSelectedOutput)="handleEmojiSelection($event)"></app-addreaction>
-<div class="msg-create-container">
+<div class="msg-create-container" (click)="focusTextInput()">
     <div class='option-icons'>
         <div class="msg-mods">
             <input type="file" #fileInput style="display: none" (change)="uploadFile(fileInput)">
@@ -8,25 +8,21 @@
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
             <img src="assets/img/icons/alternateemail.svg" (click)="insAt()">
             <div class="preview-file" *ngIf="file !== ''">
-                <img [src]="fileIMG"/>
+                <img [src]="fileIMG" />
                 <span>{{ fileName }}</span>
-                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt="" srcset="">
+                <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt=""
+                    srcset="">
             </div>
-          </div>
+        </div>
 
         <div class="msg-send">
             <img src="assets/img/icons/send.svg" (click)="createMessage()">
         </div>
     </div>
 
-    <div>
-        <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container"
-            [(ngModel)]="message.content" *ngIf="channelFirebaseService.selectedChannel"
-            placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar();" 
-            [mention]="items"
-            [mentionConfig]="mentionConfig">
-        </textarea>
+    <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
+        placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar();"
+        [mention]="items" [mentionConfig]="mentionConfig">
+    </textarea>
 
-
-    </div>
 </div>

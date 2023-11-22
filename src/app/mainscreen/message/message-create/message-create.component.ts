@@ -79,7 +79,11 @@ export class MessageCreateComponent {
     }
   }
 
-
+  /**
+   * Gets the appropriate placeholder text based on the current location.
+   *
+   * @returns {string} The placeholder text.
+   */
   getPlaceholder() {
     if (this.location == 'thread') {
       return "Antworten";
@@ -90,6 +94,15 @@ export class MessageCreateComponent {
     }
   }
 
+
+  /**
+  * Focuses on the HTML textarea element with the ViewChild reference.
+  */
+  focusTextInput() {
+    if (this.textInput && this.textInput.nativeElement) {
+      this.textInput.nativeElement.focus();
+    }
+  }
 
 
   //Autocomplete Options
@@ -102,6 +115,12 @@ export class MessageCreateComponent {
     dropUp: true
   };
 
+
+  /**
+  * Retrieves an array of user names as strings from the loaded users.
+  *
+  * @returns {string[]} An array of user names.
+  */
   getCurrentUsersAsStringArray() {
     let usersByName: string[] = [];
     this.userFirebaseService.loadedUsers.forEach((user) => {

@@ -7,10 +7,10 @@
     border-radius: 20px;
     padding: 20px;
     cursor: pointer;
-    
+
 
     .option-icons {
-        z-index:9;
+        z-index: 9;
         position: absolute;
         bottom: 20px;
         left: 20px;
@@ -32,25 +32,21 @@
         min-height: 30px;
         font-size: 18px;
         font-weight: 400;
-
-        textarea {
-            background-color: white;
-            border: none;
-            height: fit-content;
-        }
+        border: none;
+        height: fit-content;
 
         &:focus {
             outline: none;
         }
     }
 
-    &:hover{
+    &:hover {
         border: 1px solid rgba(68, 77, 242, 1);
     }
 }
 
 
-#inputFieldUserSearch{
+#inputFieldUserSearch {
     position: absolute;
     bottom: 100px;
     border: 1px solid #ADB0D9;
@@ -59,21 +55,22 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px; 
+    gap: 12px;
     max-height: 200px;
     overflow: scroll;
-    p{
-        margin: 0px;      
+
+    p {
+        margin: 0px;
     }
 }
 
-.msg-mods{
+.msg-mods {
     display: flex;
     gap: 5px;
     align-items: center;
 
-    img{
-       padding: 8px; 
+    img {
+        padding: 8px;
     }
 }
 
@@ -85,19 +82,19 @@
     object-fit: cover;
     align-items: flex-end;
 
-    img{
+    img {
         border-radius: 30%;
         width: 60px;
         height: 60px;
     }
-  }
+}
 
 
-  .close-red-icon{
+.close-red-icon {
     display: flex;
     position: absolute;
     height: 20px !important;
     top: -18px;
     left: 191px;
     cursor: pointer;
-  }
+}
