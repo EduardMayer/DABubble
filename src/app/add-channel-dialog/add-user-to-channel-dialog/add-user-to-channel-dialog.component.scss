@@ -1,0 +1,75 @@
+.addUserToChannelContainer {
+    width: 642px;
+    height: 279px;
+}
+
+::ng-deep .mat-mdc-dialog-container {
+    display: unset;
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+   width: unset;
+   height: unset;
+}
+
+add-user-to-channel-dialog-container {
+    width: 642px;
+    height: 285px;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+    width: 642px;
+    height: 285px;
+}
+
+.radioButtonContainer {
+    display: flex;
+    flex-direction: column;
+    padding-left: 45px;
+
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+.headerText {
+    padding-left: 45px;
+    color: black;
+}
+
+.addUserToSelection {
+    background-color: #444DF2;
+    height: 54px;
+    width: 125px;
+    border-radius: 30px;
+    color: white;
+    border: unset;
+    margin-right: 44px;
+
+    &:hover {
+        opacity: 0.85;
+        cursor: pointer;
+    }
+
+}
+
+.addUserToChannelDialogInput {
+    width: 94%;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid #797EF3;
+    margin-top: 7px;
+}
+
+.addUserToSelectionContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+}

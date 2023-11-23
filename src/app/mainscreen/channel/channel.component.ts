@@ -172,7 +172,7 @@ export class ChannelComponent {
 
       this.newAddedToChannelUser = new User(resultUsers);
 
-      this.newAddedToChannelUser.channels.push(this.channelFirebaseService.selectedChannel.channelName);
+      //this.newAddedToChannelUser.channels.push(this.channelFirebaseService.selectedChannel.channelName);
       this.searchText = '';
 
 
@@ -182,18 +182,35 @@ export class ChannelComponent {
 
   addUserToChannel(event: Event) {
     event.stopPropagation();
-    debugger;
-    if (this.newAddedToChannelUser.fullName) {
-      let newAddedToChannelUserToJson = this.newAddedToChannelUser.toJSON();
+debugger;
+const selectedChannelName = this.channelFirebaseService.selectedChannel?.channelName;
 
-      this.userFirebaseService.update(this.newAddedToChannelUser);
-      this.loadallChannelusers();
-      this.newAddedToChannelUser.fullName = '';
-      this.closeMenus();
+if(selectedChannelName) {
+this.userFirebaseService.loadedUsers.forEach(user => {
+  if(user.id == this.newAddedToChannelUser.id) {
+
+    if(!user.channels.includes(selectedChannelName)) {
+      //if(this.newAddedToChannelUser.fullName) {
+        this.newAddedToChannelUser.channels.push(selectedChannelName);
+        let newAddedToChannelUserToJson = this.newAddedToChannelUser.toJSON();
+  
+        this.userFirebaseService.update(this.newAddedToChannelUser);
+        this.loadallChannelusers();
+        this.newAddedToChannelUser.fullName = '';
+        this.closeMenus();
+      //}
+    } else {
+      alert('User ist schon enthalten')
+
     }
 
-
   }
+});
+}
+  }
+
+  //!user.channels.includes(selectedChannelName)
+
 
   closeMenus() {
     if (this.menuTrigger) {

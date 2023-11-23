@@ -54,6 +54,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChatViewComponent } from './mainscreen/sidenav/chat-view/chat-view.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-channel.component';
+import { AddUserToChannelDialogComponent } from './add-channel-dialog/add-user-to-channel-dialog/add-user-to-channel-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -90,7 +92,8 @@ import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-cha
     UserProfilComponent,
     IntroComponent,
     ChatViewComponent,
-    EditChannelComponent
+    EditChannelComponent,
+    AddUserToChannelDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +119,8 @@ import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-cha
     PickerModule,
     MentionModule,
     MatAutocompleteModule, 
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

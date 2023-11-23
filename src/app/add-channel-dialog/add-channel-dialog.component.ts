@@ -4,6 +4,15 @@ import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import { AddUserToChannelDialogComponent } from './add-user-to-channel-dialog/add-user-to-channel-dialog.component';
 
 @Component({
   selector: 'app-add-channel-dialog',
@@ -23,7 +32,9 @@ export class AddChannelDialogComponent {
 
   constructor(private fb: FormBuilder,
     public firebaseChannel: ChannelFirebaseService,
-    private userFirebaseService: UserFirebaseService) {
+    private userFirebaseService: UserFirebaseService,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<AddChannelDialogComponent>) {
     this.getInput();
   }
 
@@ -68,5 +79,18 @@ console.log(value);*/
     const newChannel = new Channel(value);
     newChannel.users.push(this.userFirebaseService.currentUser.id);
     this.firebaseChannel.updateChannel(newChannel);
+    this.openDialog();
+    this.closeDialog();
   }
+
+  openDialog(): void {
+    this.dialog.open(AddUserToChannelDialogComponent, {
+      width: '250px',
+    });
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
 }

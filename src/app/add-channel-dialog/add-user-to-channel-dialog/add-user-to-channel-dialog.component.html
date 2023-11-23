@@ -1,0 +1,19 @@
+<div class="addUserToChannelContainer">
+
+    <div class="headerContainer">
+        <h3 class="headerText">Leute hinzufügen</h3>
+        <img  class="close"  src="/assets/img/icons/close.svg">
+
+    </div>
+
+    <mat-radio-group class="radioButtonContainer" [(ngModel)]="selectedOption" (ngModelChange)="chooseSelection()">
+        <mat-radio-button value="1">Alle Mitglieder von ... hinzufügen</mat-radio-button>
+        <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>
+        <input *ngIf="selectedOption == '2'" class="addUserToChannelDialogInput">
+    </mat-radio-group>
+
+<div class="addUserToSelectionContainer">
+<button class="addUserToSelection">Erstellen</button>
+</div>
+
+</div>
