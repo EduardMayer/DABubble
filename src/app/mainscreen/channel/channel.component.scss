@@ -49,6 +49,22 @@
         app-date-line {
             margin: 12px 35px 12px 35px;
         }
+
+        .channel-display {
+            margin: 12px 35px 12px 35px;
+
+            .channel-header {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+
+                img {
+                    height: 70px;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                }
+            }
+        }
     }
 
     app-message-create {
@@ -200,8 +216,6 @@ app-message-create {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    //width: 100%;
-    //padding-top: 30px;
 }
 
 .addMemberImage {
