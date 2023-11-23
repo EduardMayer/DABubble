@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
   selector: 'app-edit-channel',
@@ -16,15 +17,21 @@ export class EditChannelComponent implements OnInit {
 
   NewChannelName: string = ""; 
   NewChannelDescription: string = ""; 
+  channelCreatorName = ""; 
 
-  constructor(private channelFirebaseService: ChannelFirebaseService){}
+  constructor(private channelFirebaseService: ChannelFirebaseService , private userFirebaseService: UserFirebaseService){}
 
   ngOnInit(): void {
     if(this.channelFirebaseService.selectedChannel){
       this.channel = this.channelFirebaseService.selectedChannel; 
       this.NewChannelName = this.channelFirebaseService.selectedChannel.channelName; 
       this.NewChannelDescription = this.channelFirebaseService.selectedChannel.channelDescription; 
+      this.userFirebaseService.getUserByUID(this.channelFirebaseService.selectedChannel.creatorOfChannel)
+      .then((user) => { 
+        this.channelCreatorName = user.fullName; 
+      }) 
     }
+     
   }
 
   close(){

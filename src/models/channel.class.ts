@@ -9,7 +9,7 @@ export class Channel extends Chat {
         super(data);
         this.channelName = data ? data.channelName : "";
         this.channelDescription = data ? data.channelDescription : "";
-        this.creatorOfChannel =  "";
+        this.creatorOfChannel =  data ? data.creatorChannel : "";; 
     }
 
     override toJSON() {
