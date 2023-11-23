@@ -7,23 +7,48 @@
     padding: 20px;
 
     .options {
-        z-index:9;
+        z-index: 9;
         position: absolute;
         bottom: 20px;
         left: 20px;
         right: 20px;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
 
-        msg-mods {
-            display: flex;
-            align-items: center;
+        .msg-mods {
+            height: 24px;
         }
 
-        .msg-submit-options{
+        .msg-submit-options {
             display: flex;
+            gap: 32px;
 
+            .msg-send {
+                display: flex;
+                gap: 32px;
+
+                button{
+                    border-radius: 24px;
+                    padding: 12px 25px 12px 25px;
+                    font-weight: 700;
+                    font-size: 18px;
+                    line-height: 24.55px;
+                    text-align: center;
+                }
+                
+                .back {
+                    background-color: white;
+                    color:#797EF3;
+                    border: 1px solid #797EF3;
+                }
+
+                .submit {
+                    color: white;
+                    background-color: #444DF2;
+                    border: none;
+                }
+            }
         }
     }
 
@@ -32,6 +57,8 @@
         margin-bottom: 36px;
         border: none;
         min-height: 30px;
+        font-size: 18px;
+        line-height: 24.55px;
 
         textarea {
             background-color: white;

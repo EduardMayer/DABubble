@@ -18,17 +18,14 @@ export class MessageEditComponent {
 
   @Output() showEditMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(
-    public channelFirebaseService: ChannelFirebaseService,
-    private messageFirebaseService: MessageFirebaseService,
-  ) {
-
-  }
-
   @Input() set message(value: Message) {
     this._message = new Message(value);
   }
 
+  constructor(
+    public channelFirebaseService: ChannelFirebaseService,
+    private messageFirebaseService: MessageFirebaseService,
+  ) {  }
 
   /**
   * Asynchronously creates and sends a message to a selected channel.
@@ -51,6 +48,7 @@ export class MessageEditComponent {
     this.showEditMessageOutput.emit(false);
   }
 
+  
   /**
    * Toggles the visibility of the emoji list.
    */
