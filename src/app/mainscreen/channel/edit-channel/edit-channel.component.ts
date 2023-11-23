@@ -14,11 +14,16 @@ export class EditChannelComponent implements OnInit {
   editChannelDescription = false; 
   editChannelName = false; 
 
+  NewChannelName: string = ""; 
+  NewChannelDescription: string = ""; 
+
   constructor(private channelFirebaseService: ChannelFirebaseService){}
 
   ngOnInit(): void {
     if(this.channelFirebaseService.selectedChannel){
       this.channel = this.channelFirebaseService.selectedChannel; 
+      this.NewChannelName = this.channelFirebaseService.selectedChannel.channelName; 
+      this.NewChannelDescription = this.channelFirebaseService.selectedChannel.channelDescription; 
     }
   }
 
@@ -31,10 +36,20 @@ export class EditChannelComponent implements OnInit {
     this.close(); 
   }
 
-  saveChannelName(){
+  async saveChannelName(){
+    if( this.channelFirebaseService.selectedChannel){
+      this.channelFirebaseService.selectedChannel.channelName = this.NewChannelName;
+      await this.channelFirebaseService.updateChannel(this.channelFirebaseService.selectedChannel);
+      this.channel = this.channelFirebaseService.selectedChannel; 
+    }
     this.editChannelName = false; 
   }
-  saveChannelDescription(){
+  async saveChannelDescription(){
+    if( this.channelFirebaseService.selectedChannel){
+      this.channelFirebaseService.selectedChannel.channelDescription = this.NewChannelDescription;
+      await this.channelFirebaseService.updateChannel(this.channelFirebaseService.selectedChannel);
+      this.channel = this.channelFirebaseService.selectedChannel; 
+    }
     this.editChannelDescription = false; 
   }
 }

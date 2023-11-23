@@ -49,10 +49,11 @@
                 padding: 12px;
                 padding-left: 50px;
                 width: calc(100% - 24px - 30px);
+                font-size: 1.5em;
             }
             #edit-channel-name-container-editMode-input-icon{
                 position: absolute;
-                top: -12px;
+                top: -7px;
                 left: 24px;
             }
         }
@@ -86,8 +87,9 @@
                 border: 1px solid #ADB0D9; 
                 border-radius: 20px;
                 padding: 12px;
-                padding-left: 50px;
+                //padding-left: 50px;
                 width: calc(100% - 24px - 30px);
+                font-size: 1.5em;
             }
         }
     }
@@ -136,6 +138,5 @@
         height: 1px;
         width: 100%;
         background-color:  #ADB0D9; 
-      
     }
 }

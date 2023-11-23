@@ -3,6 +3,8 @@
         <h2># {{ channel.channelName }}</h2>
         <img src="assets/img/icons/close.svg" alt="close" (click)="close()">
     </div>
+
+
     <div id="edit-channel-name-container-viewMode" *ngIf="!editChannelName">
         <div class="dsp-flex-row-spaceBtwn">
             <h3>Channel Name</h3>
@@ -16,7 +18,7 @@
             <a (click)="saveChannelName()">Speichern</a>
         </div>
         <div id="edit-channel-name-container-editMode-input">
-            <input type="text">
+            <input id="edit-channel-name-input" type="text" [(ngModel)]="NewChannelName">
            <div id="edit-channel-name-container-editMode-input-icon">
                 <h2>#</h2>
            </div>
@@ -30,7 +32,7 @@
             <h3>Beschreibung</h3>
             <a (click)="editChannelDescription = !editChannelDescription">bearbeiten</a>
         </div>
-        <h2>Hier die Beschreibung des Channel</h2>
+        <h2>{{channel.channelDescription}}</h2>
         <div class="divider-container">
             <div class="divider"></div>
         </div>
@@ -45,7 +47,7 @@
             <a (click)="saveChannelDescription()">Speichern</a>
         </div>
         <div id="edit-channel-description-container-editMode-input">
-            <input type="text">
+            <input type="text" [(ngModel)]="NewChannelDescription">
         </div>
         <div class="divider-container">
             <div class="divider"></div>
