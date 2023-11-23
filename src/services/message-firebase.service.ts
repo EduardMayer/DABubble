@@ -39,13 +39,12 @@ export class MessageFirebaseService {
     * @param {string} [path] - (Optional) The path to the Firestore document where the reaction should be updated or added.
     * @returns {Promise<void>} A promise that resolves when the update or addition is complete.
     */
-    async updateReaction(reaction: Reaction, path?: string) {
-        
+    async updateReaction(reaction: Reaction, path: string) {
         if (reaction.path) {
             const docInstance = doc(this.firestore, reaction.path);
-            if(reaction.users.length==0){
+            if (reaction.users.length == 0) {
                 deleteDoc(docInstance);
-            }else{
+            } else {
                 updateDoc(docInstance, reaction.toJSON());
             }
         } else {
@@ -75,8 +74,8 @@ export class MessageFirebaseService {
     * @returns {void}
     */
     async loadReactions(message: Message) {
-        if (this.channelFirebaseService.selectedChannel && message) {
-            const path = `channels/${this.channelFirebaseService.selectedChannel.id}/messages/${message.id}/reactions/`;
+        if (message) {
+            const path = message.path + `/reactions/`;
             this.unsubReactions = onSnapshot(collection(this.firestore, path), (querySnapshot: any) => {
                 this.loadedReactions = [];
                 querySnapshot.forEach((doc: any) => {

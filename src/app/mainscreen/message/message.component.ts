@@ -19,7 +19,7 @@ import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 })
 export class MessageComponent {
 
-  private autorUser = new User(); 
+  private autorUser = new User();
   public _message: Message | undefined;
   public autorName: string = "";
   public autorAvatar: string = "";
@@ -36,7 +36,7 @@ export class MessageComponent {
     public messageFirebaseService: MessageFirebaseService,
     public userFirebaseService: UserFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
-    private channelFirebaseService: ChannelFirebaseService, 
+    private channelFirebaseService: ChannelFirebaseService,
     private userProfilService: UserProfilService,
     private storageService: StorageFirebaseService,
   ) { }
@@ -96,7 +96,7 @@ export class MessageComponent {
     }
   }
 
-  
+
 
   createReaction(selectedEmoji: string) {
     console.log("create Reaction: " + selectedEmoji);
@@ -142,17 +142,22 @@ export class MessageComponent {
 
 
   updateReactionAddCurrentUser(reactionIndex: number) {
-    console.log("updated Reaction, user added");
-    this.messageFirebaseService.loadedReactions[reactionIndex].users.push(this.userFirebaseService.currentUser.id);
-    this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex]);
+    if (this._message) {
+      this.messageFirebaseService.loadedReactions[reactionIndex].users.push(this.userFirebaseService.currentUser.id);
+      this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex], this._message.path + "/reactions");
+      console.log("updated Reaction, user added");
+    }
   }
 
 
   updateReactionRemoveCurrentUser(reactionIndex: number, userIndex: number) {
-    console.log("updated Reaction, user removed");
-    this.messageFirebaseService.loadedReactions[reactionIndex].users.splice(userIndex, 1);
-    this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex]);
+    if (this._message) {
+      console.log("updated Reaction, user removed");
+      this.messageFirebaseService.loadedReactions[reactionIndex].users.splice(userIndex, 1);
+      this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex], this._message.path + "/reactions");
+    }
   }
+
 
 
   toggleReactions(event: Event) {
@@ -179,7 +184,7 @@ export class MessageComponent {
 
   async setAutorName(autorId: string) {
     const autorValues = await this.userFirebaseService.getUserByUID(autorId);
-    this.autorUser = autorValues; 
+    this.autorUser = autorValues;
 
     if (autorValues) {
       this.autorName = autorValues.fullName;
@@ -217,13 +222,13 @@ export class MessageComponent {
     return hours + ':' + minutes;
   }
 
-  openUserProfil(){
-    this.userProfilService.openUserProfil(this.autorUser); 
+  openUserProfil() {
+    this.userProfilService.openUserProfil(this.autorUser);
   }
 
   isPDF(fileName: string): boolean {
     return fileName.toLowerCase().endsWith('.pdf');
   }
-  
+
 }
 
