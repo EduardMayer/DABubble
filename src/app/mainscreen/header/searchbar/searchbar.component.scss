@@ -21,6 +21,18 @@
 
 }
 
+::ng-deep .mdc-list-item__primary-text{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .user-img{
+        height: 24px;
+        aspect-ratio: 1;
+    }
+}
+
+
 ::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{
     border-top-right-radius: 8px !important;
     border-top-left-radius: 8px !important;

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
@@ -7,6 +7,7 @@ import { User } from 'src/models/user.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-searchbar',
@@ -18,7 +19,8 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 export class SearchbarComponent implements OnInit {
 
   @Output() selectionEvent = new EventEmitter<string>();
-
+  @ViewChild('searchField', { static: false }) searchField!: ElementRef;
+  
   searchText: string = "";
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
@@ -30,79 +32,99 @@ export class SearchbarComponent implements OnInit {
     private chatService: ChatFirebaseService) { }
 
   headerControl = new FormControl('');
-  options: string[] = [];
-  filteredOptions$: Observable<string[]> = new Observable();
+  options: { id: string; name: string, type: string, avatarSrc?: string }[] = [];
+  filteredOptions$: Observable<{ id: string; name: string, type: string, avatarSrc?: string }[]> = new Observable();
 
 
   ngOnInit() {
-    let usersString = this.getUsersAsStringArray('@');
-    let channelsString = this.getChannelsAsStringArray('#');
-    this.options = channelsString.concat(usersString);
+    let usersArray = this.getUsersSearchArray('@');
+    let channelsArray = this.getChannelsSearchArray('#');
+    this.options = channelsArray.concat(usersArray);
+    console.log(this.options);
 
     this.filteredOptions$ = this.headerControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map(value => this._filter(value))
     );
   }
 
-  getUsersAsStringArray(prefix = '') {
-    let usersByName: string[] = [];
+  getUsersSearchArray(prefix = '') {
+    let usersByName: { id: string; name: string, type: string, avatarSrc: string }[] = [];
     this.userService.loadedUsers.forEach((user) => {
-      usersByName.push(prefix + user.fullName);
+      usersByName.push({
+        id: user.id,
+        name: prefix + user.fullName,
+        type: "user",
+        avatarSrc: user.avatar
+      });
     });
     return usersByName;
   }
 
-  getChannelsAsStringArray(prefix = '') {
-    let channelsByName: string[] = [];
+  getChannelsSearchArray(prefix = '') {
+    let channels: { id: string; name: string, type: string }[] = [];
+    console.log(this.channelService.loadedChannels)
     this.channelService.loadedChannels.forEach((channel) => {
-      channelsByName.push(prefix + channel.channelName);
+      channels.push({
+        id: channel.id,
+        name: prefix + channel.channelName,
+        type: "channel"
+      });
     });
-    return channelsByName;
+    console.log(channels);
+    return channels;
+    
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  }
-
-  selectOption(name: string) {
-    let atIndex = name.indexOf('@');
-    if (atIndex !== -1) {
-      name = name.slice(0, atIndex) + name.slice(atIndex + 1);
-      this.openChatWithUserByName(name);
-    }
-
-    atIndex = name.indexOf('#');
-    if (atIndex !== -1) {
-      name = name.slice(0, atIndex) + name.slice(atIndex + 1);
-      this.selectChannelByName(name);
+  /*
+  getAvatarScrOfUsername(username: string) {
+    console.log(username);
+    const user = this.userService.loadedUsers.find(user => user.fullName == username);
+    console.log(user);
+    if (user) {
+      return user.avatar
+    } else {
+      return "assets/img/avatar/avatar0.svg";
     }
   }
+  */
 
-  selectChannelByName(name: string) {
-    let channel = this.channelService.loadedChannels.find((channel) => name === channel.channelName);
+  private _filter(name: string | null) {
+    if (name) {
+      let filterValue = name.toLowerCase();
+      let result = this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+      return result;
+    } else {
+      return [];
+    }
+  }
+
+
+  selectOption(id: string) {
+    this.openChatWithUserById(id);
+    this.selectChannelById(id);
+    this.searchField.nativeElement.value="";
+  }
+
+
+  selectChannelById(id: string) {
+    let channel = this.channelService.loadedChannels.find((channel) => id === channel.id);
     if (channel) {
       this.channelService.selectChannel(channel.id);
-    } else {
-      console.warn("No Channel found");
     }
   }
 
-  getChatPartnerByName(name: string) {
-    return this.userService.loadedUsers.find((user) => (user.fullName === name));
+
+  getChatWithUserById(id: string) {
+    return this.userService.loadedUsers.find((user) => (user.id === id));
   }
 
-  openChatWithUserByName(name: string) {
-    let chatPartner = this.getChatPartnerByName(name);
+  openChatWithUserById(id: string) {
+    let chatPartner = this.getChatWithUserById(id);
     if (chatPartner) {
       this.startChat(chatPartner.id);
-    } else {
-      console.warn("Chat Partner not found");
     }
-
   }
-
 
   startChat(chatPartnerId: string) {
     const currentUser = this.userService.currentUser;
@@ -176,7 +198,7 @@ export class SearchbarComponent implements OnInit {
     this.userService.loadedUsers.forEach(user => {
       if (user.fullName.toUpperCase().includes(this.searchText.toUpperCase())) {
         this.searchResultsUsers.push(user);
-        this.options.push(user.fullName);
+        //this.options.push(user.fullName);
       }
     });
 
@@ -196,7 +218,7 @@ export class SearchbarComponent implements OnInit {
     this.channelService.loadedChannels.forEach(channel => {
       if (channel.channelName.toUpperCase().includes(this.searchText.toUpperCase())) {
         this.searchResultsChannels.push(channel);
-        this.options.push(channel.channelName);
+        //this.options.push(channel.channelName);
       }
     });
   }
