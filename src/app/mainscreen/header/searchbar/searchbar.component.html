@@ -4,14 +4,12 @@
     placeholder="Code learning durchsuchen" 
     [matAutocomplete]="auto"
     [formControl]="headerControl"
-    matInput
-    >
+    matInput>
+    
     <mat-autocomplete 
         autoActiveFirstOption #auto="matAutocomplete"
-        (optionSelected)="selectOption($event.option.value)"
-    >
+        (optionSelected)="selectOption($event.option.value)">
         <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option" 
-        
         click="selectOption($event)">{{option}}</mat-option>
     </mat-autocomplete>
     <img id="header-searchfield-icon" src="/assets/img/icons/search_gray.svg" alt="search" >

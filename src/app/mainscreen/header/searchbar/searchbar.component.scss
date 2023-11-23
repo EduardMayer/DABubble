@@ -1,4 +1,4 @@
-#header-searchfield-container{
+#header-searchfield-container {
 
     position: relative;
 
@@ -10,13 +10,24 @@
         border: 0px;
         padding-left: 24px;
     }
-    #header-searchfield-icon{
+
+    #header-searchfield-icon {
         position: absolute;
-        top: 8px; 
+        top: 8px;
         right: 12px;
         width: 24px;
     }
+
+
 }
+
+::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel{
+    border-top-right-radius: 8px !important;
+    border-top-left-radius: 8px !important;
+    border-radius: 8px;
+}
+
+/*
 #header-searchfield-results{
     position: relative;
     border-radius: 42px;
@@ -42,4 +53,4 @@
         }
     }
 }
-
+*/
