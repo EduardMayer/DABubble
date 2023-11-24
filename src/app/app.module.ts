@@ -42,7 +42,7 @@ import { AddreactionComponent } from './mainscreen/message/addreaction/addreacti
 import { ForgotPasswordComponent } from './startscreen/forgot-password/forgot-password.component';
 import { PickerModule } from "@ctrl/ngx-emoji-mart";
 import { ActionHandlerComponent } from './action-handler/action-handler.component';
-import { SearchbarComponent } from './mainscreen/header/searchbar/searchbar.component';
+import { SearchbarComponent } from './mainscreen/searchbar/searchbar.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
 import { MessageEditComponent } from './mainscreen/message/message-edit/message-edit.component';
 import { UserSearchComponent } from './mainscreen/user-search/user-search.component';

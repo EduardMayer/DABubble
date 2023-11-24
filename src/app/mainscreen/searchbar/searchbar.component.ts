@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
@@ -20,11 +20,13 @@ export class SearchbarComponent implements OnInit {
 
   @Output() selectionEvent = new EventEmitter<string>();
   @ViewChild('searchField', { static: false }) searchField!: ElementRef;
-  
+
   searchText: string = "";
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
+
+
 
   constructor(
     private userService: UserFirebaseService,
@@ -36,12 +38,24 @@ export class SearchbarComponent implements OnInit {
   filteredOptions$: Observable<{ id: string; name: string, type: string, avatarSrc?: string }[]> = new Observable();
 
 
-  ngOnInit() {
-    let usersArray = this.getUsersSearchArray('@');
-    let channelsArray = this.getChannelsSearchArray('#');
-    this.options = channelsArray.concat(usersArray);
-    console.log(this.options);
+  @Input() set types(value: string) {
+    switch (value) {
+      case "channels":
+        this.options = this.getChannelsSearchArray('#');
+        break;
+      case "users":
+        this.options = this.getUsersSearchArray('@');
+        break;
+      default:
+        let usersArray = this.getUsersSearchArray('@');
+        let channelsArray = this.getChannelsSearchArray('#');
+        this.options = channelsArray.concat(usersArray);
+    }
+  }
 
+
+
+  ngOnInit() {
     this.filteredOptions$ = this.headerControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -73,7 +87,7 @@ export class SearchbarComponent implements OnInit {
     });
     console.log(channels);
     return channels;
-    
+
   }
 
   /*
@@ -103,7 +117,7 @@ export class SearchbarComponent implements OnInit {
   selectOption(id: string) {
     this.openChatWithUserById(id);
     this.selectChannelById(id);
-    this.searchField.nativeElement.value="";
+    this.searchField.nativeElement.value = "";
   }
 
 

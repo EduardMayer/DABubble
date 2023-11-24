@@ -5,6 +5,7 @@
     border: solid 1px #ADB0D9;
     border-radius: 20px;
     padding: 20px;
+    min-height: 100px;
 
     .options {
         z-index: 9;
@@ -59,6 +60,7 @@
         min-height: 30px;
         font-size: 18px;
         line-height: 24.55px;
+        
 
         textarea {
             background-color: white;
