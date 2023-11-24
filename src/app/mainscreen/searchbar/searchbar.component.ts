@@ -25,6 +25,8 @@ export class SearchbarComponent implements OnInit {
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
+  model: Channel | User | undefined;
+  private _action: string | Channel="";
 
 
 
@@ -54,6 +56,21 @@ export class SearchbarComponent implements OnInit {
   }
 
 
+  @Input() set action(value: string | Channel) {
+    console.log("calling SetAction");
+    if (value instanceof Channel) {
+      this._action = "addUserToChannel";
+      this.model = value;
+    } else {
+      this._action = "openSelection";
+    }
+  }
+
+  
+  get action(): string | Channel {
+    return this._action;
+  }
+
 
   ngOnInit() {
     this.filteredOptions$ = this.headerControl.valueChanges.pipe(
@@ -62,6 +79,13 @@ export class SearchbarComponent implements OnInit {
     );
   }
 
+
+  /**
+  * Retrieves an array of user objects for search, with optional name prefix.
+  *
+  * @param {string} [prefix=''] - The optional prefix to be added to each user's name.
+  * @returns {Array<{ id: string; name: string, type: string, avatarSrc: string }>} An array of user objects for search.
+  */
   getUsersSearchArray(prefix = '') {
     let usersByName: { id: string; name: string, type: string, avatarSrc: string }[] = [];
     this.userService.loadedUsers.forEach((user) => {
@@ -75,9 +99,17 @@ export class SearchbarComponent implements OnInit {
     return usersByName;
   }
 
+
+  /**
+  * Retrieves an array of channel objects for search, with optional name prefix.
+  *
+  * @param {string} [prefix=''] - The optional prefix to be added to each channels's name.
+  * @returns {Array<{ id: string; name: string, type: string}>} An array of channel objects for search.
+  */
   getChannelsSearchArray(prefix = '') {
     let channels: { id: string; name: string, type: string }[] = [];
-    console.log(this.channelService.loadedChannels)
+    console.log("GELADENE CHANNELS");
+    console.log(this.channelService.loadedChannels);
     this.channelService.loadedChannels.forEach((channel) => {
       channels.push({
         id: channel.id,
@@ -85,24 +117,16 @@ export class SearchbarComponent implements OnInit {
         type: "channel"
       });
     });
-    console.log(channels);
     return channels;
 
   }
 
-  /*
-  getAvatarScrOfUsername(username: string) {
-    console.log(username);
-    const user = this.userService.loadedUsers.find(user => user.fullName == username);
-    console.log(user);
-    if (user) {
-      return user.avatar
-    } else {
-      return "assets/img/avatar/avatar0.svg";
-    }
-  }
+  /**
+  * Filters options based on a provided name.
+  *
+  * @param {string} name - The name to filter options.
+  * @returns {Array<Object>} An array of filtered options.
   */
-
   private _filter(name: string | null) {
     if (name) {
       let filterValue = name.toLowerCase();
@@ -110,6 +134,19 @@ export class SearchbarComponent implements OnInit {
       return result;
     } else {
       return [];
+    }
+  }
+
+  handleOption(id: string) {
+    console.log("here");
+    console.log(this._action);
+    if (this._action == 'addUserToChannel') {
+      if (this.model instanceof Channel) {
+        this.model.users.push(id);
+      }
+    } else if (this._action == 'openSelection') {
+      this.selectOption(id);
+      console.log("Selecting Option");
     }
   }
 

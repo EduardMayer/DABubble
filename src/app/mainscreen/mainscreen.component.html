@@ -1,8 +1,18 @@
-<div id="main-container" *ngIf="userFirebaseService.loadedUsers.length>0">
 
+<!--
+<div *ngIf="channelFirebaseService.finishedLoading">
+    Channels geladen
+</div>
+<div *ngIf="userFirebaseService.finishedLoading">
+    Users geladen
+</div>
+-->
+
+
+<div id="main-container" *ngIf="channelFirebaseService.finishedLoading && userFirebaseService.finishedLoading">
     <app-header id="main-header"></app-header>
 
-    <div id="main-body" *ngIf="channelFirebaseService.loadedChannels.length>0">
+    <div id="main-body">
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
         <ng-container *ngIf="chatFirebaseService.selectedChat; then chatView; else channelView">
         </ng-container>

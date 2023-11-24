@@ -108,10 +108,13 @@ export class AuthFirebaseService implements OnInit {
         JSON.parse(localStorage.getItem('user')!);
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
         this.userService.syncMail(this.UserData.email);
-        this.userService.load();
+
         this.userService.setCurrentUserStatus("online");
         this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
 
+        this.firebaseUserService.currentUser.id=this.UserData.uid;
+
+        this.firebaseUserService.load();
         this.channelFirebaseService.load(this.UserData.uid);
         this.chatFirebaseService.load(this.UserData.uid);
         
@@ -148,6 +151,7 @@ export class AuthFirebaseService implements OnInit {
         this.UserData = result.user;
         await this.userService.syncMail(this.UserData.email);
         this.ngZone.run(() => {
+          this.firebaseUserService.currentUser=this.UserData;
           this.router.navigate(['/main']);
         });
       })

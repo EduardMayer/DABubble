@@ -3,11 +3,11 @@
         [formControl]="headerControl" matInput>
 
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-        (optionSelected)="selectOption($event.option.value)">
+        (optionSelected)="handleOption($event.option.value)">
 
         <mat-option *ngFor="let option of filteredOptions$ | async" 
         [value]="option.id" 
-        (click)="selectOption(option.id)">
+        (click)="handleOption(option.id)">
         <img 
             class='user-img' 
             *ngIf="option.avatarSrc" 

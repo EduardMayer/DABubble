@@ -14,6 +14,8 @@ export class UserFirebaseService {
     public loadedUsers: User[] = [];
     private unsubUsers: any;
 
+    public finishedLoading: boolean = false;
+
     public loadedUser: User | undefined;
     private unsubUser: any;
 
@@ -24,7 +26,7 @@ export class UserFirebaseService {
     constructor(private firestore: Firestore) {
         this.currentUser = new User(
             {
-                id: "",
+                id: "0",
                 fullName: "Guest",
                 mail: "guest@guest.at",
                 channels: ["F8tiKVNq6FePPOb4BDps", "O8ZTH8u2mAbFrrpNFaGp"]
@@ -46,14 +48,20 @@ export class UserFirebaseService {
     * Asynchronously loads user data from Firestore based on optional index parameters.
     */
     async load() {
+
         const q = query(collection(this.firestore, "users"));
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];
+            this.finishedLoading = false;
+            console.log("startLoadingUser");
             querySnapshot.forEach((doc) => {
                 const user = new User(doc.data());
                 user.id = doc.id;
                 this.loadedUsers.push(user);
+                console.log("loadedUser");
             });
+            this.finishedLoading = true;
+            console.log("finishedLoadingUsers");
         });
     }
 

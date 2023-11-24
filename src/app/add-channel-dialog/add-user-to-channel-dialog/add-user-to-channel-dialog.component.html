@@ -8,8 +8,8 @@
     <mat-radio-group class="radioButtonContainer" [(ngModel)]="selectedOption" (ngModelChange)="chooseSelection()">
         <mat-radio-button value="1">Alle Mitglieder von ... hinzufügen</mat-radio-button>
         <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>
-        <input *ngIf="selectedOption == '2'" class="addUserToChannelDialogInput">
-        <app-searchbar *ngIf="selectedOption == '2'"></app-searchbar>
+        <!-- <input *ngIf="selectedOption == '2'" class="addUserToChannelDialogInput"> -->
+        <app-searchbar *ngIf="selectedOption == '2'" [types]="'users'" [action]="'addUserToChannel'"></app-searchbar>
     </mat-radio-group>
 
 <div class="addUserToSelectionContainer">
