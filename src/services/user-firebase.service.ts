@@ -53,15 +53,12 @@ export class UserFirebaseService {
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];
             this.finishedLoading = false;
-            console.log("startLoadingUser");
             querySnapshot.forEach((doc) => {
                 const user = new User(doc.data());
                 user.id = doc.id;
                 this.loadedUsers.push(user);
-                console.log("loadedUser");
             });
             this.finishedLoading = true;
-            console.log("finishedLoadingUsers");
         });
     }
 

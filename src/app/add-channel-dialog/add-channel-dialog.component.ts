@@ -24,7 +24,7 @@ export class AddChannelDialogComponent {
   channelDescription: any;
   creatorChannel: any;
 
-  channel = new Channel();
+  public channel = new Channel();
 
   location: string | undefined;
 

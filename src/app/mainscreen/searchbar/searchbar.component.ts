@@ -7,7 +7,6 @@ import { User } from 'src/models/user.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-searchbar',
@@ -19,16 +18,15 @@ import { filter, tap } from 'rxjs/operators';
 export class SearchbarComponent implements OnInit {
 
   @Output() selectionEvent = new EventEmitter<string>();
+  @Output() updatedChannelModel = new EventEmitter<Channel>();
   @ViewChild('searchField', { static: false }) searchField!: ElementRef;
 
   searchText: string = "";
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
-  model: Channel | User | undefined;
-  private _action: string | Channel="";
-
-
+  channel: Channel | undefined;
+  private _action: string | Channel = "";
 
   constructor(
     private userService: UserFirebaseService,
@@ -60,13 +58,13 @@ export class SearchbarComponent implements OnInit {
     console.log("calling SetAction");
     if (value instanceof Channel) {
       this._action = "addUserToChannel";
-      this.model = value;
+      this.channel = value;
     } else {
       this._action = "openSelection";
     }
   }
 
-  
+
   get action(): string | Channel {
     return this._action;
   }
@@ -108,8 +106,6 @@ export class SearchbarComponent implements OnInit {
   */
   getChannelsSearchArray(prefix = '') {
     let channels: { id: string; name: string, type: string }[] = [];
-    console.log("GELADENE CHANNELS");
-    console.log(this.channelService.loadedChannels);
     this.channelService.loadedChannels.forEach((channel) => {
       channels.push({
         id: channel.id,
@@ -118,7 +114,6 @@ export class SearchbarComponent implements OnInit {
       });
     });
     return channels;
-
   }
 
   /**
@@ -141,15 +136,26 @@ export class SearchbarComponent implements OnInit {
     console.log("here");
     console.log(this._action);
     if (this._action == 'addUserToChannel') {
-      if (this.model instanceof Channel) {
-        this.model.users.push(id);
+      if (this.channel instanceof Channel) {
+        this.checkIfUserExistsInChannel(this.channel, id)
+        if (this.channel.users)
+          this.channel.users.push(id);
       }
+      this.updatedChannelModel.emit(this.channel);
     } else if (this._action == 'openSelection') {
       this.selectOption(id);
       console.log("Selecting Option");
     }
   }
 
+  checkIfUserExistsInChannel(channel: Channel, uid: string) {
+    let user = channel.users.find((channelUserId) => channelUserId === uid);
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   selectOption(id: string) {
     this.openChatWithUserById(id);
@@ -157,14 +163,12 @@ export class SearchbarComponent implements OnInit {
     this.searchField.nativeElement.value = "";
   }
 
-
   selectChannelById(id: string) {
     let channel = this.channelService.loadedChannels.find((channel) => id === channel.id);
     if (channel) {
       this.channelService.selectChannel(channel.id);
     }
   }
-
 
   getChatWithUserById(id: string) {
     return this.userService.loadedUsers.find((user) => (user.id === id));
@@ -187,7 +191,6 @@ export class SearchbarComponent implements OnInit {
       this.createChat(chatPartnerId, currentUser.id)
     }
   }
-
 
   /**
    * Initiates a new chat between the current user and a specified chat partner.
