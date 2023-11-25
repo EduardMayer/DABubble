@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
+import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { UserStatusFirebaseService } from 'src/services/user-status-firebase.service';
@@ -38,6 +39,7 @@ export class UserProfilComponent implements OnInit {
     private userStatusService: UserStatusFirebaseService,
     private userFirebaseService: UserFirebaseService,
     private authService: AuthFirebaseService,
+    private chatFirebaseService: ChatFirebaseService, 
     private router: Router) {
   }
 
@@ -110,5 +112,16 @@ export class UserProfilComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  async sendMessage(){
+    if(this.user && this.userFirebaseService.currentUser){
+      let users = []; 
+      users.push(this.user.id); 
+      users.push(this.userFirebaseService.currentUser.id); 
+      console.log(users);
+      const chatExists = await this.chatFirebaseService.checkChatExists(users);
+      console.log(chatExists);
+    }
   }
 }

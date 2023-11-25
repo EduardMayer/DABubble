@@ -103,7 +103,6 @@ export class ChatFirebaseService {
         return chat;
     }
 
-
     async modifyChat(chat: Chat) {
         const docInstance = doc(this.firestore, 'chats', chat.id);
         updateDoc(docInstance, chat.toJSON());
@@ -119,15 +118,15 @@ export class ChatFirebaseService {
         return getDocs(query)
             .then((docs) => {
                 let docId = "";
-                docs.forEach((doc) => {
+                docs.forEach((doc) => {        
                     docId = doc.id;
                 })
-
                 if (docId == "") {
                     return false;
                 } else {
                     return true;
                 }
+
             });
     }
 

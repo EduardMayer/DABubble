@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div *ngIf="!isCurrentUser" id="headerUserProfil-message">
-                <button class="btn-blue">
+                <button class="btn-blue" (click)="sendMessage()">
                     <img src="assets/img/icons/message.svg" alt="message">
                     Nachricht
                 </button>

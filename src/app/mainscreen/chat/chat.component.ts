@@ -7,6 +7,7 @@ import { User } from 'src/models/user.class';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { IfChangedService } from 'src/services/if-changed-service.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { UserProfilService } from 'src/services/user-profil.service';
 
 @Component({
   selector: 'app-chat',
@@ -27,7 +28,8 @@ export class ChatComponent {
 
   constructor(
     public chatFirebaseService: ChatFirebaseService,
-    public userFirebaseService: UserFirebaseService
+    public userFirebaseService: UserFirebaseService, 
+    private usserProfilService: UserProfilService
   ) {
     //On init the Observable Value doesnt change but gets set so it has toe be done once
     this.selectedChat = this.chatFirebaseService.selectedChat;
@@ -75,6 +77,12 @@ export class ChatComponent {
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary
     const year = date.getFullYear();                              // Get year
     return `${day}.${month}.${year}`;
+  }
+
+  openProfil(){
+    if(this.chatPartner){
+      this.usserProfilService.openUserProfil(this.chatPartner); 
+    }
   }
 
 
