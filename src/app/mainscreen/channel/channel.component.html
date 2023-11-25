@@ -14,10 +14,10 @@
         <div class="addMemberContainer">
             <div class="user-avatar-list" tabindex="0" mat-icon-button [matMenuTriggerFor]="menu"
                 #menuTrigger="matMenuTrigger" aria-label="Example icon-button with a menu">
-                <img class="avatar-img" *ngFor="let user of userOnCurrentChannel | slice:0:3; let i = index"
+                <img class="avatar-img" *ngFor="let user of channelFirebaseService.userOnCurrentChannel | slice:0:3; let i = index"
                     [style.left]="i * -10 + 'px'" [style.z-index]="3 - i" [src]="user.avatar" alt="avatar">
 
-                <span class="amoundOfUsersInChannel">{{userOnCurrentChannel.length}}</span>
+                <span class="amoundOfUsersInChannel">{{channelFirebaseService.userOnCurrentChannel.length}}</span>
 
             </div>
 
@@ -35,7 +35,7 @@
         </div>
 
         <div class="menuUsersContainer" (click)="$event.stopPropagation()">
-            <div class="menuUsers" *ngFor="let user of userOnCurrentChannel">
+            <div class="menuUsers" *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
                 <img class="menuUsersImage" src="{{ user.avatar }}">
                 <span class="menuUsersName">{{user.fullName}}</span>
             </div>

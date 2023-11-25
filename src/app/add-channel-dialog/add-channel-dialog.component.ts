@@ -78,6 +78,7 @@ console.log(value);*/
   onSubmitNewChannel(value: any) {
     const newChannel = new Channel(value);
     newChannel.users.push(this.userFirebaseService.currentUser.id);
+    newChannel.creatorOfChannel = this.userFirebaseService.currentUser.fullName;
     this.firebaseChannel.updateChannel(newChannel);
     this.openDialog();
     this.closeDialog();

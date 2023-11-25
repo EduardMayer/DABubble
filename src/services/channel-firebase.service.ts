@@ -39,7 +39,8 @@ export class ChannelFirebaseService {
     constructor(
         private firestore: Firestore,
         private generateIdService: GenerateIdService,
-        private chatFirebaseService: ChatFirebaseService
+        private chatFirebaseService: ChatFirebaseService,
+        private userFirebaseService: UserFirebaseService
     ) {
     }
 
@@ -49,6 +50,7 @@ export class ChannelFirebaseService {
         this.chatFirebaseService.selectedChat = undefined;
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
+        this.loadallChannelusers();
         this.currentChannelMessagePath = `channels/${channelId}/messages/`;
     }
 
@@ -165,6 +167,7 @@ export class ChannelFirebaseService {
 
         if (!channelExists) {
             const docInstance = doc(collection(this.firestore, "channels"));
+            debugger;
             setDoc(docInstance, channel.toJSON());
         } else {
             console.warn("Channel wurde nicht erstellt, weil bereits ein Channel mit diesem Namen existiert");
@@ -245,4 +248,31 @@ export class ChannelFirebaseService {
             this.unsubChannelMessages()
         }
     }
+
+    userOnCurrentChannel: User[] = [];
+
+
+    loadallChannelusers() {
+        debugger;
+        this.userOnCurrentChannel = [];
+        this.userFirebaseService.loadedUsers.forEach(user => {
+    
+          const selectedChannelName = this.selectedChannel?.channelName;
+    
+          if (selectedChannelName) {
+            user.channels.forEach((channel, index) => {
+              if (user.channels.includes(selectedChannelName)) {
+                if (!this.userOnCurrentChannel.some((u: { fullName: string }) => u.fullName === user.fullName)) {
+                  this.userOnCurrentChannel.push(user);
+                }
+              }
+    
+              console.log('channel of the user is', channel);
+              console.log('now selected channel is', this.selectedChannel?.channelName);
+            });
+          }
+        });
+        console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
+    
+      }
 }
