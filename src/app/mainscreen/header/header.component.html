@@ -6,7 +6,7 @@
         <app-searchbar *ngIf="userService.finishedLoading && channelService.finishedLoading"  [types]='"all"' [action]="'openSelection'"></app-searchbar>
     </div>
     <div id="header-user">
-        <h1>{{user.fullName}}</h1>
+        <h1 id="header-user-name">{{user.fullName}}</h1>
         <div *ngIf="user.avatar!=''" id="header-user-icon">
             <img src="{{user.avatar}}" alt="UserIcon">
             <div id="header-status"></div>

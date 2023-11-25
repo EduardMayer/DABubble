@@ -253,7 +253,6 @@ export class ChannelFirebaseService {
 
 
     loadallChannelusers() {
-        debugger;
         this.userOnCurrentChannel = [];
         this.userFirebaseService.loadedUsers.forEach(user => {
     
