@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
+import { UserProfilService } from 'src/services/user-profil.service';
 
 @Component({
   selector: 'app-channel',
@@ -34,7 +35,8 @@ export class ChannelComponent {
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
-    public userFirebaseService: UserFirebaseService
+    public userFirebaseService: UserFirebaseService , 
+    private userProfilService: UserProfilService
   ) {
     if (channelFirebaseService.selectedChannel) {
       channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
@@ -253,6 +255,12 @@ this.userFirebaseService.loadedUsers.forEach(user => {
 
   closeEditDialog(){
     this.showEditChannel = false; 
+  }
+
+  openProfil(user : User){
+    this.closeMenus()
+    this.userProfilService.openUserProfil(user); 
+
   }
 
 }

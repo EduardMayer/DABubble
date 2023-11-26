@@ -51,6 +51,9 @@
 
         .user-display {
             margin: 12px 35px 12px 35px;
+            display: flex;
+            flex-direction: column;
+            gap:12px; 
 
             .user-header {
                 display: flex;

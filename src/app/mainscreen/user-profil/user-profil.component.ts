@@ -116,12 +116,17 @@ export class UserProfilComponent implements OnInit {
 
   async sendMessage(){
     if(this.user && this.userFirebaseService.currentUser){
-      let users = []; 
-      users.push(this.user.id); 
-      users.push(this.userFirebaseService.currentUser.id); 
-      console.log(users);
-      const chatExists = await this.chatFirebaseService.checkChatExists(users);
-      console.log(chatExists);
+     
+      console.log(this.user.id);
+      const usersChat = this.chatFirebaseService.getChatWithUser(this.user.id);
+      console.log(usersChat);
+      if(usersChat){
+        this.chatFirebaseService.selectChat(usersChat.id); 
+        this.userProfilService.close(); 
+      }
+      else{
+        console.log("no Chat found!");
+      }
     }
   }
 }

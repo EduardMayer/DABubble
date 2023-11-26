@@ -7,6 +7,7 @@ import { GenerateIdService } from './generate-id.service';
 import { UserFirebaseService } from './user-firebase.service';
 import { Observable, Subject } from 'rxjs';
 import { User } from 'src/models/user.class';
+import { user } from '@angular/fire/auth';
 
 
 @Injectable({
@@ -129,6 +130,26 @@ export class ChatFirebaseService {
                 }
             });
     }
+
+    getChatWithUser(userId: string): Chat | null {
+        let foundChat; 
+        this.loadedChats.forEach(chat => {
+            chat.users.forEach(user => {
+                if(user === userId){
+                    console.log("founded Chat");
+                    console.log(chat); 
+                    foundChat = chat; 
+                }   
+            });
+        });
+        if(foundChat){
+            return foundChat;
+        }
+        else{
+            return null; 
+        }
+    }
+
 
 
     /**

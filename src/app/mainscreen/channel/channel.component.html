@@ -35,7 +35,7 @@
         </div>
 
         <div class="menuUsersContainer" (click)="$event.stopPropagation()">
-            <div class="menuUsers" *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
+            <div class="menuUsers" (click)="openProfil(user)" *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
                 <img class="menuUsersImage" src="{{ user.avatar }}">
                 <span class="menuUsersName">{{user.fullName}}</span>
             </div>
@@ -43,7 +43,7 @@
 
         <div class="addMemberInMenu" (click)="$event.stopPropagation()">
             <img class="addMemberImage" src="assets/img/icons/addmembers.svg">
-            <span class="addMemberText" (click)="openAddMemberMenu()">Teilnehmer hinzufügens</span>
+            <span class="addMemberText" (click)="openAddMemberMenu()">Teilnehmer hinzufügen</span>
         </div>
 
     </mat-menu>
