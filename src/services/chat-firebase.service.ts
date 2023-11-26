@@ -108,8 +108,9 @@ export class ChatFirebaseService {
         updateDoc(docInstance, chat.toJSON());
     }
 
+
     getChatQueryByUsers(users: string[]) {
-        return query(collection(this.firestore, "channels"), where("users", 'array-contains', users));
+        return query(collection(this.firestore, "chats"), where("users", 'array-contains', users));
     }
 
     async checkChatExists(users: string[]): Promise<boolean> {
@@ -126,7 +127,6 @@ export class ChatFirebaseService {
                 } else {
                     return true;
                 }
-
             });
     }
 
@@ -145,12 +145,12 @@ export class ChatFirebaseService {
     }
 
 
-    getChannelQuery(userId: string) {
+    getChatQuery(userId: string) {
         return query(collection(this.firestore, "chats"), where("users", 'array-contains', userId));
     }
 
     async load(userId: string) {
-        const q = this.getChannelQuery(userId);
+        const q = this.getChatQuery(userId);
         this.unsubChats = onSnapshot(q, (querySnapshot) => {
             this.loadedChats = [];
             querySnapshot.forEach((doc) => {
