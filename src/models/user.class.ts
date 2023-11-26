@@ -7,7 +7,6 @@ export class User {
     chats: string[]; 
     status: string; 
 
-
     constructor(obj?: any) {
         this.id = obj ? obj.id : "";
         this.fullName = obj ? obj.fullName : "";

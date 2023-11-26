@@ -254,6 +254,17 @@ export class ChannelFirebaseService {
 
     loadallChannelusers() {
         this.userOnCurrentChannel = [];
+       if(this.selectedChannel){
+            this.selectedChannel.users.forEach((userID) => {
+                 this.userFirebaseService.getUserByUID(userID)
+                    .then((user) => { 
+                        this.userOnCurrentChannel.push(user);
+                    });  
+            })
+       }
+
+        /*
+        this.userOnCurrentChannel = [];
         this.userFirebaseService.loadedUsers.forEach(user => {
     
           const selectedChannelName = this.selectedChannel?.channelName;
@@ -272,6 +283,7 @@ export class ChannelFirebaseService {
           }
         });
         console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
+        */
     
       }
 }
