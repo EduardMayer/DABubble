@@ -59,7 +59,13 @@ export class UserFirebaseService {
                 this.loadedUsers.push(user);
             });
             this.finishedLoading = true;
+            this.loadedUsers = this.sortByUsersByName(this.loadedUsers);
         });
+    }
+
+
+    sortByUsersByName(users: User[]) {
+        return users.slice().sort((a, b) => a.fullName.localeCompare(b.fullName));
     }
 
 
@@ -104,7 +110,6 @@ export class UserFirebaseService {
      * @returns - User-Objekt
      */
     async getUserByUID(UID: string) {
-        //EVTL ADD If LOADEDUSERS[UID]
         let user = this.loadedUsers.find(user => user.id === UID);
 
         if (user) {
@@ -169,7 +174,6 @@ export class UserFirebaseService {
      * @returns [Users] - Array of find users. 
      */
     async getUserForSearch(searchString: string) {
-
         const searchKeywords = searchString.split(" ");
         const q = query(collection(this.firestore, "users"),
             where("fullName", ">=", searchString),

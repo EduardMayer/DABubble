@@ -21,6 +21,12 @@
 
 }
 
+.inputAvatar {
+    width: 28px;
+    height: 25px;
+    border-radius: 15px;
+}
+
 ::ng-deep .mdc-list-item__primary-text{
     display: flex;
     align-items: center;

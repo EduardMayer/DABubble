@@ -1,6 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, debounceTime, from, map, startWith } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
 import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
@@ -25,8 +25,14 @@ export class SearchbarComponent implements OnInit {
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
+
   channel: Channel | undefined;
+  public channelUsers: User[] | undefined = [];
+
+  private availableUsers: User[] = this.userService.loadedUsers;
+
   private _action: string | Channel = "";
+  _type: string = "";
 
   constructor(
     private userService: UserFirebaseService,
@@ -37,13 +43,42 @@ export class SearchbarComponent implements OnInit {
   options: { id: string; name: string, type: string, avatarSrc?: string }[] = [];
   filteredOptions$: Observable<{ id: string; name: string, type: string, avatarSrc?: string }[]> = new Observable();
 
+  ngOnInit() {
+    this.filteredOptions$ = this.headerControl.valueChanges.pipe(
+      startWith(''),
+      debounceTime(500), // Adjust the debounce time as needed+
+      map(value => this._filter(value))
+    );
+  }
+
 
   @Input() set types(value: string) {
-    switch (value) {
-      case "channels":
+    this._type = value;
+    this.updateOptions();
+  }
+
+
+  @Input() set action(value: string | Channel) {
+    console.log("calling SetAction");
+    if (value instanceof Channel) {
+      this._action = "addUserToChannel";
+      this.channel = value;
+      this.getChannelUsers(value).then(users => {
+        this.channelUsers = users;
+      })
+    } else {
+      this._action = "openSelection";
+    }
+  }
+
+
+
+  private updateOptions() {
+    switch (this._type) {
+      case 'channels':
         this.options = this.getChannelsSearchArray('#');
         break;
-      case "users":
+      case 'users':
         this.options = this.getUsersSearchArray('@');
         break;
       default:
@@ -53,15 +88,17 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+  async getChannelUsers(channel: Channel) {
+    let channelUsers: User[] = [];
+    console.log(channel.users);
+    channel.users?.forEach(userId => {
+      this.userService.getUserByUID(userId).then((user) => {
+        channelUsers.push(user);
+        this.unsetAvailableUser(user);
+      });
+    });
 
-  @Input() set action(value: string | Channel) {
-    console.log("calling SetAction");
-    if (value instanceof Channel) {
-      this._action = "addUserToChannel";
-      this.channel = value;
-    } else {
-      this._action = "openSelection";
-    }
+    return channelUsers;
   }
 
 
@@ -70,12 +107,7 @@ export class SearchbarComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    this.filteredOptions$ = this.headerControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-  }
+
 
 
   /**
@@ -86,7 +118,7 @@ export class SearchbarComponent implements OnInit {
   */
   getUsersSearchArray(prefix = '') {
     let usersByName: { id: string; name: string, type: string, avatarSrc: string }[] = [];
-    this.userService.loadedUsers.forEach((user) => {
+    this.availableUsers.forEach((user) => {
       usersByName.push({
         id: user.id,
         name: prefix + user.fullName,
@@ -122,8 +154,8 @@ export class SearchbarComponent implements OnInit {
   * @param {string} name - The name to filter options.
   * @returns {Array<Object>} An array of filtered options.
   */
-  private _filter(name: string | null) {
-    if (name) {
+  private _filter(name: string | User | null) {
+    if (typeof name === 'string') {
       let filterValue = name.toLowerCase();
       let result = this.options.filter(option => option.name.toLowerCase().includes(filterValue));
       return result;
@@ -131,8 +163,6 @@ export class SearchbarComponent implements OnInit {
       return [];
     }
   }
-
-  
 
   checkIfUserExistsInChannel(channel: Channel, uid: string) {
     let user = channel.users.find((channelUserId) => channelUserId === uid);
@@ -199,33 +229,89 @@ export class SearchbarComponent implements OnInit {
     });
   }
 
-
-
-  add(uId: string) {
+  add(userValues: { id: string; name: string, type: string, avatarSrc: string }) {
+    let user=new User(
+      {
+        id: userValues.id,
+        fullName: userValues.name,
+        avatar: userValues.avatarSrc
+      }
+    )
+    
     if (this._action == 'addUserToChannel') {
       if (this.channel instanceof Channel) {
-        this.checkIfUserExistsInChannel(this.channel, uId);
-        if (this.channel.users)
-          this.channel.users.push(uId);
-        this.searchField.nativeElement.value = "";
+        if (this.channel.users && !this.checkIfUserExistsInChannel(this.channel, user.id))
+          this.channel.users.push(user.id);
+          this.searchField.nativeElement.value = "";
+          this.unsetAvailableUser(user);
+          this.setChannelUser(user);
       }
-      this.updatedChannelModel.emit(this.channel);
-      console.log(this.channel)
     } else if (this._action == 'openSelection') {
-      this.selectOption(uId);
+      this.selectOption(user.id);
       console.log("Selecting Option");
     }
   }
 
-  remove(uId: string): void {
-    if (this.channel) {
-      const index = this.channel.users.indexOf(uId);
+  remove(user: User): void {
+    if (this.channelUsers) {
+      const index = this.channelUsers.indexOf(user);
+      this.unsetChannelUser(user);
+      this.setAvailabeUser(user);
+      this.save();
+    }
+  }
 
-      if (index && index >= 0) {
-        this.channel.users.splice(index, 1);
-        this.updatedChannelModel.emit(this.channel);
+  save() {
+    let channelUserIds = this.getChannelUserIds();
+    if (this.channel) {
+      this.channel.users = channelUserIds;
+      this.updatedChannelModel.emit(this.channel);
+    }
+  }
+
+  getChannelUserIds() {
+    let channelUserIds: string[] = [];
+    if (this.channelUsers) {
+      this.channelUsers.forEach((channelUser) => {
+        channelUserIds.push(channelUser.id);
+      });
+    }
+    return channelUserIds;
+  }
+
+  setAvailabeUser(user: User) {
+    console.log("setting Available User");
+    console.log(user)
+    this.availableUsers.push(user);
+  }
+
+  unsetAvailableUser(user: User) {
+    if (this.availableUsers.length > 0) {
+      const index = this.availableUsers.indexOf(user);
+      if (index) {
+        this.availableUsers = this.availableUsers.slice(index, 1);
       }
     }
   }
 
+  setChannelUser(user: User) {
+    console.log("setting Channel User");
+    this.channelUsers?.push(new User(user));
+    console.log(this.channelUsers);
+  }
+
+  unsetChannelUser(user: User) {
+    const index = this.channelUsers?.indexOf(user);
+
+
+    if (this.channelUsers) {
+      const index = this.channelUsers?.indexOf(user);
+      if (index) {
+        this.channelUsers = this.channelUsers?.slice(index, 1);
+      }
+    }
+  }
+
+
 }
+

@@ -59,6 +59,7 @@
             <app-searchbar [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
             (updatedChannelModel)="handleChannelUserUpdate($event)"
             ></app-searchbar>
+            <!--
             <div *ngIf="newAddedToChannelUser.fullName" class="inputContent" (click)="$event.stopPropagation()">
                 <img *ngIf="newAddedToChannelUser" class="inputAvatar" [matMenuTriggerFor]="addMember"
                     #addMemberTrigger="matMenuTrigger" src="{{newAddedToChannelUser.avatar}}">
@@ -70,7 +71,7 @@
                 <input class="memberNameInput" [(ngModel)]="searchText" (keyup)="sendData($event)"
                     (click)="$event.stopPropagation()">
             </div>
-
+            -->
         </div>
 
         <div id="header-searchfield-results-Menu"

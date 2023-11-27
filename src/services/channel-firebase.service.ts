@@ -77,7 +77,12 @@ export class ChannelFirebaseService {
                 this.loadedChannels.push(channel);
             });
             this.finishedLoading = true;
+            this.loadedChannels = this.sortChannelsByName(this.loadedChannels);
         });
+    }
+
+    sortChannelsByName(channels: Channel[]) {
+        return channels.slice().sort((a, b) => a.channelName.localeCompare(b.channelName));
     }
 
 
@@ -249,14 +254,14 @@ export class ChannelFirebaseService {
 
     loadallChannelusers() {
         this.userOnCurrentChannel = [];
-       if(this.selectedChannel){
+        if (this.selectedChannel) {
             this.selectedChannel.users.forEach((userID) => {
-                 this.userFirebaseService.getUserByUID(userID)
-                    .then((user) => { 
+                this.userFirebaseService.getUserByUID(userID)
+                    .then((user) => {
                         this.userOnCurrentChannel.push(user);
-                    });  
+                    });
             })
-       }
+        }
 
         /*
         this.userOnCurrentChannel = [];
@@ -279,6 +284,6 @@ export class ChannelFirebaseService {
         });
         console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
         */
-    
-      }
+
+    }
 }
