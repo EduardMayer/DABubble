@@ -187,12 +187,31 @@ $headerDropdownPositionRigth: 0px;
         color: red; 
     }
 }
+#header-image-container-mobile{
+    display: none;
+}
 
 @media only screen and (max-width: 1000px) {
 
     #searchbar{
         display: none;
     }
+}
+
+@media only screen and (max-width: 768px) {
+
+    #header-image-container{
+        display: none !important;
+    }
+    
+    #header-image-container-mobile{
+        display: block;
+        #header-image-container-mobile-selected{
+            display: flex;
+            gap:12px; 
+        }
+    }
+
 }
 
 @media only screen and (max-width: 700px) {
@@ -213,3 +232,5 @@ $headerDropdownPositionRigth: 0px;
     }
   
 }
+
+

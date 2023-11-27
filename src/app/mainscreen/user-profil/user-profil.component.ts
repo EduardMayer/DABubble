@@ -125,6 +125,7 @@ export class UserProfilComponent implements OnInit {
         this.userProfilService.close(); 
       }
       else{
+        
         console.log("no Chat found!");
       }
     }

@@ -1,6 +1,7 @@
 #sidenav {
     height: 100%;
     overflow-y: scroll;
+    padding: 24px;
 }
 /* width */
 ::-webkit-scrollbar {
@@ -10,7 +11,7 @@
 
 .sidenavHeader {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding-top: 27px;
 }
@@ -29,7 +30,7 @@
 
 .myChannelsHeader {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -73,6 +74,10 @@
 
 .pad-right17 {
     padding-right: 17px;
+}
+
+.pad-left18{
+    padding-left: 18px;
 }
 
 .pad-left40{
@@ -139,10 +144,10 @@
 
 .myMessagesHeader {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
-    margin-right: 33px;
+   // margin-right: 33px;
 
     &:hover {
         .arrow_drop {
@@ -165,7 +170,7 @@
 
 .myMessagesContainer {
     width: 100%;
-    display: flex;
+    //display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -191,6 +196,8 @@
 .addChannel {
     
     padding-top: 20px;
+    display: flex;
+    align-items: center;
   /*
     display: flex;
     justify-content: center;

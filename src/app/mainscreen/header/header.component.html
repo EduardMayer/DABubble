@@ -2,6 +2,14 @@
     <div id="header-image-container">
         <img src="assets/img/logo/logo.svg" alt="DABubble Logo">
     </div>
+    <div id="header-image-container-mobile">
+        <img *ngIf="!channelSelected && !chatSelected" src="assets/img/logo/logo.svg" alt="DABubble Logo">
+        <div *ngIf="channelSelected || chatSelected" id="header-image-container-mobile-selected">
+            <img src="/assets/img/icons/arrow_left_back.svg" alt="back" (click)="closeChatOrChannel()">
+            <img src="assets/img/logo/codeLearningLogo.png" alt="DABubble Logo">
+            <h3>Code learning</h3>
+        </div>
+    </div>
     <div id="searchbar">
         <app-searchbar *ngIf="userService.finishedLoading && channelService.finishedLoading"  [types]='"all"' [action]="'openSelection'"></app-searchbar>
     </div>

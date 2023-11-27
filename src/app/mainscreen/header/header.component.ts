@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 
 
 @Component({
@@ -21,12 +22,16 @@ export class HeaderComponent implements OnInit {
   user: any = new User();
 
   showHeaderMenu = false;
+  @Input() channelSelected = false; 
+  @Input() chatSelected = false; 
+  
 
   constructor(
     private userProfilService: UserProfilService,
     private authService: AuthFirebaseService,
     public userService: UserFirebaseService,
     public channelService: ChannelFirebaseService,
+    private chatService: ChatFirebaseService, 
     private router: Router) { }
 
   async ngOnInit(): Promise<void> {
@@ -55,5 +60,13 @@ export class HeaderComponent implements OnInit {
   showProfil() {
     this.showHeaderMenu = false;
     this.userProfilService.openUserProfil(this.userService.currentUser);
+  }
+
+  /**
+   * close Chat and Channel view in mobile View
+   */
+  closeChatOrChannel(){
+    this.channelService.selectedChannelId = undefined; 
+    this.chatService.selectedChatId = undefined; 
   }
 }

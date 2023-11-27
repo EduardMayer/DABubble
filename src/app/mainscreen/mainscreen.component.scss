@@ -55,3 +55,21 @@ app-channel, app-chat {
         cursor: pointer;
     }
 }
+#main-body-mobile{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    #workspace {
+        display: none;
+    }
+    #main-body{
+        display: none !important;
+    }
+    
+    #main-body-mobile{
+        display: block;
+    }
+
+}
