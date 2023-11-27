@@ -1,13 +1,24 @@
 <div id="header-searchfield-container" *ngIf="searchResultsChannels && searchResultsUsers">
+
+    <mat-chip-grid #chipGrid aria-label="Fruit selection" *ngIf="channel">
+          <mat-chip-row (removed)="remove(user)" *ngFor="let user of channel.users">
+            {{user}}
+            <button matChipRemove [attr.aria-label]="'remove ' + user">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+      </mat-chip-grid>
+
+
+
     <input #searchField id="header-searchfield" type="text" placeholder="Code learning durchsuchen" [matAutocomplete]="auto"
         [formControl]="headerControl" matInput>
 
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-        (optionSelected)="handleOption($event.option.value)">
+        (optionSelected)="add($event.option.value)">
 
         <mat-option *ngFor="let option of filteredOptions$ | async" 
-        [value]="option.id" 
-        (click)="handleOption(option.id)">
+        [value]="option.id">
         <img 
             class='user-img' 
             *ngIf="option.avatarSrc" 

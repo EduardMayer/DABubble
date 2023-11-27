@@ -56,6 +56,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-channel.component';
 import { AddUserToChannelDialogComponent } from './add-channel-dialog/add-user-to-channel-dialog/add-user-to-channel-dialog.component';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -120,7 +121,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MentionModule,
     MatAutocompleteModule, 
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

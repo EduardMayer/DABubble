@@ -132,21 +132,7 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
-  handleOption(id: string) {
-    console.log("here");
-    console.log(this._action);
-    if (this._action == 'addUserToChannel') {
-      if (this.channel instanceof Channel) {
-        this.checkIfUserExistsInChannel(this.channel, id)
-        if (this.channel.users)
-          this.channel.users.push(id);
-      }
-      this.updatedChannelModel.emit(this.channel);
-    } else if (this._action == 'openSelection') {
-      this.selectOption(id);
-      console.log("Selecting Option");
-    }
-  }
+  
 
   checkIfUserExistsInChannel(channel: Channel, uid: string) {
     let user = channel.users.find((channelUserId) => channelUserId === uid);
@@ -215,74 +201,31 @@ export class SearchbarComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  testData: string[] = ["hallo", "Test", "Search"];
-
-  sendData(event: Event) {
-    if (this.searchText != "") {
-      //console.log(this.searchText);
-      this.searchResults = this.testData.filter(s => s.includes(this.searchText));
-      this.getUsers();
-      this.getChannels();
-    }
-    else {
-      this.searchResults = [];
-      this.searchResultsUsers = [];
-      this.searchResultsChannels = [];
+  add(uId: string) {
+    if (this._action == 'addUserToChannel') {
+      if (this.channel instanceof Channel) {
+        this.checkIfUserExistsInChannel(this.channel, uId);
+        if (this.channel.users)
+          this.channel.users.push(uId);
+        this.searchField.nativeElement.value = "";
+      }
+      this.updatedChannelModel.emit(this.channel);
+      console.log(this.channel)
+    } else if (this._action == 'openSelection') {
+      this.selectOption(uId);
+      console.log("Selecting Option");
     }
   }
 
-  async getUsers() {
+  remove(uId: string): void {
+    if (this.channel) {
+      const index = this.channel.users.indexOf(uId);
 
-    this.searchResultsUsers = [];
-    console.log("Loaded Users:");
-    console.log(this.userService.loadedUsers);
-
-    this.userService.loadedUsers.forEach(user => {
-      if (user.fullName.toUpperCase().includes(this.searchText.toUpperCase())) {
-        this.searchResultsUsers.push(user);
-        //this.options.push(user.fullName);
+      if (index && index >= 0) {
+        this.channel.users.splice(index, 1);
+        this.updatedChannelModel.emit(this.channel);
       }
-    });
-
-
-    /*
-    this.userService.getUserForSearch(this.searchText)
-        .then( (users) => {
-          this.searchResultsUsers = users; 
-        });
-    */
+    }
   }
-  getChannels() {
-    this.searchResultsChannels = [];
-    console.log("Loaded Channels:");
-    console.log(this.channelService.loadedChannels);
-
-    this.channelService.loadedChannels.forEach(channel => {
-      if (channel.channelName.toUpperCase().includes(this.searchText.toUpperCase())) {
-        this.searchResultsChannels.push(channel);
-        //this.options.push(channel.channelName);
-      }
-    });
-  }
-
-
-
-  clickChannel(index: any) {
-    this.channelService.selectChannel(this.searchResultsChannels[index].id);
-  }
-
-
 
 }

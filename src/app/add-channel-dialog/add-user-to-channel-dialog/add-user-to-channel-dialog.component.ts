@@ -18,15 +18,5 @@ export class AddUserToChannelDialogComponent {
 
   handleChannelUserUpdate(newChannel: Channel) {
     this.channel = newChannel;
-    this.displaySelectedUsers(newChannel.users);
-  }
-
-
-  displaySelectedUsers(users: string[]) {
-    console.log("updating User selection");
-    console.log(users);
-    users.forEach((userId) => {
-      this.selectedUsers.nativeElement.innerHTML += userId;
-    })
   }
 }

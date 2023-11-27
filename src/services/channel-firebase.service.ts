@@ -71,17 +71,12 @@ export class ChannelFirebaseService {
         this.unsubChannels = onSnapshot(q, (querySnapshot) => {
             this.loadedChannels = [];
             this.finishedLoading = false;
-            //console.log("startLoadingChannels");
-            //console.log(userId);
             querySnapshot.forEach((doc) => {
                 const channel = new Channel(doc.data());
                 channel.id = doc.id;
                 this.loadedChannels.push(channel);
-                console.log("loadingChannels");
             });
             this.finishedLoading = true;
-            //console.log(this.loadedChannels);
-            //console.log("finishedLoadingChannels");
         });
     }
 

@@ -88,7 +88,6 @@ export class ChannelComponent {
       }
     });
     console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
-
   }
 
   searchText: string = "";
@@ -260,7 +259,11 @@ this.userFirebaseService.loadedUsers.forEach(user => {
   openProfil(user : User){
     this.closeMenus()
     this.userProfilService.openUserProfil(user); 
+  }
 
+  handleChannelUserUpdate(newChannel: Channel) {
+    this.channelFirebaseService.selectedChannel = newChannel;
+    this.channelFirebaseService.updateChannel(newChannel);
   }
 
 }

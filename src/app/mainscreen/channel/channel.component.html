@@ -56,7 +56,9 @@
         <span (click)="$event.stopPropagation()" class="channelName">#entwicklerchannel</span>
 
         <div *ngIf="newAddedToChannelUser" class="containerOfInput" (click)="$event.stopPropagation()">
-
+            <app-searchbar [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
+            (updatedChannelModel)="handleChannelUserUpdate($event)"
+            ></app-searchbar>
             <div *ngIf="newAddedToChannelUser.fullName" class="inputContent" (click)="$event.stopPropagation()">
                 <img *ngIf="newAddedToChannelUser" class="inputAvatar" [matMenuTriggerFor]="addMember"
                     #addMemberTrigger="matMenuTrigger" src="{{newAddedToChannelUser.avatar}}">
