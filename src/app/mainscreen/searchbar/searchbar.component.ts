@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, debounceTime, from, map, startWith } from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, from, map, of, startWith, switchMap } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
 import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
@@ -26,6 +26,8 @@ export class SearchbarComponent implements OnInit {
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
 
+  styleType: string = "header"
+
   channel: Channel | undefined;
   public channelUsers: User[] | undefined = [];
 
@@ -41,12 +43,16 @@ export class SearchbarComponent implements OnInit {
 
   headerControl = new FormControl('');
   options: { id: string; name: string, type: string, avatarSrc?: string }[] = [];
-  filteredOptions$: Observable<{ id: string; name: string, type: string, avatarSrc?: string }[]> = new Observable();
+
+  private _filteredOptions$ = new BehaviorSubject<{ id: string; name: string; type: string; avatarSrc?: string | undefined; }[]>([]);
+  filteredOptions$ = this._filteredOptions$.asObservable();
+  //filteredOptions$: Observable<{ id: string; name: string, type: string, avatarSrc?: string }[]> = new Observable();
 
   ngOnInit() {
     this.filteredOptions$ = this.headerControl.valueChanges.pipe(
       startWith(''),
-      debounceTime(500), // Adjust the debounce time as needed+
+      debounceTime(500),
+      switchMap(value => of(value)), // Adjust the debounce time as needed+
       map(value => this._filter(value))
     );
   }
@@ -55,6 +61,10 @@ export class SearchbarComponent implements OnInit {
   @Input() set types(value: string) {
     this._type = value;
     this.updateOptions();
+  }
+
+  @Input() set setStyle(value: string) {
+    this.styleType = value;
   }
 
 
@@ -86,6 +96,9 @@ export class SearchbarComponent implements OnInit {
         let channelsArray = this.getChannelsSearchArray('#');
         this.options = channelsArray.concat(usersArray);
     }
+
+    // Notify subscribers about the changes
+    this._filteredOptions$.next(this.options);
   }
 
   async getChannelUsers(channel: Channel) {
@@ -230,26 +243,29 @@ export class SearchbarComponent implements OnInit {
   }
 
   add(userValues: { id: string; name: string, type: string, avatarSrc: string }) {
-    let user=new User(
-      {
-        id: userValues.id,
-        fullName: userValues.name,
-        avatar: userValues.avatarSrc
-      }
-    )
-    
-    if (this._action == 'addUserToChannel') {
-      if (this.channel instanceof Channel) {
-        if (this.channel.users && !this.checkIfUserExistsInChannel(this.channel, user.id))
-          this.channel.users.push(user.id);
-          this.searchField.nativeElement.value = "";
+    //let user = new User(
+    //  {
+    //    id: userValues.id,
+    //    fullName: userValues.name.replace('@', ''),
+    //    avatar: userValues.avatarSrc
+    //  }
+    //)
+
+    this.userService.getUserByUID(userValues.id).then((user) => {
+      if (this._action == 'addUserToChannel') {
+        if (this.channel instanceof Channel) {
+          if (!this.checkIfUserExistsInChannel(this.channel, user.id))
+            this.searchField.nativeElement.value = "";
           this.unsetAvailableUser(user);
           this.setChannelUser(user);
+        }
+      } else if (this._action == 'openSelection') {
+        this.selectOption(user.id);
+        console.log("Selecting Option");
       }
-    } else if (this._action == 'openSelection') {
-      this.selectOption(user.id);
-      console.log("Selecting Option");
-    }
+    })
+
+
   }
 
   remove(user: User): void {
@@ -257,7 +273,6 @@ export class SearchbarComponent implements OnInit {
       const index = this.channelUsers.indexOf(user);
       this.unsetChannelUser(user);
       this.setAvailabeUser(user);
-      this.save();
     }
   }
 
@@ -280,36 +295,32 @@ export class SearchbarComponent implements OnInit {
   }
 
   setAvailabeUser(user: User) {
-    console.log("setting Available User");
-    console.log(user)
     this.availableUsers.push(user);
+    this.updateOptions();
   }
 
   unsetAvailableUser(user: User) {
     if (this.availableUsers.length > 0) {
       const index = this.availableUsers.indexOf(user);
-      if (index) {
-        this.availableUsers = this.availableUsers.slice(index, 1);
-      }
+      this.availableUsers.splice(index, 1);
     }
+    this.updateOptions();
+
   }
 
   setChannelUser(user: User) {
-    console.log("setting Channel User");
     this.channelUsers?.push(new User(user));
-    console.log(this.channelUsers);
+    this.updateOptions();
   }
 
   unsetChannelUser(user: User) {
-    const index = this.channelUsers?.indexOf(user);
-
-
-    if (this.channelUsers) {
-      const index = this.channelUsers?.indexOf(user);
-      if (index) {
-        this.channelUsers = this.channelUsers?.slice(index, 1);
-      }
+    if(this.channelUsers){
+      const index = this.channelUsers.indexOf(user);
+      this.channelUsers?.splice(index, 1);
+      this.updateOptions();
     }
+   
+
   }
 
 

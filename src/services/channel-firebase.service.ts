@@ -167,7 +167,6 @@ export class ChannelFirebaseService {
 
         if (!channelExists) {
             const docInstance = doc(collection(this.firestore, "channels"));
-            debugger;
             setDoc(docInstance, channel.toJSON());
         } else {
             console.warn("Channel wurde nicht erstellt, weil bereits ein Channel mit diesem Namen existiert");

@@ -30,12 +30,12 @@ export class ChannelComponent {
   memberName: string = "";
   newAddedToChannelUser = new User();
 
-  hoverTitle = false; 
-  showEditChannel: boolean = false; 
+  hoverTitle = false;
+  showEditChannel: boolean = false;
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
-    public userFirebaseService: UserFirebaseService , 
+    public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService
   ) {
     if (channelFirebaseService.selectedChannel) {
@@ -183,31 +183,30 @@ export class ChannelComponent {
 
   addUserToChannel(event: Event) {
     event.stopPropagation();
-debugger;
-const selectedChannelName = this.channelFirebaseService.selectedChannel?.channelName;
+    const selectedChannelName = this.channelFirebaseService.selectedChannel?.channelName;
 
-if(selectedChannelName) {
-this.userFirebaseService.loadedUsers.forEach(user => {
-  if(user.id == this.newAddedToChannelUser.id) {
+    if (selectedChannelName) {
+      this.userFirebaseService.loadedUsers.forEach(user => {
+        if (user.id == this.newAddedToChannelUser.id) {
 
-    if(!user.channels.includes(selectedChannelName)) {
-      //if(this.newAddedToChannelUser.fullName) {
-        this.newAddedToChannelUser.channels.push(selectedChannelName);
-        let newAddedToChannelUserToJson = this.newAddedToChannelUser.toJSON();
-  
-        this.userFirebaseService.update(this.newAddedToChannelUser);
-        this.loadallChannelusers();
-        this.newAddedToChannelUser.fullName = '';
-        this.closeMenus();
-      //}
-    } else {
-      alert('User ist schon enthalten')
+          if (!user.channels.includes(selectedChannelName)) {
+            //if(this.newAddedToChannelUser.fullName) {
+            this.newAddedToChannelUser.channels.push(selectedChannelName);
+            let newAddedToChannelUserToJson = this.newAddedToChannelUser.toJSON();
 
+            this.userFirebaseService.update(this.newAddedToChannelUser);
+            this.loadallChannelusers();
+            this.newAddedToChannelUser.fullName = '';
+            this.closeMenus();
+            //}
+          } else {
+            alert('User ist schon enthalten')
+
+          }
+
+        }
+      });
     }
-
-  }
-});
-}
   }
 
   //!user.channels.includes(selectedChannelName)
@@ -252,13 +251,13 @@ this.userFirebaseService.loadedUsers.forEach(user => {
     this.channelFirebaseService.selectChannel(this.searchResultsChannels[index].id);
   }
 
-  closeEditDialog(){
-    this.showEditChannel = false; 
+  closeEditDialog() {
+    this.showEditChannel = false;
   }
 
-  openProfil(user : User){
+  openProfil(user: User) {
     this.closeMenus()
-    this.userProfilService.openUserProfil(user); 
+    this.userProfilService.openUserProfil(user);
   }
 
   handleChannelUserUpdate(newChannel: Channel) {
