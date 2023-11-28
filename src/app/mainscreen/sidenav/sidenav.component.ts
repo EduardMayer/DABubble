@@ -29,7 +29,7 @@ export class SidenavComponent implements OnInit {
     public dialog: MatDialog,
     public channelFirebaseService: ChannelFirebaseService,
     public chatFirebaseService: ChatFirebaseService,
-    private userFirebaseService: UserFirebaseService,
+    public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService
   ) { }
 

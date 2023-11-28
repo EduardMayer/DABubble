@@ -70,7 +70,7 @@ $headerUser-width: 300px;
 $headerDropdownPositionTop: 100px;
 $headerDropdownPositionRigth: 0px;
 
-#headerMenu {
+#headerMenu , #headerMenu-mobile {
     width: 100px;
     position: absolute;
     background-color: white;
@@ -191,6 +191,7 @@ $headerDropdownPositionRigth: 0px;
 #header-container-mobile{
     display: none;
 }
+        
 
 @media only screen and (max-width: 1000px) {
 
@@ -225,6 +226,26 @@ $headerDropdownPositionRigth: 0px;
         }
         #header-user-mobile{
             min-width: unset;
+        }
+        #headerMenu-mobile{
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            top: unset;
+            height: fit-content;
+            padding: unset;
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+            width: 100vw;
+            background-color: white;
+            border-radius: 30px 30px 0px 0px;
+            .headerMenu-mobile-entry{
+                display: flex;
+                align-items: center;
+                gap:12px; 
+            }
+
+         
         }
     }
 

@@ -140,3 +140,68 @@
         background-color:  #ADB0D9; 
     }
 }
+
+#edit-channel-users-mobile{
+    display: none;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+    #edit-channel{
+        position: fixed;
+        top: 100px;
+        left: 10vw;
+        min-width: 80vw; 
+    }
+
+
+}
+
+@media only screen and (max-width: 768px) {
+
+#edit-channel{
+
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    padding: 0px;
+    border-radius: 0px;
+
+    #edit-channel-header{
+        position: sticky;
+        box-shadow: 0px 2px 10px 0px #00000014;
+        padding: 0px 12px 0px 12px;
+    }
+    #edit-channel-name-container-viewMode{
+        margin: 0px 12px 0px 12px;
+    }
+    #edit-channel-name-container-editMode{
+        margin: 0px 12px 0px 12px;
+    }
+    #edit-channel-description-container-viewMode{
+        margin: 0px 12px 0px 12px;
+    }
+    #edit-channel-description-container-editMode{
+        margin: 0px 12px 0px 12px;
+    }
+    #edit-channel-users-mobile{
+        display: block; 
+        margin: 0px 12px 0px 12px;
+        border: 1px solid #ADB0D9; 
+        border-radius: 20px;
+        padding: 12px;
+        h2{
+            margin: 0.5rem;
+        }
+
+    }
+    #edit-channel-leaveChannel{
+        margin: 0px 12px 0px 12px;
+    }
+}
+   
+ 
+}

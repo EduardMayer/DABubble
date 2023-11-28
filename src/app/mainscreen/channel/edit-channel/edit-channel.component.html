@@ -4,7 +4,6 @@
         <img src="assets/img/icons/close.svg" alt="close" (click)="close()">
     </div>
 
-
     <div id="edit-channel-name-container-viewMode" *ngIf="!editChannelName">
         <div class="dsp-flex-row-spaceBtwn">
             <h3>Channel Name</h3>
@@ -24,9 +23,6 @@
            </div>
         </div>
     </div>
-
-
-
     <div id="edit-channel-description-container-viewMode"  *ngIf="!editChannelDescription">
         <div class="dsp-flex-row-spaceBtwn">
             <h3>Beschreibung</h3>
@@ -57,9 +53,14 @@
             <h2>{{channelCreatorName}}</h2>
         </div>
     </div>
-
-
-
+    <div id="edit-channel-users-mobile">
+        <h2>Mitglieder</h2>
+        <div>
+            <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
+            [uId]="user.id">
+        </app-chat-view>
+        </div>
+    </div>
     <div id="edit-channel-leaveChannel">
         <button (click)="leaveChannel()">Channel verlassen</button>
     </div>

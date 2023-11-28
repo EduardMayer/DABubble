@@ -64,12 +64,24 @@ app-channel, app-chat {
     #workspace {
         display: none;
     }
-    #main-body{
-        display: none !important;
-    }
-    
-    #main-body-mobile{
-        display: block;
+
+    #main-container{
+        padding: unset;
+        height: 100%;
+        max-height: 100vh;
+
+        #main-header{
+            padding: 24px 24px 0px 24px;
+        }
+        
+        #main-body{
+            display: none !important;
+        }
+        
+        #main-body-mobile{
+            display: block;
+            height: 100%;
+        }
     }
 
 }

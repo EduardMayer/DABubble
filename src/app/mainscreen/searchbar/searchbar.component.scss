@@ -45,6 +45,15 @@
     border-radius: 8px;
 }
 
+@media only screen and (max-width: 768px) {
+    #header-searchfield-container {
+        #header-searchfield { 
+            border: 1px solid #ADB0D9;
+        }
+    }
+
+}
+
 /*
 #header-searchfield-results{
     position: relative;

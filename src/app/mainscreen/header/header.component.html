@@ -40,7 +40,13 @@
 
 
     <div id="headerMenu-mobile" *ngIf="showHeaderMenu">
-        <a (click)="showProfil()">Profil</a>
-        <a (click)="logout()">Logout</a>
+        <div class="headerMenu-mobile-entry">
+            <img src="assets/img/icons/accountIcon.png" alt="user">
+            <a (click)="showProfil()">Profil</a>
+        </div>
+        <div class="headerMenu-mobile-entry">
+            <img src="assets/img/icons/logout.svg" alt="logout">
+            <a (click)="logout()">Logout</a>
+        </div>
     </div>
 </div>

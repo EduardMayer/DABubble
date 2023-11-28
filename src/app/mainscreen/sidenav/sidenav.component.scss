@@ -215,3 +215,21 @@
     display: flex;
    flex-direction: column;
 }
+#sidenav-mobile-searchbar{
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    #sidenav{
+
+        border-radius: 0px;
+
+        .sidenavHeader{
+            display: none;
+        }
+        #sidenav-mobile-searchbar{
+            display: block;    
+        }
+    }
+}

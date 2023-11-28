@@ -19,7 +19,7 @@ export class EditChannelComponent implements OnInit {
   NewChannelDescription: string = ""; 
   channelCreatorName = ""; 
 
-  constructor(private channelFirebaseService: ChannelFirebaseService , private userFirebaseService: UserFirebaseService){}
+  constructor(public channelFirebaseService: ChannelFirebaseService , private userFirebaseService: UserFirebaseService){}
 
   ngOnInit(): void {
     if(this.channelFirebaseService.selectedChannel){

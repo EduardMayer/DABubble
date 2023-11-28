@@ -400,3 +400,18 @@ app-message-create {
     display: flex;
     justify-content: space-between;
 }
+
+@media only screen and (max-width: 768px) {
+
+    #channel{
+        border-radius: 0px;
+        .header{
+            box-shadow: 0px 2px 10px 0px #00000014;
+            border-radius: 0px;
+            .user-avatar-list {
+                display: none;
+            }
+        }
+    }
+
+}
