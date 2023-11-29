@@ -263,6 +263,8 @@ export class ChannelComponent {
   handleChannelUserUpdate(newChannel: Channel) {
     this.channelFirebaseService.selectedChannel = newChannel;
     this.channelFirebaseService.updateChannel(newChannel);
+    console.log("channel updated");
+    console.log(newChannel);
   }
 
 }

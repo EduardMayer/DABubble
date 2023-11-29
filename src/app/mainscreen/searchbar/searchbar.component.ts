@@ -315,6 +315,7 @@ export class SearchbarComponent implements OnInit {
           this.searchField.nativeElement.value = "";
         this.unsetAvailableUser(user);
         this.setChannelUser(user);
+        this.save();
       } else if (this._action == 'openSelection') {
         this.selectOption(user.id);
       }
@@ -332,6 +333,8 @@ export class SearchbarComponent implements OnInit {
       const index = this.channelUsers.indexOf(user);
       this.unsetChannelUser(user);
       this.setAvailabeUser(user);
+
+      this.save();
     }
   }
 
@@ -402,7 +405,7 @@ export class SearchbarComponent implements OnInit {
 
 
   /**
-  * Removes a user from the list of channel users and updates the search options.
+  * Removes a user from the list of channel users and updates the search options. 
   * @param {User} user - The user to be removed from the list of channel users.
   */
   unsetChannelUser(user: User) {

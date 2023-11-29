@@ -18,5 +18,7 @@ export class AddUserToChannelDialogComponent {
 
   handleChannelUserUpdate(newChannel: Channel) {
     this.channel = newChannel;
+    console.log("channel updated");
+    console.log(this.channel)
   }
 }
