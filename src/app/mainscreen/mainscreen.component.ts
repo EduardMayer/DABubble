@@ -42,10 +42,6 @@ export class MainscreenComponent implements OnInit {
       this.userProfilOpen = false;
     });
 
-    setInterval(()=>{
-      console.log(this.userFirebaseService.loadedUsers);
-    },2000);
-
   }
 
 
