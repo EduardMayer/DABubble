@@ -19,19 +19,11 @@ export class UserFirebaseService {
     public loadedUser: User | undefined;
     private unsubUser: any;
 
-    public currentUser: User;
+    public currentUser: User = new User();
 
     public registUser: User = new User();
 
     constructor(private firestore: Firestore) {
-        this.currentUser = new User(
-            {
-                id: "0",
-                fullName: "Guest",
-                mail: "guest@guest.at",
-                channels: ["F8tiKVNq6FePPOb4BDps", "O8ZTH8u2mAbFrrpNFaGp"]
-            }
-        )
         this.load();
     }
 
