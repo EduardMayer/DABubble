@@ -54,23 +54,34 @@ export class SearchbarComponent implements OnInit {
     );
   }
 
-
+  /**
+   * Sets the search value type and initiates the search options.
+   * @param {string} value - Type value ('channels' or 'users' or 'all').
+   */
   @Input() set types(value: string) {
     this._type = value;
-      this.availableUsers = [...this.userService.loadedUsers];
-      console.log("Available Users:");
-      console.log(this.availableUsers);
+    this.availableUsers = [...this.userService.loadedUsers];
     this.updateOptions();
   }
 
+  /**
+  * Sets the style type for the search bar.
+  * @param {string} value - The style type value('header' or 'default').
+  */
   @Input() set setStyle(value: string) {
     this.styleType = value;
   }
 
-
+  /**
+   * Sets the action type or channel instance for the search bar.
+   * If a Channel instance is provided, it sets the action type to 'addUserToChannel'
+   * and fetches associated users.
+   * If a string is provided, it sets the action type to 'openSelection'.
+   *
+   * @param {string | Channel} value - The action type or channel instance.
+   */
   @Input() set action(value: string | Channel) {
     if (value instanceof Channel) {
-      console.log(value);
       this._action = "addUserToChannel";
       this.channel = value;
       this.getChannelUsers(value).then(users => {
@@ -120,14 +131,6 @@ export class SearchbarComponent implements OnInit {
     });
     return channelUsers;
   }
-
-
-  get action(): string | Channel {
-    return this._action;
-  }
-
-
-
 
 
   /**
@@ -185,6 +188,14 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+
+  /**
+  * Checks if a user with the specified UID exists in the given channel.
+  *
+  * @param {Channel} channel - The channel to check for the user's existence.
+  * @param {string} uid - The UID of the user to check.
+  * @returns {boolean} - Returns true if the user exists in the channel, otherwise false.
+  */
   checkIfUserExistsInChannel(channel: Channel, uid: string) {
     let user = channel.users.find((channelUserId) => channelUserId === uid);
     if (user) {
@@ -194,6 +205,16 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+
+  /**
+ * Performs actions when a user or channel option is selected.
+ *
+ * 1. Opens a chat with the user identified by the provided ID.
+ * 2. Selects the channel identified by the provided ID.
+ * 3. Clears the search field value.
+ *
+ * @param {string} id - The ID of the selected user or channel.
+ */
   selectOption(id: string) {
     this.openChatWithUserById(id);
     this.selectChannelById(id);
@@ -201,6 +222,10 @@ export class SearchbarComponent implements OnInit {
   }
 
 
+  /**
+  * Selects a channel based on the provided ID.
+  * @param {string} id - The ID of the channel to be selected.
+  */
   selectChannelById(id: string) {
     let channel = this.channelService.loadedChannels.find((channel) => id === channel.id);
     if (channel) {
@@ -209,23 +234,32 @@ export class SearchbarComponent implements OnInit {
   }
 
 
+  /**
+  * Retrieves user information based on the provided user ID.
+  * @param {string} id - The ID of the user to retrieve information for.
+  * @returns {User | undefined} - The user information if found, otherwise undefined.
+  */
   getChatWithUserById(id: string) {
-    console.log(this.userService.loadedUsers);
-    console.log(id);
     return this.userService.loadedUsers.find((user) => (user.id === id));
   }
 
 
+  /**
+  * Opens a chat with the user identified by the provided user ID.
+  * @param {string} id - The ID of the user to open a chat with.
+  */
   openChatWithUserById(id: string) {
-    console.log("openChatWithUserById" + id);
     let chatPartner = this.getChatWithUserById(id);
     if (chatPartner) {
-      console.log("Starting Chat with" + chatPartner.id);
       this.startChat(chatPartner.id);
     }
   }
 
 
+  /**
+  * Initiates a chat with the specified chat partner by either selecting an existing chat or creating a new one.
+  * @param {string} chatPartnerId - The ID of the chat partner to start the chat with.
+  */
   startChat(chatPartnerId: string) {
     const currentUser = this.userService.currentUser;
     const chatToSelect = this.chatService.loadedChats.find((chat) => (chat.users.includes(chatPartnerId) && chat.users.includes(currentUser.id)));
@@ -259,24 +293,40 @@ export class SearchbarComponent implements OnInit {
     });
   }
 
+
+  /**
+  * Adds a user based on the provided user values, performing different actions based on the current action type.
+  *
+  * If the current action type is 'addUserToChannel':
+  * - Checks if the user is not already in the channel.
+  * - Clears the search field value if the user is added to the channel.
+  * - Unsets the user from the available users.
+  * - Sets the user as part of the channel's users.
+  *
+  * If the current action type is 'openSelection':
+  * - Selects the user option.
+  *
+  * @param {Object} userValues - User information including ID, name, type, and avatar source.
+  */
   add(userValues: { id: string; name: string, type: string, avatarSrc: string }) {
     this.userService.getUserByUID(userValues.id).then((user) => {
-      if (this._action == 'addUserToChannel') {
-        if (this.channel instanceof Channel) {
-          if (!this.checkIfUserExistsInChannel(this.channel, user.id))
-            this.searchField.nativeElement.value = "";
-          this.unsetAvailableUser(user);
-          this.setChannelUser(user);
-        }
+      if (this._action == 'addUserToChannel' && this.channel instanceof Channel) {
+        if (!this.checkIfUserExistsInChannel(this.channel, user.id))
+          this.searchField.nativeElement.value = "";
+        this.unsetAvailableUser(user);
+        this.setChannelUser(user);
       } else if (this._action == 'openSelection') {
         this.selectOption(user.id);
-        console.log("Selecting Option");
       }
     })
-
-
   }
 
+
+  /**
+  * Removes a user from the channel users, unsetting the user from the channel and setting the user as available.
+  *
+  * @param {User} user - The user to be removed.
+  */
   remove(user: User): void {
     if (this.channelUsers) {
       const index = this.channelUsers.indexOf(user);
@@ -285,6 +335,14 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+
+  /**
+  * Saves the updated list of users for the current channel and emits the updated channel model.
+  *
+  * Retrieves the updated list of user IDs for the channel, updates the channel's users,
+  * and emits the updated channel model using the 'updatedChannelModel' EventEmitter.
+  *
+  */
   save() {
     let channelUserIds = this.getChannelUserIds();
     if (this.channel) {
@@ -293,6 +351,11 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+  /**
+  * Retrieves an array of user IDs from the current channel's users.
+  *
+  * @returns {string[]} - An array of user IDs for the current channel users, or an empty array if no channel users are available.
+  */
   getChannelUserIds() {
     let channelUserIds: string[] = [];
     if (this.channelUsers) {
@@ -303,34 +366,51 @@ export class SearchbarComponent implements OnInit {
     return channelUserIds;
   }
 
+
+  /**
+  * Adds a user to the list of available users and updates the search options.
+  *
+  * @param {User} user - The user to be added to the list of available users.
+  */
   setAvailabeUser(user: User) {
     this.availableUsers.push(user);
     this.updateOptions();
   }
 
+
+  /**
+  * Removes a user from the list of available users and updates the search options.
+  * @param {User} user - The user to be removed from the list of available users.
+  */
   unsetAvailableUser(user: User) {
     if (this.availableUsers.length > 0) {
       const index = this.availableUsers.indexOf(user);
       const deletedUser = this.availableUsers.splice(index, 1);
-      console.log(deletedUser);
     }
     this.updateOptions();
-    console.log(this.availableUsers);
   }
 
+
+  /**
+  * Adds a user to the list of channel users and updates the search options.
+  * @param {User} user - The user to be added to the list of channel users.
+  */
   setChannelUser(user: User) {
     this.channelUsers?.push(new User(user));
     this.updateOptions();
   }
 
+
+  /**
+  * Removes a user from the list of channel users and updates the search options.
+  * @param {User} user - The user to be removed from the list of channel users.
+  */
   unsetChannelUser(user: User) {
     if (this.channelUsers) {
       const index = this.channelUsers.indexOf(user);
       this.channelUsers?.splice(index, 1);
       this.updateOptions();
     }
-
-
   }
 
 

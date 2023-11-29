@@ -117,30 +117,6 @@ export class MessageComponent {
   }
 
 
-  /*
-  getMessagePath(messageLocation: string) {
-    let path = "";
-    console.log(this._message);
-    if (messageLocation == 'channel') {
-      if (this.channelFirebaseService.selectedChannel && this._message) {
-        path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
-      }
-    } else if (messageLocation == 'thread') {
-      if (this.channelFirebaseService.selectedChannel && this._message) {
-        path = "channels/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
-      }
-
-    } else if (messageLocation == 'chat') {
-      if (this.channelFirebaseService.selectedChannel && this._message) {
-        path = "chats/" + this.channelFirebaseService.selectedChannel.id + "/messages/" + this._message.id
-      }
-    }
-
-    return path;
-  }
-  */
-
-
   updateReactionAddCurrentUser(reactionIndex: number) {
     if (this._message) {
       this.messageFirebaseService.loadedReactions[reactionIndex].users.push(this.userFirebaseService.currentUser.id);
@@ -165,7 +141,6 @@ export class MessageComponent {
     if (this.showMessageReactions) {
       this.showMessageReactions = false;
     } else {
-      console.log()
       this.showMessageReactions = true;
     }
   }
