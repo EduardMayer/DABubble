@@ -36,20 +36,15 @@ export class MainscreenComponent implements OnInit {
     this.UserProfilService.openUserProfil$.subscribe((user: User) => {
       this.userProfilOpen = true;
       this.userProfilUser = user;
-
-      //if (this.userFirebaseService.loadedUsers.length == 0) {
-      //  this.userFirebaseService.load();
-      //}
-      //
-      //if (this.channelFirebaseService.loadedChannels.length == 0) {
-      //  console.log(this.userFirebaseService.currentUser.id);
-      //  this.channelFirebaseService.load(this.userFirebaseService.currentUser.id);
-      //}
     });
 
     this.UserProfilService.closeUserProfil$.subscribe(() => {
       this.userProfilOpen = false;
     });
+
+    setInterval(()=>{
+      console.log(this.userFirebaseService.loadedUsers);
+    },2000);
 
   }
 

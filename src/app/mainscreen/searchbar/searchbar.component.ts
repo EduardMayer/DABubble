@@ -1,6 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, Observable, debounceTime, from, map, of, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, debounceTime, map, of, startWith, switchMap } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
 import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
@@ -21,17 +21,15 @@ export class SearchbarComponent implements OnInit {
   @Output() updatedChannelModel = new EventEmitter<Channel>();
   @ViewChild('searchField', { static: false }) searchField!: ElementRef;
 
-  searchText: string = "";
-  searchResults: string[] = [];
-  searchResultsUsers: User[] = [];
-  searchResultsChannels: Channel[] = [];
+  //searchText: string = "";
+  //searchResults: string[] = [];
 
   styleType: string = "header"
 
   channel: Channel | undefined;
   public channelUsers: User[] | undefined = [];
 
-  private availableUsers: User[] = this.userService.loadedUsers;
+  private availableUsers: User[] = [];
 
   private _action: string | Channel = "";
   _type: string = "";
@@ -46,7 +44,6 @@ export class SearchbarComponent implements OnInit {
 
   private _filteredOptions$ = new BehaviorSubject<{ id: string; name: string; type: string; avatarSrc?: string | undefined; }[]>([]);
   filteredOptions$ = this._filteredOptions$.asObservable();
-  //filteredOptions$: Observable<{ id: string; name: string, type: string, avatarSrc?: string }[]> = new Observable();
 
   ngOnInit() {
     this.filteredOptions$ = this.headerControl.valueChanges.pipe(
@@ -60,6 +57,9 @@ export class SearchbarComponent implements OnInit {
 
   @Input() set types(value: string) {
     this._type = value;
+      this.availableUsers = [...this.userService.loadedUsers];
+      console.log("Available Users:");
+      console.log(this.availableUsers);
     this.updateOptions();
   }
 
@@ -69,8 +69,8 @@ export class SearchbarComponent implements OnInit {
 
 
   @Input() set action(value: string | Channel) {
-    console.log("calling SetAction");
     if (value instanceof Channel) {
+      console.log(value);
       this._action = "addUserToChannel";
       this.channel = value;
       this.getChannelUsers(value).then(users => {
@@ -83,6 +83,9 @@ export class SearchbarComponent implements OnInit {
 
 
 
+  /**
+  * Updates search-result options based on the current type.
+  */
   private updateOptions() {
     switch (this._type) {
       case 'channels':
@@ -101,16 +104,20 @@ export class SearchbarComponent implements OnInit {
     this._filteredOptions$.next(this.options);
   }
 
+
+  /**
+  * Asynchronously retrieves users associated with a given channel.
+  * @param {Channel} channel - The channel for which users are to be retrieved.
+  * @returns {Promise<User[]>} - A promise that resolves to an array of User objects.
+  */
   async getChannelUsers(channel: Channel) {
     let channelUsers: User[] = [];
-    console.log(channel.users);
-    channel.users?.forEach(userId => {
+    await channel.users?.forEach(userId => {
       this.userService.getUserByUID(userId).then((user) => {
         channelUsers.push(user);
         this.unsetAvailableUser(user);
       });
     });
-
     return channelUsers;
   }
 
@@ -161,6 +168,7 @@ export class SearchbarComponent implements OnInit {
     return channels;
   }
 
+
   /**
   * Filters options based on a provided name.
   *
@@ -192,6 +200,7 @@ export class SearchbarComponent implements OnInit {
     this.searchField.nativeElement.value = "";
   }
 
+
   selectChannelById(id: string) {
     let channel = this.channelService.loadedChannels.find((channel) => id === channel.id);
     if (channel) {
@@ -199,16 +208,23 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
+
   getChatWithUserById(id: string) {
+    console.log(this.userService.loadedUsers);
+    console.log(id);
     return this.userService.loadedUsers.find((user) => (user.id === id));
   }
 
+
   openChatWithUserById(id: string) {
+    console.log("openChatWithUserById" + id);
     let chatPartner = this.getChatWithUserById(id);
     if (chatPartner) {
+      console.log("Starting Chat with" + chatPartner.id);
       this.startChat(chatPartner.id);
     }
   }
+
 
   startChat(chatPartnerId: string) {
     const currentUser = this.userService.currentUser;
@@ -220,6 +236,7 @@ export class SearchbarComponent implements OnInit {
       this.createChat(chatPartnerId, currentUser.id)
     }
   }
+
 
   /**
    * Initiates a new chat between the current user and a specified chat partner.
@@ -243,14 +260,6 @@ export class SearchbarComponent implements OnInit {
   }
 
   add(userValues: { id: string; name: string, type: string, avatarSrc: string }) {
-    //let user = new User(
-    //  {
-    //    id: userValues.id,
-    //    fullName: userValues.name.replace('@', ''),
-    //    avatar: userValues.avatarSrc
-    //  }
-    //)
-
     this.userService.getUserByUID(userValues.id).then((user) => {
       if (this._action == 'addUserToChannel') {
         if (this.channel instanceof Channel) {
@@ -302,10 +311,11 @@ export class SearchbarComponent implements OnInit {
   unsetAvailableUser(user: User) {
     if (this.availableUsers.length > 0) {
       const index = this.availableUsers.indexOf(user);
-      this.availableUsers.splice(index, 1);
+      const deletedUser = this.availableUsers.splice(index, 1);
+      console.log(deletedUser);
     }
     this.updateOptions();
-
+    console.log(this.availableUsers);
   }
 
   setChannelUser(user: User) {
@@ -314,12 +324,12 @@ export class SearchbarComponent implements OnInit {
   }
 
   unsetChannelUser(user: User) {
-    if(this.channelUsers){
+    if (this.channelUsers) {
       const index = this.channelUsers.indexOf(user);
       this.channelUsers?.splice(index, 1);
       this.updateOptions();
     }
-   
+
 
   }
 

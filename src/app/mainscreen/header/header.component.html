@@ -3,7 +3,11 @@
         <img src="assets/img/logo/logo.svg" alt="DABubble Logo">
     </div>
     <div id="searchbar">
-        <app-searchbar *ngIf="userService.finishedLoading && channelService.finishedLoading"  [types]='"all"' [action]="'openSelection'"></app-searchbar>
+        <app-searchbar
+         *ngIf="userService.finishedLoading && channelService.finishedLoading"  
+         [types]='"all"' 
+         [action]="'openSelection'">
+        </app-searchbar>
     </div>
     <div id="header-user">
         <h1 id="header-user-name">{{user.fullName}}</h1>

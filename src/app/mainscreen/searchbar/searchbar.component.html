@@ -1,4 +1,4 @@
-<div id="header-searchfield-container" *ngIf="searchResultsChannels && searchResultsUsers">
+<div id="header-searchfield-container" *ngIf="options">
 
   <mat-chip-grid #chipGrid>
     <mat-chip-row (removed)="remove(user)" *ngFor="let user of channelUsers; let i = index">
