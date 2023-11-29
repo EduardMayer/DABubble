@@ -1,13 +1,33 @@
 <form class="addChannelDialogContainer" [formGroup]="addChannelForm"
     (ngSubmit)="onSubmitNewChannel(addChannelForm.value)">
     
-    <mat-form-field class="formFieldChannelName removeBackground">
+
         <h1>Channel erstellen</h1>
 
         <p>Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein #marketing zum
             Beispiel.
         </p>
+       
+        <div class="channelNameContainer">
+            <h2>Channel-Name</h2>
+            <input class="channelNameInput newChannelInputField" formControlName="channelName" palceholder="# z.B. Kooperationsprojekte" required>
+            <p  *ngIf="addChannelForm.controls['channelName'].invalid && (addChannelForm.controls['channelName'].dirty || addChannelForm.controls['channelName'].touched)"
+            class="errorValidation">
+            Channelname muss mindesten 3 Zeichen lang sein!
+        </p>
+        </div>
 
+
+        <div class="channelDescriptionContainer">
+            <h2>Beschreibung</h2>
+            <input class="channelDescriptionInput newChannelInputField" formControlName="channelDescription" palceholder="# z.B. Kooperationsprojekte" required>
+            <p  *ngIf="addChannelForm.controls['channelDescription'].invalid && (addChannelForm.controls['channelDescription'].dirty || addChannelForm.controls['channelDescription'].touched)"
+                class="errorValidation">
+                Bitte geben Sie eine Beschreibung ein!
+            </p>
+        </div>
+
+   <!--  <mat-form-field class="formFieldChannelName removeBackground">
         <div class="channelNameContainer">
             <h2>Channel-Name</h2>
             <input matInput class="channelNameInput" formControlName="channelName" palceholder="# z.B. Kooperationsprojekte" required>
@@ -20,7 +40,6 @@
             </mat-error>
         </mat-error>
     </mat-form-field>
-
 
     <mat-form-field class="formFieldChannelDescription">
 
@@ -35,8 +54,7 @@
                 {{validation.message}}
             </mat-error>
         </mat-error>
-    </mat-form-field>
-
+    </mat-form-field> -->
 
 
     <button class="createChannelButton" type="submit" [disabled]="!addChannelForm.valid">

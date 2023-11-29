@@ -56,7 +56,7 @@ export class AddChannelDialogComponent {
   getInput() {
     this.addChannelForm = this.fb.group({
       channelName: ['', [Validators.required, Validators.minLength(3)]],
-      channelDescription: ['', [Validators.required, Validators.minLength(3)]]
+      channelDescription: ['', [Validators.required]]
       //bio: ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", Validators.maxLength(256)],
       //birthday: ['', Validators.required],
       //gender: new FormControl(this.genders[0], Validators.required),

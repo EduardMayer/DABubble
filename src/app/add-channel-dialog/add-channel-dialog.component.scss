@@ -88,6 +88,9 @@ mat-form-field {
     position: absolute;
     right: 32px;
     bottom: 28px;
+    &:disabled{
+        background-color: gray;
+    }
 }
 
 .mat-mdc-dialog-container {
@@ -98,4 +101,25 @@ mat-form-field {
     border-radius: 35px !important;
 }
 
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled){
+    background-color: none;
+}
+
+.newChannelInputField{
+    border: 1px solid #ADB0D9; 
+    border-radius: 20px;
+    padding: 12px;
+    //padding-left: 50px;
+    width: calc(100% - 24px - 30px);
+    font-size: 1.5em;
+}
+.channelNameContainer, .channelDescriptionContainer{
+    width: 100%;
+}
+
+.errorValidation{
+    color: red;
+    margin: 0px;
+    margin-top: 4px;
+}
 
