@@ -1,16 +1,19 @@
-<div id="header-searchfield-container" *ngIf="options">
+<div id="searchfield-container" [ngClass]="styleType" *ngIf="options">
 
   <mat-chip-grid #chipGrid>
     <mat-chip-row (removed)="remove(user)" *ngFor="let user of channelUsers; let i = index">
-      <img src='{{user.avatar}}' class="inputAvatar"> {{ user.fullName }}
-      <button matChipRemove [attr.aria-label]="'remove ' + user">
-        <mat-icon>cancel</mat-icon>
-      </button>
+      <div class="mat-chip-content">
+        <img src='{{user.avatar}}' class="inputAvatar">
+        <div> {{ user.fullName }}</div>
+        <button matChipRemove [attr.aria-label]="'remove ' + user">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
     </mat-chip-row>
   </mat-chip-grid>
 
-  <input #searchField id="header-searchfield" type="text" placeholder="Code learning durchsuchen"
-    [matAutocomplete]="auto" [matChipInputFor]="chipGrid" [formControl]="headerControl" matInput>
+  <input #searchField id="searchfield" type="text" placeholder="Code learning durchsuchen" [matAutocomplete]="auto"
+    [matChipInputFor]="chipGrid" [formControl]="headerControl" matInput>
 
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="add($event.option.value)">
     <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
@@ -23,9 +26,9 @@
       <ng-template #channel>
         {{ option.name }}
       </ng-template>
-      
+
     </mat-option>
   </mat-autocomplete>
-  
-  <img id="header-searchfield-icon" src="/assets/img/icons/search_gray.svg" alt="search" *ngIf="styleType=='header'">
+
+  <img id="searchfield-icon" src="/assets/img/icons/search_gray.svg" alt="search" *ngIf="styleType=='header'">
 </div>
