@@ -151,7 +151,7 @@ export class AuthFirebaseService implements OnInit {
         this.UserData = result.user;
         await this.userService.syncMail(this.UserData.email);
         this.ngZone.run(() => {
-          this.firebaseUserService.currentUser=this.UserData;
+          //this.firebaseUserService.currentUser=this.UserData;
           this.router.navigate(['/main']);
         });
       })

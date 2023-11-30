@@ -65,6 +65,7 @@ export class UserProfilComponent implements OnInit {
     }
     return null;
   }
+
   /**
  * Edit the current User and saves the changes in the firebase store. 
  */

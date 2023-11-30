@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
     private chatService: ChatFirebaseService, 
     private router: Router) { }
 
-  async ngOnInit(): Promise<void> {
+  async ngOnInit(): Promise<void> {    
     this.user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
   }
 
