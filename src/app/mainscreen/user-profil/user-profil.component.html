@@ -1,6 +1,6 @@
-<div id="UserProfil">
+<div id="UserProfil" (click)="close()">
 
-    <div id="UserProfilCard" [class.currentUserPosition]="isCurrentUser" [class.otherUserPosition]="!isCurrentUser">
+    <div (click)="stopPropagation($event)" id="UserProfilCard" [class.currentUserPosition]="isCurrentUser" [class.otherUserPosition]="!isCurrentUser">
         <div id="headerUserProfil-header">
             <h3>Profil</h3>
             <img (click)="close()" src="assets/img/icons/close.svg" alt="close">

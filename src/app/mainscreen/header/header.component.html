@@ -16,12 +16,13 @@
             <div id="header-status"></div>
         </div>
         <div id="headerDropdown">
-            <button mat-icon-button (click)="toogleHeaderMenu()">
+            <button mat-icon-button (click)="toogleHeaderMenu()" (click)="stopPropagation($event)">
                 <mat-icon>expand_more</mat-icon>
             </button>
         </div>
     </div>
-    <div id="headerMenu" *ngIf="showHeaderMenu">
+    <div id="userProfileMenuBackground" *ngIf="showHeaderMenu" (click)="closeProfilePopup()"></div>
+    <div id="headerMenu" *ngIf="showHeaderMenu" (click)="stopPropagation($event)">
         <a (click)="showProfil()">Profil</a>
         <a (click)="logout()">Logout</a>
     </div>

@@ -69,4 +69,13 @@ export class HeaderComponent implements OnInit {
     this.channelService.selectedChannelId = undefined; 
     this.chatService.selectedChatId = undefined; 
   }
+
+  closeProfilePopup(){
+    if(this.showHeaderMenu){
+      this.showHeaderMenu = false;
+    }
+  }
+  stopPropagation(event:Event){
+    event.stopPropagation();
+  }
 }

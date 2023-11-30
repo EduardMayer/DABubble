@@ -130,4 +130,7 @@ export class UserProfilComponent implements OnInit {
       }
     }
   }
+  stopPropagation(event:Event){
+    event.stopPropagation();
+  }
 }
