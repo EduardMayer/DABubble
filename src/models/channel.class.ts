@@ -4,12 +4,14 @@ export class Channel extends Chat {
     channelName: string;
     channelDescription: string;
     creatorOfChannel: string;
+    timestamp: number;
 
     constructor(data: any = {}) {
         super(data);
         this.channelName = data ? data.channelName : "";
         this.channelDescription = data ? data.channelDescription : "";
-        this.creatorOfChannel =  data ? data.creatorChannel : "";; 
+        this.creatorOfChannel =  data ? data.creatorOfChannel : "";
+        this.timestamp = data ? data.timestamp : "";
     }
 
     override toJSON() {
@@ -17,9 +19,10 @@ export class Channel extends Chat {
             id: this.id,
             channelName: this.channelName,
             channelDescription: this.channelDescription,
-            creatorChannel: this.creatorOfChannel,
+            creatorOfChannel: this.creatorOfChannel,
             messages: this.messages,
-            users: this.users
+            users: this.users,
+            timestamp: this.timestamp
         }
     }
 }

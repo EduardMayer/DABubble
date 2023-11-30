@@ -4,6 +4,7 @@ import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
+
 import {
   MatDialog,
   MatDialogRef,
@@ -77,10 +78,14 @@ console.log(value);*/
 
   onSubmitNewChannel(value: any) {
     const newChannel = new Channel(value);
-    newChannel.users.push(this.userFirebaseService.currentUser.id);
-    newChannel.creatorOfChannel = this.userFirebaseService.currentUser.id;
-    this.firebaseChannel.updateChannel(newChannel);
-    this.openDialog();
+    //newChannel.users.push(this.userFirebaseService.currentUser.id);
+    //newChannel.creatorOfChannel = this.userFirebaseService.currentUser.id;
+
+    const dialogRef = this.dialog.open(AddUserToChannelDialogComponent) //hier fügen wir die Komponente ein die geöffnet werden soll. In diesem Fall, "DialogAddUserComponent", weil da unser Dialog enthalten ist.
+    dialogRef.componentInstance.channel = new Channel(newChannel);  // Mit dieser Zeile greifen wir auf die DialogEditAdressComponent zu und lagern die user in dieser component dort ein um auf daten zuzugreifen.
+
+    //this.firebaseChannel.updateChannel(newChannel);
+    //this.openDialog();
     this.closeDialog();
   }
 

@@ -166,6 +166,9 @@ export class ChannelFirebaseService {
         let channelExists = await this.checkChannelExists(channel.channelName);
 
         if (!channelExists) {
+            channel.creatorOfChannel = this.userFirebaseService.currentUser.id;
+            channel.timestamp = Date.now(); 
+
             const docInstance = doc(collection(this.firestore, "channels"));
             setDoc(docInstance, channel.toJSON());
         } else {
