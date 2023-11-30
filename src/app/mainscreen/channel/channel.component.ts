@@ -32,6 +32,7 @@ export class ChannelComponent {
 
   hoverTitle = false;
   showEditChannel: boolean = false;
+  channelCopy: Channel | undefined;
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
@@ -269,8 +270,14 @@ export class ChannelComponent {
   }
 
   handleChannelUserUpdate(newChannel: Channel) {
-    this.channelFirebaseService.selectedChannel = newChannel;
-    this.channelFirebaseService.updateChannel(newChannel);
+    this.channelCopy = newChannel;
+  }
+
+  saveUserChanges() {
+    if (this.channelCopy) {
+      this.channelFirebaseService.selectedChannel = this.channelCopy;
+      this.channelFirebaseService.updateChannel(this.channelCopy);
+    }
   }
 
 }
