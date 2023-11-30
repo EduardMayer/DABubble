@@ -24,7 +24,6 @@ export class UserFirebaseService {
     public registUser: User = new User();
 
     constructor(private firestore: Firestore) {
-        this.load();
     }
 
     /**
@@ -40,7 +39,7 @@ export class UserFirebaseService {
     * Asynchronously loads user data from Firestore based on optional index parameters.
     */
     async load() {
-
+        console.log("loadedUsers");
         const q = query(collection(this.firestore, "users"));
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];

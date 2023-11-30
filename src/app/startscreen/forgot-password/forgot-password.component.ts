@@ -17,7 +17,10 @@ export class ForgotPasswordComponent {
 
   @Output() closeForgotPasswordView = new EventEmitter<void>();
 
-  constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
+  constructor(
+    private userService: UserFirebaseService, 
+    private authService: AuthFirebaseService, 
+    private router: Router) { }
   email: string = '';
   errorInfo: any = false;
   isInputActive = false;
