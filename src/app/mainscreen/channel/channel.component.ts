@@ -42,7 +42,7 @@ export class ChannelComponent {
       channelFirebaseService.loadChannelMessages(channelFirebaseService.selectedChannel.id);// to be changed to currentChannel
       this.messagePath = `channels/${channelFirebaseService.selectedChannel.id}/messages/`;
     }
-    this.loadallChannelusers();
+    //this.loadallChannelusers();
 
   }
 
@@ -67,6 +67,8 @@ export class ChannelComponent {
 
   }
 
+
+  /*
   userOnCurrentChannel: User[] = [];
 
   loadallChannelusers() {
@@ -89,20 +91,23 @@ export class ChannelComponent {
     });
     console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
   }
+  */
 
+  /*
   searchText: string = "";
   searchResults: string[] = [];
   searchResultsUsers: User[] = [];
   searchResultsChannels: Channel[] = [];
 
   testData: string[] = ["hallo", "Test", "Search"];
-
+  */
 
   ngOnInit(): void {
-    //this.searchResults = ["Hallo", "Test", "Search"]; 
-    //this.userService.load(); 
+
   }
 
+
+  /*
   sendData(event: Event) {
 
     console.log(this.searchText);
@@ -119,6 +124,7 @@ export class ChannelComponent {
       this.searchResultsChannels = [];
     }
   }
+  
 
   async getUsers() {
 
@@ -132,14 +138,11 @@ export class ChannelComponent {
       }
     });
 
-
-    /*
-    this.userService.getUserForSearch(this.searchText)
-        .then( (users) => {
-          this.searchResultsUsers = users; 
-        });
-    */
   }
+
+  */
+
+  /*
   getChannels() {
 
 
@@ -153,15 +156,16 @@ export class ChannelComponent {
       }
     });
 
-    /*
     this.userService.getChannelForSearch(this.searchText)
     .then( (channels) => {
       this.searchResultsChannels = channels; 
     });
-    */
+    
   }
+  */
 
 
+  /*
   selectUserfromSearchings(resultUsers: any) {
     console.log(this.channelFirebaseService.selectedChannel);
     console.log("Send New Message to User with ID: ");
@@ -180,6 +184,7 @@ export class ChannelComponent {
     }
 
   }
+  
 
   addUserToChannel(event: Event) {
     event.stopPropagation();
@@ -208,6 +213,7 @@ export class ChannelComponent {
       });
     }
   }
+  */
 
   //!user.channels.includes(selectedChannelName)
 
@@ -247,9 +253,11 @@ export class ChannelComponent {
 
   }
 
+  /*
   clickChannel(index: any) {
     this.channelFirebaseService.selectChannel(this.searchResultsChannels[index].id);
   }
+  */
 
   closeEditDialog() {
     this.showEditChannel = false;
@@ -263,8 +271,6 @@ export class ChannelComponent {
   handleChannelUserUpdate(newChannel: Channel) {
     this.channelFirebaseService.selectedChannel = newChannel;
     this.channelFirebaseService.updateChannel(newChannel);
-    console.log("channel updated");
-    console.log(newChannel);
   }
 
 }

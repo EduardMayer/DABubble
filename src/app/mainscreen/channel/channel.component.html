@@ -74,6 +74,7 @@
             -->
         </div>
 
+        <!--
         <div id="header-searchfield-results-Menu"
             *ngIf="searchResults.length >= 1 || searchResultsUsers.length >= 1  || searchResultsChannels.length >= 1"
             (click)="$event.stopPropagation()">
@@ -88,8 +89,11 @@
                 &nbsp;- {{resultChannels.channelName}}
             </p>
         </div>
+        -->
 
-        <button (click)="$event.stopPropagation(); addUserToChannel($event)" class="addSelection">Hinzufügen</button>
+        <!--
+            <button (click)="$event.stopPropagation(); addUserToChannel($event)" class="addSelection">Hinzufügen</button>
+        -->
     </mat-menu>
 
     <div class="chat-container">

@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
-import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
@@ -31,8 +30,6 @@ export class UserSearchComponent {
 
   clickUser(index: number) {
       this.userName.emit(this.searchResultsUsers[index]);
-      //const name = this.searchResultsUsers[index].fullName
-      //this._message.content += ;
   }
 
   getUsers(searchString: string) {
