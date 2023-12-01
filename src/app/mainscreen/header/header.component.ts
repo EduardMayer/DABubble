@@ -34,6 +34,9 @@ export class HeaderComponent implements OnInit {
     private chatService: ChatFirebaseService, 
     private router: Router) { }
 
+  /**
+   * Loads current user from firebase 
+   */
   async ngOnInit(): Promise<void> {    
     this.user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
   }
@@ -70,11 +73,19 @@ export class HeaderComponent implements OnInit {
     this.chatService.selectedChatId = undefined; 
   }
 
+  /**
+   * Close profil menu popup
+   */
   closeProfilePopup(){
     if(this.showHeaderMenu){
       this.showHeaderMenu = false;
     }
   }
+
+  /**
+   * Prevents closing of popup when click inside of popup
+   * @param event - clickevent 
+   */
   stopPropagation(event:Event){
     event.stopPropagation();
   }

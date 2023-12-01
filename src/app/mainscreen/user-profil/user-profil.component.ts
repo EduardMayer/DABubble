@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
@@ -48,7 +49,6 @@ export class UserProfilComponent implements OnInit {
    */
   ngOnInit(): void {
     this.isCurrentUser = this.userFirebaseService.currentUser.id == this.user.id ? true : false;
-    console.log("is current user" + this.isCurrentUser);
     this.getStatus();
     this.editUserForm.patchValue({
       nameInput: this.user.fullName, 
@@ -58,6 +58,11 @@ export class UserProfilComponent implements OnInit {
     this.currentUserInput = this.user.mail; 
   }
 
+  /**
+   * Validates the input value of a form controle if it has not more than two words.
+   * @param control - formControl for validation
+   * @returns 
+   */
   nameValidator(control: FormControl): { [key: string]: boolean } | null {
     const value = control.value;
     if (value && value.trim().split(' ').length < 2) {
@@ -66,7 +71,7 @@ export class UserProfilComponent implements OnInit {
     return null;
   }
 
-  /**
+/**
  * Edit the current User and saves the changes in the firebase store. 
  */
   async editUser() {
@@ -86,6 +91,9 @@ export class UserProfilComponent implements OnInit {
     }
   }
 
+  /**
+   * Closes userprofil without saving changes. 
+   */
   closeWithoutSave() {
     this.editUserMode = false
     this.editUserForm.patchValue({
@@ -115,22 +123,38 @@ export class UserProfilComponent implements OnInit {
       });
   }
 
+  /**
+   * Opens Chat with user. If a chat already exists, chat was openden. If no chat existst, a new one was created!
+   */
   async sendMessage(){
     if(this.user && this.userFirebaseService.currentUser){
-     
-      console.log(this.user.id);
-      const usersChat = this.chatFirebaseService.getChatWithUser(this.user.id);
-      console.log(usersChat);
+      const usersChat = this.chatFirebaseService.getChatWithUser(this.user.id);  
       if(usersChat){
         this.chatFirebaseService.selectChat(usersChat.id); 
         this.userProfilService.close(); 
       }
       else{
-        
-        console.log("no Chat found!");
+        this.createChat(); 
       }
     }
   }
+
+  /**
+   * Creates a new chat between the opened profile user and the current logged in user. 
+   */
+  createChat() {
+    let chat = new Chat({
+      users: [this.userFirebaseService.currentUser.id, this.user.id]
+    });
+    this.chatFirebaseService.update(chat).then((chat) => {
+      this.chatFirebaseService.loadedChats.unshift(chat);
+      this.chatFirebaseService.selectChat(chat.id);
+      this.close(); 
+    }).catch((error) => {
+      throw new Error(`Failed to start chat: ${error.message}`);
+    });
+  }
+
   stopPropagation(event:Event){
     event.stopPropagation();
   }
