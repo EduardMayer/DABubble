@@ -7,11 +7,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 import {
   MatDialog,
-  MatDialogRef,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogTitle,
-  MatDialogContent,
+  MatDialogRef
 } from '@angular/material/dialog';
 import { AddUserToChannelDialogComponent } from './add-user-to-channel-dialog/add-user-to-channel-dialog.component';
 
@@ -39,64 +35,45 @@ export class AddChannelDialogComponent {
     this.getInput();
   }
 
-  validation_messages = {
-    'channelName': [
-      { type: 'required', message: 'Full name is required' }
-    ],
-    'channelDescription': [
-      { type: 'maxlength', message: 'Full name is required' },
-    ]
-  };
-
-
   @Input()
   public set currentLocation(value: string) {
     this.location = value;
   }
 
+  /**
+   * Connects form variable with hmtl input form and adds a validation. 
+   */
   getInput() {
     this.addChannelForm = this.fb.group({
       channelName: ['', [Validators.required, Validators.minLength(3)]],
       channelDescription: ['', [Validators.required]]
-      //bio: ["Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s", Validators.maxLength(256)],
-      //birthday: ['', Validators.required],
-      //gender: new FormControl(this.genders[0], Validators.required),
-      //countryPhone: this.countryPhoneGroup
     });
-    //console.log(this.fullname);
-    /*this.accountDetailsForm = this.fb.group({
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      // more form inputs
-    })
-
-    //debugger;
-console.log(value);*/
   }
 
+  /**
+   * Gets value of input field and give it to the next componente, to create the new channel. 
+   * @param value - iput form value
+   */
   onSubmitNewChannel(value: any) {
     const newChannel = new Channel(value);
-    //newChannel.users.push(this.userFirebaseService.currentUser.id);
-    //newChannel.creatorOfChannel = this.userFirebaseService.currentUser.id;
-
     const dialogRef = this.dialog.open(AddUserToChannelDialogComponent) //hier fügen wir die Komponente ein die geöffnet werden soll. In diesem Fall, "DialogAddUserComponent", weil da unser Dialog enthalten ist.
     dialogRef.componentInstance.channel = new Channel(newChannel);  // Mit dieser Zeile greifen wir auf die DialogEditAdressComponent zu und lagern die user in dieser component dort ein um auf daten zuzugreifen.
-
-    //this.firebaseChannel.updateChannel(newChannel);
-    //this.openDialog();
     this.closeDialog();
   }
 
+  /**
+   * Opens addChannel dialog
+   */
   openDialog(): void {
     this.dialog.open(AddUserToChannelDialogComponent, {
       width: '250px',
     });
   }
 
+  /**
+   * Closes addChanenelDialog
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }
-
 }

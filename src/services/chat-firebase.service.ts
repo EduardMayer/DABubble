@@ -150,8 +150,6 @@ export class ChatFirebaseService {
         }
     }
 
-
-
     /**
     * Lifecycle hook called when the component is about to be destroyed.
     * Unsubscribes from any active subscription.
@@ -182,7 +180,6 @@ export class ChatFirebaseService {
         })
     }
 
-
     /* NO FOR LOOP SINCE there can only be two chat partners */
     getChatPartner(chat: Chat): string {
         if (chat.users[0] != this.userService.currentUser.id) {
@@ -193,12 +190,6 @@ export class ChatFirebaseService {
             return "";
         }
     }
-
-
-
-
-
-
 
     //MUSS überarbeitet werden
     getById(chatId: string) {

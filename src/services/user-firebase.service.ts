@@ -32,14 +32,12 @@ export class UserFirebaseService {
      */
     setCurrentUser(UserData: any) {
         this.currentUser = new User(UserData);
-        console.log("current User:" + this.currentUser);
     }
 
     /**
     * Asynchronously loads user data from Firestore based on optional index parameters.
     */
     async load() {
-        console.log("loadedUsers");
         const q = query(collection(this.firestore, "users"));
         this.unsubUsers = onSnapshot(q, (querySnapshot) => {
             this.loadedUsers = [];
@@ -69,11 +67,9 @@ export class UserFirebaseService {
         if (user.id == "") {
             const docInstance = doc(collection(this.firestore, "users"));
             setDoc(docInstance, user.toJSON());
-            console.log("user created");
         } else {
             const docInstance = doc(this.firestore, 'users', user.id);
             updateDoc(docInstance, user.toJSON());
-            console.log("user updated");
         }
     }
 
@@ -85,12 +81,15 @@ export class UserFirebaseService {
      */
     async addNewUserWithUID(user: User, UID: string) {
         setDoc(doc(this.firestore, "users", UID), user.toJSON());
-        console.log("user created with UID from Authentication");
     }
 
+
+    /**
+     * Registers a user with a given UID from authentication. 
+     * @param UID - UID from Authentication
+     */
     async addRegistUserWithUID(UID: string) {
         setDoc(doc(this.firestore, "users", UID), this.registUser.toJSON());
-        console.log("Registuser created with UID from Authentication");
     }
 
 
@@ -123,12 +122,8 @@ export class UserFirebaseService {
      * @param UID - Unique ID of User
      */
     async setUIDToCurrentUser(UID: string) {
-        //console.log("Set UID TO current User" + UID);
         const user = await this.getUserByUID(UID);
-        /*    console.log("User from UID");  
-              console.log(user); */
         this.currentUser = new User(user);
-        console.log(this.currentUser);
     }
 
     /**
@@ -155,7 +150,6 @@ export class UserFirebaseService {
         if (this.currentUser.mail != email) {
             this.currentUser.mail = email;
             this.updateCurrentUserToFirebase();
-            console.log("Email updated @ Login");
         }
     }
 
@@ -214,7 +208,6 @@ export class UserFirebaseService {
      */
     mailExists(mail: string) {
         this.load();
-        console.log(this.loadedUsers);
         if (this.loadedUsers[0]) {
             for (let i = 0; i < this.loadedUsers.length; i++) {
                 if (this.loadedUsers[i].mail === mail) {

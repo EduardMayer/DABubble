@@ -1,6 +1,6 @@
 .addChannelDialogContainer {
     height: 556px;
-    width: 738px;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -8,6 +8,13 @@
     padding-right: 30px;
     background-color: white;
     border-radius: 35px;
+
+    #addChannelDialogHeader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
 }
 
 .mat-form-field.mat-mdc-form-field.formFieldChannelName.removeBackground.ng-tns-c1205077789-0.ng-star-inserted.mat-mdc-form-field-type-mat-input.mat-form-field-appearance-fill.mat-primary.ng-pristine.ng-invalid.mat-form-field-invalid.ng-touched > * {
@@ -123,3 +130,22 @@ mat-form-field {
     margin-top: 4px;
 }
 
+@media only screen and (max-width: 768px) {
+
+
+    .addChannelDialogContainer{
+        height: 100vh;
+        width: calc(100% - 60px);
+        display: flex;
+        border-radius: 0px;
+    }
+    ::ng-deep .mat-mdc-dialog-surface.mdc-dialog__surface{
+        border-radius: 0px;
+    }
+    ::ng-deep .cdk-overlay-pane{
+        max-width: calc(100vw)  !important; 
+    }
+
+
+
+}
