@@ -8,6 +8,7 @@
     margin-bottom: 16px;
     cursor: pointer;
 
+    
 
     .option-icons {
         z-index: 9;
@@ -66,12 +67,8 @@
 
 .msg-mods {
     display: flex;
-    gap: 5px;
     align-items: center;
-
-    img {
-        padding: 8px;
-    }
+    gap: 5px;
 }
 
 
@@ -97,4 +94,27 @@
     top: -18px;
     left: 191px;
     cursor: pointer;
+}
+
+
+.msg-send svg:hover path {
+    fill: rgba(121, 126, 243, 1);
+}
+
+.msg-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 100%;
+
+    &:hover {
+        background-color: rgba(236, 238, 254, 1);
+        svg:hover path {
+            fill: rgba(68, 77, 242, 1);
+        }
+    }
+
 }
