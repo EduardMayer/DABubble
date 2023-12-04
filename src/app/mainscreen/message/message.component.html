@@ -8,7 +8,7 @@
     <div class="message-content" tabindex="0">
         <div class="message-head">
             <div *ngIf="autorName!=''"><b class="message-username" (click)="openUserProfil()">{{ autorName }}</b></div>
-            <div> {{ getTimestamp(_message.timestamp) }}</div>
+            <div class="message-timestamp"> {{ getTimestamp(_message.timestamp) }} Uhr</div>
         </div>
 
         <mat-card *ngIf="!editMessage">
