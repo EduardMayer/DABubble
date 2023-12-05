@@ -28,7 +28,8 @@ export class SearchbarComponent implements OnInit {
 
   channel: Channel | undefined;
 
-  public channelUsers: User[] | undefined = []; //All Users of the Channel
+  public channelUsers: User[] = []; //All Users of the Channel
+  public editableChannelUsers: User[] = []; //All Users that can be Removed in the current search element.
   private availableUsers: User[] = [];  // All Users that could be added to the Channel
 
   private _action: string | Channel = "";
@@ -56,6 +57,15 @@ export class SearchbarComponent implements OnInit {
 
   /**
    * Sets the search value type and initiates the search options.
+   * @param {string} value - Type value ('channels' or 'users' or 'all').
+   */
+  hasRemoveAccess: boolean = false;
+  @Input() set hasRemoveAccessInput(hasRemoveAccess: boolean) {
+    this.hasRemoveAccess = hasRemoveAccess;
+  }
+
+  /**
+   * Sets the search value type and initiates the search options that are depending on that type.
    * @param {string} value - Type value ('channels' or 'users' or 'all').
    */
   @Input() set types(value: string) {
@@ -86,6 +96,9 @@ export class SearchbarComponent implements OnInit {
       this._action = "addUserToChannel";
       this.channel = value;
       this.getChannelUsers(value).then(users => {
+        if (this.hasRemoveAccess) {
+          this.editableChannelUsers = users;
+        }
         this.channelUsers = users;
       })
     } else {
@@ -127,6 +140,8 @@ export class SearchbarComponent implements OnInit {
     await channel.users?.forEach(userId => {
       this.userService.getUserByUID(userId).then((user) => {
         channelUsers.push(user);
+
+
         this.unsetAvailableUser(user);
       });
     });
@@ -331,7 +346,7 @@ export class SearchbarComponent implements OnInit {
   */
   remove(user: User): void {
     if (this.channelUsers) {
-      const index = this.channelUsers.indexOf(user);
+      const index = this.editableChannelUsers.indexOf(user);
       this.unsetChannelUser(user);
       this.setAvailabeUser(user);
 
@@ -400,7 +415,9 @@ export class SearchbarComponent implements OnInit {
   * @param {User} user - The user to be added to the list of channel users.
   */
   setChannelUser(user: User) {
-    this.channelUsers?.push(new User(user));
+    let newUser: User = new User(user);
+    this.channelUsers?.push(newUser);
+    this.editableChannelUsers.push(newUser);
     this.updateOptions();
   }
 
@@ -413,6 +430,7 @@ export class SearchbarComponent implements OnInit {
     if (this.channelUsers) {
       const index = this.channelUsers.indexOf(user);
       this.channelUsers?.splice(index, 1);
+      this.editableChannelUsers = this.channelUsers
       this.updateOptions();
     }
   }

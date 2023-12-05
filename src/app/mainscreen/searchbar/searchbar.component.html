@@ -1,7 +1,7 @@
 <div id="searchfield-container" [ngClass]="styleType" *ngIf="options">
 
   <mat-chip-grid #chipGrid>
-    <mat-chip-row (removed)="remove(user)" *ngFor="let user of channelUsers; let i = index">
+    <mat-chip-row (removed)="remove(user)" *ngFor="let user of editableChannelUsers; let i = index">
       <div class="mat-chip-content">
         <img src='{{user.avatar}}' class="inputAvatar">
         <div> {{ user.fullName }}</div>

@@ -57,7 +57,7 @@
         <span (click)="$event.stopPropagation()" class="channelName">#entwicklerchannel</span>
 
         <div *ngIf="newAddedToChannelUser" class="containerOfInput" (click)="$event.stopPropagation()">
-            <app-searchbar [setStyle]="'channelOption'"    [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
+            <app-searchbar [setStyle]="'channelOption'" [hasRemoveAccessInput]="false"   [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
             (updatedChannelModel)="handleChannelUserUpdate($event)"
             ></app-searchbar>
             <!--
