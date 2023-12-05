@@ -3,7 +3,7 @@
 
     <div id="addChannelDialogHeader">
         <h1>Channel erstellen</h1>
-        <img src="/assets/img/icons/close.svg" alt="close">
+        <img src="/assets/img/icons/close.svg" alt="close" (click)="closeDialog()">
     </div>
 
     <p>Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein #marketing zum
@@ -16,7 +16,7 @@
             palceholder="# z.B. Kooperationsprojekte" required>
         <p *ngIf="addChannelForm.controls['channelName'].invalid && (addChannelForm.controls['channelName'].dirty || addChannelForm.controls['channelName'].touched)"
             class="errorValidation">
-            Channelname muss mindesten 3 Zeichen lang sein!
+            Channelname muss mindesten 3 - 50 Zeichen lang sein!
         </p>
     </div>
 
@@ -26,7 +26,7 @@
             palceholder="# z.B. Kooperationsprojekte" required>
         <p *ngIf="addChannelForm.controls['channelDescription'].invalid && (addChannelForm.controls['channelDescription'].dirty || addChannelForm.controls['channelDescription'].touched)"
             class="errorValidation">
-            Bitte geben Sie eine Beschreibung ein!
+            Bitte geben Sie eine Beschreibung ein max. 100 Zeichen!
         </p>
     </div>
 

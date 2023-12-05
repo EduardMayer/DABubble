@@ -45,8 +45,8 @@ export class AddChannelDialogComponent {
    */
   getInput() {
     this.addChannelForm = this.fb.group({
-      channelName: ['', [Validators.required, Validators.minLength(3)]],
-      channelDescription: ['', [Validators.required]]
+      channelName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      channelDescription: ['', [Validators.required, Validators.maxLength(100)]]
     });
   }
 

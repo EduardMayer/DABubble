@@ -15,6 +15,10 @@
         align-items: center;
         width: 100%;
     }
+
+    img{
+        cursor: pointer;
+    }
 }
 
 .mat-form-field.mat-mdc-form-field.formFieldChannelName.removeBackground.ng-tns-c1205077789-0.ng-star-inserted.mat-mdc-form-field-type-mat-input.mat-form-field-appearance-fill.mat-primary.ng-pristine.ng-invalid.mat-form-field-invalid.ng-touched > * {
@@ -91,6 +95,7 @@ mat-form-field {
     color: white;
     font-weight: bold;
     margin-top: 18px;
+    cursor: pointer;
 
     position: absolute;
     right: 32px;
