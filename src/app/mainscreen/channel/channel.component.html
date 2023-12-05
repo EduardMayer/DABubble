@@ -14,14 +14,15 @@
         <div class="addMemberContainer">
             <div class="user-avatar-list" tabindex="0" mat-icon-button [matMenuTriggerFor]="menu"
                 #menuTrigger="matMenuTrigger" aria-label="Example icon-button with a menu">
-                <img class="avatar-img" *ngFor="let user of channelFirebaseService.userOnCurrentChannel | slice:0:3; let i = index"
+                <img class="avatar-img"
+                    *ngFor="let user of channelFirebaseService.userOnCurrentChannel | slice:0:3; let i = index"
                     [style.left]="i * -10 + 'px'" [style.z-index]="3 - i" [src]="user.avatar" alt="avatar">
 
                 <span class="amoundOfUsersInChannel">{{channelFirebaseService.userOnCurrentChannel.length}}</span>
 
             </div>
 
-            <img [matMenuTriggerFor]="addMember" #addMemberTrigger="matMenuTrigger" class="addmembers"
+            <img class="addmembers" (click)="openChannelUserEdit()"
                 src="assets/img/icons/addmembers.svg">
         </div>
     </div>
@@ -36,7 +37,8 @@
         </div>
 
         <div class="menuUsersContainer" (click)="$event.stopPropagation()">
-            <div class="menuUsers" (click)="openProfil(user)" *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
+            <div class="menuUsers" (click)="openProfil(user)"
+                *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
                 <img class="menuUsersImage" src="{{ user.avatar }}">
                 <span class="menuUsersName">{{user.fullName}}</span>
             </div>
@@ -49,53 +51,42 @@
 
     </mat-menu>
 
-    <mat-menu #addMember="matMenu" (click)="$event.stopPropagation()">
-        <div class="menuHeader" (click)="$event.stopPropagation()">
-            <h3 class="headerText">Leute hinzufügen</h3>
-            <img class="closeMenu" (click)="closeMenus()" src="/assets/img/icons/close.svg">
-        </div>
-        <span (click)="$event.stopPropagation()" class="channelName">#entwicklerchannel</span>
 
-        <div *ngIf="newAddedToChannelUser" class="containerOfInput" (click)="$event.stopPropagation()">
-            <app-searchbar [setStyle]="'channelOption'" [hasRemoveAccessInput]="false"   [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
+    <div *ngIf="showChannelUserEdit">
+        <div class="menuHeader">
+            <h3 class="headerText">Leute hinzufügen</h3>
+            <img class="closeMenu" (click)="closeChannelUserEdit()" src="/assets/img/icons/close.svg">
+        </div>
+        <span class="channelName">#{{ channelFirebaseService.selectedChannel.channelName }}</span>
+        <app-searchbar 
+            [setStyle]="'channelOption'" 
+            [hasRemoveAccessInput]="false"   
+            [types]="'users'" 
+            [action]='channelFirebaseService.selectedChannel' 
             (updatedChannelModel)="handleChannelUserUpdate($event)"
             ></app-searchbar>
-            <!--
-            <div *ngIf="newAddedToChannelUser.fullName" class="inputContent" (click)="$event.stopPropagation()">
-                <img *ngIf="newAddedToChannelUser" class="inputAvatar" [matMenuTriggerFor]="addMember"
-                    #addMemberTrigger="matMenuTrigger" src="{{newAddedToChannelUser.avatar}}">
-                <span *ngIf="newAddedToChannelUser" class="menuUsersName">{{newAddedToChannelUser.fullName}}</span>
-                <img class="cancelSelectionImage" (click)="cancelSelection()" src="/assets/img/icons/close.svg">
-            </div>
+    </div> 
 
-            <div class="inputContainer">
-                <input class="memberNameInput" [(ngModel)]="searchText" (keyup)="sendData($event)"
-                    (click)="$event.stopPropagation()">
-            </div>
-            -->
+    <!--
+    <mat-menu *ngIf="showChannelUserEdit">
+        <div class="menuHeader">
+            <h3 class="headerText">Leute hinzufügen</h3>
+            <img class="closeMenu" (click)="openChannelUserEdit()" src="/assets/img/icons/close.svg">
         </div>
+        <span class="channelName">#entwicklerchannel</span>
 
-        <!--
-        <div id="header-searchfield-results-Menu"
-            *ngIf="searchResults.length >= 1 || searchResultsUsers.length >= 1  || searchResultsChannels.length >= 1"
-            (click)="$event.stopPropagation()">
-
-            <p *ngFor="let resultUsers of searchResultsUsers; index as i"
-                (click)="selectUserfromSearchings(resultUsers)">
-                <img class="resultUserImages" src="{{resultUsers.avatar}}" alt="UserIcon">
-                &nbsp;- {{resultUsers.fullName}}
-            </p>
-            <p *ngFor="let resultChannels of searchResultsChannels; index as i" (click)="clickChannel(i)">
-                <img src="assets/img/icons/workspaces.png" alt="ChannelIcon">
-                &nbsp;- {{resultChannels.channelName}}
-            </p>
+        <div class="containerOfInput">
+            <app-searchbar 
+            [setStyle]="'channelOption'" 
+            [hasRemoveAccessInput]="false"   
+            [types]="'users'" 
+            [action]='channelFirebaseService.selectedChannel' 
+            (updatedChannelModel)="handleChannelUserUpdate($event)"
+            ></app-searchbar>
         </div>
-        -->
-
-        
-            <button (click)="$event.stopPropagation(); saveUserChanges()" class="addSelection">Hinzufügen</button>
-        
+        <button (click)="saveUserChanges()" class="addSelection">Hinzufügen</button>
     </mat-menu>
+-->
 
     <div class="chat-container">
 
@@ -121,7 +112,8 @@
                     <h3># {{ channelFirebaseService.selectedChannel.channelName }}</h3>
                 </div>
                 <div class="channel-text">
-                   Das ist der Anfang des Channels <a href="#"># {{ channelFirebaseService.selectedChannel.channelName }}</a>
+                    Das ist der Anfang des Channels <a href="#"># {{ channelFirebaseService.selectedChannel.channelName
+                        }}</a>
                 </div>
             </div>
         </ng-template>

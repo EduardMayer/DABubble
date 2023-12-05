@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, debounceTime, map, of, startWith, switchMap } from 'rxjs';
 import { Channel } from 'src/models/channel.class';
@@ -15,7 +15,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 })
 
 
-export class SearchbarComponent implements OnInit {
+export class SearchbarComponent implements OnInit,OnDestroy {
 
   @Output() selectionEvent = new EventEmitter<string>();
   @Output() updatedChannelModel = new EventEmitter<Channel>();
@@ -53,6 +53,8 @@ export class SearchbarComponent implements OnInit {
       switchMap(value => of(value)), // Adjust the debounce time as needed+
       map(value => this._filter(value))
     );
+
+    console.log("Opening Searchbar");
   }
 
   /**
@@ -70,6 +72,7 @@ export class SearchbarComponent implements OnInit {
    */
   @Input() set types(value: string) {
     this._type = value;
+    console.log("Setting Available Users");
     this.availableUsers = [...this.userService.loadedUsers];
     this.updateOptions();
   }
@@ -393,6 +396,7 @@ export class SearchbarComponent implements OnInit {
   */
   setAvailabeUser(user: User) {
     this.availableUsers.push(user);
+    console.log(this.availableUsers);
     this.updateOptions();
   }
 
@@ -405,6 +409,8 @@ export class SearchbarComponent implements OnInit {
     if (this.availableUsers.length > 0) {
       const index = this.availableUsers.indexOf(user);
       const deletedUser = this.availableUsers.splice(index, 1);
+      //console.log(this.availableUsers);
+      //console.log(this.userService.loadedUsers);
     }
     this.updateOptions();
   }
@@ -433,6 +439,10 @@ export class SearchbarComponent implements OnInit {
       this.editableChannelUsers = this.channelUsers
       this.updateOptions();
     }
+  }
+
+  ngOnDestroy(){
+    console.log("Removing Searchbar");
   }
 
 

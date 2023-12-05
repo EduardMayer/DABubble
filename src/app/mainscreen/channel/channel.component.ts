@@ -34,6 +34,8 @@ export class ChannelComponent {
   showEditChannel: boolean = false;
   channelCopy: Channel | undefined;
 
+  public showChannelUserEdit=false;
+
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
     public userFirebaseService: UserFirebaseService,
@@ -66,6 +68,14 @@ export class ChannelComponent {
 
   openChannelUserPopup() {
 
+  }
+
+  openChannelUserEdit(){
+    this.showChannelUserEdit=true;
+  }
+
+  closeChannelUserEdit(){
+    this.showChannelUserEdit=false;
   }
 
 
