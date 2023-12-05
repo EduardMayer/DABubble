@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
+import { WindowSizeService } from 'src/services/window-size.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class HeaderComponent implements OnInit {
   showHeaderMenu = false;
   @Input() channelSelected = false; 
   @Input() chatSelected = false; 
-  
+    
+  windowWidth: number = 1024;  
 
   constructor(
     private userProfilService: UserProfilService,
@@ -32,6 +34,7 @@ export class HeaderComponent implements OnInit {
     public userService: UserFirebaseService,
     public channelService: ChannelFirebaseService,
     private chatService: ChatFirebaseService, 
+    private windowSizeService: WindowSizeService,
     private router: Router) { }
 
   /**
@@ -39,6 +42,9 @@ export class HeaderComponent implements OnInit {
    */
   async ngOnInit(): Promise<void> {    
     this.user = await this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid);
+    this.windowSizeService.windowWidth$.subscribe(windowWidth => {
+      this.windowWidth = windowWidth; 
+    });
   }
 
   /**

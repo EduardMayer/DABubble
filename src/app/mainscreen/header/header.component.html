@@ -1,4 +1,4 @@
-<div id="header-container">
+<div id="header-container" *ngIf="windowWidth > 768">
     <div id="header-image-container">
         <img src="assets/img/logo/logo.svg" alt="DABubble Logo">
     </div>
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<div id="header-container-mobile">
+<div id="header-container-mobile"  *ngIf="windowWidth <= 768">
     <div id="header-image-container-mobile">
         <img *ngIf="!channelSelected && !chatSelected" src="assets/img/logo/logo.svg" alt="DABubble Logo">
         <div *ngIf="channelSelected || chatSelected" id="header-image-container-mobile-selected">
