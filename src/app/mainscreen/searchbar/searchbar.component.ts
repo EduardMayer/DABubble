@@ -27,9 +27,9 @@ export class SearchbarComponent implements OnInit {
   styleType: string = "header"
 
   channel: Channel | undefined;
-  public channelUsers: User[] | undefined = [];
 
-  private availableUsers: User[] = [];
+  public channelUsers: User[] | undefined = []; //All Users of the Channel
+  private availableUsers: User[] = [];  // All Users that could be added to the Channel
 
   private _action: string | Channel = "";
   _type: string = "";
@@ -63,6 +63,7 @@ export class SearchbarComponent implements OnInit {
     this.availableUsers = [...this.userService.loadedUsers];
     this.updateOptions();
   }
+
 
   /**
   * Sets the style type for the search bar.
