@@ -13,14 +13,14 @@ $headerUser-width: 300px;
     position: relative;
 
     #header-image-container {
-        min-width: $headerImage-width;
+        min-width: 360px;
     }
 
     #header-searchfield {
-        flex-grow: 1;
+        //flex-grow: 1;
         width: 50%;
         border-radius: 42px;
-        height: 40px;
+        //height: 40px;
         border: 0px;
         padding-left: 24px;
     }
@@ -28,7 +28,7 @@ $headerUser-width: 300px;
         flex-grow: 1;
         width: 50%;
         border-radius: 42px;
-        height: 40px;
+        //height: 40px;
         border: 0px;
     }
 
@@ -37,7 +37,7 @@ $headerUser-width: 300px;
         align-items: center;
         justify-content: flex-end;
         gap: 12px;
-        min-width: $headerUser-width;
+        //min-width: $headerUser-width;
 
         #header-user-icon, #header-user-icon-mobile {
             position: relative;

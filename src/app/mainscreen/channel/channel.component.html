@@ -24,8 +24,9 @@
             <img [matMenuTriggerFor]="addMember" #addMemberTrigger="matMenuTrigger" class="addmembers"
                 src="assets/img/icons/addmembers.svg">
         </div>
-        <app-edit-channel *ngIf="showEditChannel" (closeEvent)="closeEditDialog()"></app-edit-channel>
     </div>
+    <app-edit-channel *ngIf="showEditChannel" (closeEvent)="closeEditDialog()"></app-edit-channel>
+
 
 
     <mat-menu #menu="matMenu" (click)="$event.stopPropagation()">
