@@ -14,7 +14,7 @@
         [channelSelected]="channelFirebaseService.selectedChannelId != undefined"
         [chatSelected]="chatFirebaseService.selectedChatId != undefined">
     </app-header>
-    <div id="main-body">
+    <div id="main-body" *ngIf="windowWidth > 768">
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
         <ng-container *ngIf="chatFirebaseService.selectedChat; then chatView; else channelView">
         </ng-container>
@@ -29,7 +29,7 @@
     </div>
 
     
-    <div id="main-body-mobile">
+    <div id="main-body-mobile" *ngIf="windowWidth <= 768">
         <app-sidenav *ngIf="channelFirebaseService.selectedChannelId == undefined && chatFirebaseService.selectedChatId == undefined" 
             id="main-sidebar">
         </app-sidenav>

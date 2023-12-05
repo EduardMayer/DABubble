@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
@@ -6,6 +7,7 @@ import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfilService } from 'src/services/user-profil.service';
+import { WindowSizeService } from 'src/services/window-size.service';
 
 @Component({
   selector: 'app-mainscreen',
@@ -20,6 +22,8 @@ export class MainscreenComponent implements OnInit {
   userProfilOpen = false;
   userProfilUser = new User();
   seclectedChannel: string = "";
+  windowWidth: any; 
+
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
@@ -27,7 +31,8 @@ export class MainscreenComponent implements OnInit {
     private authService: AuthFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
     private UserProfilService: UserProfilService,
-    public chatFirebaseService: ChatFirebaseService
+    public chatFirebaseService: ChatFirebaseService, 
+    private windowSizeService: WindowSizeService
   ) {
     
   }
@@ -41,7 +46,11 @@ export class MainscreenComponent implements OnInit {
     this.UserProfilService.closeUserProfil$.subscribe(() => {
       this.userProfilOpen = false;
     });
-
+    
+    this.windowSizeService.windowWidth$.subscribe(windowWidth => {
+      this.windowWidth = windowWidth; 
+    });
+    this.windowSizeService.setWindowSize(); 
   }
 
 
