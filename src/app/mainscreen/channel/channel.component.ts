@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
@@ -275,8 +275,10 @@ export class ChannelComponent {
 
   saveUserChanges() {
     if (this.channelCopy) {
+      debugger;
       this.channelFirebaseService.selectedChannel = this.channelCopy;
       this.channelFirebaseService.updateChannel(this.channelCopy);
+      this.channelFirebaseService.loadallChannelusers();
     }
   }
 

@@ -3,10 +3,10 @@
     display: flex;
 
     #searchfield {
-        /* flex-grow: 1; */
-        /* width: calc(100% - 24px); */
+        flex-grow: 1;
+        width: calc(107% - 24px);
         border-radius: 42px;
-        height: 40px;
+        height: 44px;
         border: 0px;
         padding: 17.5px 45px;
         display: flex;
@@ -109,3 +109,57 @@ searchbar setups: header, channelOption
     }
 }
 */
+
+:host-context(.channel-specific) #searchfield-container {
+    width: calc(99% - 24px);
+
+    padding-left: unset;
+}
+
+:host-context(.channel-specific) #searchfield {
+    width: 99%;
+    height: 43px;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    margin-left: unset;
+    padding-left: unset;
+}
+
+:host-context(.channel-specific) #searchfield-icon {
+    z-index: 1;
+}
+
+.testcontainer {
+
+    .mat-mdc-chip {
+        position: relative;
+        z-index: 2;
+    }
+
+    mat-chip-grid {
+        position: absolute;
+        top: 107px;
+    }
+
+    .mdc-evolution-chip-set__chips {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mat-mdc-chip-set .mdc-evolution-chip-set__chips  {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+mat-mdc-chip-set .mdc-evolution-chip-set__chips  {
+    display: flex;
+    flex-direction: column;
+}
+
+mat-mdc-chip-set .mdc-evolution-chip-set__chips  {
+    display: flex;
+    flex-direction: column;
+}

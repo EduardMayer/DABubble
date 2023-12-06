@@ -203,8 +203,7 @@ app-message-create {
 .menuUsersContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
+    align-items: flex-start}
 
 .menuUsers {
     display: flex;
@@ -231,7 +230,7 @@ app-message-create {
 }
 
 .addMemberImage {
-    padding-left: 20px;
+    //padding-left: 20px;
     width: 30px;
 }
 
@@ -256,8 +255,7 @@ app-message-create {
     padding-top: 30px;
 
     display: flex;
-    flex-direction: column;
-    align-items: center;
+   justify-content: center;
 
     app-searchbar {
        
@@ -432,3 +430,21 @@ app-message-create {
     }
 
 }
+
+.searchBar {
+    width: 76%;
+    border: solid 1px #ADB0D9;
+    border-radius: 27px;
+}
+
+.testForMat {
+    width: 100%;
+}
+
+.menuUserWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 29%;
+}
+

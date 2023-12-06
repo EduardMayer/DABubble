@@ -1,6 +1,7 @@
-<div id="searchfield-container" [ngClass]="styleType" *ngIf="options">
+<div  id="searchfield-container" [ngClass]="styleType" *ngIf="options">
 
-  <mat-chip-grid #chipGrid>
+  <div class="testcontainer">
+  <mat-chip-grid #chipGrid class="chip">
     <mat-chip-row (removed)="remove(user)" *ngFor="let user of editableChannelUsers; let i = index">
       <div class="mat-chip-content">
         <img src='{{user.avatar}}' class="inputAvatar">
@@ -14,6 +15,7 @@
 
   <input #searchField id="searchfield" type="text" placeholder="Code learning durchsuchen" [matAutocomplete]="auto"
     [matChipInputFor]="chipGrid" [formControl]="headerControl" matInput>
+</div>
 
   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="add($event.option.value)">
     <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">

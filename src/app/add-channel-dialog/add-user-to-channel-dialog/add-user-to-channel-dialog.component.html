@@ -2,7 +2,7 @@
 
     <div class="headerContainer">
         <h3 class="headerText">Leute hinzufügen</h3>
-        <img  class="close"  src="/assets/img/icons/close.svg">
+        <img (click)="closeDialog()"  class="close"  src="/assets/img/icons/close.svg">
     </div>
 
     <mat-radio-group class="radioButtonContainer" [(ngModel)]="selectedOption" (ngModelChange)="chooseSelection()">

@@ -21,6 +21,9 @@ export class SearchbarComponent implements OnInit {
   @Output() updatedChannelModel = new EventEmitter<Channel>();
   @ViewChild('searchField', { static: false }) searchField!: ElementRef;
 
+
+
+  //@Input() innerElementStyle: string = '';
   //searchText: string = "";
   //searchResults: string[] = [];
 
@@ -39,6 +42,9 @@ export class SearchbarComponent implements OnInit {
     private userService: UserFirebaseService,
     private channelService: ChannelFirebaseService,
     private chatService: ChatFirebaseService) { }
+
+    
+
 
   headerControl = new FormControl('');
   options: { id: string; name: string, type: string, avatarSrc?: string }[] = [];

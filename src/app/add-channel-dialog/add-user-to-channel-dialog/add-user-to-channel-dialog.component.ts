@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -11,7 +12,9 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 export class AddUserToChannelDialogComponent implements OnInit {
 
   constructor(public firebaseChannel: ChannelFirebaseService,
-    private userService: UserFirebaseService) {
+    private userService: UserFirebaseService,
+    public dialogRef: MatDialogRef<AddUserToChannelDialogComponent>
+    ) {
 
   }
 
@@ -44,4 +47,12 @@ export class AddUserToChannelDialogComponent implements OnInit {
     }
 
   }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
 }
+
+
+
