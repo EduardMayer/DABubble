@@ -130,7 +130,7 @@ export class UserProfilComponent implements OnInit {
     if(this.user && this.userFirebaseService.currentUser){
       const usersChat = this.chatFirebaseService.getChatWithUser(this.user.id);  
       if(usersChat){
-        this.chatFirebaseService.selectChat(usersChat.id); 
+        this.chatFirebaseService.selectChat(usersChat.id);
         this.userProfilService.close(); 
       }
       else{
