@@ -5,6 +5,7 @@
     justify-content: flex-end;
     flex-direction: column;
     border-radius: 30px;
+   
 
     .header {
         box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
@@ -16,7 +17,7 @@
         .header-title {
             display: flex;
             align-items: center;
-            font-size: 24px;
+            word-break: break-all;
         }
 
         .user-avatar-list {
@@ -120,6 +121,7 @@
 
             h2 {
                 margin: 0px;
+                font-size: 24px;
             }
 
             .header-title-container-icons {
@@ -405,6 +407,16 @@ app-message-create {
     justify-content: space-between;
 }
 
+
+@media only screen and (max-width: 1000px) {
+
+    .header{
+        h2{
+        font-size: 20px !important;
+    }
+}
+}
+
 @media only screen and (max-width: 768px) {
 
     #channel{
@@ -412,6 +424,7 @@ app-message-create {
         .header{
             box-shadow: 0px 2px 10px 0px #00000014;
             border-radius: 0px;
+        
             .user-avatar-list {
                 display: none;
             }
