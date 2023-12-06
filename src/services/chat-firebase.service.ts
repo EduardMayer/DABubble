@@ -8,6 +8,7 @@ import { UserFirebaseService } from './user-firebase.service';
 import { Observable, Subject } from 'rxjs';
 import { User } from 'src/models/user.class';
 import { user } from '@angular/fire/auth';
+import { ActiveSelectionService } from './active-selection.service';
 
 
 @Injectable({
@@ -31,7 +32,8 @@ export class ChatFirebaseService {
     constructor(
         private firestore: Firestore,
         private generateIdService: GenerateIdService,
-        private userService: UserFirebaseService
+        private userService: UserFirebaseService,
+        private activeSelectionService: ActiveSelectionService
     ) {
     }
 
@@ -51,6 +53,7 @@ export class ChatFirebaseService {
         this.selectedChat = this.loadedChats[index];
         await this.updateSelectedChat(this.selectedChat);
         this.currentChatMessagePath = `chats/${chatId}/messages/`;
+        this.activeSelectionService.activeSelection=this.selectedChat;
     }
 
 

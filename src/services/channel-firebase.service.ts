@@ -7,6 +7,7 @@ import { User } from 'src/models/user.class';
 import { UserFirebaseService } from './user-firebase.service';
 import { GenerateIdService } from './generate-id.service';
 import { ChatFirebaseService } from './chat-firebase.service';
+import { ActiveSelectionService } from './active-selection.service';
 
 
 
@@ -40,7 +41,8 @@ export class ChannelFirebaseService {
         private firestore: Firestore,
         private generateIdService: GenerateIdService,
         private chatFirebaseService: ChatFirebaseService,
-        private userFirebaseService: UserFirebaseService
+        private userFirebaseService: UserFirebaseService,
+        private activeSelectionService: ActiveSelectionService
     ) {
     }
 
@@ -52,6 +54,7 @@ export class ChannelFirebaseService {
         this.selectedChannel = this.loadedChannels[index];
         this.loadallChannelusers();
         this.currentChannelMessagePath = `channels/${channelId}/messages/`;
+        this.activeSelectionService.activeSelection=this.selectedChannel;
     }
 
 
@@ -66,6 +69,7 @@ export class ChannelFirebaseService {
         return query(collection(this.firestore, "channels"), where("users", 'array-contains', userId));
     }
 
+    
     async load(userId: string) {
         const q = this.getChannelQuery(userId);
         this.unsubChannels = onSnapshot(q, (querySnapshot) => {
@@ -80,6 +84,7 @@ export class ChannelFirebaseService {
             this.loadedChannels = this.sortChannelsByName(this.loadedChannels);
         });
     }
+
 
     sortChannelsByName(channels: Channel[]) {
         return channels.slice().sort((a, b) => a.channelName.localeCompare(b.channelName));

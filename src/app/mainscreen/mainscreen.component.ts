@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/models/user.class';
+import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
@@ -32,7 +33,8 @@ export class MainscreenComponent implements OnInit {
     public threadFirebaseService: ThreadFirebaseService,
     private UserProfilService: UserProfilService,
     public chatFirebaseService: ChatFirebaseService, 
-    private windowSizeService: WindowSizeService
+    private windowSizeService: WindowSizeService,
+    public activeSelectionService: ActiveSelectionService
   ) {
     
   }
