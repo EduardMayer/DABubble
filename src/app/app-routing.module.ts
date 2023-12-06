@@ -11,7 +11,7 @@ const routes: Routes = [
   //{ path: '', component: MainscreenComponent },
    /** FOR PROD */ 
   { path: '', component: StartscreenComponent },
-  { path: 'main', component: MainscreenComponent, canActivate: [authGuard] },
+  { path: 'index', component: MainscreenComponent, canActivate: [authGuard] },
   { path: 'userMgmt', component: ActionHandlerComponent },
   { path: 'reset/:oobCode', component: ResetPasswordComponent },
   { path: 'editChannel', component: EditChannelComponent }

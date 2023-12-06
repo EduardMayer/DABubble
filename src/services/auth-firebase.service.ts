@@ -149,7 +149,7 @@ export class AuthFirebaseService implements OnInit {
         await this.userService.syncMail(this.UserData.email);
         this.ngZone.run(() => {
           //this.firebaseUserService.currentUser=this.UserData;
-          this.router.navigate(['/main']);
+          this.router.navigate(['/index']);
         });
       })
   }
@@ -222,7 +222,7 @@ export class AuthFirebaseService implements OnInit {
    */
   loginWithPopup(provider: any) {
     return signInWithPopup(this.auth, provider).then(() => {
-      this.router.navigate(['main']);
+      this.router.navigate(['index']);
     });
   }
 

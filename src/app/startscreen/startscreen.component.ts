@@ -28,7 +28,7 @@ export class StartscreenComponent implements OnInit{
  */
   ngOnInit(): void {
     if(this.authService.isLoggedIn() && !this.authService.loginExprired()){
-      this.router.navigateByUrl('main'); 
+      this.router.navigateByUrl('index'); 
     }
   }
 

@@ -47,7 +47,7 @@ export class ActionHandlerComponent implements OnInit {
         this.userMessage = "Ihre Email-Adresse wurde erfolgreich geändert"
     }
     setTimeout(() => {
-      this.router.navigate(['main']);
+      this.router.navigate(['index']);
     }, 3000);
   }
 
