@@ -8,6 +8,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
+import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 
 @Component({
   selector: 'app-channel',
@@ -30,6 +31,7 @@ export class ChannelComponent {
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
+    public chatFirebaseService: ChatFirebaseService, 
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService,
     private activeSelectionService: ActiveSelectionService

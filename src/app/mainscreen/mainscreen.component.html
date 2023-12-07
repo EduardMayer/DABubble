@@ -1,14 +1,3 @@
-
-<!--
-<div *ngIf="channelFirebaseService.finishedLoading">
-    Channels geladen
-</div>
-<div *ngIf="userFirebaseService.finishedLoading">
-    Users geladen
-</div>
--->
-
-
 <div id="main-container" *ngIf="channelFirebaseService.finishedLoading && userFirebaseService.finishedLoading">
     <app-header id="main-header" 
         [channelSelected]="channelFirebaseService.selectedChannelId != undefined"

@@ -19,7 +19,10 @@ export class EditChannelComponent implements OnInit {
   NewChannelDescription: string = ""; 
   channelCreatorName = ""; 
 
-  constructor(public channelFirebaseService: ChannelFirebaseService , private userFirebaseService: UserFirebaseService){}
+  constructor(
+    public channelFirebaseService: ChannelFirebaseService , 
+    private userFirebaseService: UserFirebaseService
+  ){}
 
   ngOnInit(): void {
     if(this.channelFirebaseService.selectedChannel){
@@ -31,18 +34,26 @@ export class EditChannelComponent implements OnInit {
         this.channelCreatorName = user.fullName; 
       }) 
     }
-     
   }
 
+  /**
+   * Closes edit channel-dialog
+   */
   close(){
     this.closeEvent.emit(); 
   }
 
+  /**
+   * Leave selectedChannel
+   */
   leaveChannel(){
     this.channelFirebaseService.leaveSelectedChannel(); 
     this.close(); 
   }
 
+  /**
+   * Saves the channel name from input field. 
+   */
   async saveChannelName(){
     if( this.channelFirebaseService.selectedChannel){
       this.channelFirebaseService.selectedChannel.channelName = this.NewChannelName;
@@ -51,6 +62,10 @@ export class EditChannelComponent implements OnInit {
     }
     this.editChannelName = false; 
   }
+
+  /**
+   * Saves the description of the description input field. 
+   */
   async saveChannelDescription(){
     if( this.channelFirebaseService.selectedChannel){
       this.channelFirebaseService.selectedChannel.channelDescription = this.NewChannelDescription;

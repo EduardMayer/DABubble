@@ -66,38 +66,7 @@
             <app-searchbar [setStyle]="'channelOption'" [hasRemoveAccessInput]="false"   [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
             (updatedChannelModel)="handleChannelUserUpdate($event)"
             ></app-searchbar>
-            <!--
-            <div *ngIf="newAddedToChannelUser.fullName" class="inputContent" (click)="$event.stopPropagation()">
-                <img *ngIf="newAddedToChannelUser" class="inputAvatar" [matMenuTriggerFor]="addMember"
-                    #addMemberTrigger="matMenuTrigger" src="{{newAddedToChannelUser.avatar}}">
-                <span *ngIf="newAddedToChannelUser" class="menuUsersName">{{newAddedToChannelUser.fullName}}</span>
-                <img class="cancelSelectionImage" (click)="cancelSelection()" src="/assets/img/icons/close.svg">
-            </div>
-
-            <div class="inputContainer">
-                <input class="memberNameInput" [(ngModel)]="searchText" (keyup)="sendData($event)"
-                    (click)="$event.stopPropagation()">
-            </div>
-            -->
         </div>
-
-        <!--
-        <div id="header-searchfield-results-Menu"
-            *ngIf="searchResults.length >= 1 || searchResultsUsers.length >= 1  || searchResultsChannels.length >= 1"
-            (click)="$event.stopPropagation()">
-
-            <p *ngFor="let resultUsers of searchResultsUsers; index as i"
-                (click)="selectUserfromSearchings(resultUsers)">
-                <img class="resultUserImages" src="{{resultUsers.avatar}}" alt="UserIcon">
-                &nbsp;- {{resultUsers.fullName}}
-            </p>
-            <p *ngFor="let resultChannels of searchResultsChannels; index as i" (click)="clickChannel(i)">
-                <img src="assets/img/icons/workspaces.png" alt="ChannelIcon">
-                &nbsp;- {{resultChannels.channelName}}
-            </p>
-        </div>
-        -->
-
         <button (click)="$event.stopPropagation(); saveUserChanges()" class="addSelection">Hinzufügen</button>
     </mat-menu>
 
