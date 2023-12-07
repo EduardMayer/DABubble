@@ -11,6 +11,7 @@ import { User } from 'src/models/user.class';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
+import { WindowSizeService } from 'src/services/window-size.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -24,13 +25,15 @@ export class SidenavComponent implements OnInit {
   currentUser: User = new User();
 
   selectedChannelID = "";
+  windowWidth = 1024; 
 
   constructor(
     public dialog: MatDialog,
     public channelFirebaseService: ChannelFirebaseService,
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
-    private userProfilService: UserProfilService
+    private userProfilService: UserProfilService, 
+    private windowSizeService: WindowSizeService,
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +44,10 @@ export class SidenavComponent implements OnInit {
       .catch((error) => {
         console.log(error);
       });
+      this.windowSizeService.windowWidth$.subscribe(windowWidth => {
+        this.windowWidth = windowWidth; 
+      });
+      this.windowSizeService.setWindowSize(); 
   }
 
 

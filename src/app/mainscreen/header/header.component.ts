@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
     this.windowSizeService.windowWidth$.subscribe(windowWidth => {
       this.windowWidth = windowWidth; 
     });
+    this.windowSizeService.setWindowSize(); 
   }
 
   /**

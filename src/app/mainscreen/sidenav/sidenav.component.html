@@ -10,8 +10,8 @@
             </mat-icon>
         </button>
     </div>
-    <div id="sidenav-mobile-searchbar">
-        <app-searchbar *ngIf="userFirebaseService.finishedLoading && channelFirebaseService.finishedLoading"  [types]='"all"' [action]="'openSelection'"></app-searchbar>
+    <div id="sidenav-mobile-searchbar" *ngIf="windowWidth <= 768">
+        <app-searchbar *ngIf="userFirebaseService.finishedLoading && channelFirebaseService.finishedLoading"  [types]='"all"' [action]="'openSelection'" [setStyle]="'sideNavMobile'"></app-searchbar>
     </div>
 
 
@@ -62,30 +62,6 @@
                 [uId]="chatFirebaseService.getChatPartner(chat)" (click)="chatFirebaseService.selectChat(chat.id)">
             </app-chat-view>
         </div>
-        <!--
-            <div class="message" *ngFor="let chat of chatFirebaseService.loadedChats">
-                <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
-                <b (click)="openUserProfil(this.chatFirebaseService.getChatPartner(chat))">{{currentUser.fullName}} (Du)</b>
-            </div>
-
-            <div class="message">
-                <img class="avatar0" src="/assets/img/avatar/avatar0.svg">
-                <b>Frederick Beck(Du)</b>
-            </div>
-        </div>
-
-        -->
-
-        <!--   <div class="addChannel">
-            <img class="pad-right17" src="/assets/img/icons/add_circle.png">
-            Leute hinzufügen
-        </div> -->
-
-        <!--
-            <app-user-search *ngIf="showUserSearch" [message]="message" (userName)="handleUserSearchResult($event)"></app-user-search>
-        -->
-
-
     </div>
 
 </mat-card>
