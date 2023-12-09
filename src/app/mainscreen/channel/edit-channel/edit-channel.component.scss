@@ -175,6 +175,8 @@
     height: 100vh;
     padding: 0px;
     border-radius: 0px;
+    overflow: scroll;
+    
 
     #edit-channel-header{
         position: sticky;
@@ -205,10 +207,7 @@
 
     }
     #edit-channel-leaveChannel{
-        margin: 0px 12px 0px 12px;
+        margin: 0px 12px 12px 12px;
     }
-
-}
-   
- 
+  }
 }

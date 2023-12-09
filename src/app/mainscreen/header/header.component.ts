@@ -11,6 +11,7 @@ import { UserProfilService } from 'src/services/user-profil.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
+import { ActiveSelectionService } from 'src/services/active-selection.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit {
     public channelService: ChannelFirebaseService,
     private chatService: ChatFirebaseService, 
     private windowSizeService: WindowSizeService,
+    public activeSelectionService: ActiveSelectionService,
     private router: Router) { }
 
   /**
@@ -77,7 +79,8 @@ export class HeaderComponent implements OnInit {
    */
   closeChatOrChannel(){
     this.channelService.selectedChannelId = undefined; 
-    this.chatService.selectedChatId = undefined; 
+    this.chatService.selectedChatId = undefined;   
+    this.activeSelectionService.activeSelection = undefined; 
   }
 
   /**

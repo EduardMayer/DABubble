@@ -9,6 +9,9 @@ import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { WindowSizeService } from 'src/services/window-size.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-mainscreen',

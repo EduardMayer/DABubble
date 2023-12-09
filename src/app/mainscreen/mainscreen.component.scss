@@ -59,6 +59,15 @@ app-channel, app-chat, app-empty-window {
     display: none;
 }
 
+#new-message-mobile{
+    position: fixed;
+    bottom: 24px; 
+    right: 24px;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
 @media only screen and (max-width: 768px) {
 
     #workspace {

@@ -8,10 +8,11 @@ import { Chat } from 'src/models/chat.class';
 export class ActiveSelectionService {
 
     private activeSelectionType: string = ""; //Channel,Chat
-    private activeSelectionObject: Chat | Channel | null = null;
+    private activeSelectionObject: Chat | Channel | null | undefined = null;
 
-    set activeSelection(selection: Chat | Channel | null) {
-
+    set activeSelection(selection: Chat | Channel | null | undefined ) {
+        console.log(typeof selection );
+        
         if (typeof selection == 'object') {
             if (selection instanceof Channel) {
                 this.activeSelectionType = 'Channel';
