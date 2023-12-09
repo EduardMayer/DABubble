@@ -1,7 +1,7 @@
 <mat-card id="chat" *ngIf="chatFirebaseService.selectedChat$  && userFirebaseService.currentUser.id!='' && chatPartner ">
     <div class='header'>
         <div class="header-title" width="fit-content">
-            <div>
+            <div id="header-title-chatpartner-name" (click)="openProfil()">
                 <h2> {{ chatPartner.fullName }}</h2>
             </div>
         </div>

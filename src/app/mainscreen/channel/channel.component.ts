@@ -25,6 +25,8 @@ export class ChannelComponent {
   memberName: string = "";
   newAddedToChannelUser = new User();
 
+  shouldOpenAddMemberMenu = false;
+
   hoverTitle = false;
   showEditChannel: boolean = false;
   channelCopy: Channel | undefined;
@@ -39,6 +41,9 @@ export class ChannelComponent {
     this.loadChannelMessages();
   }
 
+  /**
+   * Loads the conversation of the channel. 
+   */
   loadChannelMessages(){
     let channel=this.activeSelectionService.getActiveSelectionObject() ;
     if (channel instanceof Channel) {
@@ -47,7 +52,9 @@ export class ChannelComponent {
     }
   }
 
-
+  /**
+   * Closes pop up menu für add members dialog. 
+   */
   closeMenus() {
     if (this.menuTrigger) {
       this.menuTrigger.closeMenu();
@@ -57,16 +64,18 @@ export class ChannelComponent {
     }
   }
 
+   /**
+   * Closes pop up menu for channel members dialog. 
+   */
   closeMenuViewUsersOnChannel() {
     if (this.menuTrigger) {
       this.menuTrigger.closeMenu();
     }
-
   }
 
-  shouldOpenAddMemberMenu = false;
-
-
+  /**
+  * Open add member dialog. 
+  */
   openAddMemberMenu() {
     // Verzögerung hinzufügen
     if (this.menuTrigger) {
@@ -75,50 +84,48 @@ export class ChannelComponent {
     if (this.addMemberTrigger) {
       this.addMemberTrigger.openMenu();
     }
-
   }
 
-  cancelSelection() {
-    this.newAddedToChannelUser.fullName = '';
-
-  }
-
-
+  /**
+   * Closes edit channel dialog
+   */
   closeEditDialog() {
     this.showEditChannel = false;
   }
 
+  /**
+   * Shows userprofile of given user. 
+   * @param user - user for showing in profil
+   */
   openProfil(user: User) {
     this.closeMenus()
     this.userProfilService.openUserProfil(user);
   }
 
+  /**
+   * Stores/Saves the updated channel after adding new users. 
+   * @param newChannel - updated channel
+   */
   handleChannelUserUpdate(newChannel: Channel) {
     this.channelCopy = newChannel;
   }
 
+  /**
+   * Saves changes when users where removed or added. 
+   */
   saveUserChanges() {
     if (this.channelCopy) {
-      debugger;
       this.channelFirebaseService.selectedChannel = this.channelCopy;
       this.channelFirebaseService.updateChannel(this.channelCopy);
       this.channelFirebaseService.loadallChannelusers();
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   * Returns the time (in a formated form) of a given Message. 
+   * @param message - message for that a Time is needed.
+   * @returns - Time or string "heute" when it is today. 
+   */
   getMessageTime(message: Message) {
     const currentDay = this.formatDateToDmy(new Date());
     const messageDmy = this.formatDateToDmy(new Date(message.timestamp));
@@ -129,6 +136,11 @@ export class ChannelComponent {
     }
   }
 
+  /**
+   * Formats a given date to a readable pattern. 
+   * @param date - date to format
+   * @returns - Date as string in Format DD.MM.YYYY like. 01.01.2024 
+   */
   formatDateToDmy(date: Date) {
     const day = date.getDate().toString().padStart(2, '0');      // Get day and pad with leading zero if necessary
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary

@@ -11,20 +11,19 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 })
 export class AddUserToChannelDialogComponent implements OnInit {
 
+  selectedOption: string = '';
+  public channel = new Channel();
+  @ViewChild('selectedUsers', { static: false }) selectedUsers!: ElementRef;
+
   constructor(public firebaseChannel: ChannelFirebaseService,
     private userService: UserFirebaseService,
     public dialogRef: MatDialogRef<AddUserToChannelDialogComponent>
     ) {
-
   }
 
   ngOnInit() {
     console.log(this.channel);
   }
-
-  selectedOption: string = '';
-  public channel = new Channel();
-  @ViewChild('selectedUsers', { static: false }) selectedUsers!: ElementRef;
 
   chooseSelection() {
     console.log(this.selectedOption); // Gibt den aktuell ausgewählten Wert aus
@@ -45,9 +44,11 @@ export class AddUserToChannelDialogComponent implements OnInit {
       this.channel.users.push(this.userService.currentUser.id);
       this.firebaseChannel.updateChannel(this.channel);
     }
-
   }
 
+  /**
+   * Closes add user dialog. 
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }

@@ -16,6 +16,19 @@
         .header-title {
             display: flex;
             align-items: center;
+
+            #header-title-chatpartner-name{
+                margin: 24px 0px;
+                padding: 0px 12px;
+                border-radius: 32px;
+                &:hover{
+                    cursor: pointer;
+                    background-color: #ECEEFE;
+                }
+                h2{
+                    margin: 0px;
+                }
+            }
         }
 
         .user-avatar-list {

@@ -27,6 +27,10 @@ export class ChatComponent {
 
   private selectedChatSubscription: Subscription | undefined;
 
+  searchText: string = "";
+  searchResults: string[] = [];
+  testData: string[] = ["hallo", "Test", "Search"];
+
   constructor(
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
@@ -54,58 +58,37 @@ export class ChatComponent {
     });
   }
 
-
+  /**
+   * Loads a given chat and opens ist. 
+   * @param newSelectedChat - Chat that should be loaded
+   */
   private async loadChat(newSelectedChat: Chat) {
     if (newSelectedChat != null) {
       this.chatFirebaseService.loadChatMessages(newSelectedChat.id);
       this.messagePath = `chats/${newSelectedChat.id}/messages/`;
-
       try {
         const chatPartner = await this.userFirebaseService.getUserByUID(this.chatFirebaseService.getChatPartner(newSelectedChat));
         this.chatPartner = chatPartner;
       } catch (error) {
-        // Handle errors here
         console.error("Error loading chat:", error);
       }
     }
   }
 
-
-
-
+  /**
+   * Opens profile of chatparter. 
+   */
   openProfil() {
     if (this.chatPartner) {
       this.userProfilService.openUserProfil(this.chatPartner);
     }
   }
 
-
-
-  searchText: string = "";
-  searchResults: string[] = [];
-
-  testData: string[] = ["hallo", "Test", "Search"];
-
-  ngOnDestroy() {
-    if(this.selectedChatSubscription){
-      this.selectedChatSubscription.unsubscribe();
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   /**
+   * Returns the time (in a formated form) of a given Message. 
+   * @param message - message for that a Time is needed.
+   * @returns - Time or string "heute" when it is today. 
+   */
   getMessageTime(message: Message) {
     const currentDay = this.formatDateToDmy(new Date());
     const messageDmy = this.formatDateToDmy(new Date(message.timestamp));
@@ -116,10 +99,24 @@ export class ChatComponent {
     }
   }
 
+  /**
+   * Formats a given date to a readable pattern. 
+   * @param date - date to format
+   * @returns - Date as string in Format DD.MM.YYYY like. 01.01.2024 
+   */
   formatDateToDmy(date: Date) {
     const day = date.getDate().toString().padStart(2, '0');      // Get day and pad with leading zero if necessary
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary
     const year = date.getFullYear();                              // Get year
     return `${day}.${month}.${year}`;
+  }
+
+  /**
+   * Unsubscribe from chat update on destroy 
+   */
+  ngOnDestroy() {
+    if(this.selectedChatSubscription){
+      this.selectedChatSubscription.unsubscribe();
+    }
   }
 }
