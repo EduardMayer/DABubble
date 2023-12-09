@@ -38,11 +38,9 @@
 
         <div class="menuUserWrapper">
             <div class="menuUsersContainer" (click)="$event.stopPropagation()">
-                <div class="menuUsers" (click)="openProfil(user)"
-                    *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
-                    <img class="menuUsersImage" src="{{ user.avatar }}">
-                    <span class="menuUsersName">{{user.fullName}}</span>
-                </div>
+            <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
+                [uId]="user.id" (click)="openProfil(user)">
+            </app-chat-view>
             </div>
 
             <div class="addMemberInMenu" (click)="$event.stopPropagation()">
