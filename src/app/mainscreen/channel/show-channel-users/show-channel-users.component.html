@@ -9,9 +9,9 @@
         <img src="{{user.avatar}}" class="member-image"> {{ user.fullName }}
     </div>
    
-    <div class="add-user-container">
+    <div class="add-user-container"(click)="openAddMemberMenu()">
         <img class="member-image" src="assets/img/icons/addmembers.svg">
-        <span class="add-member-text" (click)="openAddMemberMenu()">Teilnehmer hinzufügen</span>
+        <span class="add-member-text">Teilnehmer hinzufügen</span>
     </div>
     
 </div>
