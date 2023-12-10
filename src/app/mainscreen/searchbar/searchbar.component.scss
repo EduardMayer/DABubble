@@ -1,26 +1,33 @@
 #searchfield-container {
     position: relative;
-    display: flex;
+    padding: 0;
+    border: none;
 
     #searchfield {
-        flex-grow: 1;
-        width: calc(107% - 24px);
-        border-radius: 42px;
-        height: 44px;
-        border: 0px;
-        padding: 17.5px 45px;
+        position: relative;
+        margin: 0;
+        padding: 0px 12px;
+
+        height: 70px;
+        width: calc(100% - 24px);
+        font-size: 20px;
         display: flex;
-        font-size: 24px;
+
+        border: 1px solid #ADB0D9;
+        border-radius: 30px;
+
     }
 
     #searchfield-icon {
         position: absolute;
         top: 20px;
+        height: 30px;
         right: 18px;
         width: 35px;
     }
 
     mat-chip-row {
+
         .mat-chip-content {
             display: flex;
             align-items: center;
@@ -33,7 +40,6 @@
                 border-radius: 15px;
             }
         }
-
 
     }
 }
@@ -57,8 +63,9 @@ searchbar setups: header, channelOption
             font-size: 18px !important;
             width: calc(100% - 48px) !important;
         }
-        
+
     }
+
     #searchfield-icon {
         top: 12px !important;
         width: 24px !important;
@@ -68,13 +75,11 @@ searchbar setups: header, channelOption
 .channelOption {
     border: solid 1px #ADB0D9;
     border-radius: 30px;
-    padding: 8px
+    padding: 8px;
+    background-color: antiquewhite;
 }
 
-
-
-
-
+//Autocomplete-Dropdown Style Adaptions
 ::ng-deep .mdc-list-item__primary-text {
     display: flex;
     align-items: center;
@@ -86,7 +91,7 @@ searchbar setups: header, channelOption
     }
 }
 
-
+//Autocomplete-Dropdown Style Adaptions
 ::ng-deep .cdk-overlay-pane:not(.mat-mdc-autocomplete-panel-above) div.mat-mdc-autocomplete-panel {
     border-top-right-radius: 8px !important;
     border-top-left-radius: 8px !important;
@@ -130,36 +135,11 @@ searchbar setups: header, channelOption
 }
 */
 
-:host-context(.channel-specific) #searchfield-container {
-    width: calc(99% - 24px);
-
-    padding-left: unset;
-}
-
-:host-context(.channel-specific) #searchfield {
-    width: 99%;
-    height: 43px;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    margin-left: unset;
-    padding-left: unset;
-}
-
-:host-context(.channel-specific) #searchfield-icon {
-    z-index: 1;
-}
-
 .testcontainer {
 
     .mat-mdc-chip {
         position: relative;
         z-index: 2;
-    }
-
-    mat-chip-grid {
-        position: absolute;
-        top: 107px;
     }
 
     .mdc-evolution-chip-set__chips {
@@ -174,12 +154,10 @@ searchbar setups: header, channelOption
 
 }
 
-mat-mdc-chip-set .mdc-evolution-chip-set__chips {
-    display: flex;
-    flex-direction: column;
-}
 
+/*
 mat-mdc-chip-set .mdc-evolution-chip-set__chips {
     display: flex;
     flex-direction: column;
 }
+*/
