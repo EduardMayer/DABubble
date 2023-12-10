@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
+import { User } from 'src/models/user.class';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { UserProfilService } from 'src/services/user-profil.service';
 
 @Component({
   selector: 'app-show-channel-users',
@@ -14,7 +16,8 @@ export class ShowChannelUsersComponent {
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
-    public activeSelectionService: ActiveSelectionService
+    public activeSelectionService: ActiveSelectionService , 
+    private userProfilService: UserProfilService
   ) {
 
     console.log(channelFirebaseService.userOnCurrentChannel);
@@ -28,4 +31,14 @@ export class ShowChannelUsersComponent {
   close() {
     this.closeEvent.emit();
   }
+
+  
+  /**
+   * Shows userprofile of given user. 
+   * @param user - user for showing in profil
+   */
+    openProfil(user: User) {
+      this.close()
+      this.userProfilService.openUserProfil(user);
+    }
 }

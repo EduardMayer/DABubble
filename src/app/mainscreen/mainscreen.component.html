@@ -53,7 +53,7 @@
         </ng-template>
 
         <ng-template #channelView>
-            <app-channel id="main-channel"></app-channel>
+            <app-channel id="main-channel" *ngIf="!threadFirebaseService.message"></app-channel>
             <app-thread id="main-thread" *ngIf="threadFirebaseService.message"></app-thread>
         </ng-template>
 

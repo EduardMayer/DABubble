@@ -5,9 +5,16 @@
         </div>
         <img src="assets/img/icons/close.svg" alt="close" (click)="close()">
     </div>
-    <div *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
+    <!--   <div *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
         <img src="{{user.avatar}}" class="member-image"> {{ user.fullName }}
+    </div> -->
+    <div>   
+        <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
+        [uId]="user.id" (click)="openProfil(user)">
+        </app-chat-view>
     </div>
+    
+
    
     <div class="add-user-container"(click)="openAddMemberMenu()">
         <img class="member-image" src="assets/img/icons/addmembers.svg">
