@@ -76,8 +76,11 @@ searchbar setups: header, channelOption
     border: solid 1px #ADB0D9;
     border-radius: 30px;
     padding: 8px;
-    background-color: antiquewhite;
 }
+
+
+
+
 
 //Autocomplete-Dropdown Style Adaptions
 ::ng-deep .mdc-list-item__primary-text {
@@ -106,58 +109,3 @@ searchbar setups: header, channelOption
     }
 
 }
-
-/*
-#header-searchfield-results{
-    position: relative;
-    border-radius: 42px;
-    padding-left: 24px;
-    padding-right: 24px;
-    width: calc(100% - 48px);
-    background-color: white;
-    z-index: 10;
-    padding-bottom: 12px;
-    padding-top: 12px;
-    margin-top: 12px;
-    p{
-        padding-left: 24px;
-        padding-right: 24px;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        display: flex;
-        align-items: center;
-        margin: 0px;
-        &:hover{
-            background: rgba(166, 166, 166, 0.456);
-            border-radius: 42px;
-        }
-    }
-}
-*/
-
-.testcontainer {
-
-    .mat-mdc-chip {
-        position: relative;
-        z-index: 2;
-    }
-
-    .mdc-evolution-chip-set__chips {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .mat-mdc-chip-set .mdc-evolution-chip-set__chips {
-        display: flex;
-        flex-direction: column;
-    }
-
-}
-
-
-/*
-mat-mdc-chip-set .mdc-evolution-chip-set__chips {
-    display: flex;
-    flex-direction: column;
-}
-*/
