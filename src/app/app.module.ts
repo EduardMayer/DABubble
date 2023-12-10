@@ -58,6 +58,8 @@ import { AddUserToChannelDialogComponent } from './add-channel-dialog/add-user-t
 import {MatRadioModule} from '@angular/material/radio';
 import {MatChipsModule} from '@angular/material/chips';
 import { EmptyWindowComponent } from './mainscreen/empty-window/empty-window.component';
+import { EditChannelUsersComponent } from './mainscreen/channel/edit-channel-users/edit-channel-users.component';
+import { ShowChannelUsersComponent } from './mainscreen/channel/show-channel-users/show-channel-users.component';
 
 
 
@@ -96,7 +98,9 @@ import { EmptyWindowComponent } from './mainscreen/empty-window/empty-window.com
     ChatViewComponent,
     EditChannelComponent,
     AddUserToChannelDialogComponent,
-    EmptyWindowComponent
+    EmptyWindowComponent,
+    EditChannelUsersComponent,
+    ShowChannelUsersComponent
   ],
   imports: [
     BrowserModule,

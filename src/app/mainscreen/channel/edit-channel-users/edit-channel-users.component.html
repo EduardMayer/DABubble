@@ -1,0 +1,22 @@
+<div id="editChannel">
+    <div id="editChannelHeader">
+        <div>
+            <h2>Leute hinzufügen</h2>
+            <h4>#{{channelCopy.channelName}}</h4>
+        </div>
+        <img src="assets/img/icons/close.svg" alt="close" (click)="close()">
+    </div>
+    
+    <app-searchbar 
+    [setStyle]="'channelOption'" 
+    [hasRemoveAccessInput]="false" 
+    [types]="'users'" 
+    [action]='channelCopy' 
+    (updatedChannelModel)="handleChannelUserUpdate($event)"
+    ></app-searchbar>
+    <div class="button-container">
+        <button (click)="saveUserChanges()" class="add-selection">Hinzufügen</button>
+    </div>
+    
+</div>
+<div id="editChannelBackground" (click)="close()"></div>

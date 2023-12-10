@@ -29,11 +29,13 @@ export class ChannelComponent {
 
   hoverTitle = false;
   showEditChannel: boolean = false;
-  channelCopy: Channel | undefined;
+  showEditChannelUsers: boolean = false;
+  showChannelUsers: boolean = false;
+
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
-    public chatFirebaseService: ChatFirebaseService, 
+    public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService,
     private activeSelectionService: ActiveSelectionService
@@ -44,8 +46,8 @@ export class ChannelComponent {
   /**
    * Loads the conversation of the channel. 
    */
-  loadChannelMessages(){
-    let channel=this.activeSelectionService.getActiveSelectionObject() ;
+  loadChannelMessages() {
+    let channel = this.activeSelectionService.getActiveSelectionObject();
     if (channel instanceof Channel) {
       this.channelFirebaseService.loadChannelMessages(channel.id);// to be changed to currentChannel
       this.messagePath = `channels/${channel.id}/messages/`;
@@ -64,9 +66,9 @@ export class ChannelComponent {
     }
   }
 
-   /**
-   * Closes pop up menu for channel members dialog. 
-   */
+  /**
+  * Closes pop up menu for channel members dialog. 
+  */
   closeMenuViewUsersOnChannel() {
     if (this.menuTrigger) {
       this.menuTrigger.closeMenu();
@@ -86,12 +88,30 @@ export class ChannelComponent {
     }
   }
 
+
+
   /**
-   * Closes edit channel dialog
-   */
+ * Closes edit channel dialog
+ */
   closeEditDialog() {
     this.showEditChannel = false;
   }
+
+  /**
+  * Closes edit channel dialog
+  */
+  closeEditUsersDialog() {
+    this.showEditChannelUsers = false;
+  }
+
+
+  closeShowUsersDialog(option: string="") {
+    if(option=='editChannelUser'){
+      this.showEditChannelUsers = true;
+    }
+    this.showChannelUsers = false;
+  }
+
 
   /**
    * Shows userprofile of given user. 
@@ -102,24 +122,9 @@ export class ChannelComponent {
     this.userProfilService.openUserProfil(user);
   }
 
-  /**
-   * Stores/Saves the updated channel after adding new users. 
-   * @param newChannel - updated channel
-   */
-  handleChannelUserUpdate(newChannel: Channel) {
-    this.channelCopy = newChannel;
-  }
 
-  /**
-   * Saves changes when users where removed or added. 
-   */
-  saveUserChanges() {
-    if (this.channelCopy) {
-      this.channelFirebaseService.selectedChannel = this.channelCopy;
-      this.channelFirebaseService.updateChannel(this.channelCopy);
-      this.channelFirebaseService.loadallChannelusers();
-    }
-  }
+
+
 
   /**
    * Returns the time (in a formated form) of a given Message. 
@@ -146,6 +151,10 @@ export class ChannelComponent {
     const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary
     const year = date.getFullYear();                              // Get year
     return `${day}.${month}.${year}`;
+  }
+
+  closeEditChannelUsers() {
+    this.showEditChannelUsers = false;
   }
 
 }

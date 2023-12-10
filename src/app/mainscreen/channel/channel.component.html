@@ -12,59 +12,18 @@
         </div>
 
         <div class="addMemberContainer">
-            <div class="user-avatar-list" tabindex="0" mat-icon-button [matMenuTriggerFor]="menu"
-                #menuTrigger="matMenuTrigger" aria-label="Example icon-button with a menu">
+            <div class="user-avatar-list" (click)="showChannelUsers=true">
                 <img class="avatar-img"
                     *ngFor="let user of channelFirebaseService.userOnCurrentChannel | slice:0:3; let i = index"
                     [style.left]="i * -10 + 'px'" [style.z-index]="3 - i" [src]="user.avatar" alt="avatar">
-
                 <span class="amoundOfUsersInChannel">{{channelFirebaseService.userOnCurrentChannel.length}}</span>
-
             </div>
 
-            <img [matMenuTriggerFor]="addMember" #addMemberTrigger="matMenuTrigger" class="addmembers"
+            <img 
+                (click)="this.showEditChannelUsers = true"
                 src="assets/img/icons/addmembers.svg">
         </div>
     </div>
-    <app-edit-channel *ngIf="showEditChannel" (closeEvent)="closeEditDialog()"></app-edit-channel>
-
-
-
-    <mat-menu #menu="matMenu" (click)="$event.stopPropagation()">
-        <div class="menuHeader" (click)="$event.stopPropagation()">
-            <h3 class="menuHeaderText">Mitglieder</h3>
-            <img class="close" (click)="closeMenus()" src="/assets/img/icons/close.svg">
-        </div>
-
-        <div class="menuUserWrapper">
-            <div class="menuUsersContainer" (click)="$event.stopPropagation()">
-            <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
-                [uId]="user.id" (click)="openProfil(user)">
-            </app-chat-view>
-            </div>
-
-            <div class="addMemberInMenu" (click)="$event.stopPropagation()">
-                <img class="addMemberImage" src="assets/img/icons/addmembers.svg">
-                <span class="addMemberText" (click)="openAddMemberMenu()">Teilnehmer hinzufügen</span>
-            </div>
-        </div>
-    </mat-menu>
-
-    <mat-menu class="channel-specific" #addMember="matMenu" (click)="$event.stopPropagation()">
-
-        <div class="menuHeader" (click)="$event.stopPropagation()">
-            <h3 class="headerText">Leute hinzufügen</h3>
-            <img class="closeMenu" (click)="closeMenus()" src="/assets/img/icons/close.svg">
-        </div>
-        <span (click)="$event.stopPropagation()" class="channelName">#entwicklerchannel</span>
-
-        <div *ngIf="newAddedToChannelUser" class="containerOfInput" (click)="$event.stopPropagation()">
-            <app-searchbar [setStyle]="'channelOption'" [hasRemoveAccessInput]="false"   [types]="'users'" [action]='channelFirebaseService.selectedChannel' 
-            (updatedChannelModel)="handleChannelUserUpdate($event)"
-            ></app-searchbar>
-        </div>
-        <button (click)="$event.stopPropagation(); saveUserChanges()" class="addSelection">Hinzufügen</button>
-    </mat-menu>
 
     <div class="chat-container">
 
@@ -98,4 +57,21 @@
     </div>
 
     <app-message-create [path]="messagePath" [currentLocation]="'channel'"></app-message-create>
+
+    <app-edit-channel 
+        *ngIf="showEditChannel" (closeEvent)="closeEditDialog()">
+    </app-edit-channel>
+
+
+    <app-show-channel-users 
+        *ngIf="showChannelUsers" 
+        (closeEvent)="closeShowUsersDialog($event)">
+    </app-show-channel-users>
+
+
+    <app-edit-channel-users 
+        *ngIf="showEditChannelUsers" 
+        [refChannel]="channelFirebaseService.selectedChannel" 
+        (closeEvent)="closeEditUsersDialog()">
+    </app-edit-channel-users>
 </mat-card>
