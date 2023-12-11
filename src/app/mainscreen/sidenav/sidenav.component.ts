@@ -12,6 +12,7 @@ import { UserProfilService } from 'src/services/user-profil.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
+import { ActiveSelectionService } from 'src/services/active-selection.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -34,8 +35,12 @@ export class SidenavComponent implements OnInit {
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService, 
     private windowSizeService: WindowSizeService,
+    private activeSelectionService: ActiveSelectionService
   ) { }
 
+  /**
+   * Gets logged in user and sets the current window size in service. 
+   */
   ngOnInit(): void {
     this.userFirebaseService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid)
       .then((user) => {
@@ -50,7 +55,9 @@ export class SidenavComponent implements OnInit {
       this.windowSizeService.setWindowSize(); 
   }
 
-
+ /**
+   * Defines if channels in sidenav are visible. 
+   */
   showChannels() {
     if (this.unpackChannels == false) {
       this.unpackChannels = true;
@@ -59,7 +66,9 @@ export class SidenavComponent implements OnInit {
     }
   }
 
-
+  /**
+   * Defines if messages (chats) in sidenav are visible. 
+   */
   showMessages() {
     if (this.unpackMessages == false) {
       this.unpackMessages = true;
@@ -68,15 +77,23 @@ export class SidenavComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens addNewChannelDialog
+   */
   openDialog() {
     const dialogRef = this.dialog.open(AddChannelDialogComponent, {
-      //data: {name: this.name},
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.animal = result;
     });
+  }
+
+  /**
+   * Opens view to create a new chat or channel. 
+   */
+  openNewChatOrChannel(){
+    this.activeSelectionService.activeSelection = undefined; 
   }
 
 

@@ -1,7 +1,9 @@
 <div id="main-container" *ngIf="channelFirebaseService.finishedLoading && userFirebaseService.finishedLoading">
     <app-header id="main-header" 
         [channelSelected]="channelFirebaseService.selectedChannelId != undefined"
-        [chatSelected]="chatFirebaseService.selectedChatId != undefined">
+        [chatSelected]="chatFirebaseService.selectedChatId != undefined"
+        [emptyChatSelectedMobile]="!showSidenavMobile"
+        (closeEmptyViewEvent)="showSidenavMobile = true;">
     </app-header>
     <div id="main-body" *ngIf="windowWidth > 768">
         <app-sidenav *ngIf="sideNavOpen" id="main-sidebar"></app-sidenav>
@@ -58,13 +60,14 @@
         </ng-template>
 
         <ng-template #emptyView>
-            <app-sidenav *ngIf="channelFirebaseService.selectedChannelId == undefined && chatFirebaseService.selectedChatId == undefined" 
+            <app-sidenav *ngIf="channelFirebaseService.selectedChannelId == undefined && chatFirebaseService.selectedChatId == undefined && showSidenavMobile" 
             id="main-sidebar">
             </app-sidenav>
+            <app-empty-window *ngIf="!showSidenavMobile"></app-empty-window>
         </ng-template>
 
-        <div id="new-message-mobile"  *ngIf="activeSelectionService.getActiveSelectionType() === ''">
-            <button mat-fab color="primary" aria-label="new message">
+        <div id="new-message-mobile"  *ngIf="activeSelectionService.getActiveSelectionType() === '' && showSidenavMobile">
+            <button mat-fab color="primary" aria-label="new message" (click)="newMessageMobile()">
                 <mat-icon>edit_square</mat-icon>
             </button>
         </div>

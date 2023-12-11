@@ -25,24 +25,37 @@ export class AddUserToChannelDialogComponent implements OnInit {
     console.log(this.channel);
   }
 
+  /**
+   * Logs the current selected option. 
+   */
   chooseSelection() {
     console.log(this.selectedOption); // Gibt den aktuell ausgewählten Wert aus
   }
 
+  /**
+   * updates channel object when adding new users. 
+   * @param newChannel - channel to create
+   */
   handleChannelUserUpdate(newChannel: Channel) {
     this.channel = newChannel;
     console.log("channel updated");
     console.log(this.channel)
   }
 
+  /**
+   * Creates a new channel with users based on selected option. (all or selected users)
+   */
   createChannel() {
     if (this.selectedOption == '1') {
       this.channel.users = this.userService.loadedUsers.map(user => user.id);
-      this.firebaseChannel.updateChannel(this.channel);
+      this.firebaseChannel.updateChannel(this.channel).then(()=>{
+        this.closeDialog(); 
+      });
     } else {
-
       this.channel.users.push(this.userService.currentUser.id);
-      this.firebaseChannel.updateChannel(this.channel);
+      this.firebaseChannel.updateChannel(this.channel).then(()=>{
+        this.closeDialog(); 
+      });
     }
   }
 

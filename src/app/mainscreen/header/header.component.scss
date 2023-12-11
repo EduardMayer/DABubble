@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 $headerImage-width: 300px;
-$headerUser-width: 300px;
+$headerUser-width: 25%;
 
 
 #header-container, #header-container-mobile {
@@ -37,7 +37,7 @@ $headerUser-width: 300px;
         align-items: center;
         justify-content: flex-end;
         gap: 12px;
-        //min-width: $headerUser-width;
+        min-width: $headerUser-width;
 
         #header-user-icon, #header-user-icon-mobile {
             position: relative;

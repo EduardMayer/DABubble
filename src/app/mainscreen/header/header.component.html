@@ -6,7 +6,8 @@
         <app-searchbar
          *ngIf="userService.finishedLoading && channelService.finishedLoading"  
          [types]='"all"' 
-         [action]="'openSelection'">
+         [action]="'openSelection'"
+         [setStyle]="'header'">
         </app-searchbar>
     </div>
     <div id="header-user">
@@ -30,8 +31,8 @@
 
 <div id="header-container-mobile"  *ngIf="windowWidth <= 768">
     <div id="header-image-container-mobile">
-        <img *ngIf="!channelSelected && !chatSelected" src="assets/img/logo/logo.svg" alt="DABubble Logo">
-        <div *ngIf="channelSelected || chatSelected" id="header-image-container-mobile-selected">
+        <img *ngIf="!channelSelected && !chatSelected && !emptyChatSelectedMobile" src="assets/img/logo/logo.svg" alt="DABubble Logo">
+        <div *ngIf="channelSelected || chatSelected || emptyChatSelectedMobile" id="header-image-container-mobile-selected">
             <img src="/assets/img/icons/arrow_left_back.svg" alt="back" (click)="closeChatOrChannel()">
             <img src="assets/img/logo/codeLearningLogo.png" alt="DABubble Logo">
             <h3>Code learning</h3>

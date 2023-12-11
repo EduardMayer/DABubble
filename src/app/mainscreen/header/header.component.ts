@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -26,6 +26,11 @@ export class HeaderComponent implements OnInit {
   showHeaderMenu = false;
   @Input() channelSelected = false; 
   @Input() chatSelected = false; 
+  @Input() emptyChatSelectedMobile = false; 
+
+  @Output() closeEmptyViewEvent = new EventEmitter<any>();
+
+  
     
   windowWidth: number = 1024;  
 
@@ -81,6 +86,7 @@ export class HeaderComponent implements OnInit {
     this.channelService.selectedChannelId = undefined; 
     this.chatService.selectedChatId = undefined;   
     this.activeSelectionService.activeSelection = undefined; 
+    this.closeEmptyViewEvent.emit();
   }
 
   /**

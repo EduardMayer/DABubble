@@ -27,6 +27,7 @@ export class MainscreenComponent implements OnInit {
   userProfilUser = new User();
   seclectedChannel: string = "";
   windowWidth: any; 
+  showSidenavMobile: Boolean = true; 
 
 
   constructor(
@@ -62,4 +63,10 @@ export class MainscreenComponent implements OnInit {
   toggleSideNav() {
     this.sideNavOpen = !this.sideNavOpen;
   }
+
+  newMessageMobile(){
+    this.activeSelectionService.activeSelection = undefined; 
+    this.showSidenavMobile = false; 
+  }
+
 }
