@@ -23,7 +23,6 @@ export class EditChannelUsersComponent {
 
   @Input() set refChannel(value: Channel) {
     this.channelCopy = value;
-    console.log(this.channelCopy);
   }
 
   setClosingEventListener() {

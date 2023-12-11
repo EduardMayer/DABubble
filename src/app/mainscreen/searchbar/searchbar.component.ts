@@ -21,11 +21,9 @@ export class SearchbarComponent implements OnInit {
   @Output() updatedChannelModel = new EventEmitter<Channel>();
   @ViewChild('searchField', { static: false }) searchField!: ElementRef;
 
-
-
-  //@Input() innerElementStyle: string = '';
-  //searchText: string = "";
-  //searchResults: string[] = [];
+  private hasRemoveAccess: boolean = false;
+  private _action: string | Channel = "";
+  public _type: string = "";
 
   styleType: string = "header"
 
@@ -35,16 +33,12 @@ export class SearchbarComponent implements OnInit {
   public editableChannelUsers: User[] = []; //All Users that can be Removed in the current search element.
   private availableUsers: User[] = [];  // All Users that could be added to the Channel
 
-  private _action: string | Channel = "";
-  _type: string = "";
+
 
   constructor(
     private userService: UserFirebaseService,
     private channelService: ChannelFirebaseService,
     private chatService: ChatFirebaseService) { }
-
-    
-
 
   headerControl = new FormControl('');
   options: { id: string; name: string, type: string, avatarSrc?: string }[] = [];
@@ -56,7 +50,6 @@ export class SearchbarComponent implements OnInit {
     this.filteredOptions$ = this.headerControl.valueChanges.pipe(
       startWith(''),
       debounceTime(500),
-      switchMap(value => of(value)), // Adjust the debounce time as needed+
       map(value => this._filter(value))
     );
   }
@@ -65,10 +58,10 @@ export class SearchbarComponent implements OnInit {
    * Sets the search value type and initiates the search options.
    * @param {string} value - Type value ('channels' or 'users' or 'all').
    */
-  hasRemoveAccess: boolean = false;
   @Input() set hasRemoveAccessInput(hasRemoveAccess: boolean) {
     this.hasRemoveAccess = hasRemoveAccess;
   }
+
 
   /**
    * Sets the search value type and initiates the search options that are depending on that type.
@@ -88,6 +81,7 @@ export class SearchbarComponent implements OnInit {
   @Input() set setStyle(value: string) {
     this.styleType = value;
   }
+
 
   /**
    * Sets the action type or channel instance for the search bar.
@@ -146,7 +140,6 @@ export class SearchbarComponent implements OnInit {
     await channel.users?.forEach(userId => {
       this.userService.getUserByUID(userId).then((user) => {
         channelUsers.push(user);
-
 
         this.unsetAvailableUser(user);
       });
@@ -322,7 +315,7 @@ export class SearchbarComponent implements OnInit {
   * If the current action type is 'addUserToChannel':
   * - Checks if the user is not already in the channel.
   * - Clears the search field value if the user is added to the channel.
-  * - Unsets the user from the available users.
+  * - Unset the user from the available users.
   * - Sets the user as part of the channel's users.
   *
   * If the current action type is 'openSelection':
@@ -352,9 +345,8 @@ export class SearchbarComponent implements OnInit {
   */
   remove(user: User): void {
     if (this.channelUsers) {
-      const index = this.editableChannelUsers.indexOf(user);
       this.unsetChannelUser(user);
-      this.setAvailabeUser(user);
+      this.setAvailableUser(user);
 
       this.save();
     }
@@ -397,7 +389,7 @@ export class SearchbarComponent implements OnInit {
   *
   * @param {User} user - The user to be added to the list of available users.
   */
-  setAvailabeUser(user: User) {
+  setAvailableUser(user: User) {
     this.availableUsers.push(user);
     this.updateOptions();
   }
@@ -409,9 +401,9 @@ export class SearchbarComponent implements OnInit {
   */
   unsetAvailableUser(user: User) {
     if (this.availableUsers.length > 0) {
-      const index = this.availableUsers.indexOf(user);
-      const deletedUser = this.availableUsers.splice(index, 1);
+      this.availableUsers = this.availableUsers.filter(avUser => avUser.id != user.id);
     }
+
     this.updateOptions();
   }
 
@@ -434,13 +426,11 @@ export class SearchbarComponent implements OnInit {
   */
   unsetChannelUser(user: User) {
     if (this.channelUsers) {
-      const index = this.channelUsers.indexOf(user);
-      this.channelUsers?.splice(index, 1);
-      this.editableChannelUsers = this.channelUsers
+      this.channelUsers = this.channelUsers.filter(channUser => channUser != user);
+      this.editableChannelUsers = this.editableChannelUsers.filter(channUser => channUser != user);
       this.updateOptions();
     }
   }
-
 
 }
 

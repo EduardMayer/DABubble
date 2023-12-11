@@ -11,7 +11,6 @@ export class ActiveSelectionService {
     private activeSelectionObject: Chat | Channel | null | undefined = null;
 
     set activeSelection(selection: Chat | Channel | null | undefined ) {
-        console.log(typeof selection );
         
         if (typeof selection == 'object') {
             if (selection instanceof Channel) {
@@ -25,10 +24,6 @@ export class ActiveSelectionService {
             this.activeSelectionType = "";
             this.activeSelectionObject = null;
         }
-
-        console.log("SELECTION DONE: Selected Type: "+this.activeSelectionType);
-        console.log("SELECTED DATA:");
-        console.log(this.activeSelectionObject);
     }
 
     getActiveSelectionType(){
