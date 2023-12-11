@@ -125,6 +125,14 @@ export class SearchbarComponent implements OnInit {
         this.options = channelsArray.concat(usersArray);
     }
 
+    if (this.options.length == 0) {
+      this.options.push({
+        id: "",
+        name: "Keine Optionen verfügbar",
+        type: ""
+      });
+    }
+
     // Notify subscribers about the changes
     this._filteredOptions$.next(this.options);
   }
@@ -231,9 +239,10 @@ export class SearchbarComponent implements OnInit {
  * @param {string} id - The ID of the selected user or channel.
  */
   selectOption(id: string) {
+    this.searchField.nativeElement.value = "";
     this.openChatWithUserById(id);
     this.selectChannelById(id);
-    this.searchField.nativeElement.value = "";
+    this.headerControl.setValue("");
   }
 
 
@@ -324,13 +333,12 @@ export class SearchbarComponent implements OnInit {
   * @param {Object} userValues - User information including ID, name, type, and avatar source.
   */
   add(userValues: { id: string; name: string, type: string, avatarSrc: string }) {
+    this.searchField.nativeElement.value = "";
+    this.headerControl.setValue("");
+    
+    if(userValues.id!="")
     this.userService.getUserByUID(userValues.id).then((user) => {
       if (this._action == 'addUserToChannel' && this.channel instanceof Channel) {
-        if (!this.checkIfUserExistsInChannel(this.channel, user.id)){
-          this.searchField.nativeElement.value = "";
-          this.headerControl.setValue("");
-        }
-         
         this.unsetAvailableUser(user);
         this.setChannelUser(user);
         this.save();

@@ -18,11 +18,7 @@ export class ShowChannelUsersComponent {
     public channelFirebaseService: ChannelFirebaseService,
     public activeSelectionService: ActiveSelectionService , 
     private userProfilService: UserProfilService
-  ) {
-
-    console.log(channelFirebaseService.userOnCurrentChannel);
-    
-  }
+  ) { }
 
   openAddMemberMenu(){
     this.closeEvent.emit("editChannelUser");
