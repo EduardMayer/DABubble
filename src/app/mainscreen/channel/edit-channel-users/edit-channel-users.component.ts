@@ -25,23 +25,6 @@ export class EditChannelUsersComponent {
     this.channelCopy = value;
   }
 
-  setClosingEventListener() {
-    document.addEventListener('click', (event) => {
-      if (event.target != document.getElementById("editChannel")) {
-        console.log("Calling close Dialog");
-        this.close();
-      }
-    });
-
-    document.addEventListener('touchstart', (event) => {
-      if (event.target != document.getElementById("editChannel")) {
-        console.log("Calling close Dialog");
-        this.close();
-      }
-    });
-
-  }
-
 
   /**
   * Stores/Saves the updated channel after adding new users. 

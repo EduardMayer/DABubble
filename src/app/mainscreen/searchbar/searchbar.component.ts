@@ -326,8 +326,11 @@ export class SearchbarComponent implements OnInit {
   add(userValues: { id: string; name: string, type: string, avatarSrc: string }) {
     this.userService.getUserByUID(userValues.id).then((user) => {
       if (this._action == 'addUserToChannel' && this.channel instanceof Channel) {
-        if (!this.checkIfUserExistsInChannel(this.channel, user.id))
+        if (!this.checkIfUserExistsInChannel(this.channel, user.id)){
           this.searchField.nativeElement.value = "";
+          this.headerControl.setValue("");
+        }
+         
         this.unsetAvailableUser(user);
         this.setChannelUser(user);
         this.save();
