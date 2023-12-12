@@ -21,6 +21,7 @@ import { throwError } from 'rxjs';
 import { UserStatusFirebaseService } from './user-status-firebase.service';
 import { ChannelFirebaseService } from './channel-firebase.service';
 import { ChatFirebaseService } from './chat-firebase.service';
+import { ActiveSelectionService } from './active-selection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -100,7 +101,13 @@ export class AuthFirebaseService implements OnInit {
    * @param router - Angular Router
    * @param ngZone 
    */
-  constructor(private auth: Auth, private router: Router, public ngZone: NgZone, private userService: UserFirebaseService, private UserStatusService: UserStatusFirebaseService) {
+  constructor(
+      private auth: Auth, 
+      private router: Router, 
+      public ngZone: NgZone, 
+      private userService: UserFirebaseService, 
+      private UserStatusService: UserStatusFirebaseService, 
+      private activeSelectionService: ActiveSelectionService) {
     onAuthStateChanged(this.auth, async (user: any) => {
       if (user) {
         this.UserData = user;
@@ -158,6 +165,10 @@ export class AuthFirebaseService implements OnInit {
    * Loggout the User and redirect to startscreen. 
    */
   logout() {
+    this.activeSelectionService.activeSelection = undefined; 
+    this.channelFirebaseService.selectedChannelId = ""; 
+    this.channelFirebaseService.selectedChannel = undefined; 
+   
     this.UserStatusService.writeUserStatus(this.UserData.uid, "offline");
     signOut(this.auth).then(() => { this.router.navigate(['']) })
   }

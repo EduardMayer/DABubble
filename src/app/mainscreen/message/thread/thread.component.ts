@@ -100,9 +100,7 @@ export class ThreadComponent implements OnDestroy {
    * Closes current thread when componetn was destroyed (e.g. logout)
    */
   ngOnDestroy(): void {
-
-    // Führt zu Problemen in der mobilen Ansicht
-    //this.closeThread(); 
+    this.closeThread(); 
   }
 
 }
