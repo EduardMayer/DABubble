@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { IfChangedService } from 'src/services/if-changed-service.service';
@@ -12,7 +12,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   styleUrls: ['./thread.component.scss', '../../../../styles.scss', '../date-line/date-line.component.scss'],
   providers: [IfChangedService, MessageFirebaseService]
 })
-export class ThreadComponent {
+export class ThreadComponent implements OnDestroy {
 
 
   showEmojiList: boolean = false;
@@ -94,6 +94,15 @@ export class ThreadComponent {
       const daysAgo = Math.floor(delta / oneDayInMs);
       return `vor ${daysAgo} Tagen`;
     }
+  }
+
+  /**
+   * Closes current thread when componetn was destroyed (e.g. logout)
+   */
+  ngOnDestroy(): void {
+
+    // Führt zu Problemen in der mobilen Ansicht
+    //this.closeThread(); 
   }
 
 }

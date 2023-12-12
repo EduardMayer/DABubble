@@ -59,7 +59,6 @@ export class MainscreenComponent implements OnInit {
     this.windowSizeService.setWindowSize(); 
   }
 
-
   toggleSideNav() {
     this.sideNavOpen = !this.sideNavOpen;
   }

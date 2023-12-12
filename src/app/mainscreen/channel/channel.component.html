@@ -56,7 +56,7 @@
         </ng-template>
     </div>
 
-    <app-message-create [path]="messagePath" [currentLocation]="'channel'"></app-message-create>
+    <app-message-create [path]="channelFirebaseService.currentChannelMessagePath" [currentLocation]="'channel'"></app-message-create>
 
     <app-edit-channel 
         *ngIf="showEditChannel" (closeEvent)="closeEditDialog()">

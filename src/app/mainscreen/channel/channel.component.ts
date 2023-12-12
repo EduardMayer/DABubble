@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, OnDestroy } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
@@ -16,7 +16,7 @@ import { ChatFirebaseService } from 'src/services/chat-firebase.service';
   styleUrls: ['./channel.component.scss'],
   providers: [IfChangedService] // Provide the service at the component level
 })
-export class ChannelComponent {
+export class ChannelComponent implements OnDestroy{
   @ViewChild('menuTrigger') menuTrigger?: MatMenuTrigger;
   @ViewChild('addMemberTrigger') addMemberTrigger?: MatMenuTrigger;
 
@@ -156,5 +156,13 @@ export class ChannelComponent {
   closeEditChannelUsers() {
     this.showEditChannelUsers = false;
   }
+  
+  ngOnDestroy(): void {
 
+    // Führt zu Problemen in der mobilen Ansicht
+
+    //this.channelFirebaseService.selectedChannelId = ""; 
+    //this.channelFirebaseService.selectedChannel = undefined; 
+    //this.activeSelectionService.activeSelection = undefined; 
+  }
 }
