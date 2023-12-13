@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/
 import { Channel } from 'src/models/channel.class';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-edit-channel-users',
@@ -16,7 +17,8 @@ export class EditChannelUsersComponent {
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
-    public activeSelectionService: ActiveSelectionService
+    public activeSelectionService: ActiveSelectionService,
+    private notService: NotificationService
   ) {
     this.channelCopy = new Channel();
 
@@ -42,14 +44,11 @@ export class EditChannelUsersComponent {
   saveUserChanges() {
     
     if (this.channelCopy) {
-      this.channelFirebaseService.selectedChannel = this.channelCopy;
-      this.channelFirebaseService.updateChannel(this.channelCopy);
-      this.channelFirebaseService.loadallChannelusers();
-      this.savingChanges=true;
-      setTimeout(()=>{
+        this.channelFirebaseService.selectedChannel = this.channelCopy;
+        this.channelFirebaseService.updateChannel(this.channelCopy);
+        this.channelFirebaseService.loadallChannelusers();
+        this.notService.renderNotification("Benutzer wurden dem Channel hinzugefügt");
         this.close();
-        this.savingChanges=false;
-      },2000);
     }
   }
 
