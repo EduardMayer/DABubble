@@ -26,7 +26,6 @@
     </div>
 
     <div class="chat-container">
-
         <ng-container *ngIf="channelFirebaseService.selectedChannelMessages.length>0; else emptyChannel">
             <div *ngFor="let message of channelFirebaseService.selectedChannelMessages; let i = index">
                 <app-message [message]="message" [messageLocationName]="'channel'"></app-message>
@@ -62,16 +61,15 @@
         *ngIf="showEditChannel" (closeEvent)="closeEditDialog()">
     </app-edit-channel>
 
-
     <app-show-channel-users 
         *ngIf="showChannelUsers" 
         (closeEvent)="closeShowUsersDialog($event)">
     </app-show-channel-users>
-
 
     <app-edit-channel-users 
         *ngIf="showEditChannelUsers" 
         [refChannel]="channelFirebaseService.selectedChannel" 
         (closeEvent)="closeEditUsersDialog()">
     </app-edit-channel-users>
+
 </mat-card>

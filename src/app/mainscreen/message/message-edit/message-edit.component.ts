@@ -4,6 +4,7 @@ import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
+import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
@@ -30,6 +31,7 @@ export class MessageEditComponent {
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
     private storageService: StorageFirebaseService,
+    private threadService: ThreadFirebaseService
   ) {  }
 
   /**
@@ -43,9 +45,18 @@ export class MessageEditComponent {
     if (this._message) {
       if (this._message.path) {
         this.messageFirebaseService.createMessage(this._message.path, this._message);
+        this.updatedThreadMsg();
       }
       this.showEmojiBar = false;
       this.closeEditMode();
+    }
+  }
+
+  updatedThreadMsg(){
+    if(this.threadService.message && this._message){
+      if(this.threadService.message.id == this._message.id){
+        this.threadService.message=this._message;
+      }
     }
   }
 
