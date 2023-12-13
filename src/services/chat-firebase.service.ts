@@ -21,6 +21,8 @@ export class ChatFirebaseService {
     public loadedChat: Chat | undefined;
     private unsubChat: any;
 
+    public personalChat: Chat | undefined ; 
+
     selectedChatId: string | undefined;
     selectedChat: Chat | undefined;
     currentChatMessagePath: string = "";
@@ -55,7 +57,15 @@ export class ChatFirebaseService {
         this.currentChatMessagePath = `chats/${chatId}/messages/`;
         this.activeSelectionService.activeSelection=this.selectedChat;
     }
-
+    
+    async selectPersonalChat(){
+        this.selectedChatId = this.personalChat!.id;
+        this.loadChatMessages(this.userService.currentUser.id);
+        this.selectedChat = this.personalChat; 
+        await this.updateSelectedChat(this.selectedChat!);
+        this.currentChatMessagePath = `chats/${this.personalChat!.id}/messages/`;
+        this.activeSelectionService.activeSelection=this.selectedChat;
+    }
 
     getChatMessagesQuery(chatId: string) {
         return query(collection(this.firestore, `chats/${chatId}/messages`), orderBy("timestamp", "desc"));
@@ -89,7 +99,6 @@ export class ChatFirebaseService {
         } else {
             await this.modifyChat(chat);
         }
-
         return chat;
     }
 
@@ -178,9 +187,26 @@ export class ChatFirebaseService {
             querySnapshot.forEach((doc) => {
                 const chat = new Chat(doc.data());
                 chat.id = doc.id;
-                this.loadedChats.push(chat);
+                if(chat.users[0] != chat.users[1]){
+                    this.loadedChats.push(chat);
+                }
+                else {
+                    this.personalChat = chat; 
+                }
             });
+            this.checkPersonalChat(userId); 
         })
+    }
+
+    createPersonalChat(){
+        this.personalChat = new Chat({users: [this.userService.currentUser.id , this.userService.currentUser.id]}); 
+        this.createChat(this.personalChat); 
+    }
+
+    checkPersonalChat(uid:string){
+        if(this.personalChat == undefined ){
+            this.createPersonalChat(); 
+        }
     }
 
     /* NO FOR LOOP SINCE there can only be two chat partners */
@@ -189,7 +215,10 @@ export class ChatFirebaseService {
             return chat.users[0];
         } else if (chat.users[1] != this.userService.currentUser.id) {
             return chat.users[1];
-        } else {
+        }else if( chat.users[0] == chat.users[1]){
+            return chat.users[0]; 
+        } 
+        else {
             return "";
         }
     }

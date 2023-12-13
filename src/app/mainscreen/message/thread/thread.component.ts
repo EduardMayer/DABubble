@@ -14,7 +14,6 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 })
 export class ThreadComponent implements OnDestroy {
 
-
   showEmojiList: boolean = false;
   showToolbar: boolean = false;
   answersPath: string = "";

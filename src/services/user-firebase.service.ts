@@ -65,9 +65,14 @@ export class UserFirebaseService {
      */
     async update(user: User) {
         if (user.id == "") {
+            console.log("New User"); 
+            debugger // to track when a empty user is created --> please do not delete 
             const docInstance = doc(collection(this.firestore, "users"));
             setDoc(docInstance, user.toJSON());
         } else {
+            console.log("user Update");
+            console.log(user.id);
+            
             const docInstance = doc(this.firestore, 'users', user.id);
             updateDoc(docInstance, user.toJSON());
         }
@@ -101,7 +106,7 @@ export class UserFirebaseService {
      */
     async getUserByUID(UID: string) {
         let user = this.loadedUsers.find(user => user.id === UID);
-
+        
         if (user) {
             return user;
         } else {

@@ -3,6 +3,7 @@
         <div class="header-title" width="fit-content">
             <div id="header-title-chatpartner-name" (click)="openProfil()">
                 <h2> {{ chatPartner.fullName }}</h2>
+                <h2 *ngIf="chatPartner.id == userFirebaseService.currentUser.id">&nbsp;(Du)</h2>
             </div>
         </div>
     </div>
@@ -33,9 +34,15 @@
                     <img src="{{chatPartner.avatar}}">
                     <div></div>
                     <h3>{{ chatPartner.fullName }}</h3>
+                    <h3>&nbsp;(Du)</h3>
                 </div>
                 <div class="user-text">
-                    Diese Unterhaltung findet nur zwischen <a (click)="openProfil()">@{{ chatPartner.fullName }}</a> und dir statt.
+                    <div *ngIf="chatPartner.id != userFirebaseService.currentUser.id">
+                        Diese Unterhaltung findet nur zwischen <a (click)="openProfil()">@{{ chatPartner.fullName }}</a> und dir statt.
+                    </div>
+                    <div *ngIf="chatPartner.id == userFirebaseService.currentUser.id">
+                        Dieser Raum ist nur für dich da. Mache dir Notizen, liste deine To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst besprechen.
+                    </div>
                 </div>
             </div>
         </ng-template>

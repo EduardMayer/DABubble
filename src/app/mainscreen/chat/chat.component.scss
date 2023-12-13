@@ -21,6 +21,8 @@
                 margin: 24px 0px;
                 padding: 0px 12px;
                 border-radius: 32px;
+                display: flex;
+                flex-direction: row;
                 &:hover{
                     cursor: pointer;
                     background-color: #ECEEFE;

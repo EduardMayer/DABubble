@@ -13,10 +13,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 export class ChatViewComponent{
 
   user: User = new User(); 
-  refreshIntervall = 5000; 
+  refreshIntervall = 5000;  
 
   constructor(
-    private userFirebaseService: UserFirebaseService,
+    public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService, 
     private userStatusService: UserStatusFirebaseService
   ) {

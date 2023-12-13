@@ -57,6 +57,9 @@
 
         <div class="myMessages" id="myMessages" *ngIf="unpackMessages">
 
+            <app-chat-view
+                [uId]="userFirebaseService.currentUser.id" (click)="chatFirebaseService.selectPersonalChat()">
+            </app-chat-view>
 
             <app-chat-view *ngFor="let chat of chatFirebaseService.loadedChats"
                 [uId]="chatFirebaseService.getChatPartner(chat)" (click)="chatFirebaseService.selectChat(chat.id)">

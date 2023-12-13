@@ -120,7 +120,8 @@ export class AuthFirebaseService implements OnInit {
         this.firebaseUserService.currentUser.id=this.UserData.uid;
         this.firebaseUserService.load();
         this.channelFirebaseService.load(this.UserData.uid);
-        this.chatFirebaseService.load(this.UserData.uid);
+        await this.chatFirebaseService.load(this.UserData.uid);
+        //this.chatFirebaseService.checkPersonalChat(this.UserData.uid);
         
       } else {
         localStorage.setItem('user', 'null');
