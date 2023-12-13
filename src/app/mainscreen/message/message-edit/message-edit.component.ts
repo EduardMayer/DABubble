@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
+import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
@@ -15,6 +16,9 @@ export class MessageEditComponent {
   showEmojiBar: boolean = false;
   _path: string | undefined;
   _message: Message | undefined;
+  fileName: string | undefined;
+  fileSrc: string | undefined;
+  fileIMG: any;
 
   @Output() showEditMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -25,6 +29,7 @@ export class MessageEditComponent {
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
+    private storageService: StorageFirebaseService,
   ) {  }
 
   /**
@@ -77,6 +82,18 @@ export class MessageEditComponent {
       if (this._message) {
         this._message.content += selectedEmoji;
       }
+    }
+  }
+
+  async deleteFile() {
+    try {
+      if (this._message && this._message.fileSrc) {
+        await this.storageService.deleteImage(this._message.fileSrc);
+        this._message.fileSrc = '';
+        this._message.fileName = '';
+      }
+    } catch (error) {
+      console.error('Error deleting file: ', error);
     }
   }
 }

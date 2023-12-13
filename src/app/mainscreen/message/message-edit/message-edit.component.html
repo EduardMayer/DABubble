@@ -4,17 +4,25 @@
         <div class="msg-mods">
             <img src="assets/img/icons/addreaction.svg" (click)="toggleEmojiBar($event)">
         </div>
+
+        <div class="preview-file" *ngIf="_message?.fileSrc">
+            <img [src]="_message.fileSrc" />
+            <img class="close-red-icon" (click)="deleteFile()" src="assets/img/icons/close-red-icon.svg" alt="" srcset="">
+          </div>
         <div class="msg-submit-options">
+           
             <div class="msg-send">
                 <button class='back' (click)="saveMessage()">Zurück</button>
             </div>
             <div class="msg-send">
                 <button class='submit' (click)="saveMessage()">Speichern</button>
             </div>
+
         </div>
 
     </div>
     <textarea cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="_message.content"
         *ngIf="channelFirebaseService.selectedChannel"  (click)="closeEmojiBar()">
-</textarea>
+    </textarea>
+    
 </div>
