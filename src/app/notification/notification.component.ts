@@ -5,12 +5,12 @@ import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@ang
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss']
 })
-export class NotificationComponent implements OnInit,OnDestroy {
+export class NotificationComponent implements OnInit, OnDestroy {
 
   public notText: string = "";
   public notDur: number = 2;
   public notAni: string = "shift-up";
-  public messageType: string ="default"; //options e.g default, success, error
+  public messageType: string = "default"; //options e.g default, success, error
 
   @ViewChild('notContainer', { read: ElementRef }) notContainerElement: ElementRef | undefined;
 
@@ -38,24 +38,25 @@ export class NotificationComponent implements OnInit,OnDestroy {
    * available types: shift-up, shift-left-in, shift-right-in
    */
   @Input() set animation(value: string) {
-    this.notAni = value; 
+    this.notAni = value;
   }
 
-  constructor(private host: ElementRef<HTMLElement>) { 
+  constructor(private host: ElementRef<HTMLElement>) {
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.notContainerElement?.nativeElement.classList.add(this.notAni);
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.host.nativeElement.remove();
-    },this.notDur*1000);
+    }, this.notDur * 1000);
   }
 
 
   ngOnDestroy(): void {
     console.log("notification removed");
   }
+  
   ngOnInit(): void {
     console.log('notification created');
   }

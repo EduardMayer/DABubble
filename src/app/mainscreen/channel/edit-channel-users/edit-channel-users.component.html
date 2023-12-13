@@ -19,4 +19,11 @@
     </div>
     
 </div>
+
 <div id="editChannelBackground" (click)="close()"></div>
+
+<app-notification *ngIf="savingChanges"
+[text]="'Nutzer wurden erfolgreich hinzugefügt'"
+[type]="'default'"
+[animation]="'shift-right-in'" >
+</app-notification>

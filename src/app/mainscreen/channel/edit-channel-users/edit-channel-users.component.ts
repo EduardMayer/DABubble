@@ -11,6 +11,7 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 export class EditChannelUsersComponent {
 
   channelCopy: Channel;
+  savingChanges: boolean=false;
   @Output() closeEvent = new EventEmitter<any>();
 
   constructor(
@@ -39,10 +40,16 @@ export class EditChannelUsersComponent {
   * Saves changes when users where removed or added. 
   */
   saveUserChanges() {
+    
     if (this.channelCopy) {
       this.channelFirebaseService.selectedChannel = this.channelCopy;
       this.channelFirebaseService.updateChannel(this.channelCopy);
       this.channelFirebaseService.loadallChannelusers();
+      this.savingChanges=true;
+      setTimeout(()=>{
+        this.close();
+        this.savingChanges=false;
+      },2000);
     }
   }
 
