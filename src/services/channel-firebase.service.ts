@@ -237,7 +237,6 @@ export class ChannelFirebaseService {
         }
     }
 
-
     /**
     * Lifecycle hook called when the component is about to be destroyed.
     * Unsubscribes from any active subscription.

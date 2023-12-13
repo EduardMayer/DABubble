@@ -59,9 +59,11 @@
         </div>
     </div>
 
-    <textarea #textInput cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="message.content"
+    <textarea #textInput cdkTextareaAutosize #messageCreate 
+        class="msg-write-container" [(ngModel)]="message.content"
         placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar();"
-        [mention]="items" [mentionConfig]="mentionConfig">
+        [mention]="items" [mentionConfig]="mentionConfig"
+        (keydown.enter)="createMessage()">
     </textarea>
 
 </div>

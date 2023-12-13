@@ -71,7 +71,8 @@ export class MessageCreateComponent {
       if (this._path) {
         this.message.fileSrc = this.file;
         this.message.fileName = this.fileName;
-        this.messageFirebaseService.createMessage(this._path, this.message);
+        await this.messageFirebaseService.createMessage(this._path, this.message);
+        this.message.content="";
       }
       this.message = new Message();
       this.showEmojiBar = false;
