@@ -60,6 +60,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { EmptyWindowComponent } from './mainscreen/empty-window/empty-window.component';
 import { EditChannelUsersComponent } from './mainscreen/channel/edit-channel-users/edit-channel-users.component';
 import { ShowChannelUsersComponent } from './mainscreen/channel/show-channel-users/show-channel-users.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 
@@ -100,7 +101,8 @@ import { ShowChannelUsersComponent } from './mainscreen/channel/show-channel-use
     AddUserToChannelDialogComponent,
     EmptyWindowComponent,
     EditChannelUsersComponent,
-    ShowChannelUsersComponent
+    ShowChannelUsersComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

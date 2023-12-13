@@ -84,3 +84,9 @@
 <div *ngIf="userProfilOpen">
     <app-user-profil [user]="userProfilUser"></app-user-profil>
 </div>
+
+<app-notification 
+[text]="'Mitteilung'"
+[type]="'default'"
+[animation]="'shift-right-in'" >
+</app-notification>
