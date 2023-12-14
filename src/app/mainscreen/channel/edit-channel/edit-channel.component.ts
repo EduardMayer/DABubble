@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
+import { WindowSizeService } from 'src/services/window-size.service';
 
 @Component({
   selector: 'app-edit-channel',
@@ -11,6 +12,8 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
 export class EditChannelComponent implements OnInit {
 
   @Output() closeEvent = new EventEmitter<any>();
+  @Output() addUserEvent = new EventEmitter<any>();
+
   channel = new Channel(); 
   editChannelDescription = false; 
   editChannelName = false; 
@@ -19,10 +22,18 @@ export class EditChannelComponent implements OnInit {
   NewChannelDescription: string = ""; 
   channelCreatorName = ""; 
 
+  windowWidth: any; 
+
   constructor(
     public channelFirebaseService: ChannelFirebaseService , 
-    private userFirebaseService: UserFirebaseService
-  ){}
+    private userFirebaseService: UserFirebaseService, 
+    private windowSizeService: WindowSizeService
+  ){
+    this.windowSizeService.windowWidth$.subscribe(windowWidth => {
+      this.windowWidth = windowWidth; 
+    });
+    this.windowSizeService.setWindowSize(); 
+  }
 
   ngOnInit(): void {
     if(this.channelFirebaseService.selectedChannel){
@@ -73,5 +84,12 @@ export class EditChannelComponent implements OnInit {
       this.channel = this.channelFirebaseService.selectedChannel; 
     }
     this.editChannelDescription = false; 
+  }
+
+  openAddMemberMenu(){
+    this.addUserEvent.emit();
+    console.log("emit in child");
+    
+    this.close(); 
   }
 }

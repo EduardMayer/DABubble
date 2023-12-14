@@ -68,7 +68,13 @@
         <div>
             <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
             [uId]="user.id">
-        </app-chat-view>
+            </app-chat-view>
+            <div *ngIf="windowWidth <= 768">
+                <div class="add-user-container"(click)="openAddMemberMenu()">
+                    <img class="member-image" src="assets/img/icons/addmembers.svg">
+                    <span class="add-member-text">Teilnehmer hinzufügen</span>
+                </div>
+            </div>
         </div>
     </div>
     <div id="edit-channel-leaveChannel">

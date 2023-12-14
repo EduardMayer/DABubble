@@ -20,7 +20,12 @@
             </div>
 
             <img 
+                *ngIf="windowWidth > 768"
                 (click)="this.showEditChannelUsers = true"
+                src="assets/img/icons/addmembers.svg">
+            <img 
+                *ngIf="windowWidth <= 768"
+                (click)="this.showChannelUsers = true"
                 src="assets/img/icons/addmembers.svg">
         </div>
     </div>
@@ -58,7 +63,7 @@
     <app-message-create [path]="channelFirebaseService.currentChannelMessagePath" [currentLocation]="'channel'"></app-message-create>
 
     <app-edit-channel 
-        *ngIf="showEditChannel" (closeEvent)="closeEditDialog()">
+        *ngIf="showEditChannel" (closeEvent)="closeEditDialog()" (addUserEvent)="this.showEditChannelUsers = true">
     </app-edit-channel>
 
     <app-show-channel-users 

@@ -10,6 +10,7 @@ import { UserProfilService } from 'src/services/user-profil.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { FormatService } from 'src/services/format.service';
+import { WindowSizeService } from 'src/services/window-size.service';
 
 @Component({
   selector: 'app-channel',
@@ -33,6 +34,8 @@ export class ChannelComponent implements OnDestroy{
   showEditChannelUsers: boolean = false;
   showChannelUsers: boolean = false;
 
+  windowWidth: any; 
+
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
@@ -40,9 +43,14 @@ export class ChannelComponent implements OnDestroy{
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService,
     private activeSelectionService: ActiveSelectionService,
-    public formatService: FormatService
+    public formatService: FormatService , 
+    public windowSizeService: WindowSizeService
   ) {
     this.loadChannelMessages();
+    this.windowSizeService.windowWidth$.subscribe(windowWidth => {
+      this.windowWidth = windowWidth; 
+    });
+    this.windowSizeService.setWindowSize(); 
   }
 
   /**
@@ -82,6 +90,7 @@ export class ChannelComponent implements OnDestroy{
   */
   openAddMemberMenu() {
     // Verzögerung hinzufügen
+    
     if (this.menuTrigger) {
       this.menuTrigger.closeMenu();
     }
@@ -89,6 +98,8 @@ export class ChannelComponent implements OnDestroy{
       this.addMemberTrigger.openMenu();
     }
   }
+
+  
 
 
 

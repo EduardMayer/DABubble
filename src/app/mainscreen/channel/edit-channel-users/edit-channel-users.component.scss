@@ -57,3 +57,13 @@
     top: 0px;
     left: 0px;
 }
+
+
+@media only screen and (max-width: 768px) {
+    #editChannel{
+        max-width: unset;
+        min-width: unset;
+        width: calc(100vw - 24px);
+        right: 0px;
+    }
+}
