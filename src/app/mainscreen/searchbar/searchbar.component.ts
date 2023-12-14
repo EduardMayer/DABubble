@@ -6,6 +6,7 @@ import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
+import { FormatService } from 'src/services/format.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
@@ -38,7 +39,8 @@ export class SearchbarComponent implements OnInit {
   constructor(
     private userService: UserFirebaseService,
     private channelService: ChannelFirebaseService,
-    private chatService: ChatFirebaseService) { }
+    private chatService: ChatFirebaseService,
+    private formatService: FormatService) { }
 
   headerControl = new FormControl('');
   options: { id: string; name: string, type: string, avatarSrc?: string }[] = [];
@@ -167,7 +169,7 @@ export class SearchbarComponent implements OnInit {
     this.availableUsers.forEach((user) => {
       usersByName.push({
         id: user.id,
-        name: prefix + user.fullName,
+        name: prefix + this.formatService.cutStrLen(user.fullName),
         type: "user",
         avatarSrc: user.avatar
       });
@@ -187,7 +189,7 @@ export class SearchbarComponent implements OnInit {
     this.channelService.loadedChannels.forEach((channel) => {
       channels.push({
         id: channel.id,
-        name: prefix + channel.channelName,
+        name: prefix + this.formatService.cutStrLen(channel.channelName),
         type: "channel"
       });
     });

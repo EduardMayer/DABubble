@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/
 import { Channel } from 'src/models/channel.class';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
+import { FormatService } from 'src/services/format.service';
 import { NotificationService } from 'src/services/notification.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class EditChannelUsersComponent {
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
     public activeSelectionService: ActiveSelectionService,
-    private notService: NotificationService
+    private notService: NotificationService,
+    public formatService: FormatService
   ) {
     this.channelCopy = new Channel();
 

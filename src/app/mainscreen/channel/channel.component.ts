@@ -40,7 +40,7 @@ export class ChannelComponent implements OnDestroy{
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService,
     private activeSelectionService: ActiveSelectionService,
-    private formatService: FormatService
+    public formatService: FormatService
   ) {
     this.loadChannelMessages();
   }
@@ -123,9 +123,6 @@ export class ChannelComponent implements OnDestroy{
     this.closeMenus()
     this.userProfilService.openUserProfil(user);
   }
-
-
-
 
 
   /**

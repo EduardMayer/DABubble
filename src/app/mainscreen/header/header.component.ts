@@ -12,6 +12,7 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
+import { FormatService } from 'src/services/format.service';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class HeaderComponent implements OnInit {
     private chatService: ChatFirebaseService, 
     private windowSizeService: WindowSizeService,
     public activeSelectionService: ActiveSelectionService,
+    public formatService: FormatService,
     private router: Router) { }
 
   /**

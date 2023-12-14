@@ -7,6 +7,7 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { User } from 'src/models/user.class';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 import { MentionDirective } from 'angular-mentions';
+import { FormatService } from 'src/services/format.service';
 
 
 
@@ -54,7 +55,8 @@ export class MessageCreateComponent {
     private userFirebaseService: UserFirebaseService,
     public channelFirebaseService: ChannelFirebaseService,
     private messageFirebaseService: MessageFirebaseService,
-    private storageService: StorageFirebaseService
+    private storageService: StorageFirebaseService,
+    private formatService: FormatService
   ) { }
 
   /**
@@ -89,7 +91,7 @@ export class MessageCreateComponent {
     if (this.location == 'thread') {
       return "Antworten";
     } else if (this.location == "channel" && this.channelFirebaseService.selectedChannel) {
-      return "Nachricht an #" + this.channelFirebaseService.selectedChannel.channelName;
+      return "Nachricht an #" + this.formatService.cutStrLen(this.channelFirebaseService.selectedChannel.channelName);
     } else {
       return "Nachricht scheiben";
     }

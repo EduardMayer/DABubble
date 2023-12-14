@@ -37,7 +37,7 @@ export class ChatComponent {
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService,
     private activeSelectionService: ActiveSelectionService,
-    private formatService: FormatService
+    public formatService: FormatService
   ) {
     this.initChat();
   }

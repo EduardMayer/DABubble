@@ -26,8 +26,8 @@ export class FormatService {
         return hours + ':' + minutes;
       }
     
-      formatTimeDelta(timestamp: number): string {
-        const now = new Date().getTime();
+    formatTimeDelta(timestamp: number): string {
+      const now = new Date().getTime();
         const delta = now - timestamp;
         const oneDayInMs = 24 * 60 * 60 * 1000; // One day in milliseconds
     
@@ -42,6 +42,15 @@ export class FormatService {
           const daysAgo = Math.floor(delta / oneDayInMs);
           return `vor ${daysAgo} Tagen`;
         }
+    }
+
+    cutStrLen(string: string){
+      
+      if(string.length>40){
+        string=string.slice(0,39)+"..";
       }
+
+      return string;
+    }
 
 }

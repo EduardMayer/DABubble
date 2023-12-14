@@ -57,12 +57,17 @@
                 display: flex;
                 flex-direction: row;
                 gap: 8px;
+                line-break: anywhere;
 
                 img {
                     height: 70px;
                     aspect-ratio: 1;
                     border-radius: 50%;
                 }
+            }
+
+            .channel-text{
+                line-break: anywhere;
             }
         }
     }

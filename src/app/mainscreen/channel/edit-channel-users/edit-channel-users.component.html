@@ -2,7 +2,7 @@
     <div id="editChannelHeader">
         <div>
             <h2>Leute hinzufügen</h2>
-            <h4>#{{channelCopy.channelName}}</h4>
+            <h4>#{{formatService.cutStrLen(channelCopy.channelName)}}</h4>
         </div>
         <img src="assets/img/icons/close.svg" alt="close" (click)="close()">
     </div>

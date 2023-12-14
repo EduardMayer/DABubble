@@ -13,6 +13,7 @@ import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
+import { FormatService } from 'src/services/format.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -35,7 +36,8 @@ export class SidenavComponent implements OnInit {
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService, 
     private windowSizeService: WindowSizeService,
-    private activeSelectionService: ActiveSelectionService
+    private activeSelectionService: ActiveSelectionService,
+    public formatService: FormatService
   ) { }
 
   /**
