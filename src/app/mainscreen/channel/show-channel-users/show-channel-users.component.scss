@@ -16,11 +16,13 @@
     word-break: break-all;
     max-height: 70vh;
     overflow: scroll;
+    overflow-x: hidden;
 
     #showChannelHeader{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
 
         img{
             cursor: pointer;
@@ -36,6 +38,8 @@
         cursor: pointer;
     }
 }
+
+
 
 #showChannelBackground{
     position: fixed;

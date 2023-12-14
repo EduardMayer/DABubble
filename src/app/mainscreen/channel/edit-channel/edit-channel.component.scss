@@ -35,34 +35,6 @@
         }
     }
 
-    .closeIcon-container{
-        padding: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 30px;
-        cursor: pointer;
-        min-width: 30px;
-        min-height: 30px;
-
-        &:hover{
-            background-color: #ECEEFE; 
-        }
-
-        #closeIcon:hover path {
-            fill: #535AF1; 
-            }
-
-        #closeIcon{
-            width: 24px;
-            height: 24px;
-        }
-    }
-
-   
-   
-    
-
     #edit-channel-name-container-viewMode{
         border: 1px solid #ADB0D9; 
         border-radius: 20px;
@@ -148,6 +120,10 @@
             text-decoration: unset;
             cursor: pointer;
         }
+
+        h2{
+            color: rgba(83, 90, 241, 1);
+        }
         #edit-channel-description-container-editMode-input{
             position: relative;
 
@@ -159,6 +135,8 @@
                 width: calc(100% - 24px - 30px);
                 font-size: 1.5em;
             }
+
+            
         }
     }
 
