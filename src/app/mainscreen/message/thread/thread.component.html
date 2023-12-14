@@ -23,7 +23,7 @@
 
 
         <div *ngFor="let answer of threadFirebaseService.loadedAnswers; let i = index">
-            <app-message [message]="answer" [timestampString]="formatTimeDelta(answer.timestamp)"
+            <app-message [message]="answer" [timestampString]="formatService.formatTimeDelta(answer.timestamp)"
                 [messageLocationName]="'thread'" (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)"></app-message>
         </div>
     </div>

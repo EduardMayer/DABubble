@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Message } from 'src/models/message.class';
-import { DateFormatService } from 'src/services/dateFormat.service';
+import { FormatService } from 'src/services/format.service';
 
 @Component({
   selector: 'app-date-line',
@@ -10,11 +10,11 @@ import { DateFormatService } from 'src/services/dateFormat.service';
 export class DateLineComponent{
 
   constructor(
-    private dateFormatService: DateFormatService
+    private formatService: FormatService
     ){}
 
   messageTimeString: String | undefined;
-  currentDayTimeString: string = this.dateFormatService.formatDateToDmy(new Date());
+  currentDayTimeString: string = this.formatService.formatDateToDMY(new Date());
 
 
 

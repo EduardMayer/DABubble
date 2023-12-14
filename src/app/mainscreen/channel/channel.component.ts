@@ -9,6 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { UserProfilService } from 'src/services/user-profil.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
+import { FormatService } from 'src/services/format.service';
 
 @Component({
   selector: 'app-channel',
@@ -38,7 +39,8 @@ export class ChannelComponent implements OnDestroy{
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
     private userProfilService: UserProfilService,
-    private activeSelectionService: ActiveSelectionService
+    private activeSelectionService: ActiveSelectionService,
+    private formatService: FormatService
   ) {
     this.loadChannelMessages();
   }
@@ -132,8 +134,8 @@ export class ChannelComponent implements OnDestroy{
    * @returns - Time or string "heute" when it is today. 
    */
   getMessageTime(message: Message) {
-    const currentDay = this.formatDateToDmy(new Date());
-    const messageDmy = this.formatDateToDmy(new Date(message.timestamp));
+    const currentDay = this.formatService.formatDateToDMY(new Date());
+    const messageDmy = this.formatService.formatDateToDMY(new Date(message.timestamp));
     if (currentDay == messageDmy) {
       return "heute";
     } else {
@@ -141,17 +143,6 @@ export class ChannelComponent implements OnDestroy{
     }
   }
 
-  /**
-   * Formats a given date to a readable pattern. 
-   * @param date - date to format
-   * @returns - Date as string in Format DD.MM.YYYY like. 01.01.2024 
-   */
-  formatDateToDmy(date: Date) {
-    const day = date.getDate().toString().padStart(2, '0');      // Get day and pad with leading zero if necessary
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Get month (add 1 because months are zero-based) and pad with leading zero if necessary
-    const year = date.getFullYear();                              // Get year
-    return `${day}.${month}.${year}`;
-  }
 
   closeEditChannelUsers() {
     this.showEditChannelUsers = false;
