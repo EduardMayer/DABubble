@@ -91,8 +91,8 @@
     display: flex;
     position: absolute;
     height: 20px !important;
-    top: -18px;
-    left: 191px;
+    top: 0px;
+    left: 184px;
     cursor: pointer;
 }
 
@@ -101,7 +101,7 @@
     fill: rgba(121, 126, 243, 1);
 }
 
-.msg-icon {
+.msg-icon-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,8 +112,9 @@
 
     &:hover {
         background-color: rgba(236, 238, 254, 1);
-        svg:hover path {
-            fill: rgba(68, 77, 242, 1);
+        fill: rgba(68, 77, 242, 1);
+        #msg-icon path{
+            fill: #535AF1; 
         }
     }
 

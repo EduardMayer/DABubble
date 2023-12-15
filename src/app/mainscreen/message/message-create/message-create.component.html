@@ -4,8 +4,8 @@
         <div class="msg-mods">
             <input type="file" #fileInput style="display: none" (change)="uploadFile(fileInput)">
 
-            <div class="msg-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" (click)="fileInput.click()">
+            <div class="msg-icon-container">
+                <svg id="msg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" (click)="fileInput.click()">
                     <mask id="mask0_516_6760" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9"/>
                     </mask>
@@ -17,8 +17,8 @@
             
             <img src="assets/img/icons/strips_grey.svg">
             
-            <div class="msg-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" (click)="toggleEmojiBar($event)">
+            <div class="msg-icon-container">
+                <svg id="msg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" (click)="toggleEmojiBar($event)">
                     <mask id="mask0_22077_652" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9" />
                     </mask>
@@ -28,8 +28,8 @@
                 </svg> 
             </div>
 
-            <div class="msg-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" (click)="insAt()">
+            <div class="msg-icon-container">
+                <svg id="msg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" (click)="insAt()">
                     <mask id="mask0_516_6769" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9"/>
                     </mask>

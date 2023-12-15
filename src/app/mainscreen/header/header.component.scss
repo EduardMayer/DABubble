@@ -71,7 +71,7 @@ $headerDropdownPositionTop: 100px;
 $headerDropdownPositionRigth: 0px;
 
 #headerMenu , #headerMenu-mobile {
-    width: 100px;
+    
     position: absolute;
     background-color: white;
     border-radius: 30px 0px 30px 30px;
@@ -82,14 +82,26 @@ $headerDropdownPositionRigth: 0px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
-    padding: 24px;
+    padding: 30px;
     box-shadow: 0px -3px 10px 0px #00000033;
 
 
     a {
+        display: flex;
+        justify-content: center;
         cursor: pointer;
+        padding: 10px 45px;
+        border-radius: 100px;
+        font-size: 18px;
+        font-weight: 600;
+        width: 100px;
+        &:hover{
+            background-color: rgba(236, 238, 254, 1);
+            color: rgba(83, 90, 241, 1);
+        }
     }
+
+   
 }
 
 #userProfileMenuBackground{

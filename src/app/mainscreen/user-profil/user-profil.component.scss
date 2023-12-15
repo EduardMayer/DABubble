@@ -43,6 +43,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            a{
+                color: #444DF2;
+                cursor: pointer;
+                &:hover{
+                    font-weight: bold;
+                }
+            }
         }
 
         #status {
@@ -86,6 +94,7 @@
             display: flex;
             justify-content: center;
             align-items: center; 
+            margin-top: 30px;
             button{
                 display: flex;
                 justify-content: center;
@@ -93,6 +102,8 @@
                 gap:8px; 
                 &:hover{
                     cursor: pointer;
+                    background-color: rgba(121, 126, 243, 1) !important;
+                    transition: background-color 0.15s ease-in-out;
                 }
             }
         }

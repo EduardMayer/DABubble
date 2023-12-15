@@ -97,12 +97,17 @@ mat-form-field {
     font-weight: bold;
     margin-top: 18px;
     cursor: pointer;
-
     position: absolute;
     right: 32px;
     bottom: 28px;
-    &:disabled{
+
+    &:disabled {
         background-color: gray;
+    }
+
+    &:not(:disabled):hover {
+        background-color: rgba(121, 126, 243, 1) !important;
+        transition: background-color 0.15s ease-in-out;
     }
 }
 
