@@ -85,12 +85,16 @@
                 display: flex;
             }
 
-            .answers-link {
+            .answers-details {
                 display: flex;
                 align-items: center;
                 gap: 16px;
                 color: #535AF1;
                 margin: 0 5px 0 5px;
+
+                .answers-link{
+                    cursor: pointer;
+                }
             }
 
             img {

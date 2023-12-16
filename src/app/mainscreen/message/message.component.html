@@ -43,15 +43,15 @@
         </app-message-edit>
 
         <div class='message-footer'>
-            <div class="answers-link"
+            <div class="answers-details"
                 *ngIf="this.messageService.loadedAnswers.length > 0 && messageLocation == 'channel'"
                 (click)="threadFirebaseService.openThread(_message)">
                 
-                <div *ngIf="this.messageService.loadedAnswers.length == 1">
+                <div *ngIf="this.messageService.loadedAnswers.length == 1" class="answers-link">
                   {{ this.messageService.loadedAnswers.length }} Antwort
                 </div>
 
-                <div *ngIf="this.messageService.loadedAnswers.length > 1">
+                <div *ngIf="this.messageService.loadedAnswers.length > 1" class="answers-link">
                   {{ this.messageService.loadedAnswers.length }} Antworten
                 </div>
 
