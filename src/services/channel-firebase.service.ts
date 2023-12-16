@@ -37,7 +37,7 @@ export class ChannelFirebaseService {
     constructor(
         private firestore: Firestore,
         private generateIdService: GenerateIdService,
-        private chatFirebaseService: ChatFirebaseService,
+        private chatService: ChatFirebaseService,
         private userService: UserFirebaseService,
         private activeSelectionService: ActiveSelectionService
     ) {
@@ -46,7 +46,7 @@ export class ChannelFirebaseService {
     selectChannel(channelId: string) {
         this.selectedChannelId = channelId;
         this.loadChannelMessages(channelId);
-        this.chatFirebaseService.selectedChat = undefined;
+        this.chatService.selectedChat = undefined;
         const index = this.loadedChannels.findIndex(channel => channel.id === channelId);
         this.selectedChannel = this.loadedChannels[index];
         this.loadallChannelusers();

@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   windowWidth: number = 1024;  
 
   constructor(
-    private userProfilService: UserProfilService,
+    private userProfileService: UserProfileService,
     private authService: AuthFirebaseService,
     public userService: UserFirebaseService,
     public channelService: ChannelFirebaseService,
@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
    */
   showProfil() {
     this.showHeaderMenu = false;
-    this.userProfilService.openUserProfil(this.userService.currentUser);
+    this.userProfileService.openUserProfil(this.userService.currentUser);
   }
 
   /**

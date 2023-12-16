@@ -6,7 +6,7 @@ import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { UserStatusFirebaseService } from 'src/services/user-status-firebase.service';
 
 @Component({
@@ -36,9 +36,9 @@ export class UserProfilComponent implements OnInit {
   });
 
   constructor(
-    private userProfilService: UserProfilService,
+    private userProfileService: UserProfileService,
     private userStatusService: UserStatusFirebaseService,
-    private userFirebaseService: UserFirebaseService,
+    private userService: UserFirebaseService,
     private authService: AuthFirebaseService,
     private chatFirebaseService: ChatFirebaseService, 
     private router: Router) {
@@ -48,7 +48,7 @@ export class UserProfilComponent implements OnInit {
    * Gets the current user status when opening userProfil.
    */
   ngOnInit(): void {
-    this.isCurrentUser = this.userFirebaseService.currentUser.id == this.user.id ? true : false;
+    this.isCurrentUser = this.userService.currentUser.id == this.user.id ? true : false;
     this.getStatus();
     this.editUserForm.patchValue({
       nameInput: this.user.fullName, 
@@ -83,8 +83,8 @@ export class UserProfilComponent implements OnInit {
     if (this.currentAuthMail != this.editUserForm.get("emailInput")?.value) {
       await this.authService.sendUpdateEmail(mail!);
     }
-    this.userFirebaseService.setCurrentUser(this.user);
-    this.userFirebaseService.update(this.userFirebaseService.currentUser);
+    this.userService.setCurrentUser(this.user);
+    this.userService.update(this.userService.currentUser);
 
     if (this.currentAuthMail != this.editUserForm.get("emailInput")?.value) {
       this.authService.logout();
@@ -107,7 +107,7 @@ export class UserProfilComponent implements OnInit {
    * Close user profil
    */
   close() {
-    this.userProfilService.close();
+    this.userProfileService.close();
   }
 
   /**
@@ -127,11 +127,11 @@ export class UserProfilComponent implements OnInit {
    * Opens Chat with user. If a chat already exists, chat was openden. If no chat existst, a new one was created!
    */
   async sendMessage(){
-    if(this.user && this.userFirebaseService.currentUser){
+    if(this.user && this.userService.currentUser){
       const usersChat = this.chatFirebaseService.getChatWithUser(this.user.id);  
       if(usersChat){
         this.chatFirebaseService.selectChat(usersChat.id);
-        this.userProfilService.close(); 
+        this.userProfileService.close(); 
       }
       else{
         this.createChat(); 
@@ -144,7 +144,7 @@ export class UserProfilComponent implements OnInit {
    */
   createChat() {
     let chat = new Chat({
-      users: [this.userFirebaseService.currentUser.id, this.user.id]
+      users: [this.userService.currentUser.id, this.user.id]
     });
     this.chatFirebaseService.update(chat).then((chat) => {
       this.chatFirebaseService.loadedChats.unshift(chat);

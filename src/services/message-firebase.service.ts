@@ -24,8 +24,8 @@ export class MessageFirebaseService {
 
     constructor(
         private firestore: Firestore,
-        public channelFirebaseService: ChannelFirebaseService,
-        private generateIdService: GenerateIdService
+        public channelService: ChannelFirebaseService,
+        private idService: GenerateIdService
     ) {
     }
 
@@ -48,7 +48,7 @@ export class MessageFirebaseService {
                 updateDoc(docInstance, reaction.toJSON());
             }
         } else {
-            const reactionId = this.generateIdService.generateRandomId(20);
+            const reactionId = this.idService.generateRandomId(20);
             const docInstance = doc(this.firestore, `${path}/${reactionId}`);
             await setDoc(docInstance, reaction.toJSON());
         }
@@ -124,7 +124,7 @@ export class MessageFirebaseService {
     */
     async createMessage(path: string, message: Message) {
         if (message.id == "") {
-            message.id = this.generateIdService.generateRandomId(20);
+            message.id = this.idService.generateRandomId(20);
             path = path + message.id;
             const docInstance = doc(this.firestore, path);
             await setDoc(docInstance, message.toJSON());

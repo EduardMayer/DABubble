@@ -1,7 +1,7 @@
-<div id="main-container" *ngIf="channelFirebaseService.finishedLoading && userFirebaseService.finishedLoading">
+<div id="main-container" *ngIf="channelService.finishedLoading && userService.finishedLoading">
     <app-header id="main-header" 
-        [channelSelected]="channelFirebaseService.selectedChannelId != undefined"
-        [chatSelected]="chatFirebaseService.selectedChatId != undefined"
+        [channelSelected]="channelService.selectedChannelId != undefined"
+        [chatSelected]="chatService.selectedChatId != undefined"
         [emptyChatSelectedMobile]="!showSidenavMobile"
         (closeEmptyViewEvent)="showSidenavMobile = true;">
     </app-header>
@@ -17,34 +17,13 @@
         </ng-template>
         <ng-template #channelView>
             <app-channel id="main-channel"></app-channel>
-            <app-thread id="main-thread" *ngIf="threadFirebaseService.message"></app-thread>
+            <app-thread id="main-thread" *ngIf="threadService.message"></app-thread>
         </ng-template>
         <ng-template #emptyView>
             <app-empty-window></app-empty-window>
         </ng-template>
     </div>
 
-    <!-- OLD MOBILE
-    <div id="main-body-mobile" *ngIf="windowWidth <= 768">
-        <app-sidenav *ngIf="channelFirebaseService.selectedChannelId == undefined && chatFirebaseService.selectedChatId == undefined" 
-            id="main-sidebar">
-        </app-sidenav>
-
-        <ng-container *ngIf="chatFirebaseService.selectedChat; then chatView; else channelView">
-        </ng-container>
-
-        <ng-template #chatView>
-            <app-chat *ngIf="chatFirebaseService.selectedChatId" id="main-chat"></app-chat>
-        </ng-template>
-
-        <ng-template #channelView>
-            <app-channel *ngIf="channelFirebaseService.selectedChannelId" id="main-channel"></app-channel>
-            <app-thread id="main-thread" *ngIf="threadFirebaseService.message"></app-thread>
-        </ng-template>
-    </div>
-    -->
-
-    <!-- NEW MOBILE -->
     <div id="main-body-mobile" *ngIf="windowWidth <= 768">
         <ng-container *ngIf="activeSelectionService.getActiveSelectionType() === 'Chat'; then chatView"></ng-container>
         <ng-container *ngIf="activeSelectionService.getActiveSelectionType() === 'Channel'; then channelView"></ng-container>
@@ -55,12 +34,12 @@
         </ng-template>
 
         <ng-template #channelView>
-            <app-channel id="main-channel" *ngIf="!threadFirebaseService.message"></app-channel>
-            <app-thread id="main-thread" *ngIf="threadFirebaseService.message"></app-thread>
+            <app-channel id="main-channel" *ngIf="!threadService.message"></app-channel>
+            <app-thread id="main-thread" *ngIf="threadService.message"></app-thread>
         </ng-template>
 
         <ng-template #emptyView>
-            <app-sidenav *ngIf="channelFirebaseService.selectedChannelId == undefined && chatFirebaseService.selectedChatId == undefined && showSidenavMobile" 
+            <app-sidenav *ngIf="channelService.selectedChannelId == undefined && chatService.selectedChatId == undefined && showSidenavMobile" 
             id="main-sidebar">
             </app-sidenav>
             <app-empty-window *ngIf="!showSidenavMobile"></app-empty-window>

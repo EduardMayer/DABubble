@@ -33,7 +33,7 @@ export class ChatFirebaseService {
 
     constructor(
         private firestore: Firestore,
-        private generateIdService: GenerateIdService,
+        private idService: GenerateIdService,
         private userService: UserFirebaseService,
         private activeSelectionService: ActiveSelectionService
     ) {
@@ -103,7 +103,7 @@ export class ChatFirebaseService {
     }
 
     async createChat(chat: Chat) {
-        chat.id = this.generateIdService.generateRandomId(20);
+        chat.id = this.idService.generateRandomId(20);
         let chatExists = await this.checkChatExists(chat.users);
 
         if (!chatExists) {

@@ -7,7 +7,7 @@ import { Reaction } from 'src/models/reaction.class';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { User } from 'src/models/user.class';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 
 
@@ -37,7 +37,7 @@ export class MessageComponent {
     public userFirebaseService: UserFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
     private channelFirebaseService: ChannelFirebaseService,
-    private userProfilService: UserProfilService,
+    private userProfileService: UserProfileService,
     private storageService: StorageFirebaseService,
   ) { }
 
@@ -198,7 +198,7 @@ export class MessageComponent {
   }
 
   openUserProfil() {
-    this.userProfilService.openUserProfil(this.autorUser);
+    this.userProfileService.openUserProfil(this.autorUser);
   }
 
   isPDF(fileName: string): boolean {

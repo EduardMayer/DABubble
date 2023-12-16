@@ -8,7 +8,7 @@ import { AddChannelDialogComponent } from 'src/app/add-channel-dialog/add-channe
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { User } from 'src/models/user.class';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
@@ -34,7 +34,7 @@ export class SidenavComponent implements OnInit {
     public channelFirebaseService: ChannelFirebaseService,
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
-    private userProfilService: UserProfilService, 
+    private userProfileService: UserProfileService, 
     private windowSizeService: WindowSizeService,
     private activeSelectionService: ActiveSelectionService,
     public formatService: FormatService

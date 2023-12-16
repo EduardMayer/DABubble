@@ -9,7 +9,7 @@ import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { FormatService } from 'src/services/format.service';
 import { IfChangedService } from 'src/services/if-changed-service.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 
 @Component({
   selector: 'app-chat',
@@ -35,7 +35,7 @@ export class ChatComponent {
   constructor(
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
-    private userProfilService: UserProfilService,
+    private userProfileService: UserProfileService,
     private activeSelectionService: ActiveSelectionService,
     public formatService: FormatService
   ) {
@@ -82,7 +82,7 @@ export class ChatComponent {
    */
   openProfil() {
     if (this.chatPartner) {
-      this.userProfilService.openUserProfil(this.chatPartner);
+      this.userProfileService.openUserProfil(this.chatPartner);
     }
   }
 

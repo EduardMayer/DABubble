@@ -3,7 +3,7 @@ import { Channel } from 'src/models/channel.class';
 import { User } from 'src/models/user.class';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 
 @Component({
   selector: 'app-show-channel-users',
@@ -17,7 +17,7 @@ export class ShowChannelUsersComponent {
   constructor(
     public channelFirebaseService: ChannelFirebaseService,
     public activeSelectionService: ActiveSelectionService , 
-    private userProfilService: UserProfilService
+    private userProfileService: UserProfileService
   ) { }
 
   openAddMemberMenu(){
@@ -35,6 +35,6 @@ export class ShowChannelUsersComponent {
    */
     openProfil(user: User) {
       this.close()
-      this.userProfilService.openUserProfil(user);
+      this.userProfileService.openUserProfil(user);
     }
 }

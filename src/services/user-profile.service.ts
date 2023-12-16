@@ -5,7 +5,7 @@ import { User } from 'src/models/user.class';
 @Injectable({
   providedIn: 'root'
 })
-export class UserProfilService {
+export class UserProfileService {
 
   private openUserProfilSubject = new Subject<User>(); 
   openUserProfil$ = this.openUserProfilSubject.asObservable(); 

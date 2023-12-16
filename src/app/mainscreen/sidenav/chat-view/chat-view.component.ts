@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { UserStatusFirebaseService } from 'src/services/user-status-firebase.service';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
@@ -17,7 +17,7 @@ export class ChatViewComponent{
 
   constructor(
     public userFirebaseService: UserFirebaseService,
-    private userProfilService: UserProfilService, 
+    private userProfileService: UserProfileService, 
     private userStatusService: UserStatusFirebaseService
   ) {
 
@@ -46,7 +46,7 @@ export class ChatViewComponent{
   }
 
   async openUserProfil(user: User) {
-    this.userProfilService.openUserProfil(user);
+    this.userProfileService.openUserProfil(user);
   }
 
   /**

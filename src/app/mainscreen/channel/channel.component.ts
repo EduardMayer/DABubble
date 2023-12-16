@@ -6,7 +6,7 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { IfChangedService } from 'src/services/if-changed-service.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { FormatService } from 'src/services/format.service';
@@ -41,7 +41,7 @@ export class ChannelComponent implements OnDestroy{
     public channelFirebaseService: ChannelFirebaseService,
     public chatFirebaseService: ChatFirebaseService,
     public userFirebaseService: UserFirebaseService,
-    private userProfilService: UserProfilService,
+    private userProfileService: UserProfileService,
     private activeSelectionService: ActiveSelectionService,
     public formatService: FormatService , 
     public windowSizeService: WindowSizeService
@@ -132,7 +132,7 @@ export class ChannelComponent implements OnDestroy{
    */
   openProfil(user: User) {
     this.closeMenus()
-    this.userProfilService.openUserProfil(user);
+    this.userProfileService.openUserProfil(user);
   }
 
 

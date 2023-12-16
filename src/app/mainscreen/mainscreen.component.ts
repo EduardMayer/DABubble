@@ -7,12 +7,8 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { UserProfilService } from 'src/services/user-profil.service';
+import { UserProfileService } from 'src/services/user-profile.service';
 import { WindowSizeService } from 'src/services/window-size.service';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
-import { NotificationService } from 'src/services/notification.service';
 
 @Component({
   selector: 'app-mainscreen',
@@ -32,24 +28,23 @@ export class MainscreenComponent implements OnInit {
 
 
   constructor(
-    public channelFirebaseService: ChannelFirebaseService,
-    public userFirebaseService: UserFirebaseService,
-    private authService: AuthFirebaseService,
-    public threadFirebaseService: ThreadFirebaseService,
-    private UserProfilService: UserProfilService,
-    public chatFirebaseService: ChatFirebaseService, 
+    public channelService: ChannelFirebaseService,
+    public userService: UserFirebaseService,
+    public threadService: ThreadFirebaseService,
+    private userProfileService: UserProfileService,
+    public chatService: ChatFirebaseService, 
     private windowSizeService: WindowSizeService,
     public activeSelectionService: ActiveSelectionService
   ) {
   }
 
   ngOnInit(): void {
-    this.UserProfilService.openUserProfil$.subscribe((user: User) => {
+    this.userProfileService.openUserProfil$.subscribe((user: User) => {
       this.userProfilOpen = true;
       this.userProfilUser = user;
     });
 
-    this.UserProfilService.closeUserProfil$.subscribe(() => {
+    this.userProfileService.closeUserProfil$.subscribe(() => {
       this.userProfilOpen = false;
     });
     
