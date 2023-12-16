@@ -9,6 +9,7 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { User } from 'src/models/user.class';
 import { UserProfileService } from 'src/services/user-profile.service';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
+import { FormatService } from 'src/services/format.service';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class MessageComponent {
     private channelFirebaseService: ChannelFirebaseService,
     private userProfileService: UserProfileService,
     private storageService: StorageFirebaseService,
+    private formatService: FormatService
   ) { }
 
   @Input()
@@ -183,19 +185,16 @@ export class MessageComponent {
     if (this.givenTimestamp) {
       return this.givenTimestamp;
     } else {
-      return this.formatTimestampToHHMM(timestamp);
+      return this.formatService.formatTimestampToHHMM(timestamp);
     }
+  }
 
+  getLastMessage(){
+    const maxTimestamp = Math.max(...this.messageService.loadedAnswers.map(message => message.timestamp));
+    return this.getTimestamp(maxTimestamp);
   }
 
 
-  formatTimestampToHHMM(timestamp: number) {
-    const date = new Date(timestamp);
-    const hours = String(date.getHours()).padStart(2, '0'); // Ensure two digits with leading zero
-    const minutes = String(date.getMinutes()).padStart(2, '0'); // Ensure two digits with leading zero
-
-    return hours + ':' + minutes;
-  }
 
   openUserProfil() {
     this.userProfileService.openUserProfil(this.autorUser);

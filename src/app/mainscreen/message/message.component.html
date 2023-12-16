@@ -46,7 +46,18 @@
             <div class="answers-link"
                 *ngIf="this.messageService.loadedAnswers.length > 0 && messageLocation == 'channel'"
                 (click)="threadFirebaseService.openThread(_message)">
-                {{ this.messageService.loadedAnswers.length }} Antworten
+                
+                <div *ngIf="this.messageService.loadedAnswers.length == 1">
+                  {{ this.messageService.loadedAnswers.length }} Antwort
+                </div>
+
+                <div *ngIf="this.messageService.loadedAnswers.length > 1">
+                  {{ this.messageService.loadedAnswers.length }} Antworten
+                </div>
+
+                <div class="message-timestamp" *ngIf="this.messageService.loadedAnswers.length > 1">
+                    Letzte Antwort {{ getLastMessage() }} 
+                </div>
             </div>
 
             <div *ngFor="let reaction of messageService.loadedReactions" class="reaction-smileys">
