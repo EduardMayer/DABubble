@@ -23,7 +23,4 @@ export class WindowSizeService implements OnInit{
   setWindowSize(){
     this.windowWidthSubject.next(window.innerWidth);
   }
-
- 
-
 }

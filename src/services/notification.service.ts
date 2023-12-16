@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';8
+import { Injectable } from '@angular/core';
+import { WindowSizeService } from './window-size.service';
+import { take } from 'rxjs';
+
 
 @Injectable({
     providedIn: 'root'
@@ -6,6 +9,7 @@ import { Injectable } from '@angular/core';8
 
 export class NotificationService {
     
+    constructor( private windowSizeService: WindowSizeService){}
 
     /**
     * Renders a notification with the specified message, style, animation, and duration.
@@ -19,7 +23,7 @@ export class NotificationService {
     * 
     * @returns {void}
     */
-    renderNotification(message: string ="",style: string="default", animation: string="shift-right-in", duration: number=2){
+    renderNotification(message: string ="", style: string="default", animation: string="shift-right-in", duration: number=2){
         let container=document.createElement("div");
         document.body.append(container);
         container.classList.add('notification-container');
