@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy, getDoc } from "firebase/firestore";
+import { collection, updateDoc, doc, getDocs, onSnapshot, query, setDoc, where, orderBy } from "firebase/firestore";
 import { Channel } from '../models/channel.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
@@ -23,7 +23,6 @@ export class ChannelFirebaseService {
 
     channelUsers: User[] = [];
 
-
     selectedChannelId: string | undefined;
     selectedChannel: Channel | undefined;
     selectedChannelMessages: Message[] = [];
@@ -35,13 +34,11 @@ export class ChannelFirebaseService {
     finishedLoading = false;
 
 
-    userService = inject(UserFirebaseService);
-    //in consturctor?
     constructor(
         private firestore: Firestore,
         private generateIdService: GenerateIdService,
         private chatFirebaseService: ChatFirebaseService,
-        private userFirebaseService: UserFirebaseService,
+        private userService: UserFirebaseService,
         private activeSelectionService: ActiveSelectionService
     ) {
     }
@@ -171,7 +168,7 @@ export class ChannelFirebaseService {
         let channelExists = await this.checkChannelExists(channel.channelName);
 
         if (!channelExists) {
-            channel.creatorOfChannel = this.userFirebaseService.currentUser.id;
+            channel.creatorOfChannel = this.userService.currentUser.id;
             channel.timestamp = Date.now(); 
 
             const docInstance = doc(collection(this.firestore, "channels"));
@@ -223,6 +220,7 @@ export class ChannelFirebaseService {
         return this.selectedChannelId;
     }
 
+
     leaveSelectedChannel() {
         if (this.selectedChannel != null) {
             const userID = this.userService.currentUser.id;
@@ -262,34 +260,11 @@ export class ChannelFirebaseService {
         this.userOnCurrentChannel = [];
         if (this.selectedChannel) {
             this.selectedChannel.users.forEach((userID) => {
-                this.userFirebaseService.getUserByUID(userID)
+                this.userService.getUserByUID(userID)
                     .then((user) => {
                         this.userOnCurrentChannel.push(user);
                     });
             })
         }
-
-        /*
-        this.userOnCurrentChannel = [];
-        this.userFirebaseService.loadedUsers.forEach(user => {
-    
-          const selectedChannelName = this.selectedChannel?.channelName;
-    
-          if (selectedChannelName) {
-            user.channels.forEach((channel, index) => {
-              if (user.channels.includes(selectedChannelName)) {
-                if (!this.userOnCurrentChannel.some((u: { fullName: string }) => u.fullName === user.fullName)) {
-                  this.userOnCurrentChannel.push(user);
-                }
-              }
-    
-              console.log('channel of the user is', channel);
-              console.log('now selected channel is', this.selectedChannel?.channelName);
-            });
-          }
-        });
-        console.log('all users for in chasnnechannel', this.userOnCurrentChannel);
-        */
-
     }
 }

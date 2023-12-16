@@ -46,11 +46,13 @@ export class FormatService {
 
     cutStrLen(string: string){
       
-      if(string.length>40){
-        string=string.slice(0,39)+"..";
+      if(string){
+        if(string.length>40){
+          string=string.slice(0,39)+"..";
+        }
+        return string;
       }
-
-      return string;
+      return undefined;
     }
 
 }
