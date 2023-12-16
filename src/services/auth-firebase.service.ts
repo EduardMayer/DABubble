@@ -87,12 +87,10 @@ export class AuthFirebaseService implements OnInit {
     'auth/invalid-login-credentials': "Ungültige Anmeldedaten. E-Mail oder Passwort falsch"
   };
 
-
   firebaseUserService = inject(UserFirebaseService);
   channelFirebaseService = inject(ChannelFirebaseService);
   chatFirebaseService = inject(ChatFirebaseService);
   UserData: any;
-
 
   /**
    * Constructur provides the FirebaseAutentiction and create Observable that is triggerd on AuthStateChanges in Firebase.
@@ -130,14 +128,17 @@ export class AuthFirebaseService implements OnInit {
     })
   }
 
+
   /**
    * Checks if mail from authentication is the same as in user firestore and syncs if not match. E.g. after email change.
    */
   ngOnInit(): void {
+    /*
     if (this.UserData.email != this.userService.currentUser.mail) {
       this.userService.currentUser.mail = this.UserData.email;
       this.userService.updateCurrentUserToFirebase();
     }
+    */
   }
 
 
@@ -162,6 +163,7 @@ export class AuthFirebaseService implements OnInit {
       })
   }
 
+
   /**
    * Loggout the User and redirect to startscreen. 
    */
@@ -174,7 +176,7 @@ export class AuthFirebaseService implements OnInit {
     signOut(this.auth).then(() => { this.router.navigate(['']) })
   }
 
-
+  
   /**
  * Register a user with the provided email and password.
  * @param {string} email - The email of the user to register.

@@ -175,7 +175,6 @@ export class ChatFirebaseService {
         }
     }
 
-
     getChatQuery(userId: string) {
         return query(collection(this.firestore, "chats"), where("users", 'array-contains', userId));
     }
