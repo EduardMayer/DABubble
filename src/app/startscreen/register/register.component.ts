@@ -13,7 +13,10 @@ export class RegisterComponent {
 
 
 
-  constructor(private userService: UserFirebaseService, private authService: AuthFirebaseService, private router: Router) { }
+  constructor(
+    private userService: UserFirebaseService, 
+    private authService: AuthFirebaseService
+    ) { }
 
   @Output() closeRegisterView = new EventEmitter<void>();
 

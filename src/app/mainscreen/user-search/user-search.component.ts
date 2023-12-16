@@ -15,7 +15,7 @@ export class UserSearchComponent {
   clickListener: any;
 
   constructor(
-    private userFirebaseService: UserFirebaseService,
+    private userService: UserFirebaseService,
     private renderer: Renderer2,
     private el: ElementRef
   ) {
@@ -34,7 +34,7 @@ export class UserSearchComponent {
 
   getUsers(searchString: string) {
     this.searchResultsUsers = [];
-    this.userFirebaseService.loadedUsers.forEach(user => {
+    this.userService.loadedUsers.forEach(user => {
       if (user.fullName.toUpperCase().includes(searchString.toUpperCase())) {
         this.searchResultsUsers.push(user);
       }

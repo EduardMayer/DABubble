@@ -31,10 +31,9 @@ export class SidenavComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public channelFirebaseService: ChannelFirebaseService,
-    public chatFirebaseService: ChatFirebaseService,
-    public userFirebaseService: UserFirebaseService,
-    private userProfileService: UserProfileService, 
+    public channelService: ChannelFirebaseService,
+    public chatService: ChatFirebaseService,
+    public userService: UserFirebaseService,
     private windowSizeService: WindowSizeService,
     private activeSelectionService: ActiveSelectionService,
     public formatService: FormatService
@@ -44,7 +43,7 @@ export class SidenavComponent implements OnInit {
    * Gets logged in user and sets the current window size in service. 
    */
   ngOnInit(): void {
-    this.userFirebaseService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid)
+    this.userService.getUserByUID(JSON.parse(localStorage.getItem('user')!).uid)
       .then((user) => {
         this.currentUser = user
       })

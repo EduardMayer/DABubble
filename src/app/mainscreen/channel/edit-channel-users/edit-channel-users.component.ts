@@ -17,7 +17,7 @@ export class EditChannelUsersComponent {
   @Output() closeEvent = new EventEmitter<any>();
 
   constructor(
-    public channelFirebaseService: ChannelFirebaseService,
+    private channelService: ChannelFirebaseService,
     public activeSelectionService: ActiveSelectionService,
     private notService: NotificationService,
     public formatService: FormatService
@@ -46,9 +46,9 @@ export class EditChannelUsersComponent {
   saveUserChanges() {
     
     if (this.channelCopy) {
-        this.channelFirebaseService.selectedChannel = this.channelCopy;
-        this.channelFirebaseService.updateChannel(this.channelCopy);
-        this.channelFirebaseService.loadallChannelusers();
+        this.channelService.selectedChannel = this.channelCopy;
+        this.channelService.updateChannel(this.channelCopy);
+        this.channelService.loadallChannelusers();
         this.notService.renderNotification("Benutzer wurden dem Channel hinzugefügt");
         this.close();
     }

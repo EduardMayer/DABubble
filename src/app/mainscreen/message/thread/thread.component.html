@@ -1,4 +1,4 @@
-<mat-card id="thread" class="br-30" *ngIf="threadFirebaseService.message">
+<mat-card id="thread" class="br-30" *ngIf="threadService.message">
     <div class='header'>
         <div class="header-title" width="fit-content">
             <div>
@@ -6,7 +6,7 @@
             </div>
             <div>
                 <span class="channelNameHeader">
-                    # {{channelFirebaseService.selectedChannel?.channelName }}
+                    # {{channelService.selectedChannel?.channelName }}
                 </span>
             </div>
         </div>
@@ -22,16 +22,16 @@
             </div>
     </div>
 
-    <div class="chat-container" *ngIf="threadFirebaseService.message">
-        <app-message [message]="threadFirebaseService.message" [messageLocationName]="'thread'"></app-message>
+    <div class="chat-container" *ngIf="threadService.message">
+        <app-message [message]="threadService.message" [messageLocationName]="'thread'"></app-message>
 
-        <div class="line-container" *ngIf="threadFirebaseService.loadedAnswers && threadFirebaseService.loadedAnswers.length>0">
+        <div class="line-container" *ngIf="threadService.loadedAnswers && threadService.loadedAnswers.length>0">
             <div class="line"></div>
-            <div class='date'>{{ threadFirebaseService.loadedAnswers.length}} Antworten</div>
+            <div class='date'>{{ threadService.loadedAnswers.length}} Antworten</div>
         </div>
 
 
-        <div *ngFor="let answer of threadFirebaseService.loadedAnswers; let i = index">
+        <div *ngFor="let answer of threadService.loadedAnswers; let i = index">
             <app-message [message]="answer" [timestampString]="formatService.formatTimeDelta(answer.timestamp)"
                 [messageLocationName]="'thread'" (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)"></app-message>
         </div>

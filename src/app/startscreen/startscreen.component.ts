@@ -17,7 +17,10 @@ export class StartscreenComponent implements OnInit{
   showForgotPassword = false;
  
 
-  constructor(private authService: AuthFirebaseService , private router: Router){}
+  constructor(
+    private authService: AuthFirebaseService, 
+    private router: Router
+  ){}
 
 
   /**

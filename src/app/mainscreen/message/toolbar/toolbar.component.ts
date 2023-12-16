@@ -20,8 +20,8 @@ export class ToolbarComponent {
   @Output() editMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    public messageFirebaseService: MessageFirebaseService,
-    public threadFirebaseService: ThreadFirebaseService) {
+    private messageService: MessageFirebaseService,
+    public threadService: ThreadFirebaseService) {
   }
 
   /*

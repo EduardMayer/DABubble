@@ -44,12 +44,12 @@
 
         <div class='message-footer'>
             <div class="answers-link"
-                *ngIf="this.messageFirebaseService.loadedAnswers.length > 0 && messageLocation == 'channel'"
+                *ngIf="this.messageService.loadedAnswers.length > 0 && messageLocation == 'channel'"
                 (click)="threadFirebaseService.openThread(_message)">
-                {{ this.messageFirebaseService.loadedAnswers.length }} Antworten
+                {{ this.messageService.loadedAnswers.length }} Antworten
             </div>
 
-            <div *ngFor="let reaction of messageFirebaseService.loadedReactions" class="reaction-smileys">
+            <div *ngFor="let reaction of messageService.loadedReactions" class="reaction-smileys">
                 <div class="emoji-container">
                     <app-reaction [reaction]="reaction"
                         (emojiSelectedOutput)="handleEmojiSelection($event)"></app-reaction>

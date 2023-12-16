@@ -15,7 +15,7 @@ export class ShowChannelUsersComponent {
   @Output() closeEvent = new EventEmitter<any>();
 
   constructor(
-    public channelFirebaseService: ChannelFirebaseService,
+    public channelService: ChannelFirebaseService,
     public activeSelectionService: ActiveSelectionService , 
     private userProfileService: UserProfileService
   ) { }

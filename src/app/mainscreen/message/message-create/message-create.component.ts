@@ -52,9 +52,9 @@ export class MessageCreateComponent {
   }
 
   constructor(
-    private userFirebaseService: UserFirebaseService,
-    public channelFirebaseService: ChannelFirebaseService,
-    private messageFirebaseService: MessageFirebaseService,
+    private userService: UserFirebaseService,
+    private channelService: ChannelFirebaseService,
+    private messageService: MessageFirebaseService,
     private storageService: StorageFirebaseService,
     private formatService: FormatService
   ) { }
@@ -73,7 +73,7 @@ export class MessageCreateComponent {
       if (this._path) {
         this.message.fileSrc = this.file;
         this.message.fileName = this.fileName;
-        await this.messageFirebaseService.createMessage(this._path, this.message);
+        await this.messageService.createMessage(this._path, this.message);
         this.message.content="";
       }
       this.message = new Message();
@@ -90,8 +90,8 @@ export class MessageCreateComponent {
   getPlaceholder() {
     if (this.location == 'thread') {
       return "Antworten";
-    } else if (this.location == "channel" && this.channelFirebaseService.selectedChannel) {
-      return "Nachricht an #" + this.formatService.cutStrLen(this.channelFirebaseService.selectedChannel.channelName);
+    } else if (this.location == "channel" && this.channelService.selectedChannel) {
+      return "Nachricht an #" + this.formatService.cutStrLen(this.channelService.selectedChannel.channelName);
     } else {
       return "Nachricht scheiben";
     }
@@ -126,7 +126,7 @@ export class MessageCreateComponent {
   */
   getCurrentUsersAsStringArray() {
     let usersByName: string[] = [];
-    this.userFirebaseService.loadedUsers.forEach((user) => {
+    this.userService.loadedUsers.forEach((user) => {
       usersByName.push(user.fullName);
     });
     return usersByName;
@@ -179,9 +179,9 @@ export class MessageCreateComponent {
   * @returns {void}
   */
   setMessageAutor() {
-    this.message.autorId = this.userFirebaseService.currentUser.id;
+    this.message.autorId = this.userService.currentUser.id;
 
-    this.message.avatarSrc = this.userFirebaseService.currentUser.avatar;
+    this.message.avatarSrc = this.userService.currentUser.avatar;
 
     if (!this.message.autorId) {
       this.message.autorId = "";

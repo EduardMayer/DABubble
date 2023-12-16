@@ -18,9 +18,8 @@ export class ForgotPasswordComponent {
   @Output() closeForgotPasswordView = new EventEmitter<void>();
 
   constructor(
-    private userService: UserFirebaseService, 
-    private authService: AuthFirebaseService, 
-    private router: Router) { }
+    private authService: AuthFirebaseService
+    ) { }
   email: string = '';
   errorInfo: any = false;
   isInputActive = false;
@@ -40,6 +39,8 @@ export class ForgotPasswordComponent {
   isButtonDisabled() {
     return this.contactForm.invalid;
   }
+
+  
   /**
  * Emits an event to signal the closing of the forgot password view.
  * 

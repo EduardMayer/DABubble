@@ -29,7 +29,6 @@ export class AddChannelDialogComponent {
 
   constructor(private fb: FormBuilder,
     public firebaseChannel: ChannelFirebaseService,
-    private userFirebaseService: UserFirebaseService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<AddChannelDialogComponent>) {
     this.getInput();

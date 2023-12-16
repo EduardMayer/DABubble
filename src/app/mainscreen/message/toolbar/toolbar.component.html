@@ -11,7 +11,7 @@
         <img 
             *ngIf="message && messageLocation=='channel'" 
             src="assets/img/icons/answer.svg" 
-            (click)="threadFirebaseService.openThread(message)">
+            (click)="threadService.openThread(message)">
 
         <div *ngIf="isOwnMessage" (blur)="hideOptions($event)" class="message-edit-container">
             <button mat-icon-button (click)="toggleOptions($event)">

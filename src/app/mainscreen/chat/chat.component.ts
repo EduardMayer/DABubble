@@ -33,8 +33,8 @@ export class ChatComponent {
   testData: string[] = ["hallo", "Test", "Search"];
 
   constructor(
-    public chatFirebaseService: ChatFirebaseService,
-    public userFirebaseService: UserFirebaseService,
+    public chatService: ChatFirebaseService,
+    public userService: UserFirebaseService,
     private userProfileService: UserProfileService,
     private activeSelectionService: ActiveSelectionService,
     public formatService: FormatService
@@ -52,7 +52,7 @@ export class ChatComponent {
       }
     }
 
-    this.selectedChatSubscription = this.chatFirebaseService.selectedChat$.subscribe((chat) => {
+    this.selectedChatSubscription = this.chatService.selectedChat$.subscribe((chat) => {
       this.selectedChat = chat;
       // Perform actions when the selected chat changes in the chat component
       // For example, update the chat messages in the UI
@@ -66,10 +66,10 @@ export class ChatComponent {
    */
   private async loadChat(newSelectedChat: Chat) {
     if (newSelectedChat != null) {
-      this.chatFirebaseService.loadChatMessages(newSelectedChat.id);
+      this.chatService.loadChatMessages(newSelectedChat.id);
       this.messagePath = `chats/${newSelectedChat.id}/messages/`;
       try {
-        const chatPartner = await this.userFirebaseService.getUserByUID(this.chatFirebaseService.getChatPartner(newSelectedChat));
+        const chatPartner = await this.userService.getUserByUID(this.chatService.getChatPartner(newSelectedChat));
         this.chatPartner = chatPartner;
       } catch (error) {
         console.error("Error loading chat:", error);

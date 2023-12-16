@@ -20,9 +20,8 @@ export class ThreadComponent implements OnDestroy {
   answersPath: string = "";
 
   constructor(
-    public messageFirebaseService: MessageFirebaseService,
-    public channelFirebaseService: ChannelFirebaseService,
-    public threadFirebaseService: ThreadFirebaseService,
+    public channelService: ChannelFirebaseService,
+    public threadService: ThreadFirebaseService,
     public userFirebase: UserFirebaseService,
     public formatService: FormatService) {}
 
@@ -37,7 +36,7 @@ export class ThreadComponent implements OnDestroy {
   }
 
   getAnswersPath(){
-    return this.threadFirebaseService.message?.path+"/answers/";
+    return this.threadService.message?.path+"/answers/";
   }
 
   toggleEmojiList() {
@@ -61,7 +60,7 @@ export class ThreadComponent implements OnDestroy {
   }
 
   closeThread() {
-    this.threadFirebaseService.message = undefined;
+    this.threadService.message = undefined;
   }
 
 

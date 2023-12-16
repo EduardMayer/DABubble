@@ -11,7 +11,10 @@ export class ActionHandlerComponent implements OnInit {
 
   userMessage = "";
 
-  constructor(private route: ActivatedRoute, private authService: AuthFirebaseService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private authService: AuthFirebaseService, 
+    private router: Router) { }
 
   /**
    * Gets QueryParams from URL and routes to the components for recoverPasswort or verfiyEmail. 

@@ -28,8 +28,8 @@ export class MessageEditComponent {
   }
 
   constructor(
-    public channelFirebaseService: ChannelFirebaseService,
-    private messageFirebaseService: MessageFirebaseService,
+    public channelService: ChannelFirebaseService,
+    private messageService: MessageFirebaseService,
     private storageService: StorageFirebaseService,
     private threadService: ThreadFirebaseService
   ) {  }
@@ -44,7 +44,7 @@ export class MessageEditComponent {
   async saveMessage() {
     if (this._message) {
       if (this._message.path) {
-        this.messageFirebaseService.createMessage(this._message.path, this._message);
+        this.messageService.createMessage(this._message.path, this._message);
         this.updatedThreadMsg();
       }
       this.showEmojiBar = false;

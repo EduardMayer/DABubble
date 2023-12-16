@@ -1,9 +1,9 @@
-<mat-card id="chat" *ngIf="chatFirebaseService.selectedChat$  && userFirebaseService.currentUser.id!='' && chatPartner ">
+<mat-card id="chat" *ngIf="chatService.selectedChat$  && userService.currentUser.id!='' && chatPartner ">
     <div class='header'>
         <div class="header-title" width="fit-content">
             <div id="header-title-chatpartner-name" (click)="openProfil()">
                 <h2>#{{formatService.cutStrLen(chatPartner.fullName)}}</h2>
-                <h2 *ngIf="chatPartner.id == userFirebaseService.currentUser.id">&nbsp;(Du)</h2>
+                <h2 *ngIf="chatPartner.id == userService.currentUser.id">&nbsp;(Du)</h2>
             </div>
         </div>
     </div>
@@ -11,19 +11,19 @@
     <div class="chat-container" >
         <app-message-create [path]="messagePath" [currentLocation]="'Chat'"></app-message-create>
 
-        <ng-container *ngIf="chatFirebaseService.selectedChatMessages.length>0; else emptyChat">
+        <ng-container *ngIf="chatService.selectedChatMessages.length>0; else emptyChat">
 
-            <div *ngFor="let message of chatFirebaseService.selectedChatMessages; let i = index">
+            <div *ngFor="let message of chatService.selectedChatMessages; let i = index">
                 <app-message [message]="message" [messageLocationName]="'chat'"></app-message>
                 <ng-template [appIfChanged]="getMessageTime(message)">
-                    <app-date-line *ngIf="chatFirebaseService.selectedChatMessages[i-1]"
-                        [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[i-1])"></app-date-line>
+                    <app-date-line *ngIf="chatService.selectedChatMessages[i-1]"
+                        [messageTime]="getMessageTime(chatService.selectedChatMessages[i-1])"></app-date-line>
                 </ng-template>
             </div>
 
             <app-date-line
-                *ngIf="chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1]"
-                [messageTime]="getMessageTime(chatFirebaseService.selectedChatMessages[chatFirebaseService.selectedChatMessages.length-1])">
+                *ngIf="chatService.selectedChatMessages[chatService.selectedChatMessages.length-1]"
+                [messageTime]="getMessageTime(chatService.selectedChatMessages[chatService.selectedChatMessages.length-1])">
             </app-date-line>
         </ng-container>
 
@@ -34,13 +34,13 @@
                     <img src="{{chatPartner.avatar}}">
                     <div></div>
                     <h3>{{ chatPartner.fullName }}</h3>
-                    <h3 *ngIf="chatPartner.id == userFirebaseService.currentUser.id">&nbsp;(Du)</h3>
+                    <h3 *ngIf="chatPartner.id == userService.currentUser.id">&nbsp;(Du)</h3>
                 </div>
                 <div class="user-text">
-                    <div *ngIf="chatPartner.id != userFirebaseService.currentUser.id">
+                    <div *ngIf="chatPartner.id != userService.currentUser.id">
                         Diese Unterhaltung findet nur zwischen <a (click)="openProfil()">@ {{formatService.cutStrLen(chatPartner.fullName)}}</a> und dir statt.
                     </div>
-                    <div *ngIf="chatPartner.id == userFirebaseService.currentUser.id">
+                    <div *ngIf="chatPartner.id == userService.currentUser.id">
                         Dieser Raum ist nur für dich da. Mache dir Notizen, liste deine To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst besprechen.
                     </div>
                 </div>

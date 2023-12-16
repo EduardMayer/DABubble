@@ -38,9 +38,9 @@ export class ChannelComponent implements OnDestroy{
 
 
   constructor(
-    public channelFirebaseService: ChannelFirebaseService,
-    public chatFirebaseService: ChatFirebaseService,
-    public userFirebaseService: UserFirebaseService,
+    public channelService: ChannelFirebaseService,
+    public chatService: ChatFirebaseService,
+    public userService: UserFirebaseService,
     private userProfileService: UserProfileService,
     private activeSelectionService: ActiveSelectionService,
     public formatService: FormatService , 
@@ -59,7 +59,7 @@ export class ChannelComponent implements OnDestroy{
   loadChannelMessages() {
     let channel = this.activeSelectionService.getActiveSelectionObject();
     if (channel instanceof Channel) {
-      this.channelFirebaseService.loadChannelMessages(channel.id);// to be changed to currentChannel
+      this.channelService.loadChannelMessages(channel.id);// to be changed to currentChannel
       this.messagePath = `channels/${channel.id}/messages/`;
     }
   }
@@ -160,8 +160,8 @@ export class ChannelComponent implements OnDestroy{
 
     // Führt zu Problemen in der mobilen Ansicht
 
-    //this.channelFirebaseService.selectedChannelId = ""; 
-    //this.channelFirebaseService.selectedChannel = undefined; 
+    //this.channelService.selectedChannelId = ""; 
+    //this.channelService.selectedChannel = undefined; 
     //this.activeSelectionService.activeSelection = undefined; 
   }
 }

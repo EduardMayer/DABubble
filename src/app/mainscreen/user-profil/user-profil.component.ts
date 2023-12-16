@@ -40,7 +40,7 @@ export class UserProfilComponent implements OnInit {
     private userStatusService: UserStatusFirebaseService,
     private userService: UserFirebaseService,
     private authService: AuthFirebaseService,
-    private chatFirebaseService: ChatFirebaseService, 
+    private chatService: ChatFirebaseService, 
     private router: Router) {
   }
 
@@ -128,9 +128,9 @@ export class UserProfilComponent implements OnInit {
    */
   async sendMessage(){
     if(this.user && this.userService.currentUser){
-      const usersChat = this.chatFirebaseService.getChatWithUser(this.user.id);  
+      const usersChat = this.chatService.getChatWithUser(this.user.id);  
       if(usersChat){
-        this.chatFirebaseService.selectChat(usersChat.id);
+        this.chatService.selectChat(usersChat.id);
         this.userProfileService.close(); 
       }
       else{
@@ -146,9 +146,9 @@ export class UserProfilComponent implements OnInit {
     let chat = new Chat({
       users: [this.userService.currentUser.id, this.user.id]
     });
-    this.chatFirebaseService.update(chat).then((chat) => {
-      this.chatFirebaseService.loadedChats.unshift(chat);
-      this.chatFirebaseService.selectChat(chat.id);
+    this.chatService.update(chat).then((chat) => {
+      this.chatService.loadedChats.unshift(chat);
+      this.chatService.selectChat(chat.id);
       this.close(); 
     }).catch((error) => {
       throw new Error(`Failed to start chat: ${error.message}`);

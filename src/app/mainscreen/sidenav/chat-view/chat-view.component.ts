@@ -16,7 +16,7 @@ export class ChatViewComponent{
   refreshIntervall = 5000;  
 
   constructor(
-    public userFirebaseService: UserFirebaseService,
+    public userService: UserFirebaseService,
     private userProfileService: UserProfileService, 
     private userStatusService: UserStatusFirebaseService
   ) {
@@ -26,7 +26,7 @@ export class ChatViewComponent{
   @Input() set uId(value: string) {
 
     // Use Promise<User> directly, as getUserByUID returns a Promise<User>
-    this.userFirebaseService.getUserByUID(value)
+    this.userService.getUserByUID(value)
       .then((loadedUser: User) => {
         this.user = loadedUser;
         //Get Userstatus

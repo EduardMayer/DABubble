@@ -1,9 +1,9 @@
-<mat-card id="channel" *ngIf="channelFirebaseService.selectedChannel  && userFirebaseService.currentUser.id!='' ">
+<mat-card id="channel" *ngIf="channelService.selectedChannel  && userService.currentUser.id!='' ">
     <div class='header'>
         <div class="header-title" width="fit-content">
             <div class="header-title-container" (mouseover)="hoverTitle=true" (mouseout)="hoverTitle=false"
                 (click)="showEditChannel = true">
-                <h2># {{formatService.cutStrLen(channelFirebaseService.selectedChannel.channelName)}}</h2>
+                <h2># {{formatService.cutStrLen(channelService.selectedChannel.channelName)}}</h2>
                 <div class="header-title-container-icons">
                     <img *ngIf="!hoverTitle" src="assets/img/icons/arrow_down_black.svg" alt="dropdown_black">
                     <img *ngIf="hoverTitle" src="assets/img/icons/arrow_down_blue.svg" alt="dropdown_blue">
@@ -14,9 +14,9 @@
         <div class="addMemberContainer">
             <div class="user-avatar-list" (click)="showChannelUsers=true">
                 <img class="avatar-img"
-                    *ngFor="let user of channelFirebaseService.userOnCurrentChannel | slice:0:3; let i = index"
+                    *ngFor="let user of channelService.userOnCurrentChannel | slice:0:3; let i = index"
                     [style.left]="i * -10 + 'px'" [style.z-index]="3 - i" [src]="user.avatar" alt="avatar">
-                <span class="amoundOfUsersInChannel">{{channelFirebaseService.userOnCurrentChannel.length}}</span>
+                <span class="amoundOfUsersInChannel">{{channelService.userOnCurrentChannel.length}}</span>
             </div>
 
             <img 
@@ -31,18 +31,18 @@
     </div>
 
     <div class="chat-container">
-        <ng-container *ngIf="channelFirebaseService.selectedChannelMessages.length>0; else emptyChannel">
-            <div *ngFor="let message of channelFirebaseService.selectedChannelMessages; let i = index">
+        <ng-container *ngIf="channelService.selectedChannelMessages.length>0; else emptyChannel">
+            <div *ngFor="let message of channelService.selectedChannelMessages; let i = index">
                 <app-message [message]="message" [messageLocationName]="'channel'"></app-message>
                 <ng-template [appIfChanged]="getMessageTime(message)">
-                    <app-date-line *ngIf="channelFirebaseService.selectedChannelMessages[i-1]"
-                        [messageTime]="getMessageTime(channelFirebaseService.selectedChannelMessages[i-1])"></app-date-line>
+                    <app-date-line *ngIf="channelService.selectedChannelMessages[i-1]"
+                        [messageTime]="getMessageTime(channelService.selectedChannelMessages[i-1])"></app-date-line>
                 </ng-template>
             </div>
 
             <app-date-line
-                *ngIf="channelFirebaseService.selectedChannelMessages[channelFirebaseService.selectedChannelMessages.length-1]"
-                [messageTime]="getMessageTime(channelFirebaseService.selectedChannelMessages[channelFirebaseService.selectedChannelMessages.length-1])">
+                *ngIf="channelService.selectedChannelMessages[channelService.selectedChannelMessages.length-1]"
+                [messageTime]="getMessageTime(channelService.selectedChannelMessages[channelService.selectedChannelMessages.length-1])">
             </app-date-line>
         </ng-container>
 
@@ -50,17 +50,17 @@
             <!-- add- Profile Link-->
             <div class="channel-display">
                 <div class='channel-header'>
-                    <h3># {{ channelFirebaseService.selectedChannel.channelName }}</h3>
+                    <h3># {{ channelService.selectedChannel.channelName }}</h3>
                 </div>
                 <div class="channel-text">
-                    Das ist der Anfang des Channels <a href="#"># {{ channelFirebaseService.selectedChannel.channelName
+                    Das ist der Anfang des Channels <a href="#"># {{ channelService.selectedChannel.channelName
                         }}</a>
                 </div>
             </div>
         </ng-template>
     </div>
 
-    <app-message-create [path]="channelFirebaseService.currentChannelMessagePath" [currentLocation]="'channel'"></app-message-create>
+    <app-message-create [path]="channelService.currentChannelMessagePath" [currentLocation]="'channel'"></app-message-create>
 
     <app-edit-channel 
         *ngIf="showEditChannel" (closeEvent)="closeEditDialog()" (addUserEvent)="this.showEditChannelUsers = true">
@@ -73,7 +73,7 @@
 
     <app-edit-channel-users 
         *ngIf="showEditChannelUsers" 
-        [refChannel]="channelFirebaseService.selectedChannel" 
+        [refChannel]="channelService.selectedChannel" 
         (closeEvent)="closeEditUsersDialog()">
     </app-edit-channel-users>
 

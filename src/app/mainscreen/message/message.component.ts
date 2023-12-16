@@ -33,8 +33,8 @@ export class MessageComponent {
   @Output() emojiBarVisibilityOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    public messageFirebaseService: MessageFirebaseService,
-    public userFirebaseService: UserFirebaseService,
+    public messageService: MessageFirebaseService,
+    private userService: UserFirebaseService,
     public threadFirebaseService: ThreadFirebaseService,
     private channelFirebaseService: ChannelFirebaseService,
     private userProfileService: UserProfileService,
@@ -44,10 +44,10 @@ export class MessageComponent {
   @Input()
   public set message(value: Message) {
     this._message = value;
-    this.messageFirebaseService.loadReactions(value);
-    this.messageFirebaseService.loadAnswers(value);
+    this.messageService.loadReactions(value);
+    this.messageService.loadAnswers(value);
     this.setAutorName(this._message.autorId);
-    if (this._message.autorId == this.userFirebaseService.currentUser.id) {
+    if (this._message.autorId == this.userService.currentUser.id) {
       this.isOwnMessage = true;
       document.getElementById(this._message.id)?.classList.add('inverted');
     }
@@ -63,19 +63,19 @@ export class MessageComponent {
   }
 
   handleEmojiSelection(selectedEmoji: string) {
-    const reactions = this.messageFirebaseService.loadedReactions;
+    const reactions = this.messageService.loadedReactions;
     this.emojiSelectedOutput.emit(selectedEmoji);
     if (selectedEmoji == "noSelection") {
       this.closeEmojiBar();
     } else {
-      let foundEmojiIndex = this.messageFirebaseService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
+      let foundEmojiIndex = this.messageService.loadedReactions.findIndex((reaction) => reaction.name == selectedEmoji);
       if (foundEmojiIndex == -1) {
         this.createReaction(selectedEmoji);
       } else {
-        if (!this.messageFirebaseService.loadedReactions[foundEmojiIndex] || this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.length == 0) {
+        if (!this.messageService.loadedReactions[foundEmojiIndex] || this.messageService.loadedReactions[foundEmojiIndex].users.length == 0) {
           this.updateReactionAddCurrentUser(foundEmojiIndex);
         } else {
-          let foundUserIndex = this.messageFirebaseService.loadedReactions[foundEmojiIndex].users.findIndex((userId) => userId == this.userFirebaseService.currentUser.id);
+          let foundUserIndex = this.messageService.loadedReactions[foundEmojiIndex].users.findIndex((userId) => userId == this.userService.currentUser.id);
           if (foundUserIndex == -1) {
             this.updateReactionAddCurrentUser(foundEmojiIndex);
           } else {
@@ -102,13 +102,13 @@ export class MessageComponent {
     console.log("create Reaction: " + selectedEmoji);
     const newReaction = new Reaction({
       name: selectedEmoji,
-      users: [this.userFirebaseService.currentUser.id]
+      users: [this.userService.currentUser.id]
     }
     )
-    this.messageFirebaseService.loadedReactions.push(newReaction);
+    this.messageService.loadedReactions.push(newReaction);
     let path = this._message?.path + "/reactions";
 
-    this.messageFirebaseService.updateReaction(newReaction, path);
+    this.messageService.updateReaction(newReaction, path);
   }
 
 
@@ -119,8 +119,8 @@ export class MessageComponent {
 
   updateReactionAddCurrentUser(reactionIndex: number) {
     if (this._message) {
-      this.messageFirebaseService.loadedReactions[reactionIndex].users.push(this.userFirebaseService.currentUser.id);
-      this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex], this._message.path + "/reactions");
+      this.messageService.loadedReactions[reactionIndex].users.push(this.userService.currentUser.id);
+      this.messageService.updateReaction(this.messageService.loadedReactions[reactionIndex], this._message.path + "/reactions");
       console.log("updated Reaction, user added");
     }
   }
@@ -129,8 +129,8 @@ export class MessageComponent {
   updateReactionRemoveCurrentUser(reactionIndex: number, userIndex: number) {
     if (this._message) {
       console.log("updated Reaction, user removed");
-      this.messageFirebaseService.loadedReactions[reactionIndex].users.splice(userIndex, 1);
-      this.messageFirebaseService.updateReaction(this.messageFirebaseService.loadedReactions[reactionIndex], this._message.path + "/reactions");
+      this.messageService.loadedReactions[reactionIndex].users.splice(userIndex, 1);
+      this.messageService.updateReaction(this.messageService.loadedReactions[reactionIndex], this._message.path + "/reactions");
     }
   }
 
@@ -158,7 +158,7 @@ export class MessageComponent {
 
 
   async setAutorName(autorId: string) {
-    const autorValues = await this.userFirebaseService.getUserByUID(autorId);
+    const autorValues = await this.userService.getUserByUID(autorId);
     this.autorUser = autorValues;
 
     if (autorValues) {

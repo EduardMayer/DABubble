@@ -22,7 +22,7 @@
 
     </div>
     <textarea cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="_message.content"
-        *ngIf="channelFirebaseService.selectedChannel"  (click)="closeEmojiBar()">
+        *ngIf="channelService.selectedChannel"  (click)="closeEmojiBar()">
     </textarea>
     
 </div>

@@ -11,7 +11,7 @@
         </button>
     </div>
     <div id="sidenav-mobile-searchbar" *ngIf="windowWidth <= 768">
-        <app-searchbar *ngIf="userFirebaseService.finishedLoading && channelFirebaseService.finishedLoading"  [types]='"all"' [action]="'openSelection'" [setStyle]="'sideNavMobile'"></app-searchbar>
+        <app-searchbar *ngIf="userService.finishedLoading && channelService.finishedLoading"  [types]='"all"' [action]="'openSelection'" [setStyle]="'sideNavMobile'"></app-searchbar>
     </div>
 
 
@@ -32,9 +32,9 @@
         <div class="myChannelsDropdown pad-left18" id="myChannelsDropdown" *ngIf="unpackChannels">
 
             <div class="myChannels">
-                <div class="myChannels-channel" *ngFor=" let channel of channelFirebaseService.loadedChannels"
-                    (click)="channelFirebaseService.selectChannel(channel.id)"
-                    [class.myChannels-channel-selected]="channelFirebaseService.getSelectedChannelID()===channel.id">
+                <div class="myChannels-channel" *ngFor=" let channel of channelService.loadedChannels"
+                    (click)="channelService.selectChannel(channel.id)"
+                    [class.myChannels-channel-selected]="channelService.getSelectedChannelID()===channel.id">
                     <h2 class="myChannels-channel-icon">#</h2>
                     <h3 class="myChannels-channel-name" >{{ formatService.cutStrLen(channel.channelName) }}</h3>
                 </div>
@@ -58,11 +58,11 @@
         <div class="myMessages" id="myMessages" *ngIf="unpackMessages">
 
             <app-chat-view
-                [uId]="userFirebaseService.currentUser.id" (click)="chatFirebaseService.selectPersonalChat()">
+                [uId]="userService.currentUser.id" (click)="chatService.selectPersonalChat()">
             </app-chat-view>
 
-            <app-chat-view *ngFor="let chat of chatFirebaseService.loadedChats"
-                [uId]="chatFirebaseService.getChatPartner(chat)" (click)="chatFirebaseService.selectChat(chat.id)">
+            <app-chat-view *ngFor="let chat of chatService.loadedChats"
+                [uId]="chatService.getChatPartner(chat)" (click)="chatService.selectChat(chat.id)">
             </app-chat-view>
         </div>
     </div>

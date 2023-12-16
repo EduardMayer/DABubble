@@ -26,7 +26,7 @@ export class EditChannelComponent implements OnInit {
 
   constructor(
     public channelFirebaseService: ChannelFirebaseService , 
-    private userFirebaseService: UserFirebaseService, 
+    private userService: UserFirebaseService, 
     private windowSizeService: WindowSizeService
   ){
     this.windowSizeService.windowWidth$.subscribe(windowWidth => {
@@ -40,7 +40,7 @@ export class EditChannelComponent implements OnInit {
       this.channel = this.channelFirebaseService.selectedChannel; 
       this.NewChannelName = this.channelFirebaseService.selectedChannel.channelName; 
       this.NewChannelDescription = this.channelFirebaseService.selectedChannel.channelDescription; 
-      this.userFirebaseService.getUserByUID(this.channelFirebaseService.selectedChannel.creatorOfChannel)
+      this.userService.getUserByUID(this.channelFirebaseService.selectedChannel.creatorOfChannel)
       .then((user) => { 
         this.channelCreatorName = user.fullName; 
       }) 

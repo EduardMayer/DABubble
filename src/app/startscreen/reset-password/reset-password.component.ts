@@ -18,7 +18,6 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserFirebaseService,
     private authService: AuthFirebaseService,
     private router: Router
   ) {

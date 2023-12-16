@@ -14,11 +14,9 @@
             </svg>
         </div>
     </div>
-    <!--   <div *ngFor="let user of channelFirebaseService.userOnCurrentChannel">
-        <img src="{{user.avatar}}" class="member-image"> {{ user.fullName }}
-    </div> -->
+    
     <div>   
-        <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
+        <app-chat-view *ngFor="let user of channelService.userOnCurrentChannel"
         [uId]="user.id" (click)="openProfil(user)">
         </app-chat-view>
     </div>
