@@ -39,7 +39,7 @@
         </ng-template>
 
         <ng-template #emptyView>
-            <app-sidenav *ngIf="channelService.selectedChannelId == undefined && chatService.selectedChatId == undefined && showSidenavMobile" 
+            <app-sidenav *ngIf="showSidenavMobile" 
             id="main-sidebar">
             </app-sidenav>
             <app-empty-window *ngIf="!showSidenavMobile"></app-empty-window>

@@ -203,6 +203,16 @@
     display: none;
 }
 
+.add-user-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    cursor: pointer;
+    margin-left: 12px;
+    margin-top: 12px;
+}
 
 @media only screen and (max-width: 1000px) {
 

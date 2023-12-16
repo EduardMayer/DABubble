@@ -63,7 +63,8 @@
     #editChannel{
         max-width: unset;
         min-width: unset;
-        width: calc(100vw - 24px);
-        right: 0px;
+        width: calc(100vw - 72px);
+        right: 24px;
+        left: 24px;
     }
 }

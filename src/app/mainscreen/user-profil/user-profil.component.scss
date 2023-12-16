@@ -6,7 +6,7 @@
     z-index: 15;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@
         min-height: 100px;
         background-color: white;
         padding: 24px;
-        box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.5);
 
 
         #headerUserProfil-header {
