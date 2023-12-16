@@ -5,8 +5,8 @@
                 <h2>Thread</h2>
             </div>
             <div>
-                <span class="channelNameHeader">
-                    # {{channelService.selectedChannel?.channelName }}
+                <span class="channel-name-header" *ngIf="channelService.selectedChannel">
+                    # {{ formatService.cutStrLen(channelService.selectedChannel.channelName) }}
                 </span>
             </div>
         </div>
