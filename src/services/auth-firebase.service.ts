@@ -105,7 +105,7 @@ export class AuthFirebaseService implements OnInit {
       private router: Router, 
       public ngZone: NgZone, 
       private userService: UserFirebaseService, 
-      private UserStatusService: UserStatusFirebaseService, 
+      private userStatusService: UserStatusFirebaseService, 
       private activeSelectionService: ActiveSelectionService) {
     onAuthStateChanged(this.auth, async (user: any) => {
       if (user) {
@@ -115,7 +115,7 @@ export class AuthFirebaseService implements OnInit {
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
         await this.userService.syncMail(this.UserData.email);
         await this.userService.setCurrentUserStatus("online");
-        await this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
+        await this.userStatusService.writeUserStatus(this.UserData.uid, "online");
         this.firebaseUserService.currentUser.id=this.UserData.uid;
         await this.firebaseUserService.load();
         await this.channelFirebaseService.load(this.UserData.uid);
@@ -171,7 +171,7 @@ export class AuthFirebaseService implements OnInit {
     this.channelFirebaseService.selectedChannelId = ""; 
     this.channelFirebaseService.selectedChannel = undefined; 
    
-    this.UserStatusService.writeUserStatus(this.UserData.uid, "offline");
+    this.userStatusService.writeUserStatus(this.UserData.uid, "offline");
     signOut(this.auth).then(() => { this.router.navigate(['']) })
   }
 

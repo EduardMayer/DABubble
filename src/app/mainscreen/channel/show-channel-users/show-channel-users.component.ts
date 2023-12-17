@@ -14,16 +14,29 @@ export class ShowChannelUsersComponent {
   
   @Output() closeEvent = new EventEmitter<any>();
 
+  /**
+   * Defines Services
+   * @param channelService 
+   * @param activeSelectionService 
+   * @param userProfileService 
+   */
   constructor(
     public channelService: ChannelFirebaseService,
     public activeSelectionService: ActiveSelectionService , 
     private userProfileService: UserProfileService
   ) { }
 
+  /**
+   * Moves to edit channel user component
+   */
   openAddMemberMenu(){
     this.closeEvent.emit("editChannelUser");
   }
 
+  
+  /**
+   * Closes show user popup component
+   */
   close() {
     this.closeEvent.emit();
   }

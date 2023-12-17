@@ -3,7 +3,7 @@
         <div class="header-title" width="fit-content">
             <div class="header-title-container" (mouseover)="hoverTitle=true" (mouseout)="hoverTitle=false"
                 (click)="showEditChannel = true">
-                <h2># {{formatService.cutStrLen(channelService.selectedChannel.channelName)}}</h2>
+                <h2># {{getShortenedString(channelService.selectedChannel.channelName)}}</h2>
                 <div class="header-title-container-icons">
                     <img *ngIf="!hoverTitle" src="assets/img/icons/arrow_down_black.svg" alt="dropdown_black">
                     <img *ngIf="hoverTitle" src="assets/img/icons/arrow_down_blue.svg" alt="dropdown_blue">

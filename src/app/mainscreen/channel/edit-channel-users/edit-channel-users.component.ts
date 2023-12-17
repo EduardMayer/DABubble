@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
@@ -16,18 +16,22 @@ export class EditChannelUsersComponent {
   savingChanges: boolean=false;
   @Output() closeEvent = new EventEmitter<any>();
 
-  constructor(
-    private channelService: ChannelFirebaseService,
-    public activeSelectionService: ActiveSelectionService,
-    private notService: NotificationService,
-    public formatService: FormatService
-  ) {
-    this.channelCopy = new Channel();
-
-  }
-
   @Input() set refChannel(value: Channel) {
     this.channelCopy = value;
+  }
+
+/**
+ * Defines Services and declase a new channel to work with in this component. 
+ * @param channelService 
+ * @param notificationService 
+ * @param formatService 
+ */
+  constructor(
+    private channelService: ChannelFirebaseService,
+    private notificationService: NotificationService,
+    private formatService: FormatService
+  ) {
+    this.channelCopy = new Channel();
   }
 
 
@@ -44,18 +48,30 @@ export class EditChannelUsersComponent {
   * Saves changes when users where removed or added. 
   */
   saveUserChanges() {
-    
     if (this.channelCopy) {
         this.channelService.selectedChannel = this.channelCopy;
         this.channelService.updateChannel(this.channelCopy);
         this.channelService.loadallChannelusers();
-        this.notService.renderNotification("Benutzer wurden dem Channel hinzugefügt");
+        this.notificationService.renderNotification("Benutzer wurden dem Channel hinzugefügt");
         this.close();
     }
   }
 
 
+  /**
+   * Closes edit channel user popup component 
+   */
   close() {
     this.closeEvent.emit();
+  }
+
+
+  /**
+   * Returns a shorted string if it is to long. 
+   * @param stringToFormat - string that should be shorten
+   * @returns shorted string
+   */
+  getFormatedString(stringToFormat:string){
+    return this.formatService.cutStrLen(stringToFormat); 
   }
 }

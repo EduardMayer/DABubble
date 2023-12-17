@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, OnDestroy } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Channel } from 'src/models/channel.class';
 import { Message } from 'src/models/message.class';
 import { User } from 'src/models/user.class';
@@ -18,7 +18,7 @@ import { WindowSizeService } from 'src/services/window-size.service';
   styleUrls: ['./channel.component.scss'],
   providers: [IfChangedService] // Provide the service at the component level
 })
-export class ChannelComponent implements OnDestroy{
+export class ChannelComponent{
   @ViewChild('menuTrigger') menuTrigger?: MatMenuTrigger;
   @ViewChild('addMemberTrigger') addMemberTrigger?: MatMenuTrigger;
 
@@ -36,15 +36,14 @@ export class ChannelComponent implements OnDestroy{
 
   windowWidth: any; 
 
-
   constructor(
     public channelService: ChannelFirebaseService,
     public chatService: ChatFirebaseService,
     public userService: UserFirebaseService,
     private userProfileService: UserProfileService,
     private activeSelectionService: ActiveSelectionService,
-    public formatService: FormatService , 
-    public windowSizeService: WindowSizeService
+    private formatService: FormatService , 
+    private windowSizeService: WindowSizeService
   ) {
     this.loadChannelMessages();
     this.windowSizeService.windowWidth$.subscribe(windowWidth => {
@@ -64,6 +63,7 @@ export class ChannelComponent implements OnDestroy{
     }
   }
 
+
   /**
    * Closes pop up menu für add members dialog. 
    */
@@ -76,6 +76,7 @@ export class ChannelComponent implements OnDestroy{
     }
   }
 
+
   /**
   * Closes pop up menu for channel members dialog. 
   */
@@ -84,6 +85,7 @@ export class ChannelComponent implements OnDestroy{
       this.menuTrigger.closeMenu();
     }
   }
+
 
   /**
   * Open add member dialog. 
@@ -99,13 +101,10 @@ export class ChannelComponent implements OnDestroy{
     }
   }
 
-  
-
-
 
   /**
- * Closes edit channel dialog
- */
+   * Closes edit channel dialog
+   */
   closeEditDialog() {
     this.showEditChannel = false;
   }
@@ -118,6 +117,10 @@ export class ChannelComponent implements OnDestroy{
   }
 
 
+  /**
+   * Closes show user dialog and opens edit channel users if option includes a defined string. 
+   * @param option 
+   */
   closeShowUsersDialog(option: string="") {
     if(option=='editChannelUser'){
       this.showEditChannelUsers = true;
@@ -152,16 +155,20 @@ export class ChannelComponent implements OnDestroy{
   }
 
 
+  /**
+   * Closes edit channel user popup
+   */
   closeEditChannelUsers() {
     this.showEditChannelUsers = false;
   }
-  
-  ngOnDestroy(): void {
 
-    // Führt zu Problemen in der mobilen Ansicht
 
-    //this.channelService.selectedChannelId = ""; 
-    //this.channelService.selectedChannel = undefined; 
-    //this.activeSelectionService.activeSelection = undefined; 
+  /**
+   * Shorten a give string 
+   * @param stringToShort - string to short
+   * @returns - shortened string
+   */
+  getShortenedString( stringToShort: string) {
+    return this.formatService.cutStrLen(stringToShort);
   }
 }

@@ -66,7 +66,7 @@
     <div id="edit-channel-users-mobile">
         <h2>Mitglieder</h2>
         <div>
-            <app-chat-view *ngFor="let user of channelFirebaseService.userOnCurrentChannel"
+            <app-chat-view *ngFor="let user of getCurrentUserChannel()"
             [uId]="user.id">
             </app-chat-view>
             <div *ngIf="windowWidth <= 768">

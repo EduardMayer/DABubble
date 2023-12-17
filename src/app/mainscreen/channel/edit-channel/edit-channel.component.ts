@@ -14,82 +14,105 @@ export class EditChannelComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<any>();
   @Output() addUserEvent = new EventEmitter<any>();
 
-  channel = new Channel(); 
-  editChannelDescription = false; 
-  editChannelName = false; 
+  channel = new Channel();
+  editChannelDescription = false;
+  editChannelName = false;
 
-  NewChannelName: string = ""; 
-  NewChannelDescription: string = ""; 
-  channelCreatorName = ""; 
+  NewChannelName: string = "";
+  NewChannelDescription: string = "";
+  channelCreatorName = "";
 
-  windowWidth: any; 
+  windowWidth: any;
 
+  /**
+   * Declares services and subsribe for user window size, for switching between desktop and mobile view. 
+   * @param channelService 
+   * @param userService 
+   * @param windowSizeService 
+   */
   constructor(
-    public channelFirebaseService: ChannelFirebaseService , 
-    private userService: UserFirebaseService, 
+    private channelService: ChannelFirebaseService,
+    private userService: UserFirebaseService,
     private windowSizeService: WindowSizeService
-  ){
+  ) {
     this.windowSizeService.windowWidth$.subscribe(windowWidth => {
-      this.windowWidth = windowWidth; 
+      this.windowWidth = windowWidth;
     });
-    this.windowSizeService.setWindowSize(); 
+    this.windowSizeService.setWindowSize();
   }
 
+  /**
+   * Sets information of the selected channel in this component. 
+   */
   ngOnInit(): void {
-    if(this.channelFirebaseService.selectedChannel){
-      this.channel = this.channelFirebaseService.selectedChannel; 
-      this.NewChannelName = this.channelFirebaseService.selectedChannel.channelName; 
-      this.NewChannelDescription = this.channelFirebaseService.selectedChannel.channelDescription; 
-      this.userService.getUserByUID(this.channelFirebaseService.selectedChannel.creatorOfChannel)
-      .then((user) => { 
-        this.channelCreatorName = user.fullName; 
-      }) 
+    if (this.channelService.selectedChannel) {
+      this.channel = this.channelService.selectedChannel;
+      this.NewChannelName = this.channelService.selectedChannel.channelName;
+      this.NewChannelDescription = this.channelService.selectedChannel.channelDescription;
+      this.userService.getUserByUID(this.channelService.selectedChannel.creatorOfChannel)
+        .then((user) => {
+          this.channelCreatorName = user.fullName;
+        })
     }
   }
+
 
   /**
    * Closes edit channel-dialog
    */
-  close(){
-    this.closeEvent.emit(); 
+  close() {
+    this.closeEvent.emit();
   }
+
 
   /**
    * Leave selectedChannel
    */
-  leaveChannel(){
-    this.channelFirebaseService.leaveSelectedChannel(); 
-    this.close(); 
+  leaveChannel() {
+    this.channelService.leaveSelectedChannel();
+    this.close();
   }
+
 
   /**
    * Saves the channel name from input field. 
    */
-  async saveChannelName(){
-    if( this.channelFirebaseService.selectedChannel){
-      this.channelFirebaseService.selectedChannel.channelName = this.NewChannelName;
-      await this.channelFirebaseService.updateChannel(this.channelFirebaseService.selectedChannel);
-      this.channel = this.channelFirebaseService.selectedChannel; 
+  async saveChannelName() {
+    if (this.channelService.selectedChannel) {
+      this.channelService.selectedChannel.channelName = this.NewChannelName;
+      await this.channelService.updateChannel(this.channelService.selectedChannel);
+      this.channel = this.channelService.selectedChannel;
     }
-    this.editChannelName = false; 
+    this.editChannelName = false;
   }
+
 
   /**
    * Saves the description of the description input field. 
    */
-  async saveChannelDescription(){
-    if( this.channelFirebaseService.selectedChannel){
-      this.channelFirebaseService.selectedChannel.channelDescription = this.NewChannelDescription;
-      await this.channelFirebaseService.updateChannel(this.channelFirebaseService.selectedChannel);
-      this.channel = this.channelFirebaseService.selectedChannel; 
+  async saveChannelDescription() {
+    if (this.channelService.selectedChannel) {
+      this.channelService.selectedChannel.channelDescription = this.NewChannelDescription;
+      await this.channelService.updateChannel(this.channelService.selectedChannel);
+      this.channel = this.channelService.selectedChannel;
     }
-    this.editChannelDescription = false; 
+    this.editChannelDescription = false;
   }
 
-  openAddMemberMenu(){
+
+  /**
+   * Move to edit channel users component
+   */
+  openAddMemberMenu() {
     this.addUserEvent.emit();
-    console.log("emit in child");
-    
-    this.close(); 
+    this.close();
+  }
+
+
+  /**
+   * returns the useres array of the current selected channel. 
+   */
+  getCurrentUserChannel() {
+    return this.channelService.userOnCurrentChannel
   }
 }
