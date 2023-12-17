@@ -1,6 +1,5 @@
 <mat-card id="sidenav" class="br-30">
-    <!--<mat-card-content id="sidenav-content">Side Nav</mat-card-content>-->
-
+   
     <div class="sidenavHeader">
         <img src="/assets/img/logo/codeLearningLogo.png">
         <h3>Code learning</h3>
@@ -13,7 +12,6 @@
     <div id="sidenav-mobile-searchbar" *ngIf="windowWidth <= 768">
         <app-searchbar *ngIf="userService.finishedLoading && channelService.finishedLoading"  [types]='"all"' [action]="'openSelection'" [setStyle]="'sideNavMobile'"></app-searchbar>
     </div>
-
 
     <div class="myChannelsContainer">
 
@@ -36,7 +34,7 @@
                     (click)="channelService.selectChannel(channel.id)"
                     [class.myChannels-channel-selected]="channelService.getSelectedChannelID()===channel.id">
                     <h2 class="myChannels-channel-icon">#</h2>
-                    <h3 class="myChannels-channel-name" >{{ formatService.cutStrLen(channel.channelName) }}</h3>
+                    <h3 class="myChannels-channel-name" >{{ getShortenedString(channel.channelName) }}</h3>
                 </div>
             </div>
 

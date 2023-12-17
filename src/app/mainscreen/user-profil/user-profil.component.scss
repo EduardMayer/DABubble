@@ -12,15 +12,13 @@
     align-items: center;
 
     #UserProfilCard {
-
         min-width: 100px;
         max-width: 500px;
         min-height: 100px;
         background-color: white;
         padding: 24px;
         box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.5);
-
-
+        
         #headerUserProfil-header {
             display: flex;
             justify-content: space-between;
@@ -57,16 +55,12 @@
             display: flex;
             align-items: center;
             gap: 12px;
-
             #statusIcon {
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                //background-color: green;
             }
-
             #statusFont {
-                //color: green;
                 margin: 0px;
             }
         }

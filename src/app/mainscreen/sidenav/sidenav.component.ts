@@ -29,6 +29,16 @@ export class SidenavComponent implements OnInit {
   selectedChannelID = "";
   windowWidth = 1024; 
 
+  /**
+   * Defines services
+   * @param dialog 
+   * @param channelService 
+   * @param chatService 
+   * @param userService 
+   * @param windowSizeService 
+   * @param activeSelectionService 
+   * @param formatService 
+   */
   constructor(
     public dialog: MatDialog,
     public channelService: ChannelFirebaseService,
@@ -36,8 +46,9 @@ export class SidenavComponent implements OnInit {
     public userService: UserFirebaseService,
     private windowSizeService: WindowSizeService,
     private activeSelectionService: ActiveSelectionService,
-    public formatService: FormatService
+    private formatService: FormatService
   ) { }
+
 
   /**
    * Gets logged in user and sets the current window size in service. 
@@ -56,6 +67,7 @@ export class SidenavComponent implements OnInit {
       this.windowSizeService.setWindowSize(); 
   }
 
+
  /**
    * Defines if channels in sidenav are visible. 
    */
@@ -66,6 +78,7 @@ export class SidenavComponent implements OnInit {
       this.unpackChannels = false;
     }
   }
+
 
   /**
    * Defines if messages (chats) in sidenav are visible. 
@@ -78,17 +91,15 @@ export class SidenavComponent implements OnInit {
     }
   }
 
+
   /**
    * Opens addNewChannelDialog
    */
   openDialog() {
-    const dialogRef = this.dialog.open(AddChannelDialogComponent, {
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    const dialogRef = this.dialog.open(AddChannelDialogComponent, { });
+    dialogRef.afterClosed().subscribe(result => { });
   }
+
 
   /**
    * Opens view to create a new chat or channel. 
@@ -98,6 +109,14 @@ export class SidenavComponent implements OnInit {
   }
 
 
+  /**
+   * Shorten a give string 
+   * @param stringToShort - string to short
+   * @returns - shortened string
+   */
+    getShortenedString( stringToShort: string) {
+      return this.formatService.cutStrLen(stringToShort);
+    }
 }
 
 

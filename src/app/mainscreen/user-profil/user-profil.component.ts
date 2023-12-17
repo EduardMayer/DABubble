@@ -36,6 +36,16 @@ export class UserProfilComponent implements OnInit {
 
   });
 
+  /**
+   * Defines services
+   * @param userProfileService 
+   * @param userStatusService 
+   * @param userService 
+   * @param authService 
+   * @param chatService 
+   * @param notificationService 
+   * @param router 
+   */
   constructor(
     private userProfileService: UserProfileService,
     private userStatusService: UserStatusFirebaseService,
@@ -159,11 +169,12 @@ export class UserProfilComponent implements OnInit {
     });
   }
 
+  /**
+   * prevents further propagation of the current event 
+   * @param event - Clickevent
+   */
   stopPropagation(event:Event){
     event.stopPropagation();
   }
-}
-function sleep(arg0: number) {
-  throw new Error('Function not implemented.');
 }
 

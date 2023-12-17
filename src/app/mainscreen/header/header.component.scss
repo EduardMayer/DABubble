@@ -3,7 +3,8 @@ $headerImage-width: 300px;
 $headerUser-width: 25%;
 
 
-#header-container, #header-container-mobile {
+#header-container,
+#header-container-mobile {
     width: 100%;
     gap: 12px;
     display: flex;
@@ -24,7 +25,8 @@ $headerUser-width: 25%;
         border: 0px;
         padding-left: 24px;
     }
-    #searchbar{
+
+    #searchbar {
         flex-grow: 1;
         width: 50%;
         border-radius: 42px;
@@ -32,14 +34,16 @@ $headerUser-width: 25%;
         border: 0px;
     }
 
-    #header-user, #header-user-mobile{
+    #header-user,
+    #header-user-mobile {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         gap: 12px;
         min-width: $headerUser-width;
 
-        #header-user-icon, #header-user-icon-mobile {
+        #header-user-icon,
+        #header-user-icon-mobile {
             position: relative;
 
             img {
@@ -70,8 +74,9 @@ $headerUser-width: 25%;
 $headerDropdownPositionTop: 100px;
 $headerDropdownPositionRigth: 0px;
 
-#headerMenu , #headerMenu-mobile {
-    
+#headerMenu,
+#headerMenu-mobile {
+
     position: absolute;
     background-color: white;
     border-radius: 30px 0px 30px 30px;
@@ -95,16 +100,15 @@ $headerDropdownPositionRigth: 0px;
         font-size: 18px;
         font-weight: 600;
         width: 100px;
-        &:hover{
+
+        &:hover {
             background-color: rgba(236, 238, 254, 1);
             color: rgba(83, 90, 241, 1);
         }
     }
-
-   
 }
 
-#userProfileMenuBackground{
+#userProfileMenuBackground {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -184,12 +188,14 @@ $headerDropdownPositionRigth: 0px;
     .headerUserProfil-EditMode-Row {
         display: flex;
         align-items: center;
-        gap: 12px; 
-        img{
+        gap: 12px;
+
+        img {
             width: 24px;
             height: 24px;
         }
     }
+
     input {
         border-radius: 30px;
         color: #686868;
@@ -198,59 +204,67 @@ $headerDropdownPositionRigth: 0px;
         font-family: 'Nunito', sans-serif;
         width: calc(100% - 40px);
     }
-    #headerUserProfil-EditMode-btn-container{
-        margin-top: 12px; 
+
+    #headerUserProfil-EditMode-btn-container {
+        margin-top: 12px;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 24px; 
+        gap: 24px;
     }
-    #headerUserProfil-EditMode-EditMailInfo{
-        color: red; 
+
+    #headerUserProfil-EditMode-EditMailInfo {
+        color: red;
     }
 }
 
-#header-container-mobile{
+#header-container-mobile {
     display: none;
 }
-        
+
 
 @media only screen and (max-width: 1000px) {
 
-    #searchbar{
+    #searchbar {
         display: none;
     }
 }
 
 @media only screen and (max-width: 768px) {
 
-    #header-container{
+    #header-container {
         display: none;
     }
 
-    #header-container-mobile{
+    #header-container-mobile {
         display: flex;
         max-width: 100vw;
 
-        #header-image-container-mobile{
+        #header-image-container-mobile {
             display: flex;
 
-            img{
+            img {
                 width: 180px;
             }
-            #header-image-container-mobile-selected{
+
+            #header-image-container-mobile-selected {
                 display: flex;
-                gap:12px; 
-                img{
+                gap: 12px;
+
+                img {
                     width: unset;
-                };
+                }
+
+                ;
             }
         }
-        #header-user-mobile{
+
+        #header-user-mobile {
             min-width: unset;
         }
-        #headerMenu-mobile{
+
+        #headerMenu-mobile {
             position: fixed;
             bottom: 0px;
             left: 0px;
@@ -262,41 +276,43 @@ $headerDropdownPositionRigth: 0px;
             width: 100vw;
             background-color: white;
             border-radius: 30px 30px 0px 0px;
-            .headerMenu-mobile-entry{
+
+            .headerMenu-mobile-entry {
                 display: flex;
                 align-items: center;
-                gap:12px; 
+                gap: 12px;
             }
 
-         
+
         }
     }
 }
 
 @media only screen and (max-width: 700px) {
-    #header-image-container-mobile{
-        img{
+    #header-image-container-mobile {
+        img {
             max-width: 180px;
             max-height: 100px;
         }
     }
 }
+
 @media only screen and (max-width: 350px) {
-    #header-image-container-mobile{
-        #header-image-container-mobile-selected{
+    #header-image-container-mobile {
+        #header-image-container-mobile-selected {
             display: flex;
-            gap:12px; 
+            gap: 12px;
             align-items: center;
         }
-        img{
+
+        img {
             max-width: 100px;
             max-height: 30px;
         }
-        h3{
+
+        h3 {
             font-size: 18px;
         }
     }
-  
+
 }
-
-

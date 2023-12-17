@@ -27,6 +27,16 @@ export class MainscreenComponent implements OnInit {
   showSidenavMobile: Boolean = true; 
 
 
+  /**
+   * Defines services
+   * @param channelService 
+   * @param userService 
+   * @param threadService 
+   * @param userProfileService 
+   * @param chatService 
+   * @param windowSizeService 
+   * @param activeSelectionService 
+   */
   constructor(
     public channelService: ChannelFirebaseService,
     public userService: UserFirebaseService,
@@ -35,32 +45,39 @@ export class MainscreenComponent implements OnInit {
     public chatService: ChatFirebaseService, 
     private windowSizeService: WindowSizeService,
     public activeSelectionService: ActiveSelectionService
-  ) {
-  }
+  ) {}
 
+  /**
+   * Subscribe observables 
+   */
   ngOnInit(): void {
     this.userProfileService.openUserProfil$.subscribe((user: User) => {
       this.userProfilOpen = true;
       this.userProfilUser = user;
     });
-
     this.userProfileService.closeUserProfil$.subscribe(() => {
       this.userProfilOpen = false;
     });
-    
     this.windowSizeService.windowWidth$.subscribe(windowWidth => {
       this.windowWidth = windowWidth; 
     });
     this.windowSizeService.setWindowSize(); 
   }
 
+
+  /**
+   * Hides or show sidenav
+   */
   toggleSideNav() {
     this.sideNavOpen = !this.sideNavOpen;
   }
 
+
+  /**
+   * Opens view for new message in mobile screen
+   */
   newMessageMobile(){
     this.activeSelectionService.activeSelection = undefined; 
     this.showSidenavMobile = false; 
   }
-
 }

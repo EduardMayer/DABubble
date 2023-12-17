@@ -14,19 +14,24 @@ export class UserSearchComponent {
   searchResultsUsers: User[] = [];
   clickListener: any;
 
-  constructor(
-    private userService: UserFirebaseService,
-    private renderer: Renderer2,
-    private el: ElementRef
-  ) {
-  }
-
   @Input() set searchValue(value: string) {
     this._searchValue = value;
     this.getUsers(this._searchValue);
   }
 
   @Output() userName: EventEmitter<User | boolean> = new EventEmitter<User | boolean>();
+
+  /**
+   * Defines services
+   * @param userService 
+   * @param renderer 
+   * @param el 
+   */
+  constructor(
+    private userService: UserFirebaseService,
+    private renderer: Renderer2,
+    private el: ElementRef
+  ) {}
 
   clickUser(index: number) {
       this.userName.emit(this.searchResultsUsers[index]);

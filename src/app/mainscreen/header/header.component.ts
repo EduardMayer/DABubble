@@ -31,19 +31,17 @@ export class HeaderComponent implements OnInit {
 
   @Output() closeEmptyViewEvent = new EventEmitter<any>();
 
-  
-    
   windowWidth: number = 1024;  
 
   constructor(
-    private userProfileService: UserProfileService,
-    private authService: AuthFirebaseService,
     public userService: UserFirebaseService,
     public channelService: ChannelFirebaseService,
+    private userProfileService: UserProfileService,
+    private authService: AuthFirebaseService,
     private chatService: ChatFirebaseService, 
     private windowSizeService: WindowSizeService,
-    public activeSelectionService: ActiveSelectionService,
-    public formatService: FormatService,
+    private activeSelectionService: ActiveSelectionService,
+    private formatService: FormatService,
     private router: Router) { }
 
   /**
@@ -57,14 +55,15 @@ export class HeaderComponent implements OnInit {
     this.windowSizeService.setWindowSize(); 
   }
 
+
   /**
    * loggout the current user. 
    */
   logout() {
     this.showHeaderMenu = false;
     this.authService.logout();
-    //this.router.navigate(['']);
   }
+
 
   /**
    * Show or hide menu. 
@@ -73,6 +72,7 @@ export class HeaderComponent implements OnInit {
     this.showHeaderMenu = !this.showHeaderMenu;
   }
 
+
   /**
    * show or hide userprofil
    */
@@ -80,6 +80,7 @@ export class HeaderComponent implements OnInit {
     this.showHeaderMenu = false;
     this.userProfileService.openUserProfil(this.userService.currentUser);
   }
+
 
   /**
    * close Chat and Channel view in mobile View
@@ -91,6 +92,7 @@ export class HeaderComponent implements OnInit {
     this.closeEmptyViewEvent.emit();
   }
 
+
   /**
    * Close profil menu popup
    */
@@ -99,6 +101,16 @@ export class HeaderComponent implements OnInit {
       this.showHeaderMenu = false;
     }
   }
+
+  /**
+   * Shorten a give string 
+   * @param stringToShort - string to short
+   * @returns - shortened string
+   */
+  getShortenedString( stringToShort: string) {
+    return this.formatService.cutStrLen(stringToShort);
+  }
+
 
   /**
    * Prevents closing of popup when click inside of popup
