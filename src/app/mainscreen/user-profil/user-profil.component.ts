@@ -5,6 +5,7 @@ import { Chat } from 'src/models/chat.class';
 import { User } from 'src/models/user.class';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
+import { NotificationService } from 'src/services/notification.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { UserProfileService } from 'src/services/user-profile.service';
 import { UserStatusFirebaseService } from 'src/services/user-status-firebase.service';
@@ -41,6 +42,7 @@ export class UserProfilComponent implements OnInit {
     private userService: UserFirebaseService,
     private authService: AuthFirebaseService,
     private chatService: ChatFirebaseService, 
+    private notificationService: NotificationService, 
     private router: Router) {
   }
 
@@ -81,13 +83,15 @@ export class UserProfilComponent implements OnInit {
     }
     const mail = this.editUserForm.get("emailInput")?.value
     if (this.currentAuthMail != this.editUserForm.get("emailInput")?.value) {
-      await this.authService.sendUpdateEmail(mail!);
-    }
-    this.userService.setCurrentUser(this.user);
-    this.userService.update(this.userService.currentUser);
-
-    if (this.currentAuthMail != this.editUserForm.get("emailInput")?.value) {
-      this.authService.logout();
+      const sendSuccessfull = await this.authService.sendUpdateEmail(mail!);
+      this.notificationService.renderNotification("E-Mail zur Verifizierung wurde erfolgreich versendet!"); 
+      this.close(); 
+      setTimeout(() => {
+        this.userService.setCurrentUser(this.user);
+        if (this.currentAuthMail != this.editUserForm.get("emailInput")?.value) {
+          this.authService.logout();
+        }
+      },  3000 ) ; 
     }
   }
 
@@ -159,3 +163,7 @@ export class UserProfilComponent implements OnInit {
     event.stopPropagation();
   }
 }
+function sleep(arg0: number) {
+  throw new Error('Function not implemented.');
+}
+

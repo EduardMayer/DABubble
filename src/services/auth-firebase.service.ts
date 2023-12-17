@@ -22,6 +22,7 @@ import { UserStatusFirebaseService } from './user-status-firebase.service';
 import { ChannelFirebaseService } from './channel-firebase.service';
 import { ChatFirebaseService } from './chat-firebase.service';
 import { ActiveSelectionService } from './active-selection.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -112,15 +113,13 @@ export class AuthFirebaseService implements OnInit {
         localStorage.setItem('user', JSON.stringify(this.UserData));
         JSON.parse(localStorage.getItem('user')!);
         await this.userService.setUIDToCurrentUser(this.UserData.uid);
-        this.userService.syncMail(this.UserData.email);
-        this.userService.setCurrentUserStatus("online");
-        this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
+        await this.userService.syncMail(this.UserData.email);
+        await this.userService.setCurrentUserStatus("online");
+        await this.UserStatusService.writeUserStatus(this.UserData.uid, "online");
         this.firebaseUserService.currentUser.id=this.UserData.uid;
-        this.firebaseUserService.load();
-        this.channelFirebaseService.load(this.UserData.uid);
+        await this.firebaseUserService.load();
+        await this.channelFirebaseService.load(this.UserData.uid);
         await this.chatFirebaseService.load(this.UserData.uid);
-        //this.chatFirebaseService.checkPersonalChat(this.UserData.uid);
-        
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -253,15 +252,17 @@ export class AuthFirebaseService implements OnInit {
    * Send a a email for verification to the given email address.
    * @param newEmail - new email adress
    */
-  async sendUpdateEmail(newEmail: string) {
-
-    verifyBeforeUpdateEmail(this.UserData, newEmail).then(() => {
+  async sendUpdateEmail(newEmail: string): Promise<boolean> {
+  
+    return verifyBeforeUpdateEmail(this.UserData, newEmail).then(() => {
       console.log("E-Mail-Verifizierung wurde versendet!");
+      return true; 
     }).catch((error) => {
       console.log("ERROR at Email update!");
       console.log(error.code);
       console.log(error.message);
       console.log(this.UserData);
+      return false;
     });
   }
 

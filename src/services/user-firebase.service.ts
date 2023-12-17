@@ -65,7 +65,9 @@ export class UserFirebaseService {
      */
     async update(user: User) {
         if (user.id == "") {
-            console.log("New User"); 
+            console.log("New User");
+            console.log(user);
+             
             debugger // to track when a empty user is created --> please do not delete 
             const docInstance = doc(collection(this.firestore, "users"));
             setDoc(docInstance, user.toJSON());
@@ -226,7 +228,6 @@ export class UserFirebaseService {
         }
     }
 
-
     /**
     * Lifecycle hook called when the component is about to be destroyed.
     * Unsubscribes from any active subscription.
@@ -235,6 +236,4 @@ export class UserFirebaseService {
         this.unsubUsers();
         this.unsubUser();
     }
-
-
 }
