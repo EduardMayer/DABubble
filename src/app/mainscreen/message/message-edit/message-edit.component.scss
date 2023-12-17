@@ -43,8 +43,20 @@
         align-items: flex-end;
         justify-content: space-between;
 
-        .msg-mods {
-            height: 24px;
+        .toolbar-icon {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        
+            &:hover {
+                background-color: rgba(236, 238, 254, 1);
+                border-radius: 30px;
+        
+                #addreaction-icon path{
+                    fill: #535AF1; 
+                }
+            }
         }
 
         .msg-submit-options {
@@ -62,18 +74,31 @@
                     font-size: 18px;
                     line-height: 24.55px;
                     text-align: center;
+                    cursor: pointer;
                 }
                 
                 .back {
                     background-color: white;
                     color:#797EF3;
                     border: 1px solid #797EF3;
+
+                    &:hover {
+                        background-color: rgba(68, 77, 242, 1) !important;
+                        transition: background-color 0.15s ease-in-out;
+                        color: white !important;
+                      }
                 }
 
                 .submit {
                     color: white;
                     background-color: #444DF2;
                     border: none;
+
+
+                    &:hover {
+                        background-color: rgba(121, 126, 243, 1) !important;
+                        transition: background-color 0.15s ease-in-out;
+                      }
                 }
             }
         }

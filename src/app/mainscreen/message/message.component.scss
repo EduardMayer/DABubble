@@ -105,6 +105,19 @@
 
     }
 
+    #addreactionplus-icon {
+        cursor: pointer;
+    }
+
+    #addreactionplus-icon:hover rect{
+        fill: #ECEEFE;
+    }
+    
+    #addreactionplus-icon:hover path {
+        fill: #535AF1;
+      
+    }
+
     &:hover {
         background-color: #ECEEFE;
 
