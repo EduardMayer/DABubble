@@ -46,6 +46,10 @@
     transform: scale(0);
     pointer-events: none; 
   }
+
+  .disable-scroll {
+    overflow: hidden;
+  }
   
   @keyframes slidelogo-out {
       0% {
