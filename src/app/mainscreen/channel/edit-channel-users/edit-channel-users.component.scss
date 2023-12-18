@@ -1,7 +1,6 @@
 #editChannel{
     max-width: 800px;
     min-width: 400px;
-    min-height: 300px;
     background-color: white;
     border-radius: 30px 0px 30px 30px; 
     position: absolute;
@@ -9,21 +8,41 @@
     right: 30px;
     z-index: 15;
     box-shadow: 0px 6px 10px 0px #00000033;
-    padding: 0px 12px 12px 12px;
+    padding: 40px;
     gap:18px; 
     display: flex;
     flex-direction: column;
     word-break: break-all;
+
+    h4{
+        margin: 0px;
+        color: #444DF2;
+    }
+
+    
 
     #editChannelHeader{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-
+        width: 100%;
         img{
             cursor: pointer;
         }
+
+        
+    }
+
+
+    #titleHeader{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2{
+        margin: 0px;
+    }
     }
 
     .add-selection {
@@ -34,6 +53,7 @@
         color: white;
         border: unset;
         float: inline-end;
+        font-size: 18px;
     
         &:hover {
             opacity: 0.85;
@@ -45,6 +65,11 @@
             justify-content: flex-end;
         }
     }
+
+    .disabled-button {
+        background-color: gray; 
+        color: white; 
+      }
 }
 
 #editChannelBackground{
@@ -61,8 +86,9 @@
     #editChannel{
         max-width: unset;
         min-width: unset;
-        width: calc(100vw - 72px);
+        width: calc(100vw - 120px);
         right: 24px;
         left: 24px;
+        padding: 30px 16px;
     }
 }

@@ -14,6 +14,7 @@ export class EditChannelUsersComponent {
 
   channelCopy: Channel;
   savingChanges: boolean=false;
+  isUserSelected: boolean = false;
   @Output() closeEvent = new EventEmitter<any>();
 
   @Input() set refChannel(value: Channel) {
@@ -41,6 +42,12 @@ export class EditChannelUsersComponent {
   */
   handleChannelUserUpdate(newChannel: Channel) {
     this.channelCopy = newChannel;
+    this.isUserSelected= this.checkIfUserIsSelected(newChannel);
+  }
+  
+
+  checkIfUserIsSelected(channel: Channel): boolean {
+    return channel && channel.users && channel.users.length > 0;
   }
 
 

@@ -17,6 +17,7 @@ export class EditChannelComponent implements OnInit {
   channel = new Channel();
   editChannelDescription = false;
   editChannelName = false;
+  
 
   NewChannelName: string = "";
   NewChannelDescription: string = "";
