@@ -1,19 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AddChannelDialogComponent } from 'src/app/add-channel-dialog/add-channel-dialog.component';
+import { MatDialog} from '@angular/material/dialog';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { User } from 'src/models/user.class';
-import { UserProfileService } from 'src/services/user-profile.service';
-import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { ChatFirebaseService } from 'src/services/chat-firebase.service';
 import { WindowSizeService } from 'src/services/window-size.service';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { FormatService } from 'src/services/format.service';
+import { AddChannelDialogComponent } from 'src/app/mainscreen/channel/add-channel-dialog/add-channel-dialog.component';
 
 @Component({
   selector: 'app-sidenav',

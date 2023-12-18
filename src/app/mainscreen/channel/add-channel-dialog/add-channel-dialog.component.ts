@@ -2,14 +2,12 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Channel } from 'src/models/channel.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
-import { UserFirebaseService } from 'src/services/user-firebase.service';
-
 
 import {
   MatDialog,
   MatDialogRef
 } from '@angular/material/dialog';
-import { AddUserToChannelDialogComponent } from './add-user-to-channel-dialog/add-user-to-channel-dialog.component';
+import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-add-channel-dialog',
@@ -55,7 +53,7 @@ export class AddChannelDialogComponent {
    */
   onSubmitNewChannel(value: any) {
     const newChannel = new Channel(value);
-    const dialogRef = this.dialog.open(AddUserToChannelDialogComponent) //hier fügen wir die Komponente ein die geöffnet werden soll. In diesem Fall, "DialogAddUserComponent", weil da unser Dialog enthalten ist.
+    const dialogRef = this.dialog.open(AddUserDialogComponent) //hier fügen wir die Komponente ein die geöffnet werden soll. In diesem Fall, "DialogAddUserComponent", weil da unser Dialog enthalten ist.
     dialogRef.componentInstance.channel = new Channel(newChannel);  // Mit dieser Zeile greifen wir auf die DialogEditAdressComponent zu und lagern die user in dieser component dort ein um auf daten zuzugreifen.
     this.closeDialog();
   }
@@ -64,7 +62,7 @@ export class AddChannelDialogComponent {
    * Opens addChannel dialog
    */
   openDialog(): void {
-    this.dialog.open(AddUserToChannelDialogComponent, {
+    this.dialog.open(AddUserDialogComponent, {
       width: '250px',
     });
   }
