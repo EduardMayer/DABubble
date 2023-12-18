@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { timeout } from 'rxjs';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
+import { NotificationService } from 'src/services/notification.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 
@@ -18,7 +19,8 @@ export class ForgotPasswordComponent {
   @Output() closeForgotPasswordView = new EventEmitter<void>();
 
   constructor(
-    private authService: AuthFirebaseService
+    private authService: AuthFirebaseService,
+    private notificationService: NotificationService
     ) { }
   email: string = '';
   errorInfo: any = false;
@@ -61,6 +63,7 @@ export class ForgotPasswordComponent {
     this.authService.resetPassword(this.email)
       .then(() => {
         this.emailSubmitted = true;
+        this.notificationService.renderNotification("E-Mail gesendet");
 
         setTimeout(() => {
           this.closeForgotPassword();

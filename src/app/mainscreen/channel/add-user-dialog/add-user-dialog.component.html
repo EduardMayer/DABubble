@@ -12,9 +12,9 @@
         <app-searchbar *ngIf="selectedOption == '2'" 
             [types]="'users'" 
             [action]='channel'
-            [setStyle]="'channelOption'" 
-
-            (updatedChannelModel)="handleChannelUserUpdate($event)"></app-searchbar>
+            [setStyle]="'channelOption'"
+            (updatedChannelModel)="handleChannelUserUpdate($event)">
+        </app-searchbar>
     </mat-radio-group>
 
     <div class="addUserToSelectionContainer">

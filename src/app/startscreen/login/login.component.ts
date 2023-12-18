@@ -64,8 +64,6 @@ export class LoginComponent implements OnInit {
    * @returns {void}
    */
   async login() {
-    console.log(this.contactForm.value.emailInput);
-    console.log(this.contactForm.value.passwordInput);
     if (
       this.contactForm.value.emailInput != null &&
       this.contactForm.value.passwordInput != null

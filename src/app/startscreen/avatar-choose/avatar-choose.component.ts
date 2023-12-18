@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/services/notification.service';
 
 
 @Component({
@@ -12,7 +13,6 @@ import { Router } from '@angular/router';
 export class AvatarChooseComponent implements OnInit {
   user = this.userService.registUser;
   userName: string = '';
-  avatarSubmitted: boolean = false;
 
   avatars: string[] = [
     'avatar1.svg',
@@ -24,7 +24,8 @@ export class AvatarChooseComponent implements OnInit {
   ];
   constructor(
     private storageService: StorageFirebaseService, 
-    public userService: UserFirebaseService, 
+    public userService: UserFirebaseService,
+    private notificationService: NotificationService,
     public router: Router) {
     this.user.avatar = 'assets/img/avatar/avatar0.svg';
   }
@@ -85,7 +86,7 @@ export class AvatarChooseComponent implements OnInit {
    */
   onSubmitAvatar() {
     this.userService.update(this.user);
-    this.avatarSubmitted = true;
+    this.notificationService.renderNotification("Konto erfolgreich erstellt!");
 
     setTimeout(() => {
       this.router.navigate(['index']);
