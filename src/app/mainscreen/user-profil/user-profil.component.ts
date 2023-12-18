@@ -90,6 +90,8 @@ export class UserProfilComponent implements OnInit {
     const nameinput = this.editUserForm.get("nameInput")?.value;
     if(nameinput){
       this.user.fullName = nameinput;
+      this.userService.update(this.user);
+      this.userService.setCurrentUser(this.user);
     }
     const mail = this.editUserForm.get("emailInput")?.value
     if (this.currentAuthMail != this.editUserForm.get("emailInput")?.value) {
@@ -103,6 +105,10 @@ export class UserProfilComponent implements OnInit {
         }
       },  3000 ) ; 
     }
+    else{
+      location.reload(); 
+    }
+    this.close(); 
   }
 
   /**
