@@ -64,16 +64,7 @@ export class UserFirebaseService {
     * @param {User} user - The user object to be updated or created.
      */
     async update(user: User) {
-        if (user.id == "") {
-            /*
-            console.log("New User");
-            console.log(user);
-             
-            debugger // to track when a empty user is created --> please do not delete 
-            const docInstance = doc(collection(this.firestore, "users"));
-            setDoc(docInstance, user.toJSON());
-            */
-        } else {
+        if (user.id != "") {
             console.log("user Update");
             console.log(user.id);
             
