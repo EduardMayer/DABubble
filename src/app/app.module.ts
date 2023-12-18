@@ -30,7 +30,7 @@ import { AvatarChooseComponent } from './startscreen/avatar-choose/avatar-choose
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddChannelDialogComponent } from './add-channel-dialog/add-channel-dialog.component';
+
 import { MessageCreateComponent } from './mainscreen/message/message-create/message-create.component';
 import { DateLineComponent } from './mainscreen/message/date-line/date-line.component';
 import { IfChangedDirective } from './directives/if-changed.directive';
@@ -54,12 +54,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChatViewComponent } from './mainscreen/sidenav/chat-view/chat-view.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { EditChannelComponent } from './mainscreen/channel/edit-channel/edit-channel.component';
-import { AddUserToChannelDialogComponent } from './add-channel-dialog/add-user-to-channel-dialog/add-user-to-channel-dialog.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatChipsModule} from '@angular/material/chips';
 import { EmptyWindowComponent } from './mainscreen/empty-window/empty-window.component';
 import { EditChannelUsersComponent } from './mainscreen/channel/edit-channel-users/edit-channel-users.component';
 import { ShowChannelUsersComponent } from './mainscreen/channel/show-channel-users/show-channel-users.component';
+import { AddUserDialogComponent } from './mainscreen/channel/add-user-dialog/add-user-dialog.component';
+import { AddChannelDialogComponent } from './mainscreen/channel/add-channel-dialog/add-channel-dialog.component';
 
 
 
@@ -97,10 +98,10 @@ import { ShowChannelUsersComponent } from './mainscreen/channel/show-channel-use
     IntroComponent,
     ChatViewComponent,
     EditChannelComponent,
-    AddUserToChannelDialogComponent,
     EmptyWindowComponent,
     EditChannelUsersComponent,
-    ShowChannelUsersComponent
+    ShowChannelUsersComponent,
+    AddUserDialogComponent
   ],
   imports: [
     BrowserModule,

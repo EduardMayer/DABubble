@@ -5,11 +5,11 @@ import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 
 @Component({
-  selector: 'app-add-user-to-channel-dialog',
-  templateUrl: './add-user-to-channel-dialog.component.html',
-  styleUrls: ['./add-user-to-channel-dialog.component.scss']
+  selector: 'app-add-user-dialog',
+  templateUrl: './add-user-dialog.component.html',
+  styleUrls: ['./add-user-dialog.component.scss']
 })
-export class AddUserToChannelDialogComponent implements OnInit {
+export class AddUserDialogComponent implements OnInit {
 
   selectedOption: string = '';
   public channel = new Channel();
@@ -17,7 +17,7 @@ export class AddUserToChannelDialogComponent implements OnInit {
 
   constructor(public firebaseChannel: ChannelFirebaseService,
     private userService: UserFirebaseService,
-    public dialogRef: MatDialogRef<AddUserToChannelDialogComponent>
+    public dialogRef: MatDialogRef<AddUserDialogComponent>
     ) {
   }
 
