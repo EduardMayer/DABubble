@@ -432,8 +432,7 @@ app-message-create {
 }
 
 
-
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) and (min-width: 769px){
 
     .header {
         flex-direction: column;
@@ -458,5 +457,4 @@ app-message-create {
             }
         }
     }
-
 }

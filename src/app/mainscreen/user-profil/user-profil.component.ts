@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
@@ -87,6 +87,7 @@ export class UserProfilComponent implements OnInit {
  * Edit the current User and saves the changes in the firebase store. 
  */
   async editUser() {
+
     const nameinput = this.editUserForm.get("nameInput")?.value;
     if(nameinput){
       this.user.fullName = nameinput;
@@ -181,6 +182,15 @@ export class UserProfilComponent implements OnInit {
    */
   stopPropagation(event:Event){
     event.stopPropagation();
+  }
+
+  /**
+   * Confirm edits with press enter key
+   */
+  confirmEdit() {
+    if (this.editUserForm.valid) {
+      this.editUser();
+    }
   }
 }
 

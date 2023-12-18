@@ -148,8 +148,6 @@ export class ChatFirebaseService {
         this.loadedChats.forEach(chat => {
             chat.users.forEach(user => {
                 if(user === userId){
-                    console.log("founded Chat");
-                    console.log(chat); 
                     foundChat = chat; 
                 }   
             });

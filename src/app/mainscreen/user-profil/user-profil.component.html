@@ -48,7 +48,7 @@
             </div>
         </div>
         <div *ngIf="editUserMode && isCurrentUser" id="headerUserProfil-EditMode">
-            <form [formGroup]="editUserForm" (ngSubmit)="editUser()">
+            <form [formGroup]="editUserForm" (ngSubmit)="editUser()" (keydown.enter)="confirmEdit()">
                 <div>
                     <div class="headerUserProfil-EditMode-Row">
                         <img src="assets/img/icons/accountIcon.png" alt="">
@@ -61,10 +61,10 @@
                         <img src="assets/img/icons/mailblack.svg" alt="email">
                         <h3>E-Mail-Adresse</h3>
                     </div>
-                    <input type="email" formControlName="emailInput" [(ngModel)]="currentUserInput">
+                    <input type="email" formControlName="emailInput">
                 </div>
                 <div id="headerUserProfil-EditMode-EditMailInfo">
-                    <h3 *ngIf="currentUserInput != currentAuthMail">
+                    <h3 *ngIf="editUserForm.value.emailInput != currentAuthMail">
                         Achtung: Wenn Sie Ihre E-Mail-Adresse ändern, müssen Sie diese per Mail verifizieren.
                         Sie werden ausgeloggt und können sich nach Bestätigung mit ihrere neuen E-Mail Adresse anmelden.
                     </h3>

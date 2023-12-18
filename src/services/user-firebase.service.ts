@@ -65,9 +65,6 @@ export class UserFirebaseService {
      */
     async update(user: User) {
         if (user.id != "") {
-            console.log("user Update");
-            console.log(user.id);
-            
             const docInstance = doc(this.firestore, 'users', user.id);
             updateDoc(docInstance, user.toJSON());
         }
