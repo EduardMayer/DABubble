@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div id="headerMenu-mobile" *ngIf="showHeaderMenu">
+    <div id="headerMenu-mobile" *ngIf="showHeaderMenu">    
         <div class="headerMenu-mobile-entry">
             <img src="assets/img/icons/accountIcon.png" alt="user">
             <a (click)="showProfil()">Profil</a>
@@ -54,4 +54,6 @@
             <a (click)="logout()">Logout</a>
         </div>
     </div>
+    <div id="headerMenu-mobile-background" *ngIf="showHeaderMenu" (click)="showHeaderMenu = false"></div>
+
 </div>
