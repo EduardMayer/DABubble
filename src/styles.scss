@@ -78,8 +78,15 @@ button{
     font-family: 'Nunito', sans-serif;
     border-radius: 30px;
     border: 1px solid white;
+    cursor: pointer;
+    font-size: 18px;
     &:disabled{
         opacity: 0.4;
+    }
+
+    &:hover{
+        background-color: rgba(121, 126, 243, 1) !important;
+        transition: background-color 0.15s ease-in-out
     }
 }
 .btn-white{
@@ -89,8 +96,16 @@ button{
     font-family: 'Nunito', sans-serif;
     border-radius: 30px;
     border: 1px solid #444DF2;
+    cursor: pointer;
+    font-size: 18px;
     &:disabled{
         opacity: 0.4;
+    }
+
+    &:hover{
+        background-color: rgba(68, 77, 242, 1) !important;
+        transition: background-color 0.15s ease-in-out;
+        color: white !important;
     }
 }
 
