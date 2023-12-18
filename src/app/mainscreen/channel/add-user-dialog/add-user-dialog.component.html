@@ -9,7 +9,11 @@
         <mat-radio-button value="1">Alle Mitglieder von ... hinzufügen</mat-radio-button>
         <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>
         <!-- <input *ngIf="selectedOption == '2'" class="addUserToChannelDialogInput"> -->
-        <app-searchbar *ngIf="selectedOption == '2'" [types]="'users'" [action]='channel'
+        <app-searchbar *ngIf="selectedOption == '2'" 
+            [types]="'users'" 
+            [action]='channel'
+            [setStyle]="'channelOption'" 
+
             (updatedChannelModel)="handleChannelUserUpdate($event)"></app-searchbar>
     </mat-radio-group>
 
