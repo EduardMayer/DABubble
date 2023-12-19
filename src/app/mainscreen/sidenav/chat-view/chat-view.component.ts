@@ -36,7 +36,7 @@ export class ChatViewComponent{
           this.checkStatus(); 
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       })
       .catch((error) => {
@@ -62,10 +62,9 @@ export class ChatViewComponent{
         this.userStatusService.getUserStatus(this.user.id)
         .then((result) => {
           this.user!.status = result;
-          //console.log(this.user.id +  " " + result);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       }
     }, this.refreshIntervall);

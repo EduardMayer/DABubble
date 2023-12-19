@@ -20,15 +20,6 @@ export class AddUserDialogComponent {
     public dialogRef: MatDialogRef<AddUserDialogComponent>
     ) {
   }
-
-
-  /**
-   * Logs the current selected option. 
-   */
-  chooseSelection() {
-    console.log(this.selectedOption); // Gibt den aktuell ausgewählten Wert aus
-  }
-
   
   /**
    * updates channel object when adding new users. 
@@ -36,8 +27,6 @@ export class AddUserDialogComponent {
    */
   handleChannelUserUpdate(newChannel: Channel) {
     this.channel = newChannel;
-    console.log("channel updated");
-    console.log(this.channel)
   }
 
 

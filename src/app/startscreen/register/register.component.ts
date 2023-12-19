@@ -110,14 +110,12 @@ export class RegisterComponent {
     this.userService.registUser.mail = emailInputValue;
     await this.authService.register(emailInputValue, passwordInputValue)
       .then(() => {
-        console.log("Registrierung erfolgreich. User wird angelegt");
         this.userService.addRegistUserWithUID(this.userService.registUser.id);
         this.closeRegister();
       })
       .catch((error) => {
-        console.log("AuthResponse: ");
         const errorCode = error.code;
-        console.log(errorCode);
+        console.error(errorCode);
         if (errorCode != null && errorCode != undefined) {
           this.registrationErrorMessage = this.authService.getErrorMessage(errorCode);
           this.registrationFailed = true;

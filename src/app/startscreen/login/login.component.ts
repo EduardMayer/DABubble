@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
@@ -8,7 +8,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   @Output() forgotPasswordLinkClick = new EventEmitter<void>();
 
@@ -47,15 +47,6 @@ export class LoginComponent implements OnInit {
 
   firebaseUserService = inject(UserFirebaseService);
 
-  /**
-  * Angular lifecycle hook called after component initialization.
-  * Logs whether a user is logged in.
-  * 
-  * @returns {void}
-  */
-  ngOnInit(): void {
-    console.log('User Logged In: ' + this.authService.isLoggedIn());
-  }
 
   /**
    * Initiates the login process with the provided email and password.
@@ -71,7 +62,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.contactForm.value.emailInput, this.contactForm.value.passwordInput)
         .catch((error) => {
           const errorCode = error.code;
-          console.log(errorCode);
+          console.error(errorCode);
 
           if (errorCode != null && errorCode != undefined) {
             this.loginErrorMessage = this.authService.getErrorMessage(errorCode);

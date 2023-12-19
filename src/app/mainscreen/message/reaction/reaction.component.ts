@@ -27,7 +27,6 @@ export class ReactionComponent {
   * @returns {void}
   */
   emojiSelected() {
-    console.log(this.emoji+"selected");
     this.emojiSelectedOutput.emit(this.emoji);
   }
 }

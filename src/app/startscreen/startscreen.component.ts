@@ -90,6 +90,5 @@ export class StartscreenComponent implements OnInit{
 
   handleIntroComplete(introComplete: boolean){
     this.introComplete=introComplete;
-    console.log("setting intro to complete");
   }
 }

@@ -26,7 +26,6 @@ export class StorageFirebaseService {
     try {
       await this.uploadFileToStorage(storageRef, file);
       const url = await this.getDownloadUrl(storageRef);
-      console.log('File URL:', url);
       return url;
     } catch (error) {
       console.error('Error uploading image: ', error);
@@ -53,7 +52,6 @@ export class StorageFirebaseService {
     const storageRef = ref(this.storage, `${folder}/${fileName}`);
     try {
       const url = await this.uploadAndRetrieveUrl(storageRef, file);
-      console.log('File URL:', url);
       return url;
     } catch (error) {
       console.error('Error uploading file: ', error);

@@ -255,13 +255,10 @@ export class AuthFirebaseService implements OnInit {
   async sendUpdateEmail(newEmail: string): Promise<boolean> {
   
     return verifyBeforeUpdateEmail(this.UserData, newEmail).then(() => {
-      console.log("E-Mail-Verifizierung wurde versendet!");
       return true; 
     }).catch((error) => {
-      console.log("ERROR at Email update!");
-      console.log(error.code);
-      console.log(error.message);
-      console.log(this.UserData);
+      console.error(error.code);
+      console.error(error.message);
       return false;
     });
   }
@@ -273,12 +270,10 @@ export class AuthFirebaseService implements OnInit {
   async updateMail(newEmail: string) {
 
     await updateEmail(this.UserData, newEmail).then(() => {
-      console.log("Email updated!");
+
     }).catch((error) => {
-      console.log("ERROR at Email update!");
-      console.log(error.code);
-      console.log(error.message);
-      console.log(this.UserData);
+      console.error(error.code);
+      console.error(error.message);
     });
   }
 
@@ -289,10 +284,9 @@ export class AuthFirebaseService implements OnInit {
   async applyActionCode(code: string) {
     await applyActionCode(this.auth, code)
       .then(() => {
-        console.log("Confirm oobCode");
+      
       })
       .catch((error) => {
-        // Invalid or expired code
         console.error('Error verifying oobCode:', error);
       });
   }
@@ -306,10 +300,10 @@ export class AuthFirebaseService implements OnInit {
 
     return sendPasswordResetEmail(this.auth, email)
       .then(() => {
-        console.log("Password reset email sent");
+       
       })
       .catch((error) => {
-        console.log(error.code, error.message);
+        console.error(error.code, error.message);
       });
   }
 
@@ -321,7 +315,6 @@ export class AuthFirebaseService implements OnInit {
   async confirmPasswordReset(oobCode: string, newPassword: string) {
     try {
       await confirmPasswordReset(this.auth, oobCode, newPassword);
-      console.log('Passwort wurde erfolgreich zurückgesetzt.');
     } catch (error) {
       console.error('Fehler bei der Passwortänderung:', error);
     }

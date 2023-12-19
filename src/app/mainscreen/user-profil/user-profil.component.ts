@@ -145,7 +145,7 @@ export class UserProfilComponent implements OnInit {
         this.user.status = result;
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
 

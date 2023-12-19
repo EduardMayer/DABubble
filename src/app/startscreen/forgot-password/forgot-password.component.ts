@@ -70,7 +70,7 @@ export class ForgotPasswordComponent {
         }, 1400);
       })
       .catch((error) => {
-        console.log(error.message);
+        console.error(error.message);
       });
   }
 

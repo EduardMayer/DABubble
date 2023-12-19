@@ -174,7 +174,6 @@ export class MessageCreateComponent {
 
   handleEmojiSelection(selectedEmoji: string) {
     if (selectedEmoji == "noSelection") {
-      console.log("noSelection");
       this.closeEmojiBar();
     } else {
       this.message.content += selectedEmoji;

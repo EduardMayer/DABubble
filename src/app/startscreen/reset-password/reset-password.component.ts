@@ -51,11 +51,7 @@ export class ResetPasswordComponent implements OnInit {
     const queryParams = new URLSearchParams(window.location.search);
     if (queryParams.get('oobCode') != null) {
       this.oobCode = queryParams.get('oobCode')!;
-      console.log("Param");
-
     }
-    console.log("code from URL:");
-    console.log(this.oobCode);
   }
 
   /**

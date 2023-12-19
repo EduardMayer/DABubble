@@ -53,6 +53,11 @@ export class UserFirebaseService {
     }
 
 
+    /**
+     * Sorts an array of users
+     * @param users - user to sort 
+     * @returns - sorted users
+     */
     sortByUsersByName(users: User[]) {
         return users.slice().sort((a, b) => a.fullName.localeCompare(b.fullName));
     }
@@ -213,7 +218,6 @@ export class UserFirebaseService {
             }
             return false;
         } else {
-            console.log("Error: User Data could not be loaded");
             return false;
         }
     }
