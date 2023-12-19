@@ -186,7 +186,7 @@
       class="custom-checkbox"
     />
     <label for="myCheckbox"
-      >Ich stimme der <a href="#">Datenschutzerklärung</a> zu.</label
+      >Ich stimme der <a (click)="emitPrivacyPolicyOpening()">Datenschutzerklärung</a> zu.</label
     >
   </div>
   <div *ngIf="registrationFailed" class="warning-text">

@@ -10,7 +10,8 @@
         </div>
     </div>
     <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar && !showForgotPassword"(forgotPasswordLinkClick)="onForgotPasswordLinkClick()" class="app-login"></app-login>
-        <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()" class="app-register"></app-register>
+        <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" 
+        (closeRegisterView)="closeRegister()"  (openPrivacyPolicy)="handleOpenImprint()" class="app-register"></app-register>
         <app-avatar-choose *ngIf="showAvatar && !showLogin" (closeAvatarView)="closeAvatar()" class="app-avatar"></app-avatar-choose>
         <app-forgot-password *ngIf="showForgotPassword" (closeForgotPasswordView)="closeForgotPassword()" class="app-forgot"></app-forgot-password>
         <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>

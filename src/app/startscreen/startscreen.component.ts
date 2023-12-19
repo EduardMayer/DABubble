@@ -33,7 +33,6 @@ export class StartscreenComponent implements OnInit{
  */
   ngOnInit(): void {
     document.body.style.overflow = 'hidden';
-    
     if(this.authService.isLoggedIn() && !this.authService.loginExprired()){
       this.router.navigateByUrl('index'); 
     }
@@ -48,6 +47,7 @@ export class StartscreenComponent implements OnInit{
     this.imprint = false; 
     this.privacyPolicy = false; 
   }
+
 
   /**
  * Closes the registration view and shows the avatar view.
@@ -93,5 +93,10 @@ export class StartscreenComponent implements OnInit{
   handleIntroComplete(introComplete: boolean){
     document.body.style.overflow = 'auto';
     this.introComplete=introComplete;
+  }
+
+  handleOpenImprint(){
+    this.handleIntroComplete(true);
+    this.privacyPolicy=true;
   }
 }

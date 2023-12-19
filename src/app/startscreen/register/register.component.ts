@@ -17,6 +17,7 @@ export class RegisterComponent {
     }
 
   @Output() closeRegisterView = new EventEmitter<void>();
+  @Output() openPrivacyPolicy = new EventEmitter<void>();
 
   isNameInputActive: boolean = false;
   isEmailInputActive: boolean = false;
@@ -46,6 +47,9 @@ export class RegisterComponent {
   });
 
 
+  emitPrivacyPolicyOpening(){
+    this.openPrivacyPolicy.emit();
+  }
 
 
   /**
@@ -73,6 +77,7 @@ export class RegisterComponent {
     }
     return null;
   }
+
 
   /**
  * Determines whether the registration button should be disabled based on the form validity and checkbox value.
