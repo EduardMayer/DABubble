@@ -225,9 +225,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#chooseSelection" >chooseSelection</a>
-                            </li>
-                            <li>
                                 <a href="#closeDialog" >closeDialog</a>
                             </li>
                             <li>
@@ -334,45 +331,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="chooseSelection"></a>
-                    <span class="name">
-                        <span ><b>chooseSelection</b></span>
-                        <a href="#chooseSelection"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>chooseSelection()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:28</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Logs the current selected option.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="closeDialog"></a>
                     <span class="name">
                         <span ><b>closeDialog</b></span>
@@ -389,8 +347,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -428,8 +386,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -467,8 +425,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -704,15 +662,6 @@ export class AddUserDialogComponent {
     public dialogRef: MatDialogRef&lt;AddUserDialogComponent&gt;
     ) {
   }
-
-
-  /**
-   * Logs the current selected option. 
-   */
-  chooseSelection() {
-    console.log(this.selectedOption); // Gibt den aktuell ausgewählten Wert aus
-  }
-
   
   /**
    * updates channel object when adding new users. 
@@ -720,8 +669,6 @@ export class AddUserDialogComponent {
    */
   handleChannelUserUpdate(newChannel: Channel) {
     this.channel &#x3D; newChannel;
-    console.log(&quot;channel updated&quot;);
-    console.log(this.channel)
   }
 
 
@@ -765,7 +712,7 @@ export class AddUserDialogComponent {
         &lt;img (click)&#x3D;&quot;closeDialog()&quot; class&#x3D;&quot;close&quot; src&#x3D;&quot;/assets/img/icons/close.svg&quot;&gt;
     &lt;/div&gt;
 
-    &lt;mat-radio-group class&#x3D;&quot;radioButtonContainer&quot; [(ngModel)]&#x3D;&quot;selectedOption&quot; (ngModelChange)&#x3D;&quot;chooseSelection()&quot;&gt;
+    &lt;mat-radio-group class&#x3D;&quot;radioButtonContainer&quot; [(ngModel)]&#x3D;&quot;selectedOption&quot;&gt;
         &lt;mat-radio-button value&#x3D;&quot;1&quot;&gt;Alle Mitglieder von ... hinzufügen&lt;/mat-radio-button&gt;
         &lt;mat-radio-button value&#x3D;&quot;2&quot;&gt;Bestimmte Leute hinzufügen&lt;/mat-radio-button&gt;
         &lt;!-- &lt;input *ngIf&#x3D;&quot;selectedOption &#x3D;&#x3D; &#x27;2&#x27;&quot; class&#x3D;&quot;addUserToChannelDialogInput&quot;&gt; --&gt;
@@ -905,7 +852,7 @@ add-user-dialog-container {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="addUserToChannelContainer">    <div class="headerContainer">        <h3 class="headerText">Leute hinzufügen</h3>        <img (click)="closeDialog()" class="close" src="/assets/img/icons/close.svg">    </div>    <mat-radio-group class="radioButtonContainer" [(ngModel)]="selectedOption" (ngModelChange)="chooseSelection()">        <mat-radio-button value="1">Alle Mitglieder von ... hinzufügen</mat-radio-button>        <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>        <!-- <input *ngIf="selectedOption == \'2\'" class="addUserToChannelDialogInput"> -->        <app-searchbar *ngIf="selectedOption == \'2\'"             [types]="\'users\'"             [action]=\'channel\'            [setStyle]="\'channelOption\'"            (updatedChannelModel)="handleChannelUserUpdate($event)">        </app-searchbar>    </mat-radio-group>    <div class="addUserToSelectionContainer">        <button (click)="createChannel()" class="addUserToSelection">Erstellen</button>    </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="addUserToChannelContainer">    <div class="headerContainer">        <h3 class="headerText">Leute hinzufügen</h3>        <img (click)="closeDialog()" class="close" src="/assets/img/icons/close.svg">    </div>    <mat-radio-group class="radioButtonContainer" [(ngModel)]="selectedOption">        <mat-radio-button value="1">Alle Mitglieder von ... hinzufügen</mat-radio-button>        <mat-radio-button value="2">Bestimmte Leute hinzufügen</mat-radio-button>        <!-- <input *ngIf="selectedOption == \'2\'" class="addUserToChannelDialogInput"> -->        <app-searchbar *ngIf="selectedOption == \'2\'"             [types]="\'users\'"             [action]=\'channel\'            [setStyle]="\'channelOption\'"            (updatedChannelModel)="handleChannelUserUpdate($event)">        </app-searchbar>    </mat-radio-group>    <div class="addUserToSelectionContainer">        <button (click)="createChannel()" class="addUserToSelection">Erstellen</button>    </div></div></div>'
     var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
     var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
     var ACTUAL_COMPONENT = {'name': 'AddUserDialogComponent'};

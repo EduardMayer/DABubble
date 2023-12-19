@@ -996,7 +996,7 @@ export class SidenavComponent implements OnInit {
         this.currentUser &#x3D; user
       })
       .catch((error) &#x3D;&gt; {
-        console.log(error);
+        console.error(error);
       });
       this.windowSizeService.windowWidth$.subscribe(windowWidth &#x3D;&gt; {
         this.windowWidth &#x3D; windowWidth; 

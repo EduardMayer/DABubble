@@ -235,6 +235,20 @@
                 </tr>
 
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#introComplete" >introComplete</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -244,7 +258,30 @@
 
 
 
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="introComplete"></a>
+                        <b>introComplete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
 
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/startscreen/intro/intro.component.ts:20</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section data-compodoc="block-methods">
@@ -272,8 +309,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/startscreen/intro/intro.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/startscreen/intro/intro.component.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -399,7 +436,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, OnInit, Output } from &#x27;@angular/core&#x27;;
 
 /**
  * The IntroComponent displays an introduction with animations.
@@ -418,6 +455,7 @@ export class IntroComponent implements OnInit {
   animationStart: boolean &#x3D; false;
   animationLogo: boolean &#x3D; false;
   d_none: boolean &#x3D; false;
+  @Output() introComplete &#x3D; new EventEmitter&lt;boolean&gt;();
 
   /**
    * Initializes the component and triggers animations.
@@ -433,6 +471,7 @@ export class IntroComponent implements OnInit {
         //debugger
         setTimeout(() &#x3D;&gt; {
           this.d_none &#x3D; true;
+          this.introComplete.emit(true);
         }, 600);
       }, 1000);
     }, 1000);

@@ -680,7 +680,7 @@ export class ChatViewComponent{
           this.checkStatus(); 
         })
         .catch((error) &#x3D;&gt; {
-          console.log(error);
+          console.error(error);
         });
       })
       .catch((error) &#x3D;&gt; {
@@ -706,10 +706,9 @@ export class ChatViewComponent{
         this.userStatusService.getUserStatus(this.user.id)
         .then((result) &#x3D;&gt; {
           this.user!.status &#x3D; result;
-          //console.log(this.user.id +  &quot; &quot; + result);
         })
         .catch((error) &#x3D;&gt; {
-          console.log(error);
+          console.error(error);
         });
       }
     }, this.refreshIntervall);

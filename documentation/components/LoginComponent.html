@@ -133,12 +133,6 @@
 
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -257,9 +251,6 @@
                             </li>
                             <li>
                                 <a href="#loginWithGoogle" >loginWithGoogle</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#onForgotPasswordLinkClick" >onForgotPasswordLinkClick</a>
@@ -396,8 +387,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -440,8 +431,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -483,8 +474,8 @@ Handles login failures by displaying error messages.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -492,49 +483,6 @@ Handles login failures by displaying error messages.</p>
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Initiates the login process using Google authentication.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:56</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Angular lifecycle hook called after component initialization.
-Logs whether a user is logged in.</p>
 </div>
 
                         <div class="io-description">
@@ -610,8 +558,8 @@ Logs whether a user is logged in.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/startscreen/login/login.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -992,7 +940,7 @@ Logs whether a user is logged in.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, OnInit, Output, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Output, inject } from &#x27;@angular/core&#x27;;
 import { FormControl, Validators, FormGroup } from &#x27;@angular/forms&#x27;;
 import { AuthFirebaseService } from &#x27;src/services/auth-firebase.service&#x27;;
 import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
@@ -1002,7 +950,7 @@ import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x2
   templateUrl: &#x27;./login.component.html&#x27;,
   styleUrls: [&#x27;./login.component.scss&#x27;],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   @Output() forgotPasswordLinkClick &#x3D; new EventEmitter&lt;void&gt;();
 
@@ -1041,15 +989,6 @@ export class LoginComponent implements OnInit {
 
   firebaseUserService &#x3D; inject(UserFirebaseService);
 
-  /**
-  * Angular lifecycle hook called after component initialization.
-  * Logs whether a user is logged in.
-  * 
-  * @returns {void}
-  */
-  ngOnInit(): void {
-    console.log(&#x27;User Logged In: &#x27; + this.authService.isLoggedIn());
-  }
 
   /**
    * Initiates the login process with the provided email and password.
@@ -1065,7 +1004,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.contactForm.value.emailInput, this.contactForm.value.passwordInput)
         .catch((error) &#x3D;&gt; {
           const errorCode &#x3D; error.code;
-          console.log(errorCode);
+          console.error(errorCode);
 
           if (errorCode !&#x3D; null &amp;&amp; errorCode !&#x3D; undefined) {
             this.loginErrorMessage &#x3D; this.authService.getErrorMessage(errorCode);

@@ -161,6 +161,7 @@
                                 <a href="#getUserStatus" >getUserStatus</a>
                             </li>
                             <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#writeUserStatus" >writeUserStatus</a>
                             </li>
                         </ul>
@@ -219,8 +220,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/services/user-status-firebase.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/services/user-status-firebase.service.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -282,6 +283,7 @@
                 <td class="col-md-4">
                     <a name="writeUserStatus"></a>
                     <span class="name">
+                            <span class="modifier">Async</span>
                         <span ><b>writeUserStatus</b></span>
                         <a href="#writeUserStatus"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -289,7 +291,8 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>writeUserStatus(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>writeUserStatus(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -360,7 +363,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -432,7 +435,8 @@ export class UserStatusFirebaseService {
    * @param userId - unique user id
    * @param status - status of user - e.g. &quot;online&quot;, &quot;offline&quot;. 
    */
-  writeUserStatus(userId:string, status:string) {
+  async writeUserStatus(userId:string, status:string) {
+    
     const userStatusDatabaseRef &#x3D; ref(this.database, &#x27;userStatus/&#x27; + userId);
     set(userStatusDatabaseRef, {
       &quot;status&quot;: status
@@ -440,6 +444,9 @@ export class UserStatusFirebaseService {
       onDisconnect(userStatusDatabaseRef).set({
         &quot;status&quot;: &quot;offline&quot;
       });
+    })
+    .catch((error) &#x3D;&gt; {
+      console.error(&quot;Status could not set&quot;);
     });
   }
 

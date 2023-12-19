@@ -255,8 +255,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/services/storage-firebase.service.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/services/storage-firebase.service.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -336,8 +336,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="114"
-                                    class="link-to-prism">src/services/storage-firebase.service.ts:114</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/services/storage-firebase.service.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -418,8 +418,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/services/storage-firebase.service.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/services/storage-firebase.service.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -517,8 +517,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/services/storage-firebase.service.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/services/storage-firebase.service.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -616,8 +616,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">src/services/storage-firebase.service.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/services/storage-firebase.service.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -808,7 +808,6 @@ export class StorageFirebaseService {
     try {
       await this.uploadFileToStorage(storageRef, file);
       const url &#x3D; await this.getDownloadUrl(storageRef);
-      console.log(&#x27;File URL:&#x27;, url);
       return url;
     } catch (error) {
       console.error(&#x27;Error uploading image: &#x27;, error);
@@ -835,7 +834,6 @@ export class StorageFirebaseService {
     const storageRef &#x3D; ref(this.storage, &#x60;${folder}/${fileName}&#x60;);
     try {
       const url &#x3D; await this.uploadAndRetrieveUrl(storageRef, file);
-      console.log(&#x27;File URL:&#x27;, url);
       return url;
     } catch (error) {
       console.error(&#x27;Error uploading file: &#x27;, error);
