@@ -140,6 +140,7 @@
           [placeholder]="'Passwort'"
           [type]="isPasswordVisible ? 'text' : 'password'"
           name="password"
+          autocomplete
           (focus)="isPasswordInputActive = true"
           (blur)="isPasswordInputActive = false"
         />
@@ -167,7 +168,7 @@
       >
         <span
           class="required-informations"
-          *ngIf="contactForm.controls['passwordInput'].hasError('minlength')"
+          *ngIf="contactForm.controls['passwordInput'].hasError('minLength') || contactForm.controls['passwordInput'].hasError('pattern')"
           [ngClass]="{ 'warning-password': true }"
         >
           {{

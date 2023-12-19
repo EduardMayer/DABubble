@@ -77,6 +77,7 @@
           [placeholder]="'Passwort'"
           [type]="isPasswordVisible ? 'text' : 'password'"
           name="password"
+          autocomplete
           (focus)="isPasswordInputActive = true"
           (blur)="isPasswordInputActive = false"
         />
