@@ -25,40 +25,68 @@ export class ThreadComponent implements OnDestroy {
     public userFirebase: UserFirebaseService,
     public formatService: FormatService) {}
 
-  getMessageTimeString(message: Message) {
-    const currentDay = this.formatService.formatDateToDMY(new Date());
-    const messageDmy = this.formatService.formatDateToDMY(new Date(message.timestamp));
-    if (currentDay == messageDmy) {
-      return "heute";
-    } else {
-      return messageDmy;
-    }
-  }
 
+  /**
+  * Retrieves the path for answers associated with the current thread's message.
+  *
+  *  * @returns {string} - The path for answers associated with the current thread's message.
+  */
   getAnswersPath(){
     return this.threadService.message?.path+"/answers/";
   }
 
+
+  /**
+  * Toggles the rendering of the emoji list.
+  */
   toggleEmojiList() {
     this.showEmojiList = !this.showEmojiList;
   }
 
+
+  /**
+  * Closes the emoji list.
+  */
   closeEmojiList() {
     this.showEmojiList = false;
   }
 
+
+  /**
+  * Handles the visibility of the emoji bar.
+  * @param {boolean} isVisible - A boolean indicating whether the emoji list should be visible (`true`) or hidden (`false`).
+  */
   handleEmojiBarVisibility(isVisible: boolean) {
     this.showEmojiList = isVisible;
   }
 
+  
+  /**
+  * Opens the toolbar.
+  * This method sets the showToolbar flag to true, indicating that the toolbar should be displayed.
+  * @returns {void}
+  */
   openToolbar() {
     this.showToolbar = true;
   }
 
+
+  /**
+  * Closes the toolbar.
+  * This method sets the showToolbar flag to false, indicating that the toolbar should be hidden.
+  *
+  * @returns {void}
+  */
   closeToolbar() {
     this.showToolbar = false;
   }
 
+  
+  /**
+  * Closes the thread.
+  * This method sets the message property in the threadService to undefined, indicating that there is no active thread.
+  * @returns {void}
+  */
   closeThread() {
     this.threadService.message = undefined;
   }

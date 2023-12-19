@@ -16,13 +16,8 @@ export class DateLineComponent{
   messageTimeString: String | undefined;
   currentDayTimeString: string = this.formatService.formatDateToDMY(new Date());
 
-
-
   @Input()
   public set messageTime(value: string) {
     this.messageTimeString=value;
   }
-
-
-
 }

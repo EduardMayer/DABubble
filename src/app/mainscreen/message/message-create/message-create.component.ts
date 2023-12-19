@@ -132,11 +132,22 @@ export class MessageCreateComponent {
     return usersByName;
   }
 
-
+  
+  /**
+  * Adds the "@" symbol to the text input.
+  */
   addATtoMsg() {
     this.textInput.nativeElement.value += "@";
   }
 
+
+  /**
+  * Initiates the mention search.
+  *
+  * This method checks if the mention object is defined and, if so, starts the mention search.
+  *
+  * @returns {void}
+  */
   insAt() {
     if (this.mention) {
       this.mention.startSearch();

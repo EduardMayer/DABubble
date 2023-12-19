@@ -18,6 +18,14 @@ export class ReactionComponent {
 
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
 
+
+  /**
+  * Handles the selection of an emoji.
+  *
+  * This method logs the selected emoji to the console and emits the selected emoji using the emojiSelectedOutput EventEmitter.
+  * 
+  * @returns {void}
+  */
   emojiSelected() {
     console.log(this.emoji+"selected");
     this.emojiSelectedOutput.emit(this.emoji);

@@ -83,9 +83,9 @@ export class UserProfilComponent implements OnInit {
     return null;
   }
 
-/**
- * Edit the current User and saves the changes in the firebase store. 
- */
+  /**
+  * Edit the current User and saves the changes in the firebase store. 
+  */
   async editUser() {
 
     const nameinput = this.editUserForm.get("nameInput")?.value;

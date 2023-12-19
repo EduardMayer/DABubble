@@ -26,38 +26,41 @@ export class AddreactionComponent {
 
 
   ngAfterViewInit() {
-    // Get the native element of the emoji-mart component
-    // Add a click event listener to the emoji-mart component
     this.clickListener = this.renderer.listen('document', 'click', (event: MouseEvent) => {
-      // Check if the event target is inside the emoji-mart element
-
       const emojiMartElement = this.el.nativeElement.querySelector('.picker');
       if (emojiMartElement.contains(event.target as Node)) {
-        //Clicked inside emoji-mart element
-        console.log('Clicked inside emoji-mart element');
       } else {
-        //Clicked outside emoji-mart element
-        console.log('Clicked outside emoji-mart element');
         this.emojiSelectedOutput.emit("noSelection");
       }
     });
   }
 
-  // Getter for isOpened property
   get isOpened(): boolean {
     return this._isOpened;
   }
 
 
+  /**
+  * Handles the selection of an emoji.
+  *
+  * @param {any} event - The event object representing the selected emoji.
+  * 
+  * This method is triggered when an emoji is selected. It:
+  * - Sends the selected emoji to the emojiInput$ Subject (if available).
+  * - Emits the selected emoji using the emojiSelectedOutput EventEmitter.
+  */
   emojiSelected(event: any) {
     this.emojiInput$?.next(event.emoji.native);
     const selectedEmoji = event.emoji.native;
-    console.log(selectedEmoji);
     this.emojiSelectedOutput.emit(selectedEmoji);
   }
 
+
+  /**
+   * Remove the event listener in the ngOnDestroy hook to prevent memory leaks
+   */
   ngOnDestroy() {
-    // Remove the event listener in the ngOnDestroy hook to prevent memory leaks
+   
     if (this.clickListener) {
       this.clickListener();
     }

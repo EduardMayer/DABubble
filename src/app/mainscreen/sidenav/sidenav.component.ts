@@ -61,10 +61,9 @@ export class SidenavComponent implements OnInit {
       this.windowSizeService.setWindowSize(); 
   }
 
-
- /**
-   * Defines if channels in sidenav are visible. 
-   */
+  /**
+  * Defines if channels in sidenav are visible. 
+  */
   showChannels() {
     if (this.unpackChannels == false) {
       this.unpackChannels = true;
