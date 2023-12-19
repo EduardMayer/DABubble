@@ -20,7 +20,7 @@ export class StartscreenComponent implements OnInit{
  
 
   constructor(
-    private authService: AuthFirebaseService, 
+    private authService: AuthFirebaseService,
     private router: Router
   ){}
 
@@ -32,6 +32,8 @@ export class StartscreenComponent implements OnInit{
  * @returns {void}
  */
   ngOnInit(): void {
+    document.body.style.overflow = 'hidden';
+    
     if(this.authService.isLoggedIn() && !this.authService.loginExprired()){
       this.router.navigateByUrl('index'); 
     }
@@ -89,6 +91,6 @@ export class StartscreenComponent implements OnInit{
 
 
   handleIntroComplete(introComplete: boolean){
-    this.introComplete=introComplete;
+    document.body.style.overflow = 'auto';
   }
 }
