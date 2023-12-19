@@ -16,6 +16,7 @@ export class StartscreenComponent implements OnInit{
   showAvatar = false;
   showRegister = false;
   showForgotPassword = false;
+  public introComplete: boolean = false;
  
 
   constructor(
@@ -84,5 +85,11 @@ export class StartscreenComponent implements OnInit{
   onForgotPasswordLinkClick() {
     this.showLogin = false;
     this.showForgotPassword = true;
+  }
+
+
+  handleIntroComplete(introComplete: boolean){
+    this.introComplete=introComplete;
+    console.log("setting intro to complete");
   }
 }
