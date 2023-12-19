@@ -57,7 +57,7 @@
                   {{ this.messageService.loadedAnswers.length }} Antworten
                 </div>
 
-                <div class="message-timestamp" *ngIf="this.messageService.loadedAnswers.length > 1">
+                <div class="message-timestamp" *ngIf="this.messageService.loadedAnswers.length > 0">
                     Letzte Antwort {{ getLastMessage() }} 
                 </div>
             </div>
