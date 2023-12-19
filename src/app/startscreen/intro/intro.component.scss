@@ -1,3 +1,6 @@
+body{
+    overflow: hidden;
+}
 
 .background {
     z-index: 2;
@@ -47,10 +50,7 @@
     pointer-events: none; 
   }
 
-  .disable-scroll {
-    overflow: hidden;
-  }
-  
+
   @keyframes slidelogo-out {
       0% {
           opacity: 1;

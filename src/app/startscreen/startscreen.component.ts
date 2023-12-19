@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFirebaseService } from 'src/services/auth-firebase.service';
 
+
 @Component({
   selector: 'app-startscreen',
   templateUrl: './startscreen.component.html',
@@ -84,5 +85,4 @@ export class StartscreenComponent implements OnInit{
     this.showLogin = false;
     this.showForgotPassword = true;
   }
-
 }

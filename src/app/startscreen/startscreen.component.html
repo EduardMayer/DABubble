@@ -23,5 +23,10 @@
     <div id="startScreen-register-mobile" *ngIf="showLogin && !imprint && !privacyPolicy">
         <h3>Neu bei DABubble?</h3>
         <a (click)="showLogin = false; showRegister = true">Konto erstellen</a>
+
+        <div id="startScreen-imprint-mobile">
+            <a (click)="imprint = true" *ngIf="!imprint && !privacyPolicy">Impressum</a>
+            <a (click)="privacyPolicy = true" *ngIf="!imprint && !privacyPolicy">Datenschutz</a>
+        </div>
     </div>
 </div>
