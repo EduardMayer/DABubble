@@ -112,6 +112,7 @@ export class MessageFirebaseService {
         });
     }
 
+
     /**
     * Creates or updates a message in Firestore with the given path and message object.
     *
@@ -128,12 +129,22 @@ export class MessageFirebaseService {
             path = path + message.id;
             const docInstance = doc(this.firestore, path);
             await setDoc(docInstance, message.toJSON());
-            console.log("Message created");
         } else {
             const docInstance = doc(this.firestore, path);
             await updateDoc(docInstance, message.toJSON());
-            console.log("Message updated");
         }
+    }
+
+
+    /**
+    * Deletes a message from the specified Firestore path.
+    *
+    * @param {string} path - The Firestore path where the message is stored.
+    * @param {Message} message - The message to be deleted.
+    * @returns {Promise<void>} - A promise that resolves when the message is successfully deleted.
+    */
+    async deleteMessage(path: string) {
+        await deleteDoc(doc(this.firestore, `${path}`));
     }
 
     /**

@@ -1,14 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { Message } from 'src/models/message.class';
-import { MatCardModule } from '@angular/material/card';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
 import { Reaction } from 'src/models/reaction.class';
 import { ThreadFirebaseService } from 'src/services/thread-firebase.service';
-import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { User } from 'src/models/user.class';
 import { UserProfileService } from 'src/services/user-profile.service';
-import { StorageFirebaseService } from 'src/services/storage-firebase.service';
 import { FormatService } from 'src/services/format.service';
 
 
@@ -36,12 +33,11 @@ export class MessageComponent {
   constructor(
     public messageService: MessageFirebaseService,
     private userService: UserFirebaseService,
-    public threadFirebaseService: ThreadFirebaseService,
-    private channelFirebaseService: ChannelFirebaseService,
+    public threadService: ThreadFirebaseService,
     private userProfileService: UserProfileService,
-    private storageService: StorageFirebaseService,
     private formatService: FormatService
   ) { }
+
 
   @Input()
   public set message(value: Message) {
@@ -63,6 +59,7 @@ export class MessageComponent {
   @Input() set messageLocationName(value: string) {
     this.messageLocation = value;
   }
+
 
   handleEmojiSelection(selectedEmoji: string) {
     const reactions = this.messageService.loadedReactions;
@@ -91,11 +88,20 @@ export class MessageComponent {
   handleMessageEdit(editMessage: boolean) {
     if (editMessage == false) {
       this.editMessage = false;
-      console.log("edit No");
     } else {
       this.editMessage = true;
-      console.log("edit Yes");
+      this.closeToolbar();
     }
+  }
+
+
+  /**
+  * Handles the deletion of a message based on the specified boolean value.
+  * @returns {void}
+  */
+  handleMessageDelete(){
+    if(this._message)
+    this.messageService.deleteMessage(this._message.path);
   }
 
 
@@ -188,6 +194,7 @@ export class MessageComponent {
       return this.formatService.formatTimestampToHHMM(timestamp);
     }
   }
+
 
   getLastMessage(){
     const maxTimestamp = Math.max(...this.messageService.loadedAnswers.map(message => message.timestamp));

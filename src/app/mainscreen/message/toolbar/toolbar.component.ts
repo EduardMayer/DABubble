@@ -18,10 +18,10 @@ export class ToolbarComponent {
   showMessageReactions: boolean = false;
   @Output() emojiSelectedOutput: EventEmitter<string> = new EventEmitter<string>();
   @Output() editMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() deleteMessageOutput: EventEmitter<boolean> = new EventEmitter<boolean>();
   
 
   constructor(
-    private messageService: MessageFirebaseService,
     public threadService: ThreadFirebaseService) {
   }
 
@@ -32,8 +32,13 @@ export class ToolbarComponent {
 
   handleMessageEdit(){
     this.editMessageOutput.emit(true);
-    console.log("here");
   }
+
+
+  handleMessageDelete(){
+    this.deleteMessageOutput.emit(true);
+  }
+
 
   handleEmojiSelection(selectedEmoji: string) {
     if (selectedEmoji == "noSelection") {
