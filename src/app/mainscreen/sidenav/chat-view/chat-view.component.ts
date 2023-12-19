@@ -42,12 +42,16 @@ export class ChatViewComponent{
       .catch((error) => {
         console.error('Error loading user:', error);
       });
-   
   }
 
+
+  /**
+  * Opens the user profile for the specified user using the UserProfileService.
+  */
   async openUserProfil(user: User) {
     this.userProfileService.openUserProfil(user);
   }
+
 
   /**
    * Refreshes the user status in a defined intervall. 

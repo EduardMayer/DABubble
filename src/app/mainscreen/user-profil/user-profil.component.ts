@@ -52,9 +52,10 @@ export class UserProfilComponent implements OnInit {
     private userService: UserFirebaseService,
     private authService: AuthFirebaseService,
     private chatService: ChatFirebaseService, 
-    private notificationService: NotificationService, 
-    private router: Router) {
+    private notificationService: NotificationService
+    ) {
   }
+
 
   /**
    * Gets the current user status when opening userProfil.
@@ -69,6 +70,7 @@ export class UserProfilComponent implements OnInit {
     this.currentAuthMail = this.authService.UserData.email
     this.currentUserInput = this.user.mail; 
   }
+
 
   /**
    * Validates the input value of a form controle if it has not more than two words.
@@ -112,6 +114,7 @@ export class UserProfilComponent implements OnInit {
     this.close(); 
   }
 
+
   /**
    * Closes userprofil without saving changes. 
    */
@@ -124,6 +127,7 @@ export class UserProfilComponent implements OnInit {
     this.currentUserInput = this.user.mail;
   }
 
+
   /**
    * Close user profil
    */
@@ -131,6 +135,7 @@ export class UserProfilComponent implements OnInit {
     this.userProfileService.close();
   }
 
+  
   /**
    * Gets the current user status from userStatusService. 
    */
@@ -160,6 +165,7 @@ export class UserProfilComponent implements OnInit {
     }
   }
 
+
   /**
    * Creates a new chat between the opened profile user and the current logged in user. 
    */
@@ -183,6 +189,7 @@ export class UserProfilComponent implements OnInit {
   stopPropagation(event:Event){
     event.stopPropagation();
   }
+
 
   /**
    * Confirm edits with press enter key

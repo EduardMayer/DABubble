@@ -45,7 +45,14 @@ export class EditChannelUsersComponent {
   }
   
 
-
+  /**
+  * Checks if a user is selected in the specified channel.
+  *
+  * This function evaluates whether the provided channel exists and contains at least one user.
+  *
+  * @param {Channel} channel - The channel to check for user selection.
+  * @returns {boolean} - True if the channel exists and has at least one user; otherwise, false.
+  */
   checkIfUserIsSelected(channel: Channel): boolean {
     return channel && channel.users && channel.users.length > 0;
   }

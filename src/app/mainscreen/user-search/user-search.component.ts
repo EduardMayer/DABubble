@@ -33,10 +33,24 @@ export class UserSearchComponent {
     private el: ElementRef
   ) {}
 
+
+  /**
+  * Click event handler for user selection.
+  *
+  * @param {number} index - The index of the selected user in the search results.
+  * @emits {string} userName - Emits the user name of the selected user.
+  */
   clickUser(index: number) {
       this.userName.emit(this.searchResultsUsers[index]);
   }
 
+
+  /**
+  * Retrieves users based on a search string and populates the searchResultsUsers array.
+  *
+  * @param {string} searchString - The string to search for in user full names.
+  * @returns {void}
+  */
   getUsers(searchString: string) {
     this.searchResultsUsers = [];
     this.userService.loadedUsers.forEach(user => {
@@ -46,19 +60,20 @@ export class UserSearchComponent {
     });
   }
 
-  ngAfterViewInit() {
-    // Get the native element of the emoji-mart component
-    // Add a click event listener to the emoji-mart component
-    this.clickListener = this.renderer.listen('document', 'click', (event: MouseEvent) => {
-      // Check if the event target is inside the emoji-mart element
 
-      const userSearchField = this.el.nativeElement.querySelector('.user-search');
-      if (userSearchField.contains(event.target as Node)) {
-        //Clicked inside emoji-mart element
-        console.log('Clicked inside the User-Selector element');
-      } else {
-        //Clicked outside emoji-mart element
-        console.log('Clicked outside the User-Selector element');
+  ngAfterViewInit() {
+    this.addEventListenerToRemoveUserSelection();
+  }
+
+
+  /**
+  * Adds a click event listener to the document to remove user selection when clicking outside the specified user search field.
+  * @returns {void}
+  */
+  addEventListenerToRemoveUserSelection(){
+    this.clickListener = this.renderer.listen('document', 'click', (event: MouseEvent) => {
+    const userSearchField = this.el.nativeElement.querySelector('.user-search');
+    if (!userSearchField.contains(event.target as Node)) {
         this.userName.emit(false);
       }
     });
