@@ -1,0 +1,2836 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MessageComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/message/message.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/MessageFirebaseService.html" target="_self" >MessageFirebaseService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-message</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./message.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./message.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#_message" >_message</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#autorAvatar" >autorAvatar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#autorName" >autorName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#autorUser" >autorUser</a>
+                            </li>
+                            <li>
+                                <a href="#editMessage" >editMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#formatService" >formatService</a>
+                            </li>
+                            <li>
+                                <a href="#givenTimestamp" >givenTimestamp</a>
+                            </li>
+                            <li>
+                                <a href="#isOwnMessage" >isOwnMessage</a>
+                            </li>
+                            <li>
+                                <a href="#messageLocation" >messageLocation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#messageService" >messageService</a>
+                            </li>
+                            <li>
+                                <a href="#showMessageReactions" >showMessageReactions</a>
+                            </li>
+                            <li>
+                                <a href="#showToolbar" >showToolbar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#threadService" >threadService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeEmojiBar" >closeEmojiBar</a>
+                            </li>
+                            <li>
+                                <a href="#closeToolbar" >closeToolbar</a>
+                            </li>
+                            <li>
+                                <a href="#createReaction" >createReaction</a>
+                            </li>
+                            <li>
+                                <a href="#getLastMessage" >getLastMessage</a>
+                            </li>
+                            <li>
+                                <a href="#handleEmojiSelection" >handleEmojiSelection</a>
+                            </li>
+                            <li>
+                                <a href="#handleMessageDelete" >handleMessageDelete</a>
+                            </li>
+                            <li>
+                                <a href="#handleMessageEdit" >handleMessageEdit</a>
+                            </li>
+                            <li>
+                                <a href="#isPDF" >isPDF</a>
+                            </li>
+                            <li>
+                                <a href="#openToolbar" >openToolbar</a>
+                            </li>
+                            <li>
+                                <a href="#openUserProfil" >openUserProfil</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#setAutorName" >setAutorName</a>
+                            </li>
+                            <li>
+                                <a href="#toggleReactions" >toggleReactions</a>
+                            </li>
+                            <li>
+                                <a href="#updateReactionAddCurrentUser" >updateReactionAddCurrentUser</a>
+                            </li>
+                            <li>
+                                <a href="#updateReactionRemoveCurrentUser" >updateReactionRemoveCurrentUser</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#message" >message</a>
+                            </li>
+                            <li>
+                                <a href="#messageLocationName" >messageLocationName</a>
+                            </li>
+                            <li>
+                                <a href="#timestampString" >timestampString</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#emojiBarVisibilityOutput" >emojiBarVisibilityOutput</a>
+                            </li>
+                            <li>
+                                <a href="#emojiSelectedOutput" >emojiSelectedOutput</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#message" >message</a>
+                                </li>
+                                <li>
+                                    <a href="#timestampString" >timestampString</a>
+                                </li>
+                                <li>
+                                    <a href="#messageLocationName" >messageLocationName</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(messageService: <a href="../injectables/MessageFirebaseService.html" target="_self">MessageFirebaseService</a>, userService: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>, threadService: <a href="../injectables/ThreadFirebaseService.html" target="_self">ThreadFirebaseService</a>, userProfileService: <a href="../injectables/UserProfileService.html" target="_self">UserProfileService</a>, formatService: <a href="../injectables/FormatService.html" target="_self">FormatService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/mainscreen/message/message.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>messageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MessageFirebaseService.html" target="_self" >MessageFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>threadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ThreadFirebaseService.html" target="_self" >ThreadFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userProfileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserProfileService.html" target="_self" >UserProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="message"></a>
+                        <b>message</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/mainscreen/message/message.component.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="messageLocationName"></a>
+                        <b>messageLocationName</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/mainscreen/message/message.component.ts:59</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timestampString"></a>
+                        <b>timestampString</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/mainscreen/message/message.component.ts:55</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emojiBarVisibilityOutput"></a>
+                        <b>emojiBarVisibilityOutput</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/mainscreen/message/message.component.ts:31</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emojiSelectedOutput"></a>
+                        <b>emojiSelectedOutput</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter&lt;string&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/mainscreen/message/message.component.ts:30</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeEmojiBar"></a>
+                    <span class="name">
+                        <span ><b>closeEmojiBar</b></span>
+                        <a href="#closeEmojiBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeEmojiBar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:161</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the emoji bar by setting the showMessageReactions property to false.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeToolbar"></a>
+                    <span class="name">
+                        <span ><b>closeToolbar</b></span>
+                        <a href="#closeToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeToolbar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the toolbar by setting the showToolbar property to false.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createReaction"></a>
+                    <span class="name">
+                        <span ><b>createReaction</b></span>
+                        <a href="#createReaction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createReaction(selectedEmoji: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new reaction for the selected emoji and updates the message with the new reaction.</p>
+<p>This method creates a new reaction with the provided emoji:</p>
+<ul>
+<li>Initializes the new reaction with the emoji and the current user as the only user.</li>
+<li>Adds the new reaction to the loaded reactions in the message service.</li>
+<li>Constructs the path for the reactions in the message.</li>
+<li>Updates the message with the new reaction using the message service.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>selectedEmoji</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The selected emoji for which to create a reaction.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>This method creates a new reaction with the provided emoji:</p>
+<ul>
+<li>Initializes the new reaction with the emoji and the current user as the only user.</li>
+<li>Adds the new reaction to the loaded reactions in the message service.</li>
+<li>Constructs the path for the reactions in the message.</li>
+<li>Updates the message with the new reaction using the message service.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLastMessage"></a>
+                    <span class="name">
+                        <span ><b>getLastMessage</b></span>
+                        <a href="#getLastMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getLastMessage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:277</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves the timestamp of the last message in the loaded answers and formats it to HH:MM.</p>
+<p>This method calculates the maximum timestamp from the loaded answers&#39; messages:</p>
+<ul>
+<li>Uses Math.max to find the maximum timestamp among the loaded answers.</li>
+<li>Calls formatTimestampToHHMM from the formatService to format the maximum timestamp to HH:MM.</li>
+<li>Returns the formatted timestamp.</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>The formatted timestamp in the HH:MM format.</li>
+</ul>
+<p>This method calculates the maximum timestamp from the loaded answers&#39; messages:</p>
+<ul>
+<li>Uses Math.max to find the maximum timestamp among the loaded answers.</li>
+<li>Calls formatTimestampToHHMM from the formatService to format the maximum timestamp to HH:MM.</li>
+<li>Returns the formatted timestamp.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleEmojiSelection"></a>
+                    <span class="name">
+                        <span ><b>handleEmojiSelection</b></span>
+                        <a href="#handleEmojiSelection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleEmojiSelection(selectedEmoji: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the selection of an emoji and manages reactions.</p>
+<p>This method is triggered when an emoji is selected. It performs the following actions:</p>
+<ul>
+<li>Emits the selected emoji using the emojiSelectedOutput EventEmitter.</li>
+<li>If the selected emoji is &quot;noSelection,&quot; it closes the emoji bar.</li>
+<li>Manages reactions for the selected emoji:<ul>
+<li>If the emoji is not in the loaded reactions, it creates a new reaction.</li>
+<li>If the emoji is already in the loaded reactions:<ul>
+<li>If the reaction has no users, it adds the current user.</li>
+<li>If the current user is already in the reaction, it removes the user; otherwise, it adds the user.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>selectedEmoji</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The selected emoji.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>This method is triggered when an emoji is selected. It performs the following actions:</p>
+<ul>
+<li>Emits the selected emoji using the emojiSelectedOutput EventEmitter.</li>
+<li>If the selected emoji is &quot;noSelection,&quot; it closes the emoji bar.</li>
+<li>Manages reactions for the selected emoji:<ul>
+<li>If the emoji is not in the loaded reactions, it creates a new reaction.</li>
+<li>If the emoji is already in the loaded reactions:<ul>
+<li>If the reaction has no users, it adds the current user.</li>
+<li>If the current user is already in the reaction, it removes the user; otherwise, it adds the user.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleMessageDelete"></a>
+                    <span class="name">
+                        <span ><b>handleMessageDelete</b></span>
+                        <a href="#handleMessageDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleMessageDelete()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the deletion of a message based on the specified boolean value.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleMessageEdit"></a>
+                    <span class="name">
+                        <span ><b>handleMessageEdit</b></span>
+                        <a href="#handleMessageEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleMessageEdit(editMessage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the request to edit a message.</p>
+<p>This method is triggered when there is a request to edit a message. It takes a boolean flag:</p>
+<ul>
+<li>If <code>editMessage</code> is <code>false</code>, it sets the <code>editMessage</code> property to <code>false</code>.</li>
+<li>If <code>editMessage</code> is <code>true</code>, it sets the <code>editMessage</code> property to <code>true</code> and closes the toolbar.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>editMessage</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>A boolean flag indicating whether to edit the message.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>This method is triggered when there is a request to edit a message. It takes a boolean flag:</p>
+<ul>
+<li>If <code>editMessage</code> is <code>false</code>, it sets the <code>editMessage</code> property to <code>false</code>.</li>
+<li>If <code>editMessage</code> is <code>true</code>, it sets the <code>editMessage</code> property to <code>true</code> and closes the toolbar.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isPDF"></a>
+                    <span class="name">
+                        <span ><b>isPDF</b></span>
+                        <a href="#isPDF"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isPDF(fileName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="297"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:297</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the given file name represents a PDF file.</p>
+<p>This method checks if the given file name represents a PDF file by examining its extension.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fileName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openToolbar"></a>
+                    <span class="name">
+                        <span ><b>openToolbar</b></span>
+                        <a href="#openToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openToolbar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the toolbar by setting the showToolbar property to true.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openUserProfil"></a>
+                    <span class="name">
+                        <span ><b>openUserProfil</b></span>
+                        <a href="#openUserProfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openUserProfil()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:286</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the user profile for the author associated with the current message.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAutorName"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>setAutorName</b></span>
+                        <a href="#setAutorName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setAutorName(autorId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the author&#39;s name and avatar based on the provided author ID.</p>
+<p>This asynchronous method sets the author&#39;s name and avatar based on the provided author ID:</p>
+<ul>
+<li>Retrieves the user values associated with the author ID using the userService.</li>
+<li>Updates the autorUser, autorName, and autorAvatar properties with the retrieved values.</li>
+<li>If autorValues are available, assigns the fullName to autorName and the avatar to autorAvatar.</li>
+<li>If fullName or avatar is empty, assigns default values (&quot;Guest&quot; and a default avatar).</li>
+<li>If autorValues are not available, assigns default values (&quot;Guest&quot; and a default avatar).</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>autorId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The unique identifier of the author.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>This asynchronous method sets the author&#39;s name and avatar based on the provided author ID:</p>
+<ul>
+<li>Retrieves the user values associated with the author ID using the userService.</li>
+<li>Updates the autorUser, autorName, and autorAvatar properties with the retrieved values.</li>
+<li>If autorValues are available, assigns the fullName to autorName and the avatar to autorAvatar.</li>
+<li>If fullName or avatar is empty, assigns default values (&quot;Guest&quot; and a default avatar).</li>
+<li>If autorValues are not available, assigns default values (&quot;Guest&quot; and a default avatar).</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleReactions"></a>
+                    <span class="name">
+                        <span ><b>toggleReactions</b></span>
+                        <a href="#toggleReactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleReactions(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:207</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles the visibility of message reactions.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The event object triggering the toggle.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateReactionAddCurrentUser"></a>
+                    <span class="name">
+                        <span ><b>updateReactionAddCurrentUser</b></span>
+                        <a href="#updateReactionAddCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateReactionAddCurrentUser(reactionIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates a reaction by adding the current user to the list of users for the specified reaction.</p>
+<p>This method updates a reaction by adding the current user to the list of users for the specified reaction:</p>
+<ul>
+<li>Retrieves the message service&#39;s loaded reactions array and adds the current user to the specified reaction.</li>
+<li>Updates the message with the modified reaction using the message service.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reactionIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The index of the reaction to be updated in the loaded reactions array.</li>
+</ul>
+<p>This method updates a reaction by adding the current user to the list of users for the specified reaction:</p>
+<ul>
+<li>Retrieves the message service&#39;s loaded reactions array and adds the current user to the specified reaction.</li>
+<li>Updates the message with the modified reaction using the message service.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateReactionRemoveCurrentUser"></a>
+                    <span class="name">
+                        <span ><b>updateReactionRemoveCurrentUser</b></span>
+                        <a href="#updateReactionRemoveCurrentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateReactionRemoveCurrentUser(reactionIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, userIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/mainscreen/message/message.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates a reaction by removing the current user from the list of users for the specified reaction.</p>
+<p>This method updates a reaction by removing the current user from the list of users for the specified reaction:</p>
+<ul>
+<li>Retrieves the message service&#39;s loaded reactions array and removes the current user from the specified reaction.</li>
+<li>Updates the message with the modified reaction using the message service.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>reactionIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The index of the reaction to be updated in the loaded reactions array.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>userIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The index of the current user in the list of users for the specified reaction.</li>
+</ul>
+<p>This method updates a reaction by removing the current user from the list of users for the specified reaction:</p>
+<ul>
+<li>Retrieves the message service&#39;s loaded reactions array and removes the current user from the specified reaction.</li>
+<li>Updates the message with the modified reaction using the message service.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_message"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>_message</b></span>
+                        <a href="#_message"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Message.html" target="_self" >Message | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/mainscreen/message/message.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autorAvatar"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>autorAvatar</b></span>
+                        <a href="#autorAvatar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/mainscreen/message/message.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autorName"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>autorName</b></span>
+                        <a href="#autorName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/mainscreen/message/message.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autorUser"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>autorUser</b></span>
+                        <a href="#autorUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new User()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/mainscreen/message/message.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editMessage"></a>
+                    <span class="name">
+                        <span ><b>editMessage</b></span>
+                        <a href="#editMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/mainscreen/message/message.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>formatService</b></span>
+                        <a href="#formatService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/mainscreen/message/message.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="givenTimestamp"></a>
+                    <span class="name">
+                        <span ><b>givenTimestamp</b></span>
+                        <a href="#givenTimestamp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/mainscreen/message/message.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isOwnMessage"></a>
+                    <span class="name">
+                        <span ><b>isOwnMessage</b></span>
+                        <a href="#isOwnMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/mainscreen/message/message.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageLocation"></a>
+                    <span class="name">
+                        <span ><b>messageLocation</b></span>
+                        <a href="#messageLocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/mainscreen/message/message.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>messageService</b></span>
+                        <a href="#messageService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/MessageFirebaseService.html" target="_self" >MessageFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/mainscreen/message/message.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showMessageReactions"></a>
+                    <span class="name">
+                        <span ><b>showMessageReactions</b></span>
+                        <a href="#showMessageReactions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/mainscreen/message/message.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showToolbar"></a>
+                    <span class="name">
+                        <span ><b>showToolbar</b></span>
+                        <a href="#showToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/mainscreen/message/message.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="threadService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>threadService</b></span>
+                        <a href="#threadService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ThreadFirebaseService.html" target="_self" >ThreadFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/mainscreen/message/message.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="message"></a>
+                        <span class="name"><b>message</b><a href="#message"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>message(value: <a href="../classes/Message.html" target="_self">Message</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/mainscreen/message/message.component.ts:43</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timestampString"></a>
+                        <span class="name"><b>timestampString</b><a href="#timestampString"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>timestampString(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/mainscreen/message/message.component.ts:55</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="messageLocationName"></a>
+                        <span class="name"><b>messageLocationName</b><a href="#messageLocationName"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>messageLocationName(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/mainscreen/message/message.component.ts:59</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output} from &#x27;@angular/core&#x27;;
+import { Message } from &#x27;src/models/message.class&#x27;;
+import { MessageFirebaseService } from &#x27;src/services/message-firebase.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+import { Reaction } from &#x27;src/models/reaction.class&#x27;;
+import { ThreadFirebaseService } from &#x27;src/services/thread-firebase.service&#x27;;
+import { User } from &#x27;src/models/user.class&#x27;;
+import { UserProfileService } from &#x27;src/services/user-profile.service&#x27;;
+import { FormatService } from &#x27;src/services/format.service&#x27;;
+
+
+@Component({
+  selector: &#x27;app-message&#x27;,
+  templateUrl: &#x27;./message.component.html&#x27;,
+  styleUrls: [&#x27;./message.component.scss&#x27;],
+  providers: [MessageFirebaseService]
+})
+export class MessageComponent {
+
+  private autorUser &#x3D; new User();
+  public _message: Message | undefined;
+  public autorName: string &#x3D; &quot;&quot;;
+  public autorAvatar: string &#x3D; &quot;&quot;;
+  isOwnMessage: boolean &#x3D; false;
+  showToolbar: boolean &#x3D; false;
+  editMessage: boolean &#x3D; false;
+  messageLocation: string | undefined;
+  showMessageReactions: boolean &#x3D; false;
+  givenTimestamp: string | undefined;
+  @Output() emojiSelectedOutput: EventEmitter&lt;string&gt; &#x3D; new EventEmitter&lt;string&gt;();
+  @Output() emojiBarVisibilityOutput: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  constructor(
+    public messageService: MessageFirebaseService,
+    private userService: UserFirebaseService,
+    public threadService: ThreadFirebaseService,
+    private userProfileService: UserProfileService,
+    public formatService: FormatService
+  ) { }
+
+
+  @Input()
+  public set message(value: Message) {
+    this._message &#x3D; value;
+    this.messageService.loadReactions(value);
+    this.messageService.loadAnswers(value);
+    this.setAutorName(this._message.autorId);
+    if (this._message.autorId &#x3D;&#x3D; this.userService.currentUser.id) {
+      this.isOwnMessage &#x3D; true;
+      document.getElementById(this._message.id)?.classList.add(&#x27;inverted&#x27;);
+    }
+  }
+
+  @Input()
+  public set timestampString(value: string) {
+    this.givenTimestamp &#x3D; value;
+  }
+
+  @Input() set messageLocationName(value: string) {
+    this.messageLocation &#x3D; value;
+  }
+
+
+  /**
+  * Handles the selection of an emoji and manages reactions.
+  *
+  * @param {string} selectedEmoji - The selected emoji.
+  * @returns {void}
+  * 
+  * This method is triggered when an emoji is selected. It performs the following actions:
+  * - Emits the selected emoji using the emojiSelectedOutput EventEmitter.
+  * - If the selected emoji is &quot;noSelection,&quot; it closes the emoji bar.
+  * - Manages reactions for the selected emoji:
+  *   - If the emoji is not in the loaded reactions, it creates a new reaction.
+  *   - If the emoji is already in the loaded reactions:
+  *     - If the reaction has no users, it adds the current user.
+  *     - If the current user is already in the reaction, it removes the user; otherwise, it adds the user.
+  */
+  handleEmojiSelection(selectedEmoji: string) {
+    const reactions &#x3D; this.messageService.loadedReactions;
+    this.emojiSelectedOutput.emit(selectedEmoji);
+    if (selectedEmoji &#x3D;&#x3D; &quot;noSelection&quot;) {
+      this.closeEmojiBar();
+    } else {
+      let foundEmojiIndex &#x3D; this.messageService.loadedReactions.findIndex((reaction) &#x3D;&gt; reaction.name &#x3D;&#x3D; selectedEmoji);
+      if (foundEmojiIndex &#x3D;&#x3D; -1) {
+        this.createReaction(selectedEmoji);
+      } else {
+        if (!this.messageService.loadedReactions[foundEmojiIndex] || this.messageService.loadedReactions[foundEmojiIndex].users.length &#x3D;&#x3D; 0) {
+          this.updateReactionAddCurrentUser(foundEmojiIndex);
+        } else {
+          let foundUserIndex &#x3D; this.messageService.loadedReactions[foundEmojiIndex].users.findIndex((userId) &#x3D;&gt; userId &#x3D;&#x3D; this.userService.currentUser.id);
+          if (foundUserIndex &#x3D;&#x3D; -1) {
+            this.updateReactionAddCurrentUser(foundEmojiIndex);
+          } else {
+            this.updateReactionRemoveCurrentUser(foundEmojiIndex, foundUserIndex);
+          }
+        }
+      }
+    }
+  }
+
+
+  /**
+ * Handles the request to edit a message.
+ *
+ * @param {boolean} editMessage - A boolean flag indicating whether to edit the message.
+ * @returns {void}
+ * 
+ * This method is triggered when there is a request to edit a message. It takes a boolean flag:
+ * - If &#x60;editMessage&#x60; is &#x60;false&#x60;, it sets the &#x60;editMessage&#x60; property to &#x60;false&#x60;.
+ * - If &#x60;editMessage&#x60; is &#x60;true&#x60;, it sets the &#x60;editMessage&#x60; property to &#x60;true&#x60; and closes the toolbar.
+ */
+  handleMessageEdit(editMessage: boolean) {
+    if (editMessage &#x3D;&#x3D; false) {
+      this.editMessage &#x3D; false;
+    } else {
+      this.editMessage &#x3D; true;
+      this.closeToolbar();
+    }
+  }
+
+
+  /**
+  * Handles the deletion of a message based on the specified boolean value.
+  * @returns {void}
+  */
+  handleMessageDelete(){
+    if(this._message)
+    this.messageService.deleteMessage(this._message.path);
+  }
+
+
+  /**
+  * Creates a new reaction for the selected emoji and updates the message with the new reaction.
+  *
+  * @param {string} selectedEmoji - The selected emoji for which to create a reaction.
+  * @returns {void}
+  * 
+  * This method creates a new reaction with the provided emoji:
+  * - Initializes the new reaction with the emoji and the current user as the only user.
+  * - Adds the new reaction to the loaded reactions in the message service.
+  * - Constructs the path for the reactions in the message.
+  * - Updates the message with the new reaction using the message service.
+  */
+  createReaction(selectedEmoji: string) {
+    const newReaction &#x3D; new Reaction({
+      name: selectedEmoji,
+      users: [this.userService.currentUser.id]
+    }
+    )
+    this.messageService.loadedReactions.push(newReaction);
+    let path &#x3D; this._message?.path + &quot;/reactions&quot;;
+
+    this.messageService.updateReaction(newReaction, path);
+  }
+
+  /**
+  * Closes the emoji bar by setting the showMessageReactions property to false.
+  */
+  closeEmojiBar() {
+    this.showMessageReactions &#x3D; false;
+  }
+
+
+  /**
+  * Updates a reaction by adding the current user to the list of users for the specified reaction.
+  *
+  * @param {number} reactionIndex - The index of the reaction to be updated in the loaded reactions array.
+  * 
+  * This method updates a reaction by adding the current user to the list of users for the specified reaction:
+  * - Retrieves the message service&#x27;s loaded reactions array and adds the current user to the specified reaction.
+  * - Updates the message with the modified reaction using the message service.
+  */
+  updateReactionAddCurrentUser(reactionIndex: number) {
+    if (this._message) {
+      this.messageService.loadedReactions[reactionIndex].users.push(this.userService.currentUser.id);
+      this.messageService.updateReaction(this.messageService.loadedReactions[reactionIndex], this._message.path + &quot;/reactions&quot;);
+    }
+  }
+
+
+  /**
+  * Updates a reaction by removing the current user from the list of users for the specified reaction.
+  *
+  * @param {number} reactionIndex - The index of the reaction to be updated in the loaded reactions array.
+  * @param {number} userIndex - The index of the current user in the list of users for the specified reaction.
+  * 
+  * This method updates a reaction by removing the current user from the list of users for the specified reaction:
+  * - Retrieves the message service&#x27;s loaded reactions array and removes the current user from the specified reaction.
+  * - Updates the message with the modified reaction using the message service.
+  */
+  updateReactionRemoveCurrentUser(reactionIndex: number, userIndex: number) {
+    if (this._message) {
+      this.messageService.loadedReactions[reactionIndex].users.splice(userIndex, 1);
+      this.messageService.updateReaction(this.messageService.loadedReactions[reactionIndex], this._message.path + &quot;/reactions&quot;);
+    }
+  }
+
+
+  /**
+  * Toggles the visibility of message reactions.
+  *
+  * @param {Event} event - The event object triggering the toggle.
+  * @returns {void}
+  */
+  toggleReactions(event: Event) {
+    event.stopPropagation();
+    if (this.showMessageReactions) {
+      this.showMessageReactions &#x3D; false;
+    } else {
+      this.showMessageReactions &#x3D; true;
+    }
+  }
+
+
+  /**
+  * Opens the toolbar by setting the showToolbar property to true.
+  */
+  openToolbar() {
+    this.showToolbar &#x3D; true;
+  }
+
+  /**
+  * Closes the toolbar by setting the showToolbar property to false.
+  */
+  closeToolbar() {
+    this.showToolbar &#x3D; false;
+  }
+
+
+  /**
+  * Sets the author&#x27;s name and avatar based on the provided author ID.
+  *
+  * @param {string} autorId - The unique identifier of the author.
+  * @returns {Promise&lt;void&gt;}
+  * 
+  * This asynchronous method sets the author&#x27;s name and avatar based on the provided author ID:
+  * - Retrieves the user values associated with the author ID using the userService.
+  * - Updates the autorUser, autorName, and autorAvatar properties with the retrieved values.
+  * - If autorValues are available, assigns the fullName to autorName and the avatar to autorAvatar.
+  * - If fullName or avatar is empty, assigns default values (&quot;Guest&quot; and a default avatar).
+  * - If autorValues are not available, assigns default values (&quot;Guest&quot; and a default avatar).
+  */
+  async setAutorName(autorId: string) {
+    const autorValues &#x3D; await this.userService.getUserByUID(autorId);
+    this.autorUser &#x3D; autorValues;
+
+    if (autorValues) {
+      this.autorName &#x3D; autorValues.fullName;
+      this.autorAvatar &#x3D; autorValues.avatar;
+
+      if (this.autorName &#x3D;&#x3D; &quot;&quot;) {
+        this.autorName &#x3D; &quot;Guest&quot;;
+      }
+
+      if (this.autorAvatar &#x3D;&#x3D; &quot;&quot;) {
+        this.autorAvatar &#x3D; &quot;assets/img/avatar/avatar1.svg&quot;;
+      }
+    } else {
+      this.autorName &#x3D; &quot;Guest&quot;;
+      this.autorAvatar &#x3D; &quot;assets/img/avatar/avatar1.svg&quot;;
+    }
+  }
+
+
+  /**
+  * Retrieves the timestamp of the last message in the loaded answers and formats it to HH:MM.
+  *
+  * @returns {string} - The formatted timestamp in the HH:MM format.
+  * 
+  * This method calculates the maximum timestamp from the loaded answers&#x27; messages:
+  * - Uses Math.max to find the maximum timestamp among the loaded answers.
+  * - Calls formatTimestampToHHMM from the formatService to format the maximum timestamp to HH:MM.
+  * - Returns the formatted timestamp.
+  */
+  getLastMessage(){
+    const maxTimestamp &#x3D; Math.max(...this.messageService.loadedAnswers.map(message &#x3D;&gt; message.timestamp));
+    return this.formatService.formatTimestampToHHMM(maxTimestamp);
+  }
+
+
+  /**
+  * Opens the user profile for the author associated with the current message.
+  */
+  openUserProfil() {
+    this.userProfileService.openUserProfil(this.autorUser);
+  }
+
+
+  /**
+  * Checks if the given file name represents a PDF file.
+  *
+  * 
+  * This method checks if the given file name represents a PDF file by examining its extension.
+  */
+  isPDF(fileName: string): boolean {
+    return fileName.toLowerCase().endsWith(&#x27;.pdf&#x27;);
+  }
+
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&#x27;message-container&#x27; [ngClass]&#x3D;&quot;{&#x27;inverted&#x27;: isOwnMessage}&quot; *ngIf&#x3D;&quot;_message&quot; (mouseleave)&#x3D;&quot;closeToolbar()&quot;
+    (mouseenter)&#x3D;&quot;openToolbar()&quot;&gt;
+    &lt;app-toolbar *ngIf&#x3D;&quot;showToolbar&quot; [isOwnMessage]&#x3D;&quot;isOwnMessage&quot; [message]&#x3D;&quot;_message&quot;
+        [messageLocation]&#x3D;&quot;messageLocation&quot; (emojiSelectedOutput)&#x3D;&quot;handleEmojiSelection($event)&quot;
+        (editMessageOutput)&#x3D;&quot;handleMessageEdit($event)&quot;
+        (deleteMessageOutput)&#x3D;&quot;handleMessageDelete()&quot;
+        &gt;
+    &lt;/app-toolbar&gt;
+    &lt;img src&#x3D;&quot;{{ autorAvatar }}&quot; class&#x3D;&quot;message-img&quot; *ngIf&#x3D;&quot;autorAvatar&quot;&gt;
+    &lt;div class&#x3D;&quot;message-content&quot; tabindex&#x3D;&quot;0&quot;&gt;
+        &lt;div class&#x3D;&quot;message-head&quot;&gt;
+            &lt;div *ngIf&#x3D;&quot;autorName!&#x3D;&#x27;&#x27;&quot;&gt;&lt;b class&#x3D;&quot;message-username&quot; (click)&#x3D;&quot;openUserProfil()&quot;&gt;{{ autorName }}&lt;/b&gt;&lt;/div&gt;
+            &lt;div class&#x3D;&quot;message-timestamp&quot;&gt; {{ formatService.formatTimestampToHHMM(_message.timestamp) }} Uhr&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;mat-card *ngIf&#x3D;&quot;!editMessage&quot;&gt;
+            &lt;mat-card-content&gt;
+              {{ _message.content }}
+              &lt;ng-container *ngIf&#x3D;&quot;_message.fileSrc&quot;&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;isPDF(_message.fileName); else normalPath&quot;&gt;
+                  &lt;div class&#x3D;&quot;pdf-box&quot;&gt;
+                    &lt;a [href]&#x3D;&quot;_message.fileSrc&quot; download&#x3D;&quot;{{ _message.fileName }}&quot; target&#x3D;&quot;_blank&quot;&gt;
+                      &lt;img [src]&#x3D;&quot;&#x27;assets/img/icons/pdf-icon2.svg&#x27;&quot; alt&#x3D;&quot;{{ _message.fileName }}&quot; style&#x3D;&quot;max-width: 100%; max-height: 40px;&quot;&gt;
+                      {{ _message.fileName }}
+                    &lt;/a&gt;
+                  &lt;/div&gt;
+                &lt;/ng-container&gt;
+                &lt;ng-template #normalPath&gt;
+                  &lt;a [href]&#x3D;&quot;_message.fileSrc&quot; download&#x3D;&quot;{{ _message.fileName }}&quot; target&#x3D;&quot;_blank&quot;&gt;
+                    &lt;img [src]&#x3D;&quot;_message.fileSrc&quot; alt&#x3D;&quot;{{ _message.fileName }}&quot; class&#x3D;&quot;img-box&quot;&gt;
+                  &lt;/a&gt;
+                &lt;/ng-template&gt;
+              &lt;/ng-container&gt;
+            &lt;/mat-card-content&gt;
+        &lt;/mat-card&gt;
+
+        &lt;app-addreaction *ngIf&#x3D;&quot;showMessageReactions &amp;&amp; !editMessage&quot; [isOpened]&#x3D;&quot;showMessageReactions&quot;
+            (emojiSelectedOutput)&#x3D;&quot;handleEmojiSelection($event)&quot;&gt;
+        &lt;/app-addreaction&gt;
+
+        &lt;app-message-edit 
+            *ngIf&#x3D;&quot;editMessage&quot; 
+            [message]&#x3D;&quot;_message&quot; 
+            (showEditMessageOutput)&#x3D;&quot;handleMessageEdit($event)&quot;&gt;
+        &lt;/app-message-edit&gt;
+
+        &lt;div class&#x3D;&#x27;message-footer&#x27;&gt;
+            &lt;div class&#x3D;&quot;answers-details&quot;
+                *ngIf&#x3D;&quot;this.messageService.loadedAnswers.length &gt; 0 &amp;&amp; messageLocation &#x3D;&#x3D; &#x27;channel&#x27;&quot;
+                (click)&#x3D;&quot;threadService.openThread(_message)&quot;&gt;
+                
+                &lt;div *ngIf&#x3D;&quot;this.messageService.loadedAnswers.length &#x3D;&#x3D; 1&quot; class&#x3D;&quot;answers-link&quot;&gt;
+                  {{ this.messageService.loadedAnswers.length }} Antwort
+                &lt;/div&gt;
+
+                &lt;div *ngIf&#x3D;&quot;this.messageService.loadedAnswers.length &gt; 1&quot; class&#x3D;&quot;answers-link&quot;&gt;
+                  {{ this.messageService.loadedAnswers.length }} Antworten
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;message-timestamp&quot; *ngIf&#x3D;&quot;this.messageService.loadedAnswers.length &gt; 0&quot;&gt;
+                    Letzte Antwort {{ getLastMessage() }} 
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div *ngFor&#x3D;&quot;let reaction of messageService.loadedReactions&quot; class&#x3D;&quot;reaction-smileys&quot;&gt;
+                &lt;div class&#x3D;&quot;emoji-container&quot;&gt;
+                    &lt;app-reaction [reaction]&#x3D;&quot;reaction&quot;
+                        (emojiSelectedOutput)&#x3D;&quot;handleEmojiSelection($event)&quot;&gt;&lt;/app-reaction&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;svg id&#x3D;&quot;addreactionplus-icon&quot; width&#x3D;&quot;37&quot; height&#x3D;&quot;34&quot; viewBox&#x3D;&quot;0 0 37 34&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; (click)&#x3D;&quot;toggleReactions($event)&quot;&gt;
+              &lt;rect x&#x3D;&quot;0.036377&quot; width&#x3D;&quot;36.0407&quot; height&#x3D;&quot;34&quot; rx&#x3D;&quot;17&quot; fill&#x3D;&quot;white&quot;/&gt;
+              &lt;mask id&#x3D;&quot;mask0_516_7068&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;5&quot; y&#x3D;&quot;5&quot; width&#x3D;&quot;25&quot; height&#x3D;&quot;24&quot;&gt;
+              &lt;rect x&#x3D;&quot;5.03638&quot; y&#x3D;&quot;5&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+              &lt;/mask&gt;
+              &lt;g mask&#x3D;&quot;url(#mask0_516_7068)&quot;&gt;
+              &lt;path d&#x3D;&quot;M17.0364 27C15.653 27 14.353 26.7375 13.1364 26.2125C11.9197 25.6875 10.8614 24.975 9.96138 24.075C9.06138 23.175 8.34888 22.1167 7.82388 20.9C7.29888 19.6833 7.03638 18.3833 7.03638 17C7.03638 15.6167 7.29888 14.3167 7.82388 13.1C8.34888 11.8833 9.06138 10.825 9.96138 9.925C10.8614 9.025 11.9197 8.3125 13.1364 7.7875C14.353 7.2625 15.653 7 17.0364 7C17.7864 7 18.5155 7.07917 19.2239 7.2375C19.9322 7.39583 20.603 7.625 21.2364 7.925C21.1697 8.09167 21.1197 8.26667 21.0864 8.45C21.053 8.63333 21.0364 8.81667 21.0364 9C21.0364 9.23333 21.0614 9.45417 21.1114 9.6625C21.1614 9.87083 21.228 10.0667 21.3114 10.25C20.6947 9.86667 20.028 9.5625 19.3114 9.3375C18.5947 9.1125 17.8364 9 17.0364 9C14.8197 9 12.9322 9.77917 11.3739 11.3375C9.81554 12.8958 9.03638 14.7833 9.03638 17C9.03638 19.2167 9.81554 21.1042 11.3739 22.6625C12.9322 24.2208 14.8197 25 17.0364 25C19.253 25 21.1405 24.2208 22.6989 22.6625C24.2572 21.1042 25.0364 19.2167 25.0364 17C25.0364 16.3333 24.9572 15.6917 24.7989 15.075C24.6405 14.4583 24.4197 13.875 24.1364 13.325C24.403 13.5417 24.6947 13.7083 25.0114 13.825C25.328 13.9417 25.6697 14 26.0364 14C26.1197 14 26.2072 13.9958 26.2989 13.9875C26.3905 13.9792 26.478 13.9667 26.5614 13.95C26.7114 14.4333 26.828 14.9292 26.9114 15.4375C26.9947 15.9458 27.0364 16.4667 27.0364 17C27.0364 18.3833 26.7739 19.6833 26.2489 20.9C25.7239 22.1167 25.0114 23.175 24.1114 24.075C23.2114 24.975 22.153 25.6875 20.9364 26.2125C19.7197 26.7375 18.4197 27 17.0364 27ZM20.5364 16C20.9697 16 21.328 15.8583 21.6114 15.575C21.8947 15.2917 22.0364 14.9333 22.0364 14.5C22.0364 14.0667 21.8947 13.7083 21.6114 13.425C21.328 13.1417 20.9697 13 20.5364 13C20.103 13 19.7447 13.1417 19.4614 13.425C19.178 13.7083 19.0364 14.0667 19.0364 14.5C19.0364 14.9333 19.178 15.2917 19.4614 15.575C19.7447 15.8583 20.103 16 20.5364 16ZM13.5364 16C13.9697 16 14.328 15.8583 14.6114 15.575C14.8947 15.2917 15.0364 14.9333 15.0364 14.5C15.0364 14.0667 14.8947 13.7083 14.6114 13.425C14.328 13.1417 13.9697 13 13.5364 13C13.103 13 12.7447 13.1417 12.4614 13.425C12.178 13.7083 12.0364 14.0667 12.0364 14.5C12.0364 14.9333 12.178 15.2917 12.4614 15.575C12.7447 15.8583 13.103 16 13.5364 16ZM17.0364 22.5C18.2197 22.5 19.2655 22.175 20.1739 21.525C21.0822 20.875 21.7364 20.0333 22.1364 19H11.9364C12.3364 20.0333 12.9905 20.875 13.8989 21.525C14.8072 22.175 15.853 22.5 17.0364 22.5ZM25.0364 10H24.0364C23.753 10 23.5155 9.90417 23.3239 9.7125C23.1322 9.52083 23.0364 9.28333 23.0364 9C23.0364 8.71667 23.1322 8.47917 23.3239 8.2875C23.5155 8.09583 23.753 8 24.0364 8H25.0364V7C25.0364 6.71667 25.1322 6.47917 25.3239 6.2875C25.5155 6.09583 25.753 6 26.0364 6C26.3197 6 26.5572 6.09583 26.7489 6.2875C26.9405 6.47917 27.0364 6.71667 27.0364 7V8H28.0364C28.3197 8 28.5572 8.09583 28.7489 8.2875C28.9405 8.47917 29.0364 8.71667 29.0364 9C29.0364 9.28333 28.9405 9.52083 28.7489 9.7125C28.5572 9.90417 28.3197 10 28.0364 10H27.0364V11C27.0364 11.2833 26.9405 11.5208 26.7489 11.7125C26.5572 11.9042 26.3197 12 26.0364 12C25.753 12 25.5155 11.9042 25.3239 11.7125C25.1322 11.5208 25.0364 11.2833 25.0364 11V10Z&quot; fill&#x3D;&quot;black&quot;/&gt;
+              &lt;/g&gt;
+            &lt;/svg&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./message.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.message-container {
+    width: calc(100% - 90px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    position: relative;
+    padding: 10px 45px 10px 45px;
+
+    .message-img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .message-content {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0px 30px;
+
+        .message-head {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            margin: 5px;
+            align-items: center;
+
+            div {
+                width: fit-content;
+                .message-username{
+                    font-size: 18px;
+                    font-weight: 700;
+                    &amp;:hover{
+                        cursor: pointer;
+                        color: #797EF3;
+                    }
+                }
+            }
+
+        }
+
+        .message-timestamp{
+            font-size: 14px;
+            color: rgba(104, 104, 104, 1);
+        }
+
+        mat-card {
+            width: fit-content;
+            background-color: #ECEEFE;
+            border-radius: 0 30px 30px 30px;
+
+            mat-card-content {
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24.55px;
+                padding: 20px;
+                width: auto;
+                display: flex;
+                word-break: break-word;
+            }
+
+            app-toolbar {
+                position: absolute;
+                bottom: calc(100% + 10px);
+                right: 0;
+                z-index: 99;
+            }
+
+
+        }
+
+        app-message-edit{
+            width: 100%;
+        }
+
+        .message-footer {
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .reaction-smileys {
+                display: flex;
+            }
+
+            .answers-details {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                color: #535AF1;
+                margin: 0 5px 0 5px;
+
+                .answers-link{
+                    cursor: pointer;
+                }
+            }
+
+            img {
+                margin: 0 5px 0 5px;
+            }
+        }
+
+
+    }
+
+    #addreactionplus-icon {
+        cursor: pointer;
+    }
+
+    #addreactionplus-icon:hover rect{
+        fill: #ECEEFE;
+    }
+    
+    #addreactionplus-icon:hover path {
+        fill: #535AF1;
+      
+    }
+
+    &amp;:hover {
+        background-color: #ECEEFE;
+
+        .message-content {
+            mat-card {
+                background-color: white;
+            }
+        }
+
+    }
+
+    app-toolbar {
+        position: absolute;
+        top: -49px;
+        z-index: 999;
+        margin: 16px;
+    }
+
+    .pdf-box{
+        
+        a{
+            color: black;
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+
+
+            &amp;:hover{
+                color: blue;
+            }
+        }
+    }
+
+    
+    .img-box{
+        max-width: 100%; 
+        max-height: 200px;
+
+        &amp;:hover{
+            scale: 1.02;
+        }
+    
+    }
+
+}
+
+.inverted {
+    flex-direction: row-reverse;
+
+    .message-content {
+        align-items: end;
+
+        .message-head {
+            flex-direction: row-reverse;
+        }
+
+        mat-card {
+            border-radius: 30px 0 30px 30px;
+            background-color: #797EF3;
+            color: white;
+
+            app-toolbar {
+                left: unset;
+                right: 0;
+            }
+        }
+    }
+
+    &amp;:hover {
+        background-color: #ECEEFE;
+
+        .message-content {
+            mat-card {
+                background-color: #797EF3;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .message-container {
+
+        width: calc(100% - 40px);
+        padding: 10px 20px 10px 20px;
+    
+        .message-img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class=\'message-container\' [ngClass]="{\'inverted\': isOwnMessage}" *ngIf="_message" (mouseleave)="closeToolbar()"    (mouseenter)="openToolbar()">    <app-toolbar *ngIf="showToolbar" [isOwnMessage]="isOwnMessage" [message]="_message"        [messageLocation]="messageLocation" (emojiSelectedOutput)="handleEmojiSelection($event)"        (editMessageOutput)="handleMessageEdit($event)"        (deleteMessageOutput)="handleMessageDelete()"        >    </app-toolbar>    <img src="{{ autorAvatar }}" class="message-img" *ngIf="autorAvatar">    <div class="message-content" tabindex="0">        <div class="message-head">            <div *ngIf="autorName!=\'\'"><b class="message-username" (click)="openUserProfil()">{{ autorName }}</b></div>            <div class="message-timestamp"> {{ formatService.formatTimestampToHHMM(_message.timestamp) }} Uhr</div>        </div>        <mat-card *ngIf="!editMessage">            <mat-card-content>              {{ _message.content }}              <ng-container *ngIf="_message.fileSrc">                <ng-container *ngIf="isPDF(_message.fileName); else normalPath">                  <div class="pdf-box">                    <a [href]="_message.fileSrc" download="{{ _message.fileName }}" target="_blank">                      <img [src]="\'assets/img/icons/pdf-icon2.svg\'" alt="{{ _message.fileName }}" style="max-width: 100%; max-height: 40px;">                      {{ _message.fileName }}                    </a>                  </div>                </ng-container>                <ng-template #normalPath>                  <a [href]="_message.fileSrc" download="{{ _message.fileName }}" target="_blank">                    <img [src]="_message.fileSrc" alt="{{ _message.fileName }}" class="img-box">                  </a>                </ng-template>              </ng-container>            </mat-card-content>        </mat-card>        <app-addreaction *ngIf="showMessageReactions && !editMessage" [isOpened]="showMessageReactions"            (emojiSelectedOutput)="handleEmojiSelection($event)">        </app-addreaction>        <app-message-edit             *ngIf="editMessage"             [message]="_message"             (showEditMessageOutput)="handleMessageEdit($event)">        </app-message-edit>        <div class=\'message-footer\'>            <div class="answers-details"                *ngIf="this.messageService.loadedAnswers.length > 0 && messageLocation == \'channel\'"                (click)="threadService.openThread(_message)">                                <div *ngIf="this.messageService.loadedAnswers.length == 1" class="answers-link">                  {{ this.messageService.loadedAnswers.length }} Antwort                </div>                <div *ngIf="this.messageService.loadedAnswers.length > 1" class="answers-link">                  {{ this.messageService.loadedAnswers.length }} Antworten                </div>                <div class="message-timestamp" *ngIf="this.messageService.loadedAnswers.length > 0">                    Letzte Antwort {{ getLastMessage() }}                 </div>            </div>            <div *ngFor="let reaction of messageService.loadedReactions" class="reaction-smileys">                <div class="emoji-container">                    <app-reaction [reaction]="reaction"                        (emojiSelectedOutput)="handleEmojiSelection($event)"></app-reaction>                </div>            </div>            <svg id="addreactionplus-icon" width="37" height="34" viewBox="0 0 37 34" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="toggleReactions($event)">              <rect x="0.036377" width="36.0407" height="34" rx="17" fill="white"/>              <mask id="mask0_516_7068" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="5" y="5" width="25" height="24">              <rect x="5.03638" y="5" width="24" height="24" fill="#D9D9D9"/>              </mask>              <g mask="url(#mask0_516_7068)">              <path d="M17.0364 27C15.653 27 14.353 26.7375 13.1364 26.2125C11.9197 25.6875 10.8614 24.975 9.96138 24.075C9.06138 23.175 8.34888 22.1167 7.82388 20.9C7.29888 19.6833 7.03638 18.3833 7.03638 17C7.03638 15.6167 7.29888 14.3167 7.82388 13.1C8.34888 11.8833 9.06138 10.825 9.96138 9.925C10.8614 9.025 11.9197 8.3125 13.1364 7.7875C14.353 7.2625 15.653 7 17.0364 7C17.7864 7 18.5155 7.07917 19.2239 7.2375C19.9322 7.39583 20.603 7.625 21.2364 7.925C21.1697 8.09167 21.1197 8.26667 21.0864 8.45C21.053 8.63333 21.0364 8.81667 21.0364 9C21.0364 9.23333 21.0614 9.45417 21.1114 9.6625C21.1614 9.87083 21.228 10.0667 21.3114 10.25C20.6947 9.86667 20.028 9.5625 19.3114 9.3375C18.5947 9.1125 17.8364 9 17.0364 9C14.8197 9 12.9322 9.77917 11.3739 11.3375C9.81554 12.8958 9.03638 14.7833 9.03638 17C9.03638 19.2167 9.81554 21.1042 11.3739 22.6625C12.9322 24.2208 14.8197 25 17.0364 25C19.253 25 21.1405 24.2208 22.6989 22.6625C24.2572 21.1042 25.0364 19.2167 25.0364 17C25.0364 16.3333 24.9572 15.6917 24.7989 15.075C24.6405 14.4583 24.4197 13.875 24.1364 13.325C24.403 13.5417 24.6947 13.7083 25.0114 13.825C25.328 13.9417 25.6697 14 26.0364 14C26.1197 14 26.2072 13.9958 26.2989 13.9875C26.3905 13.9792 26.478 13.9667 26.5614 13.95C26.7114 14.4333 26.828 14.9292 26.9114 15.4375C26.9947 15.9458 27.0364 16.4667 27.0364 17C27.0364 18.3833 26.7739 19.6833 26.2489 20.9C25.7239 22.1167 25.0114 23.175 24.1114 24.075C23.2114 24.975 22.153 25.6875 20.9364 26.2125C19.7197 26.7375 18.4197 27 17.0364 27ZM20.5364 16C20.9697 16 21.328 15.8583 21.6114 15.575C21.8947 15.2917 22.0364 14.9333 22.0364 14.5C22.0364 14.0667 21.8947 13.7083 21.6114 13.425C21.328 13.1417 20.9697 13 20.5364 13C20.103 13 19.7447 13.1417 19.4614 13.425C19.178 13.7083 19.0364 14.0667 19.0364 14.5C19.0364 14.9333 19.178 15.2917 19.4614 15.575C19.7447 15.8583 20.103 16 20.5364 16ZM13.5364 16C13.9697 16 14.328 15.8583 14.6114 15.575C14.8947 15.2917 15.0364 14.9333 15.0364 14.5C15.0364 14.0667 14.8947 13.7083 14.6114 13.425C14.328 13.1417 13.9697 13 13.5364 13C13.103 13 12.7447 13.1417 12.4614 13.425C12.178 13.7083 12.0364 14.0667 12.0364 14.5C12.0364 14.9333 12.178 15.2917 12.4614 15.575C12.7447 15.8583 13.103 16 13.5364 16ZM17.0364 22.5C18.2197 22.5 19.2655 22.175 20.1739 21.525C21.0822 20.875 21.7364 20.0333 22.1364 19H11.9364C12.3364 20.0333 12.9905 20.875 13.8989 21.525C14.8072 22.175 15.853 22.5 17.0364 22.5ZM25.0364 10H24.0364C23.753 10 23.5155 9.90417 23.3239 9.7125C23.1322 9.52083 23.0364 9.28333 23.0364 9C23.0364 8.71667 23.1322 8.47917 23.3239 8.2875C23.5155 8.09583 23.753 8 24.0364 8H25.0364V7C25.0364 6.71667 25.1322 6.47917 25.3239 6.2875C25.5155 6.09583 25.753 6 26.0364 6C26.3197 6 26.5572 6.09583 26.7489 6.2875C26.9405 6.47917 27.0364 6.71667 27.0364 7V8H28.0364C28.3197 8 28.5572 8.09583 28.7489 8.2875C28.9405 8.47917 29.0364 8.71667 29.0364 9C29.0364 9.28333 28.9405 9.52083 28.7489 9.7125C28.5572 9.90417 28.3197 10 28.0364 10H27.0364V11C27.0364 11.2833 26.9405 11.5208 26.7489 11.7125C26.5572 11.9042 26.3197 12 26.0364 12C25.753 12 25.5155 11.9042 25.3239 11.7125C25.1322 11.5208 25.0364 11.2833 25.0364 11V10Z" fill="black"/>              </g>            </svg>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'MessageComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MessageComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

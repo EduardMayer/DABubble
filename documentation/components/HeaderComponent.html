@@ -1,0 +1,2013 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HeaderComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/header/header.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-header</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./header.component.scss,<br>../../../styles.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./header.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#channelService" >channelService</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaderMenu" >showHeaderMenu</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                            <li>
+                                <a href="#windowWidth" >windowWidth</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeChatOrChannel" >closeChatOrChannel</a>
+                            </li>
+                            <li>
+                                <a href="#closeProfilePopup" >closeProfilePopup</a>
+                            </li>
+                            <li>
+                                <a href="#getShortenedString" >getShortenedString</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#showProfil" >showProfil</a>
+                            </li>
+                            <li>
+                                <a href="#stopPropagation" >stopPropagation</a>
+                            </li>
+                            <li>
+                                <a href="#toogleHeaderMenu" >toogleHeaderMenu</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#channelSelected" >channelSelected</a>
+                            </li>
+                            <li>
+                                <a href="#chatSelected" >chatSelected</a>
+                            </li>
+                            <li>
+                                <a href="#emptyChatSelectedMobile" >emptyChatSelectedMobile</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeEmptyViewEvent" >closeEmptyViewEvent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userService: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>, channelService: <a href="../injectables/ChannelFirebaseService.html" target="_self">ChannelFirebaseService</a>, userProfileService: <a href="../injectables/UserProfileService.html" target="_self">UserProfileService</a>, authService: <a href="../injectables/AuthFirebaseService.html" target="_self">AuthFirebaseService</a>, chatService: <a href="../injectables/ChatFirebaseService.html" target="_self">ChatFirebaseService</a>, windowSizeService: <a href="../injectables/WindowSizeService.html" target="_self">WindowSizeService</a>, activeSelectionService: <a href="../injectables/ActiveSelectionService.html" target="_self">ActiveSelectionService</a>, formatService: <a href="../injectables/FormatService.html" target="_self">FormatService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/mainscreen/header/header.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>channelService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userProfileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserProfileService.html" target="_self" >UserProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthFirebaseService.html" target="_self" >AuthFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>chatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChatFirebaseService.html" target="_self" >ChatFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>windowSizeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WindowSizeService.html" target="_self" >WindowSizeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activeSelectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActiveSelectionService.html" target="_self" >ActiveSelectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="channelSelected"></a>
+                        <b>channelSelected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/mainscreen/header/header.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chatSelected"></a>
+                        <b>chatSelected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/mainscreen/header/header.component.ts:29</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emptyChatSelectedMobile"></a>
+                        <b>emptyChatSelectedMobile</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/mainscreen/header/header.component.ts:30</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeEmptyViewEvent"></a>
+                        <b>closeEmptyViewEvent</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/mainscreen/header/header.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeChatOrChannel"></a>
+                    <span class="name">
+                        <span ><b>closeChatOrChannel</b></span>
+                        <a href="#closeChatOrChannel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeChatOrChannel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>close Chat and Channel view in mobile View</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeProfilePopup"></a>
+                    <span class="name">
+                        <span ><b>closeProfilePopup</b></span>
+                        <a href="#closeProfilePopup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeProfilePopup()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Close profil menu popup</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getShortenedString"></a>
+                    <span class="name">
+                        <span ><b>getShortenedString</b></span>
+                        <a href="#getShortenedString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getShortenedString(stringToShort: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Shorten a give string</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stringToShort</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>string to short</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>shortened string</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>loggout the current user.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads current user from firebase</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showProfil"></a>
+                    <span class="name">
+                        <span ><b>showProfil</b></span>
+                        <a href="#showProfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showProfil()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>show or hide userprofil</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stopPropagation"></a>
+                    <span class="name">
+                        <span ><b>stopPropagation</b></span>
+                        <a href="#stopPropagation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>stopPropagation(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Prevents closing of popup when click inside of popup</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>clickevent</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toogleHeaderMenu"></a>
+                    <span class="name">
+                        <span ><b>toogleHeaderMenu</b></span>
+                        <a href="#toogleHeaderMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toogleHeaderMenu()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/mainscreen/header/header.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Show or hide menu.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="channelService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>channelService</b></span>
+                        <a href="#channelService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/mainscreen/header/header.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaderMenu"></a>
+                    <span class="name">
+                        <span ><b>showHeaderMenu</b></span>
+                        <a href="#showHeaderMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/mainscreen/header/header.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new User()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/mainscreen/header/header.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/mainscreen/header/header.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="windowWidth"></a>
+                    <span class="name">
+                        <span ><b>windowWidth</b></span>
+                        <a href="#windowWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1024</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/mainscreen/header/header.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnInit, Output } from &#x27;@angular/core&#x27;;
+import { User } from &#x27;src/models/user.class&#x27;;
+import { AuthFirebaseService } from &#x27;src/services/auth-firebase.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { UserProfileService } from &#x27;src/services/user-profile.service&#x27;;
+import { ChannelFirebaseService } from &#x27;src/services/channel-firebase.service&#x27;;
+import { ChatFirebaseService } from &#x27;src/services/chat-firebase.service&#x27;;
+import { WindowSizeService } from &#x27;src/services/window-size.service&#x27;;
+import { ActiveSelectionService } from &#x27;src/services/active-selection.service&#x27;;
+import { FormatService } from &#x27;src/services/format.service&#x27;;
+
+
+@Component({
+  selector: &#x27;app-header&#x27;,
+  templateUrl: &#x27;./header.component.html&#x27;,
+  styleUrls: [&#x27;./header.component.scss&#x27;, &#x27;../../../styles.scss&#x27;]
+})
+export class HeaderComponent implements OnInit {
+
+  user: any &#x3D; new User();
+
+  showHeaderMenu &#x3D; false;
+  @Input() channelSelected &#x3D; false; 
+  @Input() chatSelected &#x3D; false; 
+  @Input() emptyChatSelectedMobile &#x3D; false; 
+
+  @Output() closeEmptyViewEvent &#x3D; new EventEmitter&lt;any&gt;();
+
+  windowWidth: number &#x3D; 1024;  
+
+  constructor(
+    public userService: UserFirebaseService,
+    public channelService: ChannelFirebaseService,
+    private userProfileService: UserProfileService,
+    private authService: AuthFirebaseService,
+    private chatService: ChatFirebaseService, 
+    private windowSizeService: WindowSizeService,
+    private activeSelectionService: ActiveSelectionService,
+    private formatService: FormatService,
+    private router: Router) { }
+
+  /**
+   * Loads current user from firebase 
+   */
+  async ngOnInit(): Promise&lt;void&gt; {    
+    this.user &#x3D; await this.userService.getUserByUID(JSON.parse(localStorage.getItem(&#x27;user&#x27;)!).uid);
+    this.windowSizeService.windowWidth$.subscribe(windowWidth &#x3D;&gt; {
+      this.windowWidth &#x3D; windowWidth; 
+    });
+    this.windowSizeService.setWindowSize(); 
+  }
+
+
+  /**
+   * loggout the current user. 
+   */
+  logout() {
+    this.showHeaderMenu &#x3D; false;
+    this.authService.logout();
+  }
+
+
+  /**
+   * Show or hide menu. 
+   */
+  toogleHeaderMenu() {
+    this.showHeaderMenu &#x3D; !this.showHeaderMenu;
+  }
+
+
+  /**
+   * show or hide userprofil
+   */
+  showProfil() {
+    this.showHeaderMenu &#x3D; false;
+    this.userProfileService.openUserProfil(this.userService.currentUser);
+  }
+
+
+  /**
+   * close Chat and Channel view in mobile View
+   */
+  closeChatOrChannel(){
+    this.channelService.selectedChannelId &#x3D; undefined; 
+    this.chatService.selectedChatId &#x3D; undefined;   
+    this.activeSelectionService.activeSelection &#x3D; undefined; 
+    this.closeEmptyViewEvent.emit();
+  }
+
+
+  /**
+   * Close profil menu popup
+   */
+  closeProfilePopup(){
+    if(this.showHeaderMenu){
+      this.showHeaderMenu &#x3D; false;
+    }
+  }
+
+  /**
+   * Shorten a give string 
+   * @param stringToShort - string to short
+   * @returns - shortened string
+   */
+  getShortenedString( stringToShort: string) {
+    return this.formatService.cutStrLen(stringToShort);
+  }
+
+
+  /**
+   * Prevents closing of popup when click inside of popup
+   * @param event - clickevent 
+   */
+  stopPropagation(event:Event){
+    event.stopPropagation();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div id&#x3D;&quot;header-container&quot; *ngIf&#x3D;&quot;windowWidth &gt; 768&quot;&gt;
+    &lt;div id&#x3D;&quot;header-image-container&quot;&gt;
+        &lt;img src&#x3D;&quot;assets/img/logo/logo.svg&quot; alt&#x3D;&quot;DABubble Logo&quot;&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;searchbar&quot;&gt;
+        &lt;app-searchbar
+         *ngIf&#x3D;&quot;userService.finishedLoading &amp;&amp; channelService.finishedLoading&quot;  
+         [types]&#x3D;&#x27;&quot;all&quot;&#x27; 
+         [action]&#x3D;&quot;&#x27;openSelection&#x27;&quot;
+         [setStyle]&#x3D;&quot;&#x27;header&#x27;&quot;&gt;
+        &lt;/app-searchbar&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;header-user&quot;&gt;
+        &lt;h1 id&#x3D;&quot;header-user-name&quot;&gt;{{getShortenedString(user.fullName)}}&lt;/h1&gt;
+        &lt;div *ngIf&#x3D;&quot;user.avatar!&#x3D;&#x27;&#x27;&quot; id&#x3D;&quot;header-user-icon&quot;&gt;
+            &lt;img src&#x3D;&quot;{{user.avatar}}&quot; alt&#x3D;&quot;UserIcon&quot;&gt;
+            &lt;div id&#x3D;&quot;header-status&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id&#x3D;&quot;headerDropdown&quot;&gt;
+            &lt;button mat-icon-button (click)&#x3D;&quot;toogleHeaderMenu()&quot; (click)&#x3D;&quot;stopPropagation($event)&quot;&gt;
+                &lt;mat-icon&gt;expand_more&lt;/mat-icon&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;userProfileMenuBackground&quot; *ngIf&#x3D;&quot;showHeaderMenu&quot; (click)&#x3D;&quot;closeProfilePopup()&quot;&gt;&lt;/div&gt;
+    &lt;div id&#x3D;&quot;headerMenu&quot; *ngIf&#x3D;&quot;showHeaderMenu&quot; (click)&#x3D;&quot;stopPropagation($event)&quot;&gt;
+        &lt;a (click)&#x3D;&quot;showProfil()&quot;&gt;Profil&lt;/a&gt;
+        &lt;a (click)&#x3D;&quot;logout()&quot;&gt;Log out&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id&#x3D;&quot;header-container-mobile&quot;  *ngIf&#x3D;&quot;windowWidth &lt;&#x3D; 768&quot;&gt;
+    &lt;div id&#x3D;&quot;header-image-container-mobile&quot;&gt;
+        &lt;img *ngIf&#x3D;&quot;!channelSelected &amp;&amp; !chatSelected &amp;&amp; !emptyChatSelectedMobile&quot; src&#x3D;&quot;assets/img/logo/logo.svg&quot; alt&#x3D;&quot;DABubble Logo&quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;channelSelected || chatSelected || emptyChatSelectedMobile&quot; id&#x3D;&quot;header-image-container-mobile-selected&quot;&gt;
+            &lt;img src&#x3D;&quot;/assets/img/icons/arrow_left_back.svg&quot; alt&#x3D;&quot;back&quot; (click)&#x3D;&quot;closeChatOrChannel()&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/logo/codeLearningLogo.png&quot; alt&#x3D;&quot;DABubble Logo&quot;&gt;
+            &lt;h3&gt;Code learning&lt;/h3&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;header-user-mobile&quot; (click)&#x3D;&quot;toogleHeaderMenu()&quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;user.avatar!&#x3D;&#x27;&#x27;&quot; id&#x3D;&quot;header-user-icon-mobile&quot;&gt;
+            &lt;img src&#x3D;&quot;{{user.avatar}}&quot; alt&#x3D;&quot;UserIcon&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id&#x3D;&quot;headerMenu-mobile&quot; *ngIf&#x3D;&quot;showHeaderMenu&quot;&gt;    
+        &lt;div class&#x3D;&quot;headerMenu-mobile-entry&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/icons/accountIcon.png&quot; alt&#x3D;&quot;user&quot;&gt;
+            &lt;a (click)&#x3D;&quot;showProfil()&quot;&gt;Profil&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;headerMenu-mobile-entry&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/icons/logout.svg&quot; alt&#x3D;&quot;logout&quot;&gt;
+            &lt;a (click)&#x3D;&quot;logout()&quot;&gt;Logout&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;headerMenu-mobile-background&quot; *ngIf&#x3D;&quot;showHeaderMenu&quot; (click)&#x3D;&quot;showHeaderMenu &#x3D; false&quot;&gt;&lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./header.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@import url(&quot;https://fonts.googleapis.com/icon?family&#x3D;Material+Icons&quot;);
+$headerImage-width: 300px;
+$headerUser-width: 25%;
+
+
+#header-container,
+#header-container-mobile {
+    width: 100%;
+    gap: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+
+    #header-image-container {
+        min-width: 360px;
+    }
+
+    #header-searchfield {
+        //flex-grow: 1;
+        width: 50%;
+        border-radius: 42px;
+        //height: 40px;
+        border: 0px;
+        padding-left: 24px;
+    }
+
+    #searchbar {
+        flex-grow: 1;
+        width: 50%;
+        border-radius: 42px;
+        //height: 40px;
+        border: 0px;
+    }
+
+    #header-user,
+    #header-user-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        min-width: $headerUser-width;
+
+        #header-user-icon,
+        #header-user-icon-mobile {
+            position: relative;
+
+            img {
+                width: 50px;
+                border-radius: 50%;
+            }
+
+            #header-status {
+                position: absolute;
+                bottom: 4px;
+                right: 4px;
+                min-width: 10px;
+                min-height: 10px;
+                border-radius: 50%;
+                background-color: green;
+                z-index: 10;
+                border: 1px solid white;
+            }
+        }
+    }
+}
+
+.mat-mdc-menu-panel {
+    border-radius: 30px !important;
+}
+
+
+$headerDropdownPositionTop: 100px;
+$headerDropdownPositionRigth: 0px;
+
+#headerMenu,
+#headerMenu-mobile {
+
+    position: absolute;
+    background-color: white;
+    border-radius: 30px 0px 30px 30px;
+    top: $headerDropdownPositionTop;
+    right: $headerDropdownPositionRigth;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-shadow: 0px -3px 10px 0px #00000033;
+
+
+    a {
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        padding: 10px 45px;
+        border-radius: 100px;
+        font-size: 18px;
+        font-weight: 600;
+        width: 100px;
+
+        &amp;:hover {
+            background-color: rgba(236, 238, 254, 1);
+            color: rgba(83, 90, 241, 1);
+        }
+    }
+}
+
+#userProfileMenuBackground {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0px;
+    left: 0px;
+    z-index: 9;
+}
+
+#headerUserProfil {
+    padding: 24px;
+    min-width: 100px;
+    max-width: 500px;
+    min-height: 100px;
+    z-index: 10;
+    top: $headerDropdownPositionTop;
+    right: $headerDropdownPositionRigth;
+    position: absolute;
+    background-color: white;
+    border-radius: 30px 0px 30px 30px;
+    box-shadow: 0px 6px 10px 0px #00000033;
+
+    #headerUserProfil-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #headerUserProfil-image-container {
+        width: 100%;
+        min-width: 300px;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 30%;
+            border-radius: 50%;
+        }
+    }
+
+    #headerUserProfil-name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #status {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        #statusIcon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: green;
+        }
+
+        #statusFont {
+            color: green;
+            margin: 0px;
+        }
+    }
+
+    #headerUserProfil-email {
+        display: flex;
+        flex-direction: column;
+
+        #headerUserProfil-email-header {
+            display: flex;
+            gap: 12px;
+        }
+    }
+}
+
+#headerUserProfil-EditMode {
+
+    .headerUserProfil-EditMode-Row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    input {
+        border-radius: 30px;
+        color: #686868;
+        border: 1px solid #686868;
+        padding: 15px 20px 15px 20px;
+        font-family: &#x27;Nunito&#x27;, sans-serif;
+        width: calc(100% - 40px);
+    }
+
+    #headerUserProfil-EditMode-btn-container {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+    }
+
+    #headerUserProfil-EditMode-EditMailInfo {
+        color: red;
+    }
+}
+
+#header-container-mobile {
+    display: none;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+    #searchbar {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    #header-container {
+        display: none;
+    }
+
+    #header-container-mobile {
+        display: flex;
+        max-width: 100vw;
+
+        #header-image-container-mobile {
+            display: flex;
+
+            img {
+                width: 180px;
+            }
+
+            #header-image-container-mobile-selected {
+                display: flex;
+                gap: 12px;
+
+                img {
+                    width: unset;
+                }
+
+                ;
+            }
+        }
+
+        #header-user-mobile {
+            min-width: unset;
+        }
+
+        #headerMenu-mobile {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            top: unset;
+            height: fit-content;
+            padding: unset;
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+            width: 100vw;
+            background-color: white;
+            border-radius: 30px 30px 0px 0px;
+            z-index: 10;
+
+            .headerMenu-mobile-entry {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+        }
+        #headerMenu-mobile-background{
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0px; 
+            left: 0px;
+            z-index: 9;
+          }
+
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #header-image-container-mobile {
+        img {
+            max-width: 180px;
+            max-height: 100px;
+        }
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    #header-image-container-mobile {
+        #header-image-container-mobile-selected {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100px;
+            max-height: 30px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+    }
+
+}</code></pre>
+                <p class="comment">
+                    <code>../../../styles.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;@angular/material&#x27; as mat;
+
+@import &quot;@ctrl/ngx-emoji-mart/picker&quot;;
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-regular.woff2&#x27;);
+}
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 200;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-200.woff2&#x27;);
+}
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 300;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-300.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 500;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-500.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 600;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-600.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito Sans&#x27;;
+    src: url(&#x27;assets/fonts/nunito-sans-v15-latin-regular.woff2&#x27;);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    background-color: #edeefe;
+}
+
+.dsp-none{
+    display: none;
+}
+
+input {
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+textarea {
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+button{
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+.br-30 {
+    border-radius: 30px;
+}
+
+.btn-blue{
+    background-color: #444DF2; 
+    color: white;
+    padding: 12px 25px 12px 25px;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    border-radius: 30px;
+    border: 1px solid white;
+    cursor: pointer;
+    font-size: 18px;
+    &amp;:disabled{
+        opacity: 0.4;
+    }
+
+    &amp;:hover{
+        background-color: rgba(121, 126, 243, 1) !important;
+        transition: background-color 0.15s ease-in-out
+    }
+}
+.btn-white{
+    background-color: white; 
+    color: #444DF2;
+    padding: 12px 25px 12px 25px;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    border-radius: 30px;
+    border: 1px solid #444DF2;
+    cursor: pointer;
+    font-size: 18px;
+    &amp;:disabled{
+        opacity: 0.4;
+    }
+
+    &amp;:hover{
+        background-color: rgba(68, 77, 242, 1) !important;
+        transition: background-color 0.15s ease-in-out;
+        color: white !important;
+    }
+}
+
+.closeIcon-container{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
+
+    &amp;:hover{
+        background-color: #ECEEFE; 
+        #closeIcon path {
+            fill: #535AF1; 
+            }
+    }
+
+    #closeIcon{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.highlighted {
+    background-color: yellow;
+  }
+  .highlight-container {
+    margin-top: 10px;
+  }
+
+
+
+.notification-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+
+    .notification-card {
+        z-index: 99;
+        position: relative;
+        top: 70%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: fit-content;
+        opacity: 0;
+
+        .notification-card-content {
+            font-weight: 500;
+            font-size: 24px;
+        }
+    }
+
+
+
+    //Available animation types
+    @keyframes shift-left-in {
+        0% {
+            opacity: 0;
+            left: -10%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+            left: 50%
+        }
+
+        70% {
+            top: 70%;
+            left: 50%
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            left: -10%;
+        }
+    }
+
+    @keyframes shift-up {
+        0% {
+            opacity: 0;
+            top: 110%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+        }
+
+        70% {
+            top: 70%;
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            top: 110%;
+        }
+    }
+
+    @keyframes shift-right-in {
+        0% {
+            opacity: 0;
+            left: 110%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+            left: 50%
+        }
+
+        70% {
+            top: 70%;
+            left: 50%
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            left: 110%;
+        }
+    }
+    
+
+    //Types of Messages
+    .error {
+        background-color: rgb(255, 66, 66);
+        color: white;
+    }
+
+    .success {
+        background-color: #4f9d00;
+        border: solid 1px #00d84f;
+        color: white;
+    }
+
+    .default {
+        background-color: #444DF2;
+        border-radius: 30px 30px 0px 30px;
+        padding: 25px;
+        border: none;
+        color: white;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div id="header-container" *ngIf="windowWidth > 768">    <div id="header-image-container">        <img src="assets/img/logo/logo.svg" alt="DABubble Logo">    </div>    <div id="searchbar">        <app-searchbar         *ngIf="userService.finishedLoading && channelService.finishedLoading"           [types]=\'"all"\'          [action]="\'openSelection\'"         [setStyle]="\'header\'">        </app-searchbar>    </div>    <div id="header-user">        <h1 id="header-user-name">{{getShortenedString(user.fullName)}}</h1>        <div *ngIf="user.avatar!=\'\'" id="header-user-icon">            <img src="{{user.avatar}}" alt="UserIcon">            <div id="header-status"></div>        </div>        <div id="headerDropdown">            <button mat-icon-button (click)="toogleHeaderMenu()" (click)="stopPropagation($event)">                <mat-icon>expand_more</mat-icon>            </button>        </div>    </div>    <div id="userProfileMenuBackground" *ngIf="showHeaderMenu" (click)="closeProfilePopup()"></div>    <div id="headerMenu" *ngIf="showHeaderMenu" (click)="stopPropagation($event)">        <a (click)="showProfil()">Profil</a>        <a (click)="logout()">Log out</a>    </div></div><div id="header-container-mobile"  *ngIf="windowWidth <= 768">    <div id="header-image-container-mobile">        <img *ngIf="!channelSelected && !chatSelected && !emptyChatSelectedMobile" src="assets/img/logo/logo.svg" alt="DABubble Logo">        <div *ngIf="channelSelected || chatSelected || emptyChatSelectedMobile" id="header-image-container-mobile-selected">            <img src="/assets/img/icons/arrow_left_back.svg" alt="back" (click)="closeChatOrChannel()">            <img src="assets/img/logo/codeLearningLogo.png" alt="DABubble Logo">            <h3>Code learning</h3>        </div>    </div>    <div id="header-user-mobile" (click)="toogleHeaderMenu()">        <div *ngIf="user.avatar!=\'\'" id="header-user-icon-mobile">            <img src="{{user.avatar}}" alt="UserIcon">        </div>    </div>    <div id="headerMenu-mobile" *ngIf="showHeaderMenu">            <div class="headerMenu-mobile-entry">            <img src="assets/img/icons/accountIcon.png" alt="user">            <a (click)="showProfil()">Profil</a>        </div>        <div class="headerMenu-mobile-entry">            <img src="assets/img/icons/logout.svg" alt="logout">            <a (click)="logout()">Logout</a>        </div>    </div>    <div id="headerMenu-mobile-background" *ngIf="showHeaderMenu" (click)="showHeaderMenu = false"></div></div></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HeaderComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

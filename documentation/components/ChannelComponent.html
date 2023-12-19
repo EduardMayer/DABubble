@@ -1,0 +1,2321 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ChannelComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/channel/channel.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/IfChangedService.html" target="_self" >IfChangedService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-channel</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./channel.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./channel.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#addMemberTrigger" >addMemberTrigger</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#channelService" >channelService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#chatService" >chatService</a>
+                            </li>
+                            <li>
+                                <a href="#hoverTitle" >hoverTitle</a>
+                            </li>
+                            <li>
+                                <a href="#memberName" >memberName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#menuTrigger" >menuTrigger</a>
+                            </li>
+                            <li>
+                                <a href="#messagePath" >messagePath</a>
+                            </li>
+                            <li>
+                                <a href="#messageTime" >messageTime</a>
+                            </li>
+                            <li>
+                                <a href="#newAddedToChannelUser" >newAddedToChannelUser</a>
+                            </li>
+                            <li>
+                                <a href="#shouldOpenAddMemberMenu" >shouldOpenAddMemberMenu</a>
+                            </li>
+                            <li>
+                                <a href="#showChannelUsers" >showChannelUsers</a>
+                            </li>
+                            <li>
+                                <a href="#showEditChannel" >showEditChannel</a>
+                            </li>
+                            <li>
+                                <a href="#showEditChannelUsers" >showEditChannelUsers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                            <li>
+                                <a href="#windowWidth" >windowWidth</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeEditChannelUsers" >closeEditChannelUsers</a>
+                            </li>
+                            <li>
+                                <a href="#closeEditDialog" >closeEditDialog</a>
+                            </li>
+                            <li>
+                                <a href="#closeEditUsersDialog" >closeEditUsersDialog</a>
+                            </li>
+                            <li>
+                                <a href="#closeMenus" >closeMenus</a>
+                            </li>
+                            <li>
+                                <a href="#closeMenuViewUsersOnChannel" >closeMenuViewUsersOnChannel</a>
+                            </li>
+                            <li>
+                                <a href="#closeShowUsersDialog" >closeShowUsersDialog</a>
+                            </li>
+                            <li>
+                                <a href="#getMessageTime" >getMessageTime</a>
+                            </li>
+                            <li>
+                                <a href="#getShortenedString" >getShortenedString</a>
+                            </li>
+                            <li>
+                                <a href="#loadChannelMessages" >loadChannelMessages</a>
+                            </li>
+                            <li>
+                                <a href="#openAddMemberMenu" >openAddMemberMenu</a>
+                            </li>
+                            <li>
+                                <a href="#openProfil" >openProfil</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(channelService: <a href="../injectables/ChannelFirebaseService.html" target="_self">ChannelFirebaseService</a>, chatService: <a href="../injectables/ChatFirebaseService.html" target="_self">ChatFirebaseService</a>, userService: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>, userProfileService: <a href="../injectables/UserProfileService.html" target="_self">UserProfileService</a>, activeSelectionService: <a href="../injectables/ActiveSelectionService.html" target="_self">ActiveSelectionService</a>, formatService: <a href="../injectables/FormatService.html" target="_self">FormatService</a>, windowSizeService: <a href="../injectables/WindowSizeService.html" target="_self">WindowSizeService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>channelService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>chatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChatFirebaseService.html" target="_self" >ChatFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userProfileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserProfileService.html" target="_self" >UserProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activeSelectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActiveSelectionService.html" target="_self" >ActiveSelectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>windowSizeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WindowSizeService.html" target="_self" >WindowSizeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeEditChannelUsers"></a>
+                    <span class="name">
+                        <span ><b>closeEditChannelUsers</b></span>
+                        <a href="#closeEditChannelUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeEditChannelUsers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes edit channel user popup</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeEditDialog"></a>
+                    <span class="name">
+                        <span ><b>closeEditDialog</b></span>
+                        <a href="#closeEditDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeEditDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes edit channel dialog</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeEditUsersDialog"></a>
+                    <span class="name">
+                        <span ><b>closeEditUsersDialog</b></span>
+                        <a href="#closeEditUsersDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeEditUsersDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes edit channel dialog</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeMenus"></a>
+                    <span class="name">
+                        <span ><b>closeMenus</b></span>
+                        <a href="#closeMenus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeMenus()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes pop up menu für add members dialog.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeMenuViewUsersOnChannel"></a>
+                    <span class="name">
+                        <span ><b>closeMenuViewUsersOnChannel</b></span>
+                        <a href="#closeMenuViewUsersOnChannel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeMenuViewUsersOnChannel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes pop up menu for channel members dialog.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeShowUsersDialog"></a>
+                    <span class="name">
+                        <span ><b>closeShowUsersDialog</b></span>
+                        <a href="#closeShowUsersDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeShowUsersDialog(option: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes show user dialog and opens edit channel users if option includes a defined string.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&quot;&quot;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMessageTime"></a>
+                    <span class="name">
+                        <span ><b>getMessageTime</b></span>
+                        <a href="#getMessageTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMessageTime(message: <a href="../classes/Message.html" target="_self">Message</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the time (in a formated form) of a given Message.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>message for that a Time is needed.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>Time or string &quot;heute&quot; when it is today.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getShortenedString"></a>
+                    <span class="name">
+                        <span ><b>getShortenedString</b></span>
+                        <a href="#getShortenedString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getShortenedString(stringToShort: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Shorten a give string</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stringToShort</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>string to short</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>shortened string</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadChannelMessages"></a>
+                    <span class="name">
+                        <span ><b>loadChannelMessages</b></span>
+                        <a href="#loadChannelMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadChannelMessages()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads the conversation of the channel.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAddMemberMenu"></a>
+                    <span class="name">
+                        <span ><b>openAddMemberMenu</b></span>
+                        <a href="#openAddMemberMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openAddMemberMenu()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Open add member dialog.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openProfil"></a>
+                    <span class="name">
+                        <span ><b>openProfil</b></span>
+                        <a href="#openProfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openProfil(user: <a href="../classes/User.html" target="_self">User</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Shows userprofile of given user.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../classes/User.html" target="_self" >User</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>user for showing in profil</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addMemberTrigger"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>addMemberTrigger</b></span>
+                        <a href="#addMemberTrigger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MatMenuTrigger</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;addMemberTrigger&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="channelService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>channelService</b></span>
+                        <a href="#channelService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chatService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>chatService</b></span>
+                        <a href="#chatService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ChatFirebaseService.html" target="_self" >ChatFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hoverTitle"></a>
+                    <span class="name">
+                        <span ><b>hoverTitle</b></span>
+                        <a href="#hoverTitle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="memberName"></a>
+                    <span class="name">
+                        <span ><b>memberName</b></span>
+                        <a href="#memberName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="menuTrigger"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>menuTrigger</b></span>
+                        <a href="#menuTrigger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MatMenuTrigger</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;menuTrigger&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messagePath"></a>
+                    <span class="name">
+                        <span ><b>messagePath</b></span>
+                        <a href="#messagePath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageTime"></a>
+                    <span class="name">
+                        <span ><b>messageTime</b></span>
+                        <a href="#messageTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newAddedToChannelUser"></a>
+                    <span class="name">
+                        <span ><b>newAddedToChannelUser</b></span>
+                        <a href="#newAddedToChannelUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new User()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shouldOpenAddMemberMenu"></a>
+                    <span class="name">
+                        <span ><b>shouldOpenAddMemberMenu</b></span>
+                        <a href="#shouldOpenAddMemberMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showChannelUsers"></a>
+                    <span class="name">
+                        <span ><b>showChannelUsers</b></span>
+                        <a href="#showChannelUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showEditChannel"></a>
+                    <span class="name">
+                        <span ><b>showEditChannel</b></span>
+                        <a href="#showEditChannel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showEditChannelUsers"></a>
+                    <span class="name">
+                        <span ><b>showEditChannelUsers</b></span>
+                        <a href="#showEditChannelUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="windowWidth"></a>
+                    <span class="name">
+                        <span ><b>windowWidth</b></span>
+                        <a href="#windowWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/mainscreen/channel/channel.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ViewChild} from &#x27;@angular/core&#x27;;
+import { Channel } from &#x27;src/models/channel.class&#x27;;
+import { Message } from &#x27;src/models/message.class&#x27;;
+import { User } from &#x27;src/models/user.class&#x27;;
+import { ChannelFirebaseService } from &#x27;src/services/channel-firebase.service&#x27;;
+import { IfChangedService } from &#x27;src/services/if-changed-service.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+import { MatMenuTrigger } from &#x27;@angular/material/menu&#x27;;
+import { UserProfileService } from &#x27;src/services/user-profile.service&#x27;;
+import { ActiveSelectionService } from &#x27;src/services/active-selection.service&#x27;;
+import { ChatFirebaseService } from &#x27;src/services/chat-firebase.service&#x27;;
+import { FormatService } from &#x27;src/services/format.service&#x27;;
+import { WindowSizeService } from &#x27;src/services/window-size.service&#x27;;
+
+@Component({
+  selector: &#x27;app-channel&#x27;,
+  templateUrl: &#x27;./channel.component.html&#x27;,
+  styleUrls: [&#x27;./channel.component.scss&#x27;],
+  providers: [IfChangedService] // Provide the service at the component level
+})
+export class ChannelComponent{
+  @ViewChild(&#x27;menuTrigger&#x27;) menuTrigger?: MatMenuTrigger;
+  @ViewChild(&#x27;addMemberTrigger&#x27;) addMemberTrigger?: MatMenuTrigger;
+
+  messageTime: string &#x3D; &quot;&quot;;
+  messagePath: string &#x3D; &quot;&quot;;
+  memberName: string &#x3D; &quot;&quot;;
+  newAddedToChannelUser &#x3D; new User();
+
+  shouldOpenAddMemberMenu &#x3D; false;
+
+  hoverTitle &#x3D; false;
+  showEditChannel: boolean &#x3D; false;
+  showEditChannelUsers: boolean &#x3D; false;
+  showChannelUsers: boolean &#x3D; false;
+
+  windowWidth: any; 
+
+  constructor(
+    public channelService: ChannelFirebaseService,
+    public chatService: ChatFirebaseService,
+    public userService: UserFirebaseService,
+    private userProfileService: UserProfileService,
+    private activeSelectionService: ActiveSelectionService,
+    private formatService: FormatService , 
+    private windowSizeService: WindowSizeService
+  ) {
+    this.loadChannelMessages();
+    this.windowSizeService.windowWidth$.subscribe(windowWidth &#x3D;&gt; {
+      this.windowWidth &#x3D; windowWidth; 
+    });
+    this.windowSizeService.setWindowSize(); 
+  }
+
+  /**
+   * Loads the conversation of the channel. 
+   */
+  loadChannelMessages() {
+    let channel &#x3D; this.activeSelectionService.getActiveSelectionObject();
+    if (channel instanceof Channel) {
+      this.channelService.loadChannelMessages(channel.id);// to be changed to currentChannel
+      this.messagePath &#x3D; &#x60;channels/${channel.id}/messages/&#x60;;
+    }
+  }
+
+
+  /**
+   * Closes pop up menu für add members dialog. 
+   */
+  closeMenus() {
+    if (this.menuTrigger) {
+      this.menuTrigger.closeMenu();
+    }
+    if (this.addMemberTrigger) {
+      this.addMemberTrigger.closeMenu();
+    }
+  }
+
+
+  /**
+  * Closes pop up menu for channel members dialog. 
+  */
+  closeMenuViewUsersOnChannel() {
+    if (this.menuTrigger) {
+      this.menuTrigger.closeMenu();
+    }
+  }
+
+
+  /**
+  * Open add member dialog. 
+  */
+  openAddMemberMenu() {
+    // Verzögerung hinzufügen
+    
+    if (this.menuTrigger) {
+      this.menuTrigger.closeMenu();
+    }
+    if (this.addMemberTrigger) {
+      this.addMemberTrigger.openMenu();
+    }
+  }
+
+
+  /**
+   * Closes edit channel dialog
+   */
+  closeEditDialog() {
+    this.showEditChannel &#x3D; false;
+  }
+
+  
+  /**
+  * Closes edit channel dialog
+  */
+  closeEditUsersDialog() {
+    this.showEditChannelUsers &#x3D; false;
+  }
+
+
+  /**
+   * Closes show user dialog and opens edit channel users if option includes a defined string. 
+   * @param option 
+   */
+  closeShowUsersDialog(option: string&#x3D;&quot;&quot;) {
+    if(option&#x3D;&#x3D;&#x27;editChannelUser&#x27;){
+      this.showEditChannelUsers &#x3D; true;
+    }
+    this.showChannelUsers &#x3D; false;
+  }
+
+
+  /**
+   * Shows userprofile of given user. 
+   * @param user - user for showing in profil
+   */
+  openProfil(user: User) {
+    this.closeMenus()
+    this.userProfileService.openUserProfil(user);
+  }
+
+
+  /**
+   * Returns the time (in a formated form) of a given Message. 
+   * @param message - message for that a Time is needed.
+   * @returns - Time or string &quot;heute&quot; when it is today. 
+   */
+  getMessageTime(message: Message) {
+    const currentDay &#x3D; this.formatService.formatDateToDMY(new Date());
+    const messageDmy &#x3D; this.formatService.formatDateToDMY(new Date(message.timestamp));
+    if (currentDay &#x3D;&#x3D; messageDmy) {
+      return &quot;heute&quot;;
+    } else {
+      return messageDmy;
+    }
+  }
+
+
+  /**
+   * Closes edit channel user popup
+   */
+  closeEditChannelUsers() {
+    this.showEditChannelUsers &#x3D; false;
+  }
+
+
+  /**
+   * Shorten a give string 
+   * @param stringToShort - string to short
+   * @returns - shortened string
+   */
+  getShortenedString( stringToShort: string) {
+    return this.formatService.cutStrLen(stringToShort);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card id&#x3D;&quot;channel&quot; *ngIf&#x3D;&quot;channelService.selectedChannel  &amp;&amp; userService.currentUser.id!&#x3D;&#x27;&#x27; &quot;&gt;
+    &lt;div class&#x3D;&#x27;header&#x27;&gt;
+        &lt;div class&#x3D;&quot;header-title&quot; width&#x3D;&quot;fit-content&quot;&gt;
+            &lt;div class&#x3D;&quot;header-title-container&quot; (mouseover)&#x3D;&quot;hoverTitle&#x3D;true&quot; (mouseout)&#x3D;&quot;hoverTitle&#x3D;false&quot;
+                (click)&#x3D;&quot;showEditChannel &#x3D; true&quot;&gt;
+                &lt;h2&gt;# {{getShortenedString(channelService.selectedChannel.channelName)}}&lt;/h2&gt;
+                &lt;div class&#x3D;&quot;header-title-container-icons&quot;&gt;
+                    &lt;img *ngIf&#x3D;&quot;!hoverTitle&quot; src&#x3D;&quot;assets/img/icons/arrow_down_black.svg&quot; alt&#x3D;&quot;dropdown_black&quot;&gt;
+                    &lt;img *ngIf&#x3D;&quot;hoverTitle&quot; src&#x3D;&quot;assets/img/icons/arrow_down_blue.svg&quot; alt&#x3D;&quot;dropdown_blue&quot;&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;addMemberContainer&quot;&gt;
+            &lt;div class&#x3D;&quot;user-avatar-list&quot; (click)&#x3D;&quot;showChannelUsers&#x3D;true&quot;&gt;
+                &lt;img class&#x3D;&quot;avatar-img&quot;
+                    *ngFor&#x3D;&quot;let user of channelService.userOnCurrentChannel | slice:0:3; let i &#x3D; index&quot;
+                    [style.left]&#x3D;&quot;i * -10 + &#x27;px&#x27;&quot; [style.z-index]&#x3D;&quot;3 - i&quot; [src]&#x3D;&quot;user.avatar&quot; alt&#x3D;&quot;avatar&quot;&gt;
+                &lt;span class&#x3D;&quot;amoundOfUsersInChannel&quot;&gt;{{channelService.userOnCurrentChannel.length}}&lt;/span&gt;
+            &lt;/div&gt;
+
+
+            &lt;svg id&#x3D;&quot;addmember-icon&quot; *ngIf&#x3D;&quot;windowWidth &gt; 768&quot; width&#x3D;&quot;40&quot; height&#x3D;&quot;40&quot; viewBox&#x3D;&quot;0 0 40 40&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; (click)&#x3D;&quot;this.showEditChannelUsers &#x3D; true&quot;&gt;
+                &lt;rect width&#x3D;&quot;40&quot; height&#x3D;&quot;40&quot; rx&#x3D;&quot;20&quot; fill&#x3D;&quot;#ECEEFE&quot;/&gt;
+                &lt;mask id&#x3D;&quot;mask0_392_4421&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;8&quot; y&#x3D;&quot;8&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
+                &lt;rect x&#x3D;&quot;8&quot; y&#x3D;&quot;8&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+                &lt;/mask&gt;
+                &lt;g mask&#x3D;&quot;url(#mask0_392_4421)&quot;&gt;
+                &lt;path d&#x3D;&quot;M27 22C26.7167 22 26.4793 21.904 26.288 21.712C26.096 21.5207 26 21.2833 26 21V19H24C23.7167 19 23.4793 18.904 23.288 18.712C23.096 18.5207 23 18.2833 23 18C23 17.7167 23.096 17.479 23.288 17.287C23.4793 17.0957 23.7167 17 24 17H26V15C26 14.7167 26.096 14.479 26.288 14.287C26.4793 14.0957 26.7167 14 27 14C27.2833 14 27.5207 14.0957 27.712 14.287C27.904 14.479 28 14.7167 28 15V17H30C30.2833 17 30.5207 17.0957 30.712 17.287C30.904 17.479 31 17.7167 31 18C31 18.2833 30.904 18.5207 30.712 18.712C30.5207 18.904 30.2833 19 30 19H28V21C28 21.2833 27.904 21.5207 27.712 21.712C27.5207 21.904 27.2833 22 27 22ZM17 20C15.9 20 14.9583 19.6083 14.175 18.825C13.3917 18.0417 13 17.1 13 16C13 14.9 13.3917 13.9583 14.175 13.175C14.9583 12.3917 15.9 12 17 12C18.1 12 19.0417 12.3917 19.825 13.175C20.6083 13.9583 21 14.9 21 16C21 17.1 20.6083 18.0417 19.825 18.825C19.0417 19.6083 18.1 20 17 20ZM10 28C9.71667 28 9.47933 27.904 9.288 27.712C9.096 27.5207 9 27.2833 9 27V25.2C9 24.6333 9.146 24.1123 9.438 23.637C9.72933 23.1623 10.1167 22.8 10.6 22.55C11.6333 22.0333 12.6833 21.6457 13.75 21.387C14.8167 21.129 15.9 21 17 21C18.1 21 19.1833 21.129 20.25 21.387C21.3167 21.6457 22.3667 22.0333 23.4 22.55C23.8833 22.8 24.2707 23.1623 24.562 23.637C24.854 24.1123 25 24.6333 25 25.2V27C25 27.2833 24.904 27.5207 24.712 27.712C24.5207 27.904 24.2833 28 24 28H10ZM11 26H23V25.2C23 25.0167 22.9543 24.85 22.863 24.7C22.771 24.55 22.65 24.4333 22.5 24.35C21.6 23.9 20.6917 23.5623 19.775 23.337C18.8583 23.1123 17.9333 23 17 23C16.0667 23 15.1417 23.1123 14.225 23.337C13.3083 23.5623 12.4 23.9 11.5 24.35C11.35 24.4333 11.2293 24.55 11.138 24.7C11.046 24.85 11 25.0167 11 25.2V26ZM17 18C17.55 18 18.021 17.804 18.413 17.412C18.8043 17.0207 19 16.55 19 16C19 15.45 18.8043 14.9793 18.413 14.588C18.021 14.196 17.55 14 17 14C16.45 14 15.9793 14.196 15.588 14.588C15.196 14.9793 15 15.45 15 16C15 16.55 15.196 17.0207 15.588 17.412C15.9793 17.804 16.45 18 17 18Z&quot; fill&#x3D;&quot;black&quot;/&gt;
+                &lt;/g&gt;
+            &lt;/svg&gt;
+            
+            &lt;svg id&#x3D;&quot;addmember-icon&quot; *ngIf&#x3D;&quot;windowWidth &lt;&#x3D; 768&quot; width&#x3D;&quot;40&quot; height&#x3D;&quot;40&quot; viewBox&#x3D;&quot;0 0 40 40&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; (click)&#x3D;&quot;this.showChannelUsers &#x3D; true&quot;&gt;
+                &lt;rect width&#x3D;&quot;40&quot; height&#x3D;&quot;40&quot; rx&#x3D;&quot;20&quot; fill&#x3D;&quot;#ECEEFE&quot;/&gt;
+                &lt;mask id&#x3D;&quot;mask0_392_4421&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;8&quot; y&#x3D;&quot;8&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
+                &lt;rect x&#x3D;&quot;8&quot; y&#x3D;&quot;8&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+                &lt;/mask&gt;
+                &lt;g mask&#x3D;&quot;url(#mask0_392_4421)&quot;&gt;
+                &lt;path d&#x3D;&quot;M27 22C26.7167 22 26.4793 21.904 26.288 21.712C26.096 21.5207 26 21.2833 26 21V19H24C23.7167 19 23.4793 18.904 23.288 18.712C23.096 18.5207 23 18.2833 23 18C23 17.7167 23.096 17.479 23.288 17.287C23.4793 17.0957 23.7167 17 24 17H26V15C26 14.7167 26.096 14.479 26.288 14.287C26.4793 14.0957 26.7167 14 27 14C27.2833 14 27.5207 14.0957 27.712 14.287C27.904 14.479 28 14.7167 28 15V17H30C30.2833 17 30.5207 17.0957 30.712 17.287C30.904 17.479 31 17.7167 31 18C31 18.2833 30.904 18.5207 30.712 18.712C30.5207 18.904 30.2833 19 30 19H28V21C28 21.2833 27.904 21.5207 27.712 21.712C27.5207 21.904 27.2833 22 27 22ZM17 20C15.9 20 14.9583 19.6083 14.175 18.825C13.3917 18.0417 13 17.1 13 16C13 14.9 13.3917 13.9583 14.175 13.175C14.9583 12.3917 15.9 12 17 12C18.1 12 19.0417 12.3917 19.825 13.175C20.6083 13.9583 21 14.9 21 16C21 17.1 20.6083 18.0417 19.825 18.825C19.0417 19.6083 18.1 20 17 20ZM10 28C9.71667 28 9.47933 27.904 9.288 27.712C9.096 27.5207 9 27.2833 9 27V25.2C9 24.6333 9.146 24.1123 9.438 23.637C9.72933 23.1623 10.1167 22.8 10.6 22.55C11.6333 22.0333 12.6833 21.6457 13.75 21.387C14.8167 21.129 15.9 21 17 21C18.1 21 19.1833 21.129 20.25 21.387C21.3167 21.6457 22.3667 22.0333 23.4 22.55C23.8833 22.8 24.2707 23.1623 24.562 23.637C24.854 24.1123 25 24.6333 25 25.2V27C25 27.2833 24.904 27.5207 24.712 27.712C24.5207 27.904 24.2833 28 24 28H10ZM11 26H23V25.2C23 25.0167 22.9543 24.85 22.863 24.7C22.771 24.55 22.65 24.4333 22.5 24.35C21.6 23.9 20.6917 23.5623 19.775 23.337C18.8583 23.1123 17.9333 23 17 23C16.0667 23 15.1417 23.1123 14.225 23.337C13.3083 23.5623 12.4 23.9 11.5 24.35C11.35 24.4333 11.2293 24.55 11.138 24.7C11.046 24.85 11 25.0167 11 25.2V26ZM17 18C17.55 18 18.021 17.804 18.413 17.412C18.8043 17.0207 19 16.55 19 16C19 15.45 18.8043 14.9793 18.413 14.588C18.021 14.196 17.55 14 17 14C16.45 14 15.9793 14.196 15.588 14.588C15.196 14.9793 15 15.45 15 16C15 16.55 15.196 17.0207 15.588 17.412C15.9793 17.804 16.45 18 17 18Z&quot; fill&#x3D;&quot;black&quot;/&gt;
+                &lt;/g&gt;
+            &lt;/svg&gt;  
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;chat-container&quot;&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;channelService.selectedChannelMessages.length&gt;0; else emptyChannel&quot;&gt;
+            &lt;div *ngFor&#x3D;&quot;let message of channelService.selectedChannelMessages; let i &#x3D; index&quot;&gt;
+                &lt;app-message [message]&#x3D;&quot;message&quot; [messageLocationName]&#x3D;&quot;&#x27;channel&#x27;&quot;&gt;&lt;/app-message&gt;
+                &lt;ng-template [appIfChanged]&#x3D;&quot;getMessageTime(message)&quot;&gt;
+                    &lt;app-date-line *ngIf&#x3D;&quot;channelService.selectedChannelMessages[i-1]&quot;
+                        [messageTime]&#x3D;&quot;getMessageTime(channelService.selectedChannelMessages[i-1])&quot;&gt;&lt;/app-date-line&gt;
+                &lt;/ng-template&gt;
+            &lt;/div&gt;
+
+            &lt;app-date-line
+                *ngIf&#x3D;&quot;channelService.selectedChannelMessages[channelService.selectedChannelMessages.length-1]&quot;
+                [messageTime]&#x3D;&quot;getMessageTime(channelService.selectedChannelMessages[channelService.selectedChannelMessages.length-1])&quot;&gt;
+            &lt;/app-date-line&gt;
+        &lt;/ng-container&gt;
+
+        &lt;ng-template #emptyChannel&gt;
+            &lt;!-- add- Profile Link--&gt;
+            &lt;div class&#x3D;&quot;channel-display&quot;&gt;
+                &lt;div class&#x3D;&#x27;channel-header&#x27;&gt;
+                    &lt;h3&gt;# {{ channelService.selectedChannel.channelName }}&lt;/h3&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;channel-text&quot;&gt;
+                    Das ist der Anfang des Channels &lt;a href&#x3D;&quot;#&quot;&gt;# {{ channelService.selectedChannel.channelName
+                        }}&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/ng-template&gt;
+    &lt;/div&gt;
+
+    &lt;app-message-create [path]&#x3D;&quot;channelService.currentChannelMessagePath&quot; [currentLocation]&#x3D;&quot;&#x27;channel&#x27;&quot;&gt;&lt;/app-message-create&gt;
+
+    &lt;app-edit-channel 
+        *ngIf&#x3D;&quot;showEditChannel&quot; (closeEvent)&#x3D;&quot;closeEditDialog()&quot; (addUserEvent)&#x3D;&quot;this.showEditChannelUsers &#x3D; true&quot;&gt;
+    &lt;/app-edit-channel&gt;
+
+    &lt;app-show-channel-users 
+        *ngIf&#x3D;&quot;showChannelUsers&quot; 
+        (closeEvent)&#x3D;&quot;closeShowUsersDialog($event)&quot;&gt;
+    &lt;/app-show-channel-users&gt;
+
+    &lt;app-edit-channel-users 
+        *ngIf&#x3D;&quot;showEditChannelUsers&quot; 
+        [refChannel]&#x3D;&quot;channelService.selectedChannel&quot; 
+        (closeEvent)&#x3D;&quot;closeEditUsersDialog()&quot;&gt;
+    &lt;/app-edit-channel-users&gt;
+
+&lt;/mat-card&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./channel.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">#channel {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-radius: 30px;
+
+    .header {
+        box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+        padding: 25px 45px;
+        border-radius: 30px 30px 0 0;
+        display: flex;
+        justify-content: space-between;
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            word-break: break-all;
+        }
+
+        .user-avatar-list {
+            display: flex;
+            align-items: center;
+            padding: 11px;
+            border-radius: 30px;
+            margin-right: 10px;
+
+            &amp;:hover {
+                background-color: #ECEEFE;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .amoundOfUsersInChannel {
+        font-size: 20px;
+        padding-left: 10px;
+        font-weight: 600;
+    }
+
+    .chat-container {
+        overflow-y: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+
+        app-date-line {
+            margin: 12px 35px 12px 35px;
+        }
+
+        .channel-display {
+            margin: 12px 35px 12px 35px;
+
+            .channel-header {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+                line-break: anywhere;
+
+                img {
+                    height: 70px;
+                    aspect-ratio: 1;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+
+            .channel-text {
+                line-break: anywhere;
+            }
+        }
+    }
+
+    app-message-create {
+        padding: 35px 35px 35px 35px;
+    }
+}
+
+
+.align-bottom {
+    position: sticky;
+    bottom: 0;
+}
+
+.chat-container {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+}
+
+.addmembers {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#addmember-icon {
+    cursor: pointer;
+}
+
+#addmember-icon:hover path {
+    fill: #535AF1;
+}
+
+.header {
+    padding: 0px 35px 0px 35px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .header-title {
+        display: flex;
+        align-items: center;
+
+        .header-title-container {
+            display: flex;
+            padding: 4px 12px 4px 12px;
+            align-items: center;
+
+            h2 {
+                margin: 0px;
+                font-size: 24px;
+            }
+
+            .header-title-container-icons {
+                height: 30px;
+            }
+
+            &amp;:hover {
+                color: #535AF1;
+                background-color: #ECEEFE;
+                border-radius: 37px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .user-avatar-list {
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+app-message-create {
+    padding: 0px 35px 0px 35px;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+::ng-deep div#mat-menu-panel-0 {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuHeaderText {
+    padding-left: 45px;
+}
+
+.close {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerText {
+    padding-left: 45px;
+}
+
+.closeMenu {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+.resultUserImages {
+    width: 20px;
+    border-radius: 15px;
+}
+
+.menuUsersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+.menuUsers {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 59%;
+    margin-top: 19px;
+}
+
+.menuUsersImage {
+    //padding-left: 20px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.menuUsersName {
+    padding-left: 20px;
+}
+
+.addMemberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addMemberImage {
+    //padding-left: 20px;
+    width: 30px;
+}
+
+.addMemberInMenu {
+    display: flex;
+    align-items: center;
+    margin-top: 21px;
+    cursor: pointer;
+    justify-content: center;
+    margin-right: 25px;
+}
+
+
+.addMemberText {
+    padding-left: 20px;
+}
+
+.containerOfInput {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    padding-top: 30px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.inputContainer {
+    width: 75%;
+    height: 42px;
+}
+
+.memberNameInput {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 1px solid #797EF3;
+}
+
+.inputAvatar {
+    width: 28px;
+    height: 25px;
+    border-radius: 15px;
+}
+
+.inputContent {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background-color: #ECEEFE;
+    border-radius: 25px;
+    height: 35%;
+    width: 39%;
+    top: 39px;
+    left: 77px;
+
+    position: absolute;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 280px;
+}
+
+#header-searchfield-results {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 12px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &amp;:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+#header-searchfield-results-Menu {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 68px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &amp;:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    width: 496px !important;
+    height: 310px !important;
+    min-width: unset !important;
+    max-width: unset !important;
+
+    border-top-left-radius: 35px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 35px !important;
+    border-bottom-left-radius: 35px !important;
+
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 100%;
+}
+
+.channelName {
+    color: #797EF3;
+    padding-left: 45px;
+}
+
+.addSelection {
+    background-color: #444DF2;
+    height: 54px;
+    width: 125px;
+    border-radius: 30px;
+    color: white;
+    border: unset;
+    position: absolute;
+    right: 57px;
+    bottom: 78px;
+
+    &amp;:hover {
+        opacity: 0.85;
+        cursor: pointer;
+    }
+
+}
+
+.inputContainerMaster {
+    width: 100%;
+}
+
+.menuHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.searchBar {
+    width: 76%;
+    border: solid 1px #ADB0D9;
+    border-radius: 27px;
+}
+
+.testForMat {
+    width: 100%;
+}
+
+.menuUserWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 48px;
+}
+
+
+@media only screen and (max-width: 1000px) and (min-width: 769px){
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        h2 {
+            font-size: 20px !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    #channel {
+        border-radius: 0px;
+
+        .header {
+            box-shadow: 0px 2px 10px 0px #00000014;
+            border-radius: 0px;
+
+            .user-avatar-list {
+                display: none;
+            }
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card id="channel" *ngIf="channelService.selectedChannel  && userService.currentUser.id!=\'\' ">    <div class=\'header\'>        <div class="header-title" width="fit-content">            <div class="header-title-container" (mouseover)="hoverTitle=true" (mouseout)="hoverTitle=false"                (click)="showEditChannel = true">                <h2># {{getShortenedString(channelService.selectedChannel.channelName)}}</h2>                <div class="header-title-container-icons">                    <img *ngIf="!hoverTitle" src="assets/img/icons/arrow_down_black.svg" alt="dropdown_black">                    <img *ngIf="hoverTitle" src="assets/img/icons/arrow_down_blue.svg" alt="dropdown_blue">                </div>            </div>        </div>        <div class="addMemberContainer">            <div class="user-avatar-list" (click)="showChannelUsers=true">                <img class="avatar-img"                    *ngFor="let user of channelService.userOnCurrentChannel | slice:0:3; let i = index"                    [style.left]="i * -10 + \'px\'" [style.z-index]="3 - i" [src]="user.avatar" alt="avatar">                <span class="amoundOfUsersInChannel">{{channelService.userOnCurrentChannel.length}}</span>            </div>            <svg id="addmember-icon" *ngIf="windowWidth > 768" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="this.showEditChannelUsers = true">                <rect width="40" height="40" rx="20" fill="#ECEEFE"/>                <mask id="mask0_392_4421" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">                <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>                </mask>                <g mask="url(#mask0_392_4421)">                <path d="M27 22C26.7167 22 26.4793 21.904 26.288 21.712C26.096 21.5207 26 21.2833 26 21V19H24C23.7167 19 23.4793 18.904 23.288 18.712C23.096 18.5207 23 18.2833 23 18C23 17.7167 23.096 17.479 23.288 17.287C23.4793 17.0957 23.7167 17 24 17H26V15C26 14.7167 26.096 14.479 26.288 14.287C26.4793 14.0957 26.7167 14 27 14C27.2833 14 27.5207 14.0957 27.712 14.287C27.904 14.479 28 14.7167 28 15V17H30C30.2833 17 30.5207 17.0957 30.712 17.287C30.904 17.479 31 17.7167 31 18C31 18.2833 30.904 18.5207 30.712 18.712C30.5207 18.904 30.2833 19 30 19H28V21C28 21.2833 27.904 21.5207 27.712 21.712C27.5207 21.904 27.2833 22 27 22ZM17 20C15.9 20 14.9583 19.6083 14.175 18.825C13.3917 18.0417 13 17.1 13 16C13 14.9 13.3917 13.9583 14.175 13.175C14.9583 12.3917 15.9 12 17 12C18.1 12 19.0417 12.3917 19.825 13.175C20.6083 13.9583 21 14.9 21 16C21 17.1 20.6083 18.0417 19.825 18.825C19.0417 19.6083 18.1 20 17 20ZM10 28C9.71667 28 9.47933 27.904 9.288 27.712C9.096 27.5207 9 27.2833 9 27V25.2C9 24.6333 9.146 24.1123 9.438 23.637C9.72933 23.1623 10.1167 22.8 10.6 22.55C11.6333 22.0333 12.6833 21.6457 13.75 21.387C14.8167 21.129 15.9 21 17 21C18.1 21 19.1833 21.129 20.25 21.387C21.3167 21.6457 22.3667 22.0333 23.4 22.55C23.8833 22.8 24.2707 23.1623 24.562 23.637C24.854 24.1123 25 24.6333 25 25.2V27C25 27.2833 24.904 27.5207 24.712 27.712C24.5207 27.904 24.2833 28 24 28H10ZM11 26H23V25.2C23 25.0167 22.9543 24.85 22.863 24.7C22.771 24.55 22.65 24.4333 22.5 24.35C21.6 23.9 20.6917 23.5623 19.775 23.337C18.8583 23.1123 17.9333 23 17 23C16.0667 23 15.1417 23.1123 14.225 23.337C13.3083 23.5623 12.4 23.9 11.5 24.35C11.35 24.4333 11.2293 24.55 11.138 24.7C11.046 24.85 11 25.0167 11 25.2V26ZM17 18C17.55 18 18.021 17.804 18.413 17.412C18.8043 17.0207 19 16.55 19 16C19 15.45 18.8043 14.9793 18.413 14.588C18.021 14.196 17.55 14 17 14C16.45 14 15.9793 14.196 15.588 14.588C15.196 14.9793 15 15.45 15 16C15 16.55 15.196 17.0207 15.588 17.412C15.9793 17.804 16.45 18 17 18Z" fill="black"/>                </g>            </svg>                        <svg id="addmember-icon" *ngIf="windowWidth <= 768" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="this.showChannelUsers = true">                <rect width="40" height="40" rx="20" fill="#ECEEFE"/>                <mask id="mask0_392_4421" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">                <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>                </mask>                <g mask="url(#mask0_392_4421)">                <path d="M27 22C26.7167 22 26.4793 21.904 26.288 21.712C26.096 21.5207 26 21.2833 26 21V19H24C23.7167 19 23.4793 18.904 23.288 18.712C23.096 18.5207 23 18.2833 23 18C23 17.7167 23.096 17.479 23.288 17.287C23.4793 17.0957 23.7167 17 24 17H26V15C26 14.7167 26.096 14.479 26.288 14.287C26.4793 14.0957 26.7167 14 27 14C27.2833 14 27.5207 14.0957 27.712 14.287C27.904 14.479 28 14.7167 28 15V17H30C30.2833 17 30.5207 17.0957 30.712 17.287C30.904 17.479 31 17.7167 31 18C31 18.2833 30.904 18.5207 30.712 18.712C30.5207 18.904 30.2833 19 30 19H28V21C28 21.2833 27.904 21.5207 27.712 21.712C27.5207 21.904 27.2833 22 27 22ZM17 20C15.9 20 14.9583 19.6083 14.175 18.825C13.3917 18.0417 13 17.1 13 16C13 14.9 13.3917 13.9583 14.175 13.175C14.9583 12.3917 15.9 12 17 12C18.1 12 19.0417 12.3917 19.825 13.175C20.6083 13.9583 21 14.9 21 16C21 17.1 20.6083 18.0417 19.825 18.825C19.0417 19.6083 18.1 20 17 20ZM10 28C9.71667 28 9.47933 27.904 9.288 27.712C9.096 27.5207 9 27.2833 9 27V25.2C9 24.6333 9.146 24.1123 9.438 23.637C9.72933 23.1623 10.1167 22.8 10.6 22.55C11.6333 22.0333 12.6833 21.6457 13.75 21.387C14.8167 21.129 15.9 21 17 21C18.1 21 19.1833 21.129 20.25 21.387C21.3167 21.6457 22.3667 22.0333 23.4 22.55C23.8833 22.8 24.2707 23.1623 24.562 23.637C24.854 24.1123 25 24.6333 25 25.2V27C25 27.2833 24.904 27.5207 24.712 27.712C24.5207 27.904 24.2833 28 24 28H10ZM11 26H23V25.2C23 25.0167 22.9543 24.85 22.863 24.7C22.771 24.55 22.65 24.4333 22.5 24.35C21.6 23.9 20.6917 23.5623 19.775 23.337C18.8583 23.1123 17.9333 23 17 23C16.0667 23 15.1417 23.1123 14.225 23.337C13.3083 23.5623 12.4 23.9 11.5 24.35C11.35 24.4333 11.2293 24.55 11.138 24.7C11.046 24.85 11 25.0167 11 25.2V26ZM17 18C17.55 18 18.021 17.804 18.413 17.412C18.8043 17.0207 19 16.55 19 16C19 15.45 18.8043 14.9793 18.413 14.588C18.021 14.196 17.55 14 17 14C16.45 14 15.9793 14.196 15.588 14.588C15.196 14.9793 15 15.45 15 16C15 16.55 15.196 17.0207 15.588 17.412C15.9793 17.804 16.45 18 17 18Z" fill="black"/>                </g>            </svg>          </div>    </div>    <div class="chat-container">        <ng-container *ngIf="channelService.selectedChannelMessages.length>0; else emptyChannel">            <div *ngFor="let message of channelService.selectedChannelMessages; let i = index">                <app-message [message]="message" [messageLocationName]="\'channel\'"></app-message>                <ng-template [appIfChanged]="getMessageTime(message)">                    <app-date-line *ngIf="channelService.selectedChannelMessages[i-1]"                        [messageTime]="getMessageTime(channelService.selectedChannelMessages[i-1])"></app-date-line>                </ng-template>            </div>            <app-date-line                *ngIf="channelService.selectedChannelMessages[channelService.selectedChannelMessages.length-1]"                [messageTime]="getMessageTime(channelService.selectedChannelMessages[channelService.selectedChannelMessages.length-1])">            </app-date-line>        </ng-container>        <ng-template #emptyChannel>            <!-- add- Profile Link-->            <div class="channel-display">                <div class=\'channel-header\'>                    <h3># {{ channelService.selectedChannel.channelName }}</h3>                </div>                <div class="channel-text">                    Das ist der Anfang des Channels <a href="#"># {{ channelService.selectedChannel.channelName                        }}</a>                </div>            </div>        </ng-template>    </div>    <app-message-create [path]="channelService.currentChannelMessagePath" [currentLocation]="\'channel\'"></app-message-create>    <app-edit-channel         *ngIf="showEditChannel" (closeEvent)="closeEditDialog()" (addUserEvent)="this.showEditChannelUsers = true">    </app-edit-channel>    <app-show-channel-users         *ngIf="showChannelUsers"         (closeEvent)="closeShowUsersDialog($event)">    </app-show-channel-users>    <app-edit-channel-users         *ngIf="showEditChannelUsers"         [refChannel]="channelService.selectedChannel"         (closeEvent)="closeEditUsersDialog()">    </app-edit-channel-users></mat-card></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'ChannelComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChannelComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

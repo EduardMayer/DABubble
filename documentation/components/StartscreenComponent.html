@@ -1,0 +1,1111 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StartscreenComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/startscreen/startscreen.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-startscreen</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./startscreen.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./startscreen.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#imprint" >imprint</a>
+                            </li>
+                            <li>
+                                <a href="#privacyPolicy" >privacyPolicy</a>
+                            </li>
+                            <li>
+                                <a href="#showAvatar" >showAvatar</a>
+                            </li>
+                            <li>
+                                <a href="#showForgotPassword" >showForgotPassword</a>
+                            </li>
+                            <li>
+                                <a href="#showLogin" >showLogin</a>
+                            </li>
+                            <li>
+                                <a href="#showRegister" >showRegister</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeAvatar" >closeAvatar</a>
+                            </li>
+                            <li>
+                                <a href="#closeForgotPassword" >closeForgotPassword</a>
+                            </li>
+                            <li>
+                                <a href="#closeImprintAndPrivacy" >closeImprintAndPrivacy</a>
+                            </li>
+                            <li>
+                                <a href="#closeRegister" >closeRegister</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onForgotPasswordLinkClick" >onForgotPasswordLinkClick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthFirebaseService.html" target="_self">AuthFirebaseService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/startscreen/startscreen.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthFirebaseService.html" target="_self" >AuthFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeAvatar"></a>
+                    <span class="name">
+                        <span ><b>closeAvatar</b></span>
+                        <a href="#closeAvatar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeAvatar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/startscreen/startscreen.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the avatar view and shows the login view.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeForgotPassword"></a>
+                    <span class="name">
+                        <span ><b>closeForgotPassword</b></span>
+                        <a href="#closeForgotPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeForgotPassword()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/startscreen/startscreen.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the forgot password view and shows the login view.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeImprintAndPrivacy"></a>
+                    <span class="name">
+                        <span ><b>closeImprintAndPrivacy</b></span>
+                        <a href="#closeImprintAndPrivacy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeImprintAndPrivacy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/startscreen/startscreen.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the imprint and privacy policy views by setting their respective flags to false.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeRegister"></a>
+                    <span class="name">
+                        <span ><b>closeRegister</b></span>
+                        <a href="#closeRegister"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeRegister()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/startscreen/startscreen.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the registration view and shows the avatar view.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/startscreen/startscreen.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Angular lifecycle hook called after component initialization.
+Redirects to the &#39;main&#39; route if the user is already logged in and the login session is not expired.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onForgotPasswordLinkClick"></a>
+                    <span class="name">
+                        <span ><b>onForgotPasswordLinkClick</b></span>
+                        <a href="#onForgotPasswordLinkClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onForgotPasswordLinkClick()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/startscreen/startscreen.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Shows the forgot password view and hides the login view.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imprint"></a>
+                    <span class="name">
+                        <span ><b>imprint</b></span>
+                        <a href="#imprint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/startscreen/startscreen.component.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="privacyPolicy"></a>
+                    <span class="name">
+                        <span ><b>privacyPolicy</b></span>
+                        <a href="#privacyPolicy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/startscreen/startscreen.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showAvatar"></a>
+                    <span class="name">
+                        <span ><b>showAvatar</b></span>
+                        <a href="#showAvatar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/startscreen/startscreen.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showForgotPassword"></a>
+                    <span class="name">
+                        <span ><b>showForgotPassword</b></span>
+                        <a href="#showForgotPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/startscreen/startscreen.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showLogin"></a>
+                    <span class="name">
+                        <span ><b>showLogin</b></span>
+                        <a href="#showLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/startscreen/startscreen.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showRegister"></a>
+                    <span class="name">
+                        <span ><b>showRegister</b></span>
+                        <a href="#showRegister"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/startscreen/startscreen.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { AuthFirebaseService } from &#x27;src/services/auth-firebase.service&#x27;;
+
+
+@Component({
+  selector: &#x27;app-startscreen&#x27;,
+  templateUrl: &#x27;./startscreen.component.html&#x27;,
+  styleUrls: [&#x27;./startscreen.component.scss&#x27;]
+})
+export class StartscreenComponent implements OnInit{
+
+  showLogin &#x3D; true; 
+  imprint &#x3D; false; 
+  privacyPolicy &#x3D; false; 
+  showAvatar &#x3D; false;
+  showRegister &#x3D; false;
+  showForgotPassword &#x3D; false;
+ 
+
+  constructor(
+    private authService: AuthFirebaseService, 
+    private router: Router
+  ){}
+
+
+  /**
+ * Angular lifecycle hook called after component initialization.
+ * Redirects to the &#x27;main&#x27; route if the user is already logged in and the login session is not expired.
+ * 
+ * @returns {void}
+ */
+  ngOnInit(): void {
+    if(this.authService.isLoggedIn() &amp;&amp; !this.authService.loginExprired()){
+      this.router.navigateByUrl(&#x27;index&#x27;); 
+    }
+  }
+
+  /**
+ * Closes the imprint and privacy policy views by setting their respective flags to false.
+ * 
+ * @returns {void}
+ */
+  closeImprintAndPrivacy(){
+    this.imprint &#x3D; false; 
+    this.privacyPolicy &#x3D; false; 
+  }
+
+  /**
+ * Closes the registration view and shows the avatar view.
+ * 
+ * @returns {void}
+ */
+  closeRegister(){
+    this.showRegister &#x3D; false; 
+    this.showAvatar &#x3D; true; 
+  }
+
+  /**
+ * Closes the avatar view and shows the login view.
+ * 
+ * @returns {void}
+ */
+  closeAvatar(){
+    this.showLogin &#x3D; true;
+    this.showAvatar &#x3D; false;
+  }
+
+  /**
+ * Closes the forgot password view and shows the login view.
+ * 
+ * @returns {void}
+ */
+  closeForgotPassword(){
+    this.showLogin &#x3D; true;
+    this.showForgotPassword &#x3D; false;
+  }
+
+  /**
+ * Shows the forgot password view and hides the login view.
+ * 
+ * @returns {void}
+ */
+  onForgotPasswordLinkClick() {
+    this.showLogin &#x3D; false;
+    this.showForgotPassword &#x3D; true;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-intro&gt;&lt;/app-intro&gt;
+&lt;div id&#x3D;&quot;startScreen-container&quot;&gt;
+    &lt;div class&#x3D;&quot;uper-startscreen-container&quot;&gt;
+        &lt;div id&#x3D;&quot;startScreen-logo&quot;&gt;
+            &lt;img src&#x3D;&quot;assets/img/logo/logo.svg&quot; alt&#x3D;&quot;logo&quot;&gt;
+        &lt;/div&gt;
+        &lt;div id&#x3D;&quot;startScreen-register&quot; *ngIf&#x3D;&quot;showLogin &amp;&amp; !imprint &amp;&amp; !privacyPolicy&quot;&gt;
+            &lt;h3&gt;Neu bei DABubble?&lt;/h3&gt;
+            &lt;a (click)&#x3D;&quot;showLogin &#x3D; false; showRegister &#x3D; true&quot;&gt;Konto erstellen&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;app-login *ngIf&#x3D;&quot;showLogin &amp;&amp; !imprint &amp;&amp; !privacyPolicy &amp;&amp; !showAvatar &amp;&amp; !showForgotPassword&quot;(forgotPasswordLinkClick)&#x3D;&quot;onForgotPasswordLinkClick()&quot; class&#x3D;&quot;app-login&quot;&gt;&lt;/app-login&gt;
+        &lt;app-register *ngIf&#x3D;&quot;showRegister &amp;&amp; !showLogin &amp;&amp; !imprint &amp;&amp; !privacyPolicy &amp;&amp; !showAvatar&quot; (closeRegisterView)&#x3D;&quot;closeRegister()&quot; class&#x3D;&quot;app-register&quot;&gt;&lt;/app-register&gt;
+        &lt;app-avatar-choose *ngIf&#x3D;&quot;showAvatar &amp;&amp; !showLogin&quot; (closeAvatarView)&#x3D;&quot;closeAvatar()&quot; class&#x3D;&quot;app-avatar&quot;&gt;&lt;/app-avatar-choose&gt;
+        &lt;app-forgot-password *ngIf&#x3D;&quot;showForgotPassword&quot; (closeForgotPasswordView)&#x3D;&quot;closeForgotPassword()&quot; class&#x3D;&quot;app-forgot&quot;&gt;&lt;/app-forgot-password&gt;
+        &lt;app-imprint *ngIf&#x3D;&quot;imprint&quot; (closeImprintView)&#x3D;&quot;closeImprintAndPrivacy()&quot;&gt;&lt;/app-imprint&gt;
+        &lt;app-privacy-policy *ngIf&#x3D;&quot;privacyPolicy&quot; (closePrivacyPolicyView)&#x3D;&quot;closeImprintAndPrivacy()&quot;&gt;&lt;/app-privacy-policy&gt;
+    &lt;div id&#x3D;&quot;startscreen-imprint-container&quot;&gt;
+        &lt;a (click)&#x3D;&quot;imprint &#x3D; true&quot; *ngIf&#x3D;&quot;!imprint &amp;&amp; !privacyPolicy&quot;&gt;Impressum&lt;/a&gt;
+        &lt;a (click)&#x3D;&quot;privacyPolicy &#x3D; true&quot; *ngIf&#x3D;&quot;!imprint &amp;&amp; !privacyPolicy&quot;&gt;Datenschutz&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;startScreen-register-mobile&quot; *ngIf&#x3D;&quot;showLogin &amp;&amp; !imprint &amp;&amp; !privacyPolicy&quot;&gt;
+        &lt;h3&gt;Neu bei DABubble?&lt;/h3&gt;
+        &lt;a (click)&#x3D;&quot;showLogin &#x3D; false; showRegister &#x3D; true&quot;&gt;Konto erstellen&lt;/a&gt;
+
+        &lt;div id&#x3D;&quot;startScreen-imprint-mobile&quot;&gt;
+            &lt;a (click)&#x3D;&quot;imprint &#x3D; true&quot; *ngIf&#x3D;&quot;!imprint &amp;&amp; !privacyPolicy&quot;&gt;Impressum&lt;/a&gt;
+            &lt;a (click)&#x3D;&quot;privacyPolicy &#x3D; true&quot; *ngIf&#x3D;&quot;!imprint &amp;&amp; !privacyPolicy&quot;&gt;Datenschutz&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./startscreen.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">
+#startScreen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
+  h3 {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba(121, 126, 243, 1);
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &amp;:hover {
+      border: 1px solid rgba(173, 176, 217, 1);
+      border-radius: 100px;
+    }
+  }
+}
+
+.uper-startscreen-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 75px;
+  padding-bottom: 11px;
+}
+
+
+#startScreen-logo {
+  display: flex;
+  padding-left: 75px;
+}
+
+#startScreen-register {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  padding-right: 75px;
+}
+
+#startScreen-register-mobile{
+  display: none;
+}
+
+#startscreen-imprint-container {
+  display: flex;
+  gap: 48px;
+  padding-top: 68px;
+  padding-bottom: 48px;
+}
+
+
+@media screen and (max-width: 640px) {
+
+  #startScreen-register,
+  #startscreen-imprint-container{
+    display: none;
+  }
+
+  #startScreen-container{
+    display: flex;
+    justify-content: center;
+    
+  }
+
+  #startScreen-register-mobile{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 20px;
+    font-size: 18px;
+
+    a {
+      text-decoration: none;
+      color: rgba(121, 126, 243, 1);
+      padding: 7px 18px;
+      font-size: 18px;
+      border: 1px solid rgba(121, 126, 243, 1);
+      border-radius: 100px;
+      cursor: pointer;
+      font-weight: bold;
+      color: rgba(68, 77, 242, 1);
+    }
+  }
+
+  #startScreen-imprint-mobile{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .uper-startscreen-container {
+    justify-content: center;
+    //margin-top: 92px;
+    padding-bottom: 30px;
+  }
+  
+  #startScreen-logo {
+    padding-left: 0px;
+  }
+
+  .app-login{
+    width: 100%;
+  }
+
+  .app-register{
+    width: 100%;
+  }
+
+  .app-avatar{
+    width: 100%;
+  }
+
+  .app-forgot{
+    width: 100%;
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-intro></app-intro><div id="startScreen-container">    <div class="uper-startscreen-container">        <div id="startScreen-logo">            <img src="assets/img/logo/logo.svg" alt="logo">        </div>        <div id="startScreen-register" *ngIf="showLogin && !imprint && !privacyPolicy">            <h3>Neu bei DABubble?</h3>            <a (click)="showLogin = false; showRegister = true">Konto erstellen</a>        </div>    </div>    <app-login *ngIf="showLogin && !imprint && !privacyPolicy && !showAvatar && !showForgotPassword"(forgotPasswordLinkClick)="onForgotPasswordLinkClick()" class="app-login"></app-login>        <app-register *ngIf="showRegister && !showLogin && !imprint && !privacyPolicy && !showAvatar" (closeRegisterView)="closeRegister()" class="app-register"></app-register>        <app-avatar-choose *ngIf="showAvatar && !showLogin" (closeAvatarView)="closeAvatar()" class="app-avatar"></app-avatar-choose>        <app-forgot-password *ngIf="showForgotPassword" (closeForgotPasswordView)="closeForgotPassword()" class="app-forgot"></app-forgot-password>        <app-imprint *ngIf="imprint" (closeImprintView)="closeImprintAndPrivacy()"></app-imprint>        <app-privacy-policy *ngIf="privacyPolicy" (closePrivacyPolicyView)="closeImprintAndPrivacy()"></app-privacy-policy>    <div id="startscreen-imprint-container">        <a (click)="imprint = true" *ngIf="!imprint && !privacyPolicy">Impressum</a>        <a (click)="privacyPolicy = true" *ngIf="!imprint && !privacyPolicy">Datenschutz</a>    </div>    <div id="startScreen-register-mobile" *ngIf="showLogin && !imprint && !privacyPolicy">        <h3>Neu bei DABubble?</h3>        <a (click)="showLogin = false; showRegister = true">Konto erstellen</a>        <div id="startScreen-imprint-mobile">            <a (click)="imprint = true" *ngIf="!imprint && !privacyPolicy">Impressum</a>            <a (click)="privacyPolicy = true" *ngIf="!imprint && !privacyPolicy">Datenschutz</a>        </div>    </div></div></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'StartscreenComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StartscreenComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1984 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ChatComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/chat/chat.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/IfChangedService.html" target="_self" >IfChangedService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-chat</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./chat.component.scss,<br>../../../styles.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./chat.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chatPartner" >chatPartner</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#chatService" >chatService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#formatService" >formatService</a>
+                            </li>
+                            <li>
+                                <a href="#memberName" >memberName</a>
+                            </li>
+                            <li>
+                                <a href="#messagePath" >messagePath</a>
+                            </li>
+                            <li>
+                                <a href="#messageTime" >messageTime</a>
+                            </li>
+                            <li>
+                                <a href="#searchResults" >searchResults</a>
+                            </li>
+                            <li>
+                                <a href="#searchText" >searchText</a>
+                            </li>
+                            <li>
+                                <a href="#selectedChat" >selectedChat</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#selectedChatSubscription" >selectedChatSubscription</a>
+                            </li>
+                            <li>
+                                <a href="#testData" >testData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getMessageTime" >getMessageTime</a>
+                            </li>
+                            <li>
+                                <a href="#initChat" >initChat</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadChat" >loadChat</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#openProfil" >openProfil</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(chatService: <a href="../injectables/ChatFirebaseService.html" target="_self">ChatFirebaseService</a>, userService: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>, userProfileService: <a href="../injectables/UserProfileService.html" target="_self">UserProfileService</a>, activeSelectionService: <a href="../injectables/ActiveSelectionService.html" target="_self">ActiveSelectionService</a>, formatService: <a href="../injectables/FormatService.html" target="_self">FormatService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>chatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChatFirebaseService.html" target="_self" >ChatFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userProfileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserProfileService.html" target="_self" >UserProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activeSelectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActiveSelectionService.html" target="_self" >ActiveSelectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMessageTime"></a>
+                    <span class="name">
+                        <span ><b>getMessageTime</b></span>
+                        <a href="#getMessageTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMessageTime(message: <a href="../classes/Message.html" target="_self">Message</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns the time (in a formated form) of a given Message.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="../classes/Message.html" target="_self" >Message</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>message for that a Time is needed.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>Time or string &quot;heute&quot; when it is today.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initChat"></a>
+                    <span class="name">
+                        <span ><b>initChat</b></span>
+                        <a href="#initChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initChat()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadChat"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadChat</b></span>
+                        <a href="#loadChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadChat(newSelectedChat: <a href="../classes/Chat.html" target="_self">Chat</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads a given chat and opens ist.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newSelectedChat</td>
+                                            <td>
+                                                            <code><a href="../classes/Chat.html" target="_self" >Chat</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Chat that should be loaded</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Unsubscribe from chat update on destroy</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openProfil"></a>
+                    <span class="name">
+                        <span ><b>openProfil</b></span>
+                        <a href="#openProfil"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openProfil()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens profile of chatparter.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chatPartner"></a>
+                    <span class="name">
+                        <span ><b>chatPartner</b></span>
+                        <a href="#chatPartner"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/User.html" target="_self" >User | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chatService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>chatService</b></span>
+                        <a href="#chatService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ChatFirebaseService.html" target="_self" >ChatFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>formatService</b></span>
+                        <a href="#formatService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="memberName"></a>
+                    <span class="name">
+                        <span ><b>memberName</b></span>
+                        <a href="#memberName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messagePath"></a>
+                    <span class="name">
+                        <span ><b>messagePath</b></span>
+                        <a href="#messagePath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageTime"></a>
+                    <span class="name">
+                        <span ><b>messageTime</b></span>
+                        <a href="#messageTime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchResults"></a>
+                    <span class="name">
+                        <span ><b>searchResults</b></span>
+                        <a href="#searchResults"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchText"></a>
+                    <span class="name">
+                        <span ><b>searchText</b></span>
+                        <a href="#searchText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedChat"></a>
+                    <span class="name">
+                        <span ><b>selectedChat</b></span>
+                        <a href="#selectedChat"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Chat.html" target="_self" >Chat | undefined | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedChatSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>selectedChatSubscription</b></span>
+                        <a href="#selectedChatSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="testData"></a>
+                    <span class="name">
+                        <span ><b>testData</b></span>
+                        <a href="#testData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&quot;hallo&quot;, &quot;Test&quot;, &quot;Search&quot;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/mainscreen/chat/chat.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ObserversModule } from &#x27;@angular/cdk/observers&#x27;;
+import { Component } from &#x27;@angular/core&#x27;;
+import { Observable, Subscription } from &#x27;rxjs&#x27;;
+import { Chat } from &#x27;src/models/chat.class&#x27;;
+import { Message } from &#x27;src/models/message.class&#x27;;
+import { User } from &#x27;src/models/user.class&#x27;;
+import { ActiveSelectionService } from &#x27;src/services/active-selection.service&#x27;;
+import { ChatFirebaseService } from &#x27;src/services/chat-firebase.service&#x27;;
+import { FormatService } from &#x27;src/services/format.service&#x27;;
+import { IfChangedService } from &#x27;src/services/if-changed-service.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+import { UserProfileService } from &#x27;src/services/user-profile.service&#x27;;
+
+@Component({
+  selector: &#x27;app-chat&#x27;,
+  templateUrl: &#x27;./chat.component.html&#x27;,
+  styleUrls: [&#x27;./chat.component.scss&#x27;, &#x27;../../../styles.scss&#x27;],
+  providers: [IfChangedService]
+})
+export class ChatComponent {
+
+  messageTime: string &#x3D; &quot;&quot;;
+  messagePath: string &#x3D; &quot;&quot;;
+  memberName: string &#x3D; &quot;&quot;;
+
+  chatPartner: User | undefined;
+  selectedChat: Chat | undefined | null &#x3D; undefined;
+
+  private selectedChatSubscription: Subscription | undefined;
+
+  searchText: string &#x3D; &quot;&quot;;
+  searchResults: string[] &#x3D; [];
+  testData: string[] &#x3D; [&quot;hallo&quot;, &quot;Test&quot;, &quot;Search&quot;];
+
+  constructor(
+    public chatService: ChatFirebaseService,
+    public userService: UserFirebaseService,
+    private userProfileService: UserProfileService,
+    private activeSelectionService: ActiveSelectionService,
+    public formatService: FormatService
+  ) {
+    this.initChat();
+  }
+
+
+  initChat() {
+    //On init the Observable Value doesnt change but gets set so it has toe be done once
+    if (this.activeSelectionService.getActiveSelectionObject() instanceof Chat) {
+      this.selectedChat &#x3D; this.activeSelectionService.getActiveSelectionObject();
+      if (this.selectedChat) {
+        this.loadChat(this.selectedChat);
+      }
+    }
+
+    this.selectedChatSubscription &#x3D; this.chatService.selectedChat$.subscribe((chat) &#x3D;&gt; {
+      this.selectedChat &#x3D; chat;
+      // Perform actions when the selected chat changes in the chat component
+      // For example, update the chat messages in the UI
+      this.loadChat(this.selectedChat);
+    });
+  }
+
+  
+  /**
+   * Loads a given chat and opens ist. 
+   * @param newSelectedChat - Chat that should be loaded
+   */
+  private async loadChat(newSelectedChat: Chat) {
+    if (newSelectedChat !&#x3D; null) {
+      this.chatService.loadChatMessages(newSelectedChat.id);
+      this.messagePath &#x3D; &#x60;chats/${newSelectedChat.id}/messages/&#x60;;
+      try {
+        const chatPartner &#x3D; await this.userService.getUserByUID(this.chatService.getChatPartner(newSelectedChat));
+        this.chatPartner &#x3D; chatPartner;
+      } catch (error) {
+        console.error(&quot;Error loading chat:&quot;, error);
+      }
+    }
+  }
+
+
+  /**
+   * Opens profile of chatparter. 
+   */
+  openProfil() {
+    if (this.chatPartner) {
+      this.userProfileService.openUserProfil(this.chatPartner);
+    }
+  }
+
+
+   /**
+   * Returns the time (in a formated form) of a given Message. 
+   * @param message - message for that a Time is needed.
+   * @returns - Time or string &quot;heute&quot; when it is today. 
+   */
+  getMessageTime(message: Message) {
+    const currentDay &#x3D; this.formatService.formatDateToDMY(new Date());
+    const messageDmy &#x3D; this.formatService.formatDateToDMY(new Date(message.timestamp));
+    if (currentDay &#x3D;&#x3D; messageDmy) {
+      return &quot;heute&quot;;
+    } else {
+      return messageDmy;
+    }
+  }
+
+
+  /**
+   * Unsubscribe from chat update on destroy 
+   */
+  ngOnDestroy() {
+    if(this.selectedChatSubscription){
+      this.selectedChatSubscription.unsubscribe();
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card id&#x3D;&quot;chat&quot; *ngIf&#x3D;&quot;chatService.selectedChat$  &amp;&amp; userService.currentUser.id!&#x3D;&#x27;&#x27; &amp;&amp; chatPartner &quot;&gt;
+    &lt;div class&#x3D;&#x27;header&#x27;&gt;
+        &lt;div class&#x3D;&quot;header-title&quot; width&#x3D;&quot;fit-content&quot;&gt;
+            &lt;div id&#x3D;&quot;header-title-chatpartner-name&quot; (click)&#x3D;&quot;openProfil()&quot;&gt;
+                &lt;h2&gt;#{{formatService.cutStrLen(chatPartner.fullName)}}&lt;/h2&gt;
+                &lt;h2 *ngIf&#x3D;&quot;chatPartner.id &#x3D;&#x3D; userService.currentUser.id&quot;&gt;&amp;nbsp;(Du)&lt;/h2&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;chat-container&quot; &gt;
+        &lt;app-message-create [path]&#x3D;&quot;messagePath&quot; [currentLocation]&#x3D;&quot;&#x27;Chat&#x27;&quot;&gt;&lt;/app-message-create&gt;
+
+        &lt;ng-container *ngIf&#x3D;&quot;chatService.selectedChatMessages.length&gt;0; else emptyChat&quot;&gt;
+
+            &lt;div *ngFor&#x3D;&quot;let message of chatService.selectedChatMessages; let i &#x3D; index&quot;&gt;
+                &lt;app-message [message]&#x3D;&quot;message&quot; [messageLocationName]&#x3D;&quot;&#x27;chat&#x27;&quot;&gt;&lt;/app-message&gt;
+                &lt;ng-template [appIfChanged]&#x3D;&quot;getMessageTime(message)&quot;&gt;
+                    &lt;app-date-line *ngIf&#x3D;&quot;chatService.selectedChatMessages[i-1]&quot;
+                        [messageTime]&#x3D;&quot;getMessageTime(chatService.selectedChatMessages[i-1])&quot;&gt;&lt;/app-date-line&gt;
+                &lt;/ng-template&gt;
+            &lt;/div&gt;
+
+            &lt;app-date-line
+                *ngIf&#x3D;&quot;chatService.selectedChatMessages[chatService.selectedChatMessages.length-1]&quot;
+                [messageTime]&#x3D;&quot;getMessageTime(chatService.selectedChatMessages[chatService.selectedChatMessages.length-1])&quot;&gt;
+            &lt;/app-date-line&gt;
+        &lt;/ng-container&gt;
+
+        &lt;ng-template #emptyChat&gt;
+            &lt;!-- add- Profile Link--&gt;
+            &lt;div class&#x3D;&quot;user-display&quot;&gt;
+                &lt;div class&#x3D;&#x27;user-header&#x27;&gt;
+                    &lt;img src&#x3D;&quot;{{chatPartner.avatar}}&quot;&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                    &lt;h3&gt;{{ chatPartner.fullName }}&lt;/h3&gt;
+                    &lt;h3 *ngIf&#x3D;&quot;chatPartner.id &#x3D;&#x3D; userService.currentUser.id&quot;&gt;&amp;nbsp;(Du)&lt;/h3&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;user-text&quot;&gt;
+                    &lt;div *ngIf&#x3D;&quot;chatPartner.id !&#x3D; userService.currentUser.id&quot;&gt;
+                        Diese Unterhaltung findet nur zwischen &lt;a (click)&#x3D;&quot;openProfil()&quot;&gt;@ {{formatService.cutStrLen(chatPartner.fullName)}}&lt;/a&gt; und dir statt.
+                    &lt;/div&gt;
+                    &lt;div *ngIf&#x3D;&quot;chatPartner.id &#x3D;&#x3D; userService.currentUser.id&quot;&gt;
+                        Dieser Raum ist nur für dich da. Mache dir Notizen, liste deine To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst besprechen.
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/ng-template&gt;
+    &lt;/div&gt;
+&lt;/mat-card&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./chat.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">#chat {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-radius: 30px;
+
+    .header {
+        box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+        padding: 0px 35px 0px 35px;
+        border-radius: 30px 30px 0 0;
+        display: flex;
+        justify-content: space-between;
+
+        .header-title {
+            display: flex;
+            align-items: center;
+
+            #header-title-chatpartner-name{
+                margin: 24px 0px;
+                padding: 0px 12px;
+                border-radius: 32px;
+                display: flex;
+                flex-direction: row;
+                &amp;:hover{
+                    cursor: pointer;
+                    background-color: #ECEEFE;
+                }
+                h2{
+                    margin: 0px;
+                }
+            }
+        }
+
+        .user-avatar-list {
+            display: flex;
+            align-items: center;
+
+            padding: 11px;
+            border-radius: 30px;
+            margin-right: 22px;
+
+            &amp;:hover {
+                background-color: #ECEEFE;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .amoundOfUsersInChannel {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+
+    .chat-container {
+        overflow-y: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+
+        app-date-line {
+            margin: 12px 35px 12px 35px;
+        }
+
+        .user-display {
+            margin: 12px 35px 12px 35px;
+            display: flex;
+            flex-direction: column;
+            gap:12px; 
+
+            .user-header {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+
+                img {
+                    height: 70px;
+                    aspect-ratio: 1;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+
+    }
+
+    app-message-create {
+        padding: 35px 35px 35px 35px;
+    }
+}
+
+
+.align-bottom {
+    position: sticky;
+    bottom: 0;
+}
+
+.chat-container {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+}
+
+.addmembers {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header {
+    padding: 0px 35px 0px 35px;
+    display: flex;
+    justify-content: space-between;
+
+    .header-title {
+        display: flex;
+        align-items: center;
+    }
+
+    .user-avatar-list {
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+app-message-create {
+    padding: 0px 35px 0px 35px;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+::ng-deep div#mat-menu-panel-0 {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuHeaderText {
+    padding-left: 45px;
+}
+
+.close {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerText {
+    padding-left: 45px;
+}
+
+.closeMenu {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+.resultUserImages {
+    width: 20px;
+    border-radius: 15px;
+}
+
+.menuUsersContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuUsers {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.menuUsersImage {
+    padding-left: 20px;
+    width: 60px;
+}
+
+.menuUsersName {
+    padding-left: 20px;
+}
+
+.addMemberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.addMemberImage {
+    padding-left: 20px;
+    width: 30px;
+}
+
+.addMemberInMenu {
+    display: flex;
+    align-items: center;
+    padding-top: 21px;
+    cursor: pointer;
+}
+
+
+.addMemberText {
+    padding-left: 20px;
+}
+
+.containerOfInput {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    padding-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputContainer {
+    width: 75%;
+    height: 42px;
+}
+
+.memberNameInput {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 1px solid #797EF3;
+}
+
+.inputAvatar {
+    width: 28px;
+    height: 25px;
+    border-radius: 15px;
+}
+
+.inputContent {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background-color: #ECEEFE;
+    border-radius: 25px;
+    height: 35%;
+    width: 39%;
+    top: 39px;
+    left: 77px;
+
+    position: absolute;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 280px;
+}
+
+#header-searchfield-results {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 12px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &amp;:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+#header-searchfield-results-Menu {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 68px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &amp;:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    width: 496px !important;
+    height: 310px !important;
+    min-width: unset !important;
+    max-width: unset !important;
+
+    border-top-left-radius: 35px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 35px !important;
+    border-bottom-left-radius: 35px !important;
+
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 100%;
+}
+
+.channelName {
+    color: #797EF3;
+    padding-left: 45px;
+}
+
+.addSelection {
+    background-color: #444DF2;
+    height: 54px;
+    width: 125px;
+    border-radius: 30px;
+    color: white;
+    border: unset;
+    position: absolute;
+    right: 57px;
+    bottom: 78px;
+
+    &amp;:hover {
+        opacity: 0.85;
+        cursor: pointer;
+    }
+
+}
+
+.inputContainerMaster {
+    width: 100%;
+}
+
+.cancelSelection {}</code></pre>
+                <p class="comment">
+                    <code>../../../styles.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;@angular/material&#x27; as mat;
+
+@import &quot;@ctrl/ngx-emoji-mart/picker&quot;;
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-regular.woff2&#x27;);
+}
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 200;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-200.woff2&#x27;);
+}
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 300;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-300.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 500;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-500.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 600;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-600.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito Sans&#x27;;
+    src: url(&#x27;assets/fonts/nunito-sans-v15-latin-regular.woff2&#x27;);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    background-color: #edeefe;
+}
+
+.dsp-none{
+    display: none;
+}
+
+input {
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+textarea {
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+button{
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+.br-30 {
+    border-radius: 30px;
+}
+
+.btn-blue{
+    background-color: #444DF2; 
+    color: white;
+    padding: 12px 25px 12px 25px;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    border-radius: 30px;
+    border: 1px solid white;
+    cursor: pointer;
+    font-size: 18px;
+    &amp;:disabled{
+        opacity: 0.4;
+    }
+
+    &amp;:hover{
+        background-color: rgba(121, 126, 243, 1) !important;
+        transition: background-color 0.15s ease-in-out
+    }
+}
+.btn-white{
+    background-color: white; 
+    color: #444DF2;
+    padding: 12px 25px 12px 25px;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    border-radius: 30px;
+    border: 1px solid #444DF2;
+    cursor: pointer;
+    font-size: 18px;
+    &amp;:disabled{
+        opacity: 0.4;
+    }
+
+    &amp;:hover{
+        background-color: rgba(68, 77, 242, 1) !important;
+        transition: background-color 0.15s ease-in-out;
+        color: white !important;
+    }
+}
+
+.closeIcon-container{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
+
+    &amp;:hover{
+        background-color: #ECEEFE; 
+        #closeIcon path {
+            fill: #535AF1; 
+            }
+    }
+
+    #closeIcon{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.highlighted {
+    background-color: yellow;
+  }
+  .highlight-container {
+    margin-top: 10px;
+  }
+
+
+
+.notification-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+
+    .notification-card {
+        z-index: 99;
+        position: relative;
+        top: 70%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: fit-content;
+        opacity: 0;
+
+        .notification-card-content {
+            font-weight: 500;
+            font-size: 24px;
+        }
+    }
+
+
+
+    //Available animation types
+    @keyframes shift-left-in {
+        0% {
+            opacity: 0;
+            left: -10%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+            left: 50%
+        }
+
+        70% {
+            top: 70%;
+            left: 50%
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            left: -10%;
+        }
+    }
+
+    @keyframes shift-up {
+        0% {
+            opacity: 0;
+            top: 110%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+        }
+
+        70% {
+            top: 70%;
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            top: 110%;
+        }
+    }
+
+    @keyframes shift-right-in {
+        0% {
+            opacity: 0;
+            left: 110%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+            left: 50%
+        }
+
+        70% {
+            top: 70%;
+            left: 50%
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            left: 110%;
+        }
+    }
+    
+
+    //Types of Messages
+    .error {
+        background-color: rgb(255, 66, 66);
+        color: white;
+    }
+
+    .success {
+        background-color: #4f9d00;
+        border: solid 1px #00d84f;
+        color: white;
+    }
+
+    .default {
+        background-color: #444DF2;
+        border-radius: 30px 30px 0px 30px;
+        padding: 25px;
+        border: none;
+        color: white;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card id="chat" *ngIf="chatService.selectedChat$  && userService.currentUser.id!=\'\' && chatPartner ">    <div class=\'header\'>        <div class="header-title" width="fit-content">            <div id="header-title-chatpartner-name" (click)="openProfil()">                <h2>#{{formatService.cutStrLen(chatPartner.fullName)}}</h2>                <h2 *ngIf="chatPartner.id == userService.currentUser.id">&nbsp;(Du)</h2>            </div>        </div>    </div>    <div class="chat-container" >        <app-message-create [path]="messagePath" [currentLocation]="\'Chat\'"></app-message-create>        <ng-container *ngIf="chatService.selectedChatMessages.length>0; else emptyChat">            <div *ngFor="let message of chatService.selectedChatMessages; let i = index">                <app-message [message]="message" [messageLocationName]="\'chat\'"></app-message>                <ng-template [appIfChanged]="getMessageTime(message)">                    <app-date-line *ngIf="chatService.selectedChatMessages[i-1]"                        [messageTime]="getMessageTime(chatService.selectedChatMessages[i-1])"></app-date-line>                </ng-template>            </div>            <app-date-line                *ngIf="chatService.selectedChatMessages[chatService.selectedChatMessages.length-1]"                [messageTime]="getMessageTime(chatService.selectedChatMessages[chatService.selectedChatMessages.length-1])">            </app-date-line>        </ng-container>        <ng-template #emptyChat>            <!-- add- Profile Link-->            <div class="user-display">                <div class=\'user-header\'>                    <img src="{{chatPartner.avatar}}">                    <div></div>                    <h3>{{ chatPartner.fullName }}</h3>                    <h3 *ngIf="chatPartner.id == userService.currentUser.id">&nbsp;(Du)</h3>                </div>                <div class="user-text">                    <div *ngIf="chatPartner.id != userService.currentUser.id">                        Diese Unterhaltung findet nur zwischen <a (click)="openProfil()">@ {{formatService.cutStrLen(chatPartner.fullName)}}</a> und dir statt.                    </div>                    <div *ngIf="chatPartner.id == userService.currentUser.id">                        Dieser Raum ist nur für dich da. Mache dir Notizen, liste deine To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst besprechen.                    </div>                </div>            </div>        </ng-template>    </div></mat-card></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'ChatComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChatComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

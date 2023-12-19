@@ -1,0 +1,891 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="./" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content coverage">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">Documentation coverage</li>
+</ol>
+
+<div>
+    <img src="./images/coverage-badge-documentation.svg">
+</div>
+
+<table class="table table-bordered coverage" id="coverage-table">
+    <thead class="coverage-header">
+        <tr>
+            <th>File</th>
+            <th>Type</th>
+            <th>Identifier</th>
+            <th style="text-align:right" class="statements" data-sort-default>Statements</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ActionHandlerComponent.html">src/app/action-handler/action-handler.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ActionHandlerComponent</td>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(2/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/AppComponent.html">src/app/app.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>AppComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./directives/IfChangedDirective.html">src/app/directives/if-changed.directive.ts</a>
+            </td>
+            <td>directive</td>
+            <td>IfChangedDirective</td>
+            <td align="right" data-sort="50">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(2/4)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/AddChannelDialogComponent.html">src/app/mainscreen/channel/add-channel-dialog/add-channel-dialog.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>AddChannelDialogComponent</td>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(4/16)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/AddUserDialogComponent.html">src/app/mainscreen/channel/add-user-dialog/add-user-dialog.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>AddUserDialogComponent</td>
+            <td align="right" data-sort="36">
+                <span class="coverage-percent">36 %</span>
+                <span class="coverage-count">(4/11)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ChannelComponent.html">src/app/mainscreen/channel/channel.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ChannelComponent</td>
+            <td align="right" data-sort="39">
+                <span class="coverage-percent">39 %</span>
+                <span class="coverage-count">(11/28)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/EditChannelUsersComponent.html">src/app/mainscreen/channel/edit-channel-users/edit-channel-users.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>EditChannelUsersComponent</td>
+            <td align="right" data-sort="50">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(6/12)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/EditChannelComponent.html">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>EditChannelComponent</td>
+            <td align="right" data-sort="44">
+                <span class="coverage-percent">44 %</span>
+                <span class="coverage-count">(8/18)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ShowChannelUsersComponent.html">src/app/mainscreen/channel/show-channel-users/show-channel-users.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ShowChannelUsersComponent</td>
+            <td align="right" data-sort="50">
+                <span class="coverage-percent">50 %</span>
+                <span class="coverage-count">(4/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ChatComponent.html">src/app/mainscreen/chat/chat.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ChatComponent</td>
+            <td align="right" data-sort="21">
+                <span class="coverage-percent">21 %</span>
+                <span class="coverage-count">(4/19)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/EmptyWindowComponent.html">src/app/mainscreen/empty-window/empty-window.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>EmptyWindowComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/4)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/HeaderComponent.html">src/app/mainscreen/header/header.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>HeaderComponent</td>
+            <td align="right" data-sort="42">
+                <span class="coverage-percent">42 %</span>
+                <span class="coverage-count">(8/19)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/MainscreenComponent.html">src/app/mainscreen/mainscreen.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>MainscreenComponent</td>
+            <td align="right" data-sort="22">
+                <span class="coverage-percent">22 %</span>
+                <span class="coverage-count">(4/18)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/AddreactionComponent.html">src/app/mainscreen/message/addreaction/addreaction.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>AddreactionComponent</td>
+            <td align="right" data-sort="18">
+                <span class="coverage-percent">18 %</span>
+                <span class="coverage-count">(2/11)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/DateLineComponent.html">src/app/mainscreen/message/date-line/date-line.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>DateLineComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/MessageCreateComponent.html">src/app/mainscreen/message/message-create/message-create.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>MessageCreateComponent</td>
+            <td align="right" data-sort="41">
+                <span class="coverage-percent">41 %</span>
+                <span class="coverage-count">(15/36)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/MessageEditComponent.html">src/app/mainscreen/message/message-edit/message-edit.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>MessageEditComponent</td>
+            <td align="right" data-sort="15">
+                <span class="coverage-percent">15 %</span>
+                <span class="coverage-count">(3/20)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/MessageComponent.html">src/app/mainscreen/message/message.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>MessageComponent</td>
+            <td align="right" data-sort="41">
+                <span class="coverage-percent">41 %</span>
+                <span class="coverage-count">(14/34)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ReactionComponent.html">src/app/mainscreen/message/reaction/reaction.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ReactionComponent</td>
+            <td align="right" data-sort="16">
+                <span class="coverage-percent">16 %</span>
+                <span class="coverage-count">(1/6)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ThreadComponent.html">src/app/mainscreen/message/thread/thread.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ThreadComponent</td>
+            <td align="right" data-sort="47">
+                <span class="coverage-percent">47 %</span>
+                <span class="coverage-count">(8/17)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ToolbarComponent.html">src/app/mainscreen/message/toolbar/toolbar.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ToolbarComponent</td>
+            <td align="right" data-sort="38">
+                <span class="coverage-percent">38 %</span>
+                <span class="coverage-count">(7/18)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/SearchbarComponent.html">src/app/mainscreen/searchbar/searchbar.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SearchbarComponent</td>
+            <td align="right" data-sort="57">
+                <span class="coverage-percent">57 %</span>
+                <span class="coverage-count">(24/42)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ChatViewComponent.html">src/app/mainscreen/sidenav/chat-view/chat-view.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ChatViewComponent</td>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(2/8)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/SidenavComponent.html">src/app/mainscreen/sidenav/sidenav.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SidenavComponent</td>
+            <td align="right" data-sort="41">
+                <span class="coverage-percent">41 %</span>
+                <span class="coverage-count">(7/17)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/UserProfilComponent.html">src/app/mainscreen/user-profil/user-profil.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>UserProfilComponent</td>
+            <td align="right" data-sort="61">
+                <span class="coverage-percent">61 %</span>
+                <span class="coverage-count">(11/18)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/AvatarChooseComponent.html">src/app/startscreen/avatar-choose/avatar-choose.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>AvatarChooseComponent</td>
+            <td align="right" data-sort="38">
+                <span class="coverage-percent">38 %</span>
+                <span class="coverage-count">(5/13)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ForgotPasswordComponent.html">src/app/startscreen/forgot-password/forgot-password.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ForgotPasswordComponent</td>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(3/12)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ImprintComponent.html">src/app/startscreen/imprint/imprint.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ImprintComponent</td>
+            <td align="right" data-sort="33">
+                <span class="coverage-percent">33 %</span>
+                <span class="coverage-count">(1/3)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/IntroComponent.html">src/app/startscreen/intro/intro.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>IntroComponent</td>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(2/5)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/LoginComponent.html">src/app/startscreen/login/login.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>LoginComponent</td>
+            <td align="right" data-sort="28">
+                <span class="coverage-percent">28 %</span>
+                <span class="coverage-count">(6/21)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/PrivacyPolicyComponent.html">src/app/startscreen/privacy-policy/privacy-policy.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>PrivacyPolicyComponent</td>
+            <td align="right" data-sort="33">
+                <span class="coverage-percent">33 %</span>
+                <span class="coverage-count">(1/3)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/RegisterComponent.html">src/app/startscreen/register/register.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>RegisterComponent</td>
+            <td align="right" data-sort="26">
+                <span class="coverage-percent">26 %</span>
+                <span class="coverage-count">(5/19)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/ResetPasswordComponent.html">src/app/startscreen/reset-password/reset-password.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ResetPasswordComponent</td>
+            <td align="right" data-sort="36">
+                <span class="coverage-percent">36 %</span>
+                <span class="coverage-count">(4/11)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./components/StartscreenComponent.html">src/app/startscreen/startscreen.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>StartscreenComponent</td>
+            <td align="right" data-sort="42">
+                <span class="coverage-percent">42 %</span>
+                <span class="coverage-count">(6/14)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#environment">src/environments/environment.ts</a>
+            </td>
+            <td>variable</td>
+            <td>environment</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./miscellaneous/variables.html#authGuard">src/guard/auth-guard.guard.ts</a>
+            </td>
+            <td>variable</td>
+            <td>authGuard</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Answer.html">src/models/answer.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>Answer</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/11)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Channel.html">src/models/channel.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>Channel</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Chat.html">src/models/chat.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>Chat</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Message.html">src/models/message.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>Message</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/12)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Reaction.html">src/models/reaction.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>Reaction</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/Thread.html">src/models/thread.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>Thread</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/7)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./classes/User.html">src/models/user.class.ts</a>
+            </td>
+            <td>class</td>
+            <td>User</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ActiveSelectionService.html">src/services/active-selection.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ActiveSelectionService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/AuthFirebaseService.html">src/services/auth-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>AuthFirebaseService</td>
+            <td align="right" data-sort="68">
+                <span class="coverage-percent">68 %</span>
+                <span class="coverage-count">(15/22)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ChannelFirebaseService.html">src/services/channel-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ChannelFirebaseService</td>
+            <td align="right" data-sort="12">
+                <span class="coverage-percent">12 %</span>
+                <span class="coverage-count">(4/33)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ChatFirebaseService.html">src/services/chat-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ChatFirebaseService</td>
+            <td align="right" data-sort="6">
+                <span class="coverage-percent">6 %</span>
+                <span class="coverage-count">(2/32)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/FormatService.html">src/services/format.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>FormatService</td>
+            <td align="right" data-sort="20">
+                <span class="coverage-percent">20 %</span>
+                <span class="coverage-count">(1/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/GenerateIdService.html">src/services/generate-id.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>GenerateIdService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/IfChangedService.html">src/services/if-changed-service.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>IfChangedService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/5)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/MessageFirebaseService.html">src/services/message-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>MessageFirebaseService</td>
+            <td align="right" data-sort="41">
+                <span class="coverage-percent">41 %</span>
+                <span class="coverage-count">(7/17)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/NotificationService.html">src/services/notification.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>NotificationService</td>
+            <td align="right" data-sort="33">
+                <span class="coverage-percent">33 %</span>
+                <span class="coverage-count">(1/3)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/StorageFirebaseService.html">src/services/storage-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>StorageFirebaseService</td>
+            <td align="right" data-sort="75">
+                <span class="coverage-percent">75 %</span>
+                <span class="coverage-count">(6/8)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/ThreadFirebaseService.html">src/services/thread-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>ThreadFirebaseService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/12)</span>
+            </td>
+        </tr>
+        <tr class="good">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/UserFirebaseService.html">src/services/user-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>UserFirebaseService</td>
+            <td align="right" data-sort="60">
+                <span class="coverage-percent">60 %</span>
+                <span class="coverage-count">(15/25)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/UserProfileService.html">src/services/user-profile.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>UserProfileService</td>
+            <td align="right" data-sort="25">
+                <span class="coverage-percent">25 %</span>
+                <span class="coverage-count">(2/8)</span>
+            </td>
+        </tr>
+        <tr class="medium">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/UserStatusFirebaseService.html">src/services/user-status-firebase.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>UserStatusFirebaseService</td>
+            <td align="right" data-sort="40">
+                <span class="coverage-percent">40 %</span>
+                <span class="coverage-count">(2/5)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                <a href="./injectables/WindowSizeService.html">src/services/window-size.service.ts</a>
+            </td>
+            <td>injectable</td>
+            <td>WindowSizeService</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/6)</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="js/libs/tablesort.min.js"></script>
+<script src="js/libs/tablesort.number.min.js"></script>
+<script>
+    new Tablesort(document.getElementById('coverage-table'));
+</script>
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'coverage';
+            var COMPODOC_CURRENT_PAGE_URL = 'coverage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

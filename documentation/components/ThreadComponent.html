@@ -1,0 +1,1608 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ThreadComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/message/thread/thread.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                                <code><a href="../injectables/IfChangedService.html" target="_self" >IfChangedService</a></code>
+                                <code><a href="../injectables/MessageFirebaseService.html" target="_self" >MessageFirebaseService</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-thread</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./thread.component.scss,<br>../../../../styles.scss,<br>../date-line/date-line.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./thread.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#answersPath" >answersPath</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#channelService" >channelService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#formatService" >formatService</a>
+                            </li>
+                            <li>
+                                <a href="#showEmojiList" >showEmojiList</a>
+                            </li>
+                            <li>
+                                <a href="#showToolbar" >showToolbar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#threadService" >threadService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userFirebase" >userFirebase</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeEmojiList" >closeEmojiList</a>
+                            </li>
+                            <li>
+                                <a href="#closeThread" >closeThread</a>
+                            </li>
+                            <li>
+                                <a href="#closeToolbar" >closeToolbar</a>
+                            </li>
+                            <li>
+                                <a href="#getAnswersPath" >getAnswersPath</a>
+                            </li>
+                            <li>
+                                <a href="#handleEmojiBarVisibility" >handleEmojiBarVisibility</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#openToolbar" >openToolbar</a>
+                            </li>
+                            <li>
+                                <a href="#toggleEmojiList" >toggleEmojiList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(channelService: <a href="../injectables/ChannelFirebaseService.html" target="_self">ChannelFirebaseService</a>, threadService: <a href="../injectables/ThreadFirebaseService.html" target="_self">ThreadFirebaseService</a>, userFirebase: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>, formatService: <a href="../injectables/FormatService.html" target="_self">FormatService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>channelService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>threadService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ThreadFirebaseService.html" target="_self" >ThreadFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userFirebase</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formatService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeEmojiList"></a>
+                    <span class="name">
+                        <span ><b>closeEmojiList</b></span>
+                        <a href="#closeEmojiList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeEmojiList()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the emoji list.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeThread"></a>
+                    <span class="name">
+                        <span ><b>closeThread</b></span>
+                        <a href="#closeThread"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeThread()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the thread.
+This method sets the message property in the threadService to undefined, indicating that there is no active thread.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeToolbar"></a>
+                    <span class="name">
+                        <span ><b>closeToolbar</b></span>
+                        <a href="#closeToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeToolbar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes the toolbar.
+This method sets the showToolbar flag to false, indicating that the toolbar should be hidden.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAnswersPath"></a>
+                    <span class="name">
+                        <span ><b>getAnswersPath</b></span>
+                        <a href="#getAnswersPath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAnswersPath()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves the path for answers associated with the current thread&#39;s message.</p>
+<ul>
+<li>@returns {string} - The path for answers associated with the current thread&#39;s message.</li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <ul>
+<li>The path for answers associated with the current thread&#39;s message.</li>
+</ul>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleEmojiBarVisibility"></a>
+                    <span class="name">
+                        <span ><b>handleEmojiBarVisibility</b></span>
+                        <a href="#handleEmojiBarVisibility"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleEmojiBarVisibility(isVisible: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the visibility of the emoji bar.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>isVisible</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>A boolean indicating whether the emoji list should be visible (<code>true</code>) or hidden (<code>false</code>).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes current thread when componetn was destroyed (e.g. logout)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openToolbar"></a>
+                    <span class="name">
+                        <span ><b>openToolbar</b></span>
+                        <a href="#openToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openToolbar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens the toolbar.
+This method sets the showToolbar flag to true, indicating that the toolbar should be displayed.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleEmojiList"></a>
+                    <span class="name">
+                        <span ><b>toggleEmojiList</b></span>
+                        <a href="#toggleEmojiList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleEmojiList()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggles the rendering of the emoji list.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="answersPath"></a>
+                    <span class="name">
+                        <span ><b>answersPath</b></span>
+                        <a href="#answersPath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="channelService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>channelService</b></span>
+                        <a href="#channelService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>formatService</b></span>
+                        <a href="#formatService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/FormatService.html" target="_self" >FormatService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showEmojiList"></a>
+                    <span class="name">
+                        <span ><b>showEmojiList</b></span>
+                        <a href="#showEmojiList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showToolbar"></a>
+                    <span class="name">
+                        <span ><b>showToolbar</b></span>
+                        <a href="#showToolbar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="threadService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>threadService</b></span>
+                        <a href="#threadService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ThreadFirebaseService.html" target="_self" >ThreadFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userFirebase"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userFirebase</b></span>
+                        <a href="#userFirebase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/mainscreen/message/thread/thread.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnDestroy, Output } from &#x27;@angular/core&#x27;;
+import { Message } from &#x27;src/models/message.class&#x27;;
+import { ChannelFirebaseService } from &#x27;src/services/channel-firebase.service&#x27;;
+import { FormatService } from &#x27;src/services/format.service&#x27;;
+import { IfChangedService } from &#x27;src/services/if-changed-service.service&#x27;;
+import { MessageFirebaseService } from &#x27;src/services/message-firebase.service&#x27;;
+import { ThreadFirebaseService } from &#x27;src/services/thread-firebase.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+
+@Component({
+  selector: &#x27;app-thread&#x27;,
+  templateUrl: &#x27;./thread.component.html&#x27;,
+  styleUrls: [&#x27;./thread.component.scss&#x27;, &#x27;../../../../styles.scss&#x27;, &#x27;../date-line/date-line.component.scss&#x27;],
+  providers: [IfChangedService, MessageFirebaseService]
+})
+export class ThreadComponent implements OnDestroy {
+
+  showEmojiList: boolean &#x3D; false;
+  showToolbar: boolean &#x3D; false;
+  answersPath: string &#x3D; &quot;&quot;;
+
+  constructor(
+    public channelService: ChannelFirebaseService,
+    public threadService: ThreadFirebaseService,
+    public userFirebase: UserFirebaseService,
+    public formatService: FormatService) {}
+
+
+  /**
+  * Retrieves the path for answers associated with the current thread&#x27;s message.
+  *
+  *  * @returns {string} - The path for answers associated with the current thread&#x27;s message.
+  */
+  getAnswersPath(){
+    return this.threadService.message?.path+&quot;/answers/&quot;;
+  }
+
+
+  /**
+  * Toggles the rendering of the emoji list.
+  */
+  toggleEmojiList() {
+    this.showEmojiList &#x3D; !this.showEmojiList;
+  }
+
+
+  /**
+  * Closes the emoji list.
+  */
+  closeEmojiList() {
+    this.showEmojiList &#x3D; false;
+  }
+
+
+  /**
+  * Handles the visibility of the emoji bar.
+  * @param {boolean} isVisible - A boolean indicating whether the emoji list should be visible (&#x60;true&#x60;) or hidden (&#x60;false&#x60;).
+  */
+  handleEmojiBarVisibility(isVisible: boolean) {
+    this.showEmojiList &#x3D; isVisible;
+  }
+
+  
+  /**
+  * Opens the toolbar.
+  * This method sets the showToolbar flag to true, indicating that the toolbar should be displayed.
+  * @returns {void}
+  */
+  openToolbar() {
+    this.showToolbar &#x3D; true;
+  }
+
+
+  /**
+  * Closes the toolbar.
+  * This method sets the showToolbar flag to false, indicating that the toolbar should be hidden.
+  *
+  * @returns {void}
+  */
+  closeToolbar() {
+    this.showToolbar &#x3D; false;
+  }
+
+  
+  /**
+  * Closes the thread.
+  * This method sets the message property in the threadService to undefined, indicating that there is no active thread.
+  * @returns {void}
+  */
+  closeThread() {
+    this.threadService.message &#x3D; undefined;
+  }
+
+
+  /**
+   * Closes current thread when componetn was destroyed (e.g. logout)
+   */
+  ngOnDestroy(): void {
+    this.closeThread(); 
+  }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card id&#x3D;&quot;thread&quot; class&#x3D;&quot;br-30&quot; *ngIf&#x3D;&quot;threadService.message&quot;&gt;
+    &lt;div class&#x3D;&#x27;header&#x27;&gt;
+        &lt;div class&#x3D;&quot;header-title&quot; width&#x3D;&quot;fit-content&quot;&gt;
+            &lt;div&gt;
+                &lt;h2&gt;Thread&lt;/h2&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;span class&#x3D;&quot;channel-name-header&quot; *ngIf&#x3D;&quot;channelService.selectedChannel&quot;&gt;
+                    # {{ formatService.cutStrLen(channelService.selectedChannel.channelName) }}
+                &lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;closeIcon-container&quot; (click)&#x3D;&quot;closeThread()&quot;&gt;
+            &lt;svg id&#x3D;&quot;closeIcon&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; alt&#x3D;&quot;close&quot;&gt;
+                &lt;mask id&#x3D;&quot;mask0_453_12989&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
+                    &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+                &lt;/mask&gt;
+                &lt;g mask&#x3D;&quot;url(#mask0_453_12989)&quot;&gt;
+                    &lt;path d&#x3D;&quot;M11.9998 13.3998L7.0998 18.2998C6.91647 18.4831 6.68314 18.5748 6.3998 18.5748C6.11647 18.5748 5.88314 18.4831 5.6998 18.2998C5.51647 18.1165 5.4248 17.8831 5.4248 17.5998C5.4248 17.3165 5.51647 17.0831 5.6998 16.8998L10.5998 11.9998L5.6998 7.0998C5.51647 6.91647 5.4248 6.68314 5.4248 6.3998C5.4248 6.11647 5.51647 5.88314 5.6998 5.6998C5.88314 5.51647 6.11647 5.4248 6.3998 5.4248C6.68314 5.4248 6.91647 5.51647 7.0998 5.6998L11.9998 10.5998L16.8998 5.6998C17.0831 5.51647 17.3165 5.4248 17.5998 5.4248C17.8831 5.4248 18.1165 5.51647 18.2998 5.6998C18.4831 5.88314 18.5748 6.11647 18.5748 6.3998C18.5748 6.68314 18.4831 6.91647 18.2998 7.0998L13.3998 11.9998L18.2998 16.8998C18.4831 17.0831 18.5748 17.3165 18.5748 17.5998C18.5748 17.8831 18.4831 18.1165 18.2998 18.2998C18.1165 18.4831 17.8831 18.5748 17.5998 18.5748C17.3165 18.5748 17.0831 18.4831 16.8998 18.2998L11.9998 13.3998Z&quot; fill&#x3D;&quot;black&quot;/&gt;
+                &lt;/g&gt;
+            &lt;/svg&gt;
+            &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;chat-container&quot; *ngIf&#x3D;&quot;threadService.message&quot;&gt;
+        &lt;app-message [message]&#x3D;&quot;threadService.message&quot; [messageLocationName]&#x3D;&quot;&#x27;thread&#x27;&quot;&gt;&lt;/app-message&gt;
+
+        &lt;div class&#x3D;&quot;line-container&quot; *ngIf&#x3D;&quot;threadService.loadedAnswers &amp;&amp; threadService.loadedAnswers.length&gt;0&quot;&gt;
+            &lt;div class&#x3D;&quot;line&quot;&gt;&lt;/div&gt;
+            &lt;div class&#x3D;&#x27;date&#x27;&gt;{{ threadService.loadedAnswers.length}} Antworten&lt;/div&gt;
+        &lt;/div&gt;
+
+
+        &lt;div *ngFor&#x3D;&quot;let answer of threadService.loadedAnswers; let i &#x3D; index&quot;&gt;
+            &lt;app-message [message]&#x3D;&quot;answer&quot; [timestampString]&#x3D;&quot;formatService.formatTimeDelta(answer.timestamp)&quot;
+                [messageLocationName]&#x3D;&quot;&#x27;thread&#x27;&quot; (emojiBarVisibilityOutput)&#x3D;&quot;handleEmojiBarVisibility($event)&quot;&gt;&lt;/app-message&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;app-message-create [path]&#x3D;&quot;getAnswersPath()&quot; [currentLocation]&#x3D;&quot;&#x27;thread&#x27;&quot;&gt;&lt;/app-message-create&gt;
+
+
+
+
+
+&lt;/mat-card&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./thread.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">//Revert default mat-card settings
+.mat-mdc-card-content:last-child {
+    padding: 0;
+}
+
+.mat-mdc-card-content:first-child {
+    padding: 0;
+}
+
+.mat-mdc-card-content {
+    padding: 0;
+}
+
+#thread {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    border-radius: 30px;
+
+    .header {
+        box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+        padding: 36px 45px;
+        border-radius: 30px 30px 0 0;
+        display: flex;
+        justify-content: space-between;
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        h2{
+            margin: 0px;
+        }
+    }
+
+    .chat-container {
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: calc(100% - 50px);
+
+        app-message {
+            margin-top: 35px;
+        }
+
+        app-date-line,
+        .line-container {
+            margin: 12px 35px 12px 35px;
+        }
+    }
+
+
+
+
+    app-message-create {
+        padding: 35px 35px 35px 35px;
+    }
+}
+
+
+
+
+.closeIcon {
+    cursor: pointer;
+}
+
+.channel-name-header {
+    color: #444DF2;
+    line-break: anywhere;
+}</code></pre>
+                <p class="comment">
+                    <code>../../../../styles.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">@use &#x27;@angular/material&#x27; as mat;
+
+@import &quot;@ctrl/ngx-emoji-mart/picker&quot;;
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-regular.woff2&#x27;);
+}
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 200;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-200.woff2&#x27;);
+}
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 300;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-300.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 500;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-500.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito&#x27;;
+    font-weight: 600;
+    font-style: normal;
+    src: url(&#x27;assets/fonts/nunito-v26-latin-600.woff2&#x27;);
+}
+
+@font-face {
+    font-family: &#x27;Nunito Sans&#x27;;
+    src: url(&#x27;assets/fonts/nunito-sans-v15-latin-regular.woff2&#x27;);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    background-color: #edeefe;
+}
+
+.dsp-none{
+    display: none;
+}
+
+input {
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+textarea {
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+button{
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+}
+
+.br-30 {
+    border-radius: 30px;
+}
+
+.btn-blue{
+    background-color: #444DF2; 
+    color: white;
+    padding: 12px 25px 12px 25px;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    border-radius: 30px;
+    border: 1px solid white;
+    cursor: pointer;
+    font-size: 18px;
+    &amp;:disabled{
+        opacity: 0.4;
+    }
+
+    &amp;:hover{
+        background-color: rgba(121, 126, 243, 1) !important;
+        transition: background-color 0.15s ease-in-out
+    }
+}
+.btn-white{
+    background-color: white; 
+    color: #444DF2;
+    padding: 12px 25px 12px 25px;
+    font-family: &#x27;Nunito&#x27;, sans-serif;
+    border-radius: 30px;
+    border: 1px solid #444DF2;
+    cursor: pointer;
+    font-size: 18px;
+    &amp;:disabled{
+        opacity: 0.4;
+    }
+
+    &amp;:hover{
+        background-color: rgba(68, 77, 242, 1) !important;
+        transition: background-color 0.15s ease-in-out;
+        color: white !important;
+    }
+}
+
+.closeIcon-container{
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
+
+    &amp;:hover{
+        background-color: #ECEEFE; 
+        #closeIcon path {
+            fill: #535AF1; 
+            }
+    }
+
+    #closeIcon{
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.highlighted {
+    background-color: yellow;
+  }
+  .highlight-container {
+    margin-top: 10px;
+  }
+
+
+
+.notification-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+
+    .notification-card {
+        z-index: 99;
+        position: relative;
+        top: 70%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: fit-content;
+        opacity: 0;
+
+        .notification-card-content {
+            font-weight: 500;
+            font-size: 24px;
+        }
+    }
+
+
+
+    //Available animation types
+    @keyframes shift-left-in {
+        0% {
+            opacity: 0;
+            left: -10%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+            left: 50%
+        }
+
+        70% {
+            top: 70%;
+            left: 50%
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            left: -10%;
+        }
+    }
+
+    @keyframes shift-up {
+        0% {
+            opacity: 0;
+            top: 110%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+        }
+
+        70% {
+            top: 70%;
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            top: 110%;
+        }
+    }
+
+    @keyframes shift-right-in {
+        0% {
+            opacity: 0;
+            left: 110%;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        30% {
+            top: 70%;
+            left: 50%
+        }
+
+        70% {
+            top: 70%;
+            left: 50%
+        }
+
+        95% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            left: 110%;
+        }
+    }
+    
+
+    //Types of Messages
+    .error {
+        background-color: rgb(255, 66, 66);
+        color: white;
+    }
+
+    .success {
+        background-color: #4f9d00;
+        border: solid 1px #00d84f;
+        color: white;
+    }
+
+    .default {
+        background-color: #444DF2;
+        border-radius: 30px 30px 0px 30px;
+        padding: 25px;
+        border: none;
+        color: white;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+  </code></pre>
+                <p class="comment">
+                    <code>../date-line/date-line.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.line-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    .date {
+        border: 1px solid #ADB0D9;
+        border-radius: 30px;
+        padding: 5px 15px 5px 15px;
+        background-color: white;
+        z-index: 2;
+    }
+
+    .line {
+        top: calc(50% - 0.5px);
+        position: absolute;
+        width: calc( 100% - 1px);
+        padding: 0.5px;
+        background-color: #ADB0D9;
+        z-index: 1;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card id="thread" class="br-30" *ngIf="threadService.message">    <div class=\'header\'>        <div class="header-title" width="fit-content">            <div>                <h2>Thread</h2>            </div>            <div>                <span class="channel-name-header" *ngIf="channelService.selectedChannel">                    # {{ formatService.cutStrLen(channelService.selectedChannel.channelName) }}                </span>            </div>        </div>        <div class="closeIcon-container" (click)="closeThread()">            <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" alt="close">                <mask id="mask0_453_12989" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">                    <rect width="24" height="24" fill="#D9D9D9"/>                </mask>                <g mask="url(#mask0_453_12989)">                    <path d="M11.9998 13.3998L7.0998 18.2998C6.91647 18.4831 6.68314 18.5748 6.3998 18.5748C6.11647 18.5748 5.88314 18.4831 5.6998 18.2998C5.51647 18.1165 5.4248 17.8831 5.4248 17.5998C5.4248 17.3165 5.51647 17.0831 5.6998 16.8998L10.5998 11.9998L5.6998 7.0998C5.51647 6.91647 5.4248 6.68314 5.4248 6.3998C5.4248 6.11647 5.51647 5.88314 5.6998 5.6998C5.88314 5.51647 6.11647 5.4248 6.3998 5.4248C6.68314 5.4248 6.91647 5.51647 7.0998 5.6998L11.9998 10.5998L16.8998 5.6998C17.0831 5.51647 17.3165 5.4248 17.5998 5.4248C17.8831 5.4248 18.1165 5.51647 18.2998 5.6998C18.4831 5.88314 18.5748 6.11647 18.5748 6.3998C18.5748 6.68314 18.4831 6.91647 18.2998 7.0998L13.3998 11.9998L18.2998 16.8998C18.4831 17.0831 18.5748 17.3165 18.5748 17.5998C18.5748 17.8831 18.4831 18.1165 18.2998 18.2998C18.1165 18.4831 17.8831 18.5748 17.5998 18.5748C17.3165 18.5748 17.0831 18.4831 16.8998 18.2998L11.9998 13.3998Z" fill="black"/>                </g>            </svg>            </div>    </div>    <div class="chat-container" *ngIf="threadService.message">        <app-message [message]="threadService.message" [messageLocationName]="\'thread\'"></app-message>        <div class="line-container" *ngIf="threadService.loadedAnswers && threadService.loadedAnswers.length>0">            <div class="line"></div>            <div class=\'date\'>{{ threadService.loadedAnswers.length}} Antworten</div>        </div>        <div *ngFor="let answer of threadService.loadedAnswers; let i = index">            <app-message [message]="answer" [timestampString]="formatService.formatTimeDelta(answer.timestamp)"                [messageLocationName]="\'thread\'" (emojiBarVisibilityOutput)="handleEmojiBarVisibility($event)"></app-message>        </div>    </div>    <app-message-create [path]="getAnswersPath()" [currentLocation]="\'thread\'"></app-message-create></mat-card></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'ThreadComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ThreadComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

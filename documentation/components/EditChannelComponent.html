@@ -1,0 +1,1508 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  EditChannelComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/channel/edit-channel/edit-channel.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-edit-channel</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./edit-channel.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./edit-channel.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#channel" >channel</a>
+                            </li>
+                            <li>
+                                <a href="#channelCreatorName" >channelCreatorName</a>
+                            </li>
+                            <li>
+                                <a href="#editChannelDescription" >editChannelDescription</a>
+                            </li>
+                            <li>
+                                <a href="#editChannelName" >editChannelName</a>
+                            </li>
+                            <li>
+                                <a href="#NewChannelDescription" >NewChannelDescription</a>
+                            </li>
+                            <li>
+                                <a href="#NewChannelName" >NewChannelName</a>
+                            </li>
+                            <li>
+                                <a href="#windowWidth" >windowWidth</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                            <li>
+                                <a href="#getCurrentUserChannel" >getCurrentUserChannel</a>
+                            </li>
+                            <li>
+                                <a href="#leaveChannel" >leaveChannel</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openAddMemberMenu" >openAddMemberMenu</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveChannelDescription" >saveChannelDescription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveChannelName" >saveChannelName</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addUserEvent" >addUserEvent</a>
+                            </li>
+                            <li>
+                                <a href="#closeEvent" >closeEvent</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(channelService: <a href="../injectables/ChannelFirebaseService.html" target="_self">ChannelFirebaseService</a>, userService: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>, windowSizeService: <a href="../injectables/WindowSizeService.html" target="_self">WindowSizeService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Declares services and subsribe for user window size, for switching between desktop and mobile view.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>channelService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>windowSizeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WindowSizeService.html" target="_self" >WindowSizeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addUserEvent"></a>
+                        <b>addUserEvent</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:15</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="closeEvent"></a>
+                        <b>closeEvent</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>EventEmitter</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:14</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="close"></a>
+                    <span class="name">
+                        <span ><b>close</b></span>
+                        <a href="#close"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>close()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Closes edit channel-dialog</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCurrentUserChannel"></a>
+                    <span class="name">
+                        <span ><b>getCurrentUserChannel</b></span>
+                        <a href="#getCurrentUserChannel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCurrentUserChannel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>returns the useres array of the current selected channel.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="leaveChannel"></a>
+                    <span class="name">
+                        <span ><b>leaveChannel</b></span>
+                        <a href="#leaveChannel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>leaveChannel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Leave selectedChannel</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets information of the selected channel in this component.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAddMemberMenu"></a>
+                    <span class="name">
+                        <span ><b>openAddMemberMenu</b></span>
+                        <a href="#openAddMemberMenu"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openAddMemberMenu()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Move to edit channel users component</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveChannelDescription"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>saveChannelDescription</b></span>
+                        <a href="#saveChannelDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveChannelDescription()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves the description of the description input field.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveChannelName"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>saveChannelName</b></span>
+                        <a href="#saveChannelName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveChannelName()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves the channel name from input field.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="channel"></a>
+                    <span class="name">
+                        <span ><b>channel</b></span>
+                        <a href="#channel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Channel()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="channelCreatorName"></a>
+                    <span class="name">
+                        <span ><b>channelCreatorName</b></span>
+                        <a href="#channelCreatorName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editChannelDescription"></a>
+                    <span class="name">
+                        <span ><b>editChannelDescription</b></span>
+                        <a href="#editChannelDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editChannelName"></a>
+                    <span class="name">
+                        <span ><b>editChannelName</b></span>
+                        <a href="#editChannelName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NewChannelDescription"></a>
+                    <span class="name">
+                        <span ><b>NewChannelDescription</b></span>
+                        <a href="#NewChannelDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NewChannelName"></a>
+                    <span class="name">
+                        <span ><b>NewChannelName</b></span>
+                        <a href="#NewChannelName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="windowWidth"></a>
+                    <span class="name">
+                        <span ><b>windowWidth</b></span>
+                        <a href="#windowWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/mainscreen/channel/edit-channel/edit-channel.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnInit, Output } from &#x27;@angular/core&#x27;;
+import { Channel } from &#x27;src/models/channel.class&#x27;;
+import { ChannelFirebaseService } from &#x27;src/services/channel-firebase.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+import { WindowSizeService } from &#x27;src/services/window-size.service&#x27;;
+
+@Component({
+  selector: &#x27;app-edit-channel&#x27;,
+  templateUrl: &#x27;./edit-channel.component.html&#x27;,
+  styleUrls: [&#x27;./edit-channel.component.scss&#x27;]
+})
+export class EditChannelComponent implements OnInit {
+
+  @Output() closeEvent &#x3D; new EventEmitter&lt;any&gt;();
+  @Output() addUserEvent &#x3D; new EventEmitter&lt;any&gt;();
+
+  channel &#x3D; new Channel();
+  editChannelDescription &#x3D; false;
+  editChannelName &#x3D; false;
+  
+
+  NewChannelName: string &#x3D; &quot;&quot;;
+  NewChannelDescription: string &#x3D; &quot;&quot;;
+  channelCreatorName &#x3D; &quot;&quot;;
+
+  windowWidth: any;
+
+  /**
+   * Declares services and subsribe for user window size, for switching between desktop and mobile view. 
+   * @param channelService 
+   * @param userService 
+   * @param windowSizeService 
+   */
+  constructor(
+    private channelService: ChannelFirebaseService,
+    private userService: UserFirebaseService,
+    private windowSizeService: WindowSizeService
+  ) {
+    this.windowSizeService.windowWidth$.subscribe(windowWidth &#x3D;&gt; {
+      this.windowWidth &#x3D; windowWidth;
+    });
+    this.windowSizeService.setWindowSize();
+  }
+
+  /**
+   * Sets information of the selected channel in this component. 
+   */
+  ngOnInit(): void {
+    if (this.channelService.selectedChannel) {
+      this.channel &#x3D; this.channelService.selectedChannel;
+      this.NewChannelName &#x3D; this.channelService.selectedChannel.channelName;
+      this.NewChannelDescription &#x3D; this.channelService.selectedChannel.channelDescription;
+      this.userService.getUserByUID(this.channelService.selectedChannel.creatorOfChannel)
+        .then((user) &#x3D;&gt; {
+          this.channelCreatorName &#x3D; user.fullName;
+        })
+    }
+  }
+
+
+  /**
+   * Closes edit channel-dialog
+   */
+  close() {
+    this.closeEvent.emit();
+  }
+
+
+  /**
+   * Leave selectedChannel
+   */
+  leaveChannel() {
+    this.channelService.leaveSelectedChannel();
+    this.close();
+  }
+
+
+  /**
+   * Saves the channel name from input field. 
+   */
+  async saveChannelName() {
+    if (this.channelService.selectedChannel) {
+      this.channelService.selectedChannel.channelName &#x3D; this.NewChannelName;
+      await this.channelService.updateChannel(this.channelService.selectedChannel);
+      this.channel &#x3D; this.channelService.selectedChannel;
+    }
+    this.editChannelName &#x3D; false;
+  }
+
+
+  /**
+   * Saves the description of the description input field. 
+   */
+  async saveChannelDescription() {
+    if (this.channelService.selectedChannel) {
+      this.channelService.selectedChannel.channelDescription &#x3D; this.NewChannelDescription;
+      await this.channelService.updateChannel(this.channelService.selectedChannel);
+      this.channel &#x3D; this.channelService.selectedChannel;
+    }
+    this.editChannelDescription &#x3D; false;
+  }
+
+
+  /**
+   * Move to edit channel users component
+   */
+  openAddMemberMenu() {
+    this.addUserEvent.emit();
+    this.close();
+  }
+
+
+  /**
+   * returns the useres array of the current selected channel. 
+   */
+  getCurrentUserChannel() {
+    return this.channelService.userOnCurrentChannel
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div id&#x3D;&quot;edit-channel&quot;&gt;
+    &lt;div id&#x3D;&quot;edit-channel-header&quot;&gt;
+        
+        &lt;h2&gt;&lt;b&gt;#&lt;/b&gt;{{ channel.channelName }}&lt;/h2&gt;
+        &lt;div class&#x3D;&quot;closeIcon-container&quot; (click)&#x3D;&quot;close()&quot;&gt;
+        &lt;svg id&#x3D;&quot;closeIcon&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; alt&#x3D;&quot;close&quot;&gt;
+            &lt;mask id&#x3D;&quot;mask0_453_12989&quot; style&#x3D;&quot;mask-type:alpha&quot; maskUnits&#x3D;&quot;userSpaceOnUse&quot; x&#x3D;&quot;0&quot; y&#x3D;&quot;0&quot; width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot;&gt;
+                &lt;rect width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; fill&#x3D;&quot;#D9D9D9&quot;/&gt;
+            &lt;/mask&gt;
+            &lt;g mask&#x3D;&quot;url(#mask0_453_12989)&quot;&gt;
+                &lt;path d&#x3D;&quot;M11.9998 13.3998L7.0998 18.2998C6.91647 18.4831 6.68314 18.5748 6.3998 18.5748C6.11647 18.5748 5.88314 18.4831 5.6998 18.2998C5.51647 18.1165 5.4248 17.8831 5.4248 17.5998C5.4248 17.3165 5.51647 17.0831 5.6998 16.8998L10.5998 11.9998L5.6998 7.0998C5.51647 6.91647 5.4248 6.68314 5.4248 6.3998C5.4248 6.11647 5.51647 5.88314 5.6998 5.6998C5.88314 5.51647 6.11647 5.4248 6.3998 5.4248C6.68314 5.4248 6.91647 5.51647 7.0998 5.6998L11.9998 10.5998L16.8998 5.6998C17.0831 5.51647 17.3165 5.4248 17.5998 5.4248C17.8831 5.4248 18.1165 5.51647 18.2998 5.6998C18.4831 5.88314 18.5748 6.11647 18.5748 6.3998C18.5748 6.68314 18.4831 6.91647 18.2998 7.0998L13.3998 11.9998L18.2998 16.8998C18.4831 17.0831 18.5748 17.3165 18.5748 17.5998C18.5748 17.8831 18.4831 18.1165 18.2998 18.2998C18.1165 18.4831 17.8831 18.5748 17.5998 18.5748C17.3165 18.5748 17.0831 18.4831 16.8998 18.2998L11.9998 13.3998Z&quot; fill&#x3D;&quot;black&quot;/&gt;
+            &lt;/g&gt;
+        &lt;/svg&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id&#x3D;&quot;edit-channel-name-container-viewMode&quot; *ngIf&#x3D;&quot;!editChannelName&quot;&gt;
+        &lt;div class&#x3D;&quot;dsp-flex-row-spaceBtwn&quot;&gt;
+            &lt;h3&gt;Channel-Name&lt;/h3&gt;
+            &lt;a (click)&#x3D;&quot;editChannelName &#x3D; !editChannelName&quot;&gt;Bearbeiten&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;p&gt;&lt;b&gt;#&lt;/b&gt; {{ channel.channelName }}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;edit-channel-name-container-editMode&quot; *ngIf&#x3D;&quot;editChannelName&quot;&gt;
+        &lt;div class&#x3D;&quot;dsp-flex-row-spaceBtwn&quot;&gt;
+            &lt;h3&gt;Channel-Name&lt;/h3&gt;
+            &lt;a (click)&#x3D;&quot;saveChannelName()&quot;&gt;Speichern&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div id&#x3D;&quot;edit-channel-name-container-editMode-input&quot;&gt;
+            &lt;input id&#x3D;&quot;edit-channel-name-input&quot; type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;NewChannelName&quot;&gt;
+           &lt;div id&#x3D;&quot;edit-channel-name-container-editMode-input-icon&quot;&gt;
+                &lt;b&gt;#&lt;/b&gt;
+           &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;edit-channel-description-container-viewMode&quot;  *ngIf&#x3D;&quot;!editChannelDescription&quot;&gt;
+        &lt;div class&#x3D;&quot;dsp-flex-row-spaceBtwn&quot;&gt;
+            &lt;h3&gt;Beschreibung&lt;/h3&gt;
+            &lt;a (click)&#x3D;&quot;editChannelDescription &#x3D; !editChannelDescription&quot;&gt;Bearbeiten&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;p&gt;{{channel.channelDescription}}&lt;/p&gt;
+        &lt;div class&#x3D;&quot;divider-container&quot;&gt;
+            &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div id&#x3D;&quot;edit-channel-creator-description&quot;&gt;
+            &lt;h3&gt;Erstellt von&lt;/h3&gt;
+            &lt;h2&gt;{{channelCreatorName}}&lt;/h2&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;edit-channel-description-container-editMode&quot; *ngIf&#x3D;&quot;editChannelDescription&quot;&gt;
+        &lt;div class&#x3D;&quot;dsp-flex-row-spaceBtwn&quot;&gt;
+            &lt;h3&gt;Beschreibung&lt;/h3&gt;
+            &lt;a (click)&#x3D;&quot;saveChannelDescription()&quot;&gt;Speichern&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div id&#x3D;&quot;edit-channel-description-container-editMode-input&quot;&gt;
+            &lt;input type&#x3D;&quot;text&quot; [(ngModel)]&#x3D;&quot;NewChannelDescription&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;divider-container&quot;&gt;
+            &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;h3&gt;Erstellt von&lt;/h3&gt;
+            &lt;h2&gt;{{channelCreatorName}}&lt;/h2&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;edit-channel-users-mobile&quot;&gt;
+        &lt;h2&gt;Mitglieder&lt;/h2&gt;
+        &lt;div&gt;
+            &lt;app-chat-view *ngFor&#x3D;&quot;let user of getCurrentUserChannel()&quot;
+            [uId]&#x3D;&quot;user.id&quot;&gt;
+            &lt;/app-chat-view&gt;
+            &lt;div *ngIf&#x3D;&quot;windowWidth &lt;&#x3D; 768&quot;&gt;
+                &lt;div class&#x3D;&quot;add-user-container&quot;(click)&#x3D;&quot;openAddMemberMenu()&quot;&gt;
+                    &lt;img class&#x3D;&quot;member-image&quot; src&#x3D;&quot;assets/img/icons/addmembers.svg&quot;&gt;
+                    &lt;span class&#x3D;&quot;add-member-text&quot;&gt;Teilnehmer hinzufügen&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;edit-channel-leaveChannel&quot;&gt;
+        &lt;button (click)&#x3D;&quot;leaveChannel()&quot;&gt;Channel verlassen&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id&#x3D;&quot;edit-channel-background&quot; (click)&#x3D;&quot;close()&quot;&gt;&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./edit-channel.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">#edit-channel {
+    max-width: 800px;
+    min-width: 400px;
+    min-height: 300px;
+    background-color: white;
+    border-radius: 0px 30px 30px 30px;
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    z-index: 15;
+    box-shadow: 0px 6px 10px 0px #00000033;
+    padding: 30px;
+    gap: 18px;
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+
+    #edit-channel-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+
+        h2 {
+            margin: 0px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        b {
+            font-size: 30px;
+        }
+    }
+
+    #edit-channel-name-container-viewMode {
+        border: 1px solid #ADB0D9;
+        border-radius: 20px;
+        padding: 12px;
+
+        a {
+            color: #535AF1;
+            text-decoration: unset;
+            cursor: pointer;
+
+            &amp;:hover {
+                font-weight: bold;
+            }
+        }
+
+        b {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            margin: 0px;
+        }
+    }
+
+    #edit-channel-name-container-editMode {
+        padding: 12px;
+
+        a {
+            color: #535AF1;
+            text-decoration: unset;
+            cursor: pointer;
+        }
+
+        #edit-channel-name-container-editMode-input {
+            position: relative;
+
+            input {
+                border: 1px solid #ADB0D9;
+                border-radius: 20px;
+                padding: 12px;
+                padding-left: 50px;
+                width: calc(100% - 24px - 30px);
+                font-size: 1.5em;
+            }
+
+            #edit-channel-name-container-editMode-input-icon {
+                position: absolute;
+                top: 10px;
+                left: 25px;
+                font-size: 28px;
+            }
+        }
+    }
+
+    #edit-channel-description-container-viewMode {
+        border: 1px solid #ADB0D9;
+        border-radius: 20px;
+        padding: 12px;
+
+        a {
+            color: #535AF1;
+            text-decoration: unset;
+            cursor: pointer;
+
+            &amp;:hover {
+                font-weight: bold;
+            }
+        }
+
+        h3 {
+            margin: 0px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    #edit-channel-description-container-editMode {
+        padding: 12px;
+
+        a {
+            color: #535AF1;
+            text-decoration: unset;
+            cursor: pointer;
+        }
+
+        h2 {
+            color: rgba(83, 90, 241, 1);
+        }
+
+        #edit-channel-description-container-editMode-input {
+            position: relative;
+
+            input {
+                border: 1px solid #ADB0D9;
+                border-radius: 20px;
+                padding: 12px;
+                //padding-left: 50px;
+                width: calc(100% - 24px - 30px);
+                font-size: 1.5em;
+            }
+
+
+        }
+    }
+
+
+
+
+    #edit-channel-leaveChannel {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        button {
+            color: white;
+            background: #444DF2;
+            padding: 12px 25px 12px 25px;
+            border-radius: 20px;
+            border: 0px;
+            font-size: 1em;
+            cursor: pointer;
+
+            &amp;:hover {
+                background-color: rgba(121, 126, 243, 1) !important;
+                transition: background-color 0.15s ease-in-out;
+            }
+        }
+    }
+}
+
+#edit-channel-creator-description {
+    h2 {
+        color: rgba(83, 90, 241, 1);
+    }
+}
+
+#edit-channel-background {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 14;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0px;
+    left: 0px;
+}
+
+.dsp-flex-row-spaceBtwn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.divider-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 0px 12px 0px;
+
+    .divider {
+        height: 1px;
+        width: 100%;
+        background-color: #ADB0D9;
+    }
+}
+
+#edit-channel-users-mobile {
+    display: none;
+}
+
+.add-user-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    cursor: pointer;
+    margin-left: 12px;
+    margin-top: 12px;
+}
+
+@media only screen and (max-width: 1000px) {
+
+    #edit-channel {
+        position: fixed;
+        top: 100px;
+        left: 10vw;
+        min-width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    #edit-channel {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        padding: 0px;
+        border-radius: 0px;
+        overflow: scroll;
+
+        #edit-channel-header {
+            position: sticky;
+            box-shadow: 0px 2px 10px 0px #00000014;
+            padding: 0px 12px 0px 12px;
+            min-height: 100px;
+        }
+
+        #edit-channel-name-container-viewMode {
+            margin: 0px 12px 0px 12px;
+        }
+
+        #edit-channel-name-container-editMode {
+            margin: 0px 12px 0px 12px;
+        }
+
+        #edit-channel-description-container-viewMode {
+            margin: 0px 12px 0px 12px;
+        }
+
+        #edit-channel-description-container-editMode {
+            margin: 0px 12px 0px 12px;
+        }
+
+        #edit-channel-users-mobile {
+            display: block;
+            margin: 0px 12px 0px 12px;
+            border: 1px solid #ADB0D9;
+            border-radius: 20px;
+            padding: 12px;
+
+            h2 {
+                margin: 0.5rem;
+            }
+        }
+
+        #edit-channel-leaveChannel {
+            margin: 0px 12px 12px 12px;
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div id="edit-channel">    <div id="edit-channel-header">                <h2><b>#</b>{{ channel.channelName }}</h2>        <div class="closeIcon-container" (click)="close()">        <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" alt="close">            <mask id="mask0_453_12989" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">                <rect width="24" height="24" fill="#D9D9D9"/>            </mask>            <g mask="url(#mask0_453_12989)">                <path d="M11.9998 13.3998L7.0998 18.2998C6.91647 18.4831 6.68314 18.5748 6.3998 18.5748C6.11647 18.5748 5.88314 18.4831 5.6998 18.2998C5.51647 18.1165 5.4248 17.8831 5.4248 17.5998C5.4248 17.3165 5.51647 17.0831 5.6998 16.8998L10.5998 11.9998L5.6998 7.0998C5.51647 6.91647 5.4248 6.68314 5.4248 6.3998C5.4248 6.11647 5.51647 5.88314 5.6998 5.6998C5.88314 5.51647 6.11647 5.4248 6.3998 5.4248C6.68314 5.4248 6.91647 5.51647 7.0998 5.6998L11.9998 10.5998L16.8998 5.6998C17.0831 5.51647 17.3165 5.4248 17.5998 5.4248C17.8831 5.4248 18.1165 5.51647 18.2998 5.6998C18.4831 5.88314 18.5748 6.11647 18.5748 6.3998C18.5748 6.68314 18.4831 6.91647 18.2998 7.0998L13.3998 11.9998L18.2998 16.8998C18.4831 17.0831 18.5748 17.3165 18.5748 17.5998C18.5748 17.8831 18.4831 18.1165 18.2998 18.2998C18.1165 18.4831 17.8831 18.5748 17.5998 18.5748C17.3165 18.5748 17.0831 18.4831 16.8998 18.2998L11.9998 13.3998Z" fill="black"/>            </g>        </svg>        </div>    </div>    <div id="edit-channel-name-container-viewMode" *ngIf="!editChannelName">        <div class="dsp-flex-row-spaceBtwn">            <h3>Channel-Name</h3>            <a (click)="editChannelName = !editChannelName">Bearbeiten</a>        </div>        <p><b>#</b> {{ channel.channelName }}</p>    </div>    <div id="edit-channel-name-container-editMode" *ngIf="editChannelName">        <div class="dsp-flex-row-spaceBtwn">            <h3>Channel-Name</h3>            <a (click)="saveChannelName()">Speichern</a>        </div>        <div id="edit-channel-name-container-editMode-input">            <input id="edit-channel-name-input" type="text" [(ngModel)]="NewChannelName">           <div id="edit-channel-name-container-editMode-input-icon">                <b>#</b>           </div>        </div>    </div>    <div id="edit-channel-description-container-viewMode"  *ngIf="!editChannelDescription">        <div class="dsp-flex-row-spaceBtwn">            <h3>Beschreibung</h3>            <a (click)="editChannelDescription = !editChannelDescription">Bearbeiten</a>        </div>        <p>{{channel.channelDescription}}</p>        <div class="divider-container">            <div class="divider"></div>        </div>        <div id="edit-channel-creator-description">            <h3>Erstellt von</h3>            <h2>{{channelCreatorName}}</h2>        </div>    </div>    <div id="edit-channel-description-container-editMode" *ngIf="editChannelDescription">        <div class="dsp-flex-row-spaceBtwn">            <h3>Beschreibung</h3>            <a (click)="saveChannelDescription()">Speichern</a>        </div>        <div id="edit-channel-description-container-editMode-input">            <input type="text" [(ngModel)]="NewChannelDescription">        </div>        <div class="divider-container">            <div class="divider"></div>        </div>        <div>            <h3>Erstellt von</h3>            <h2>{{channelCreatorName}}</h2>        </div>    </div>    <div id="edit-channel-users-mobile">        <h2>Mitglieder</h2>        <div>            <app-chat-view *ngFor="let user of getCurrentUserChannel()"            [uId]="user.id">            </app-chat-view>            <div *ngIf="windowWidth <= 768">                <div class="add-user-container"(click)="openAddMemberMenu()">                    <img class="member-image" src="assets/img/icons/addmembers.svg">                    <span class="add-member-text">Teilnehmer hinzufügen</span>                </div>            </div>        </div>    </div>    <div id="edit-channel-leaveChannel">        <button (click)="leaveChannel()">Channel verlassen</button>    </div></div><div id="edit-channel-background" (click)="close()"></div></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'EditChannelComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EditChannelComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

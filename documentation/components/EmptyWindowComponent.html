@@ -1,0 +1,923 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>da-bubble documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">da-bubble documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  EmptyWindowComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/mainscreen/empty-window/empty-window.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-empty-window</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./empty-window.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./empty-window.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#channelService" >channelService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(channelService: <a href="../injectables/ChannelFirebaseService.html" target="_self">ChannelFirebaseService</a>, userService: <a href="../injectables/UserFirebaseService.html" target="_self">UserFirebaseService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/mainscreen/empty-window/empty-window.component.ts:10</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>channelService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="channelService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>channelService</b></span>
+                        <a href="#channelService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ChannelFirebaseService.html" target="_self" >ChannelFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/mainscreen/empty-window/empty-window.component.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserFirebaseService.html" target="_self" >UserFirebaseService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/mainscreen/empty-window/empty-window.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { ChannelFirebaseService } from &#x27;src/services/channel-firebase.service&#x27;;
+import { UserFirebaseService } from &#x27;src/services/user-firebase.service&#x27;;
+
+@Component({
+  selector: &#x27;app-empty-window&#x27;,
+  templateUrl: &#x27;./empty-window.component.html&#x27;,
+  styleUrls: [&#x27;./empty-window.component.scss&#x27;]
+})
+export class EmptyWindowComponent {
+    constructor(
+      public channelService: ChannelFirebaseService,
+      public userService: UserFirebaseService
+    ){
+
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;mat-card id&#x3D;&quot;emptyWindow&quot;&gt;
+    
+    &lt;div class&#x3D;&#x27;header&#x27;&gt;
+        &lt;div class&#x3D;&quot;header-title&quot; width&#x3D;&quot;fit-content&quot;&gt;
+            &lt;h2&gt;Neue Nachricht&lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;app-searchbar
+        *ngIf&#x3D;&quot;userService.finishedLoading &amp;&amp; channelService.finishedLoading&quot;  
+        [types]&#x3D;&#x27;&quot;all&quot;&#x27; 
+        [action]&#x3D;&quot;&#x27;openSelection&#x27;&quot;
+        [setStyle]&#x3D;&quot;&#x27;channelOption&#x27;&quot;&gt;
+       &lt;/app-searchbar&gt;
+    &lt;/div&gt;
+&lt;/mat-card&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./empty-window.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">#emptyWindow {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 30px;
+
+
+    .header {
+        box-shadow: rgba(0, 0, 0, 0.8) 0 2px 23px -10px;
+        padding: 25px 45px;
+        border-radius: 30px 30px 0 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            word-break: break-all;
+        }
+
+        app-searchbar {
+            width: 100%;
+        }
+    }
+
+    .amoundOfUsersInChannel {
+        font-size: 20px;
+        padding-left: 10px;
+        font-weight: 600;
+    }
+
+    .chat-container {
+        overflow-y: auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        width: 100%;
+
+        app-date-line {
+            margin: 12px 35px 12px 35px;
+        }
+
+        .channel-display {
+            margin: 12px 35px 12px 35px;
+
+            .channel-header {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+
+                img {
+                    height: 70px;
+                    aspect-ratio: 1;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    app-message-create {
+        padding: 35px 35px 35px 35px;
+    }
+}
+
+
+.align-bottom {
+    position: sticky;
+    bottom: 0;
+}
+
+.chat-container {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+}
+
+.addmembers {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.header {
+    padding: 0px 35px 0px 35px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .header-title {
+        display: flex;
+        align-items: center;
+
+        .header-title-container {
+            display: flex;
+            padding: 4px 12px 4px 12px;
+            align-items: center;
+
+            h2 {
+                margin: 0px;
+                font-size: 24px;
+            }
+
+            .header-title-container-icons {
+                height: 30px;
+            }
+
+            &amp;:hover {
+                color: #535AF1;
+                background-color: #ECEEFE;
+                border-radius: 37px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .user-avatar-list {
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+app-message-create {
+    padding: 0px 35px 0px 35px;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+::ng-deep div#mat-menu-panel-0 {
+    border-top-left-radius: 35px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 35px;
+    border-bottom-left-radius: 35px;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-0 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menuHeaderText {
+    padding-left: 45px;
+}
+
+.close {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+::ng-deep .menuHeader.ng-tns-c2786309385-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerText {
+    padding-left: 45px;
+}
+
+.closeMenu {
+    padding-right: 45px;
+    cursor: pointer;
+}
+
+.resultUserImages {
+    width: 20px;
+    border-radius: 15px;
+}
+
+.menuUsersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menuUsers {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 59%;
+    margin-top: 19px;
+}
+
+.menuUsersImage {
+    //padding-left: 20px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.menuUsersName {
+    padding-left: 20px;
+}
+
+.addMemberContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addMemberImage {
+    padding-left: 20px;
+    width: 30px;
+}
+
+.addMemberInMenu {
+    display: flex;
+    align-items: center;
+    margin-top: 21px;
+    cursor: pointer;
+    justify-content: center;
+    margin-right: 25px;
+}
+
+
+.addMemberText {
+    padding-left: 20px;
+}
+
+.containerOfInput {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    padding-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    app-searchbar {}
+}
+
+.inputContainer {
+    width: 75%;
+    height: 42px;
+}
+
+.memberNameInput {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 1px solid #797EF3;
+}
+
+.inputAvatar {
+    width: 28px;
+    height: 25px;
+    border-radius: 15px;
+}
+
+.inputContent {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background-color: #ECEEFE;
+    border-radius: 25px;
+    height: 35%;
+    width: 39%;
+    top: 39px;
+    left: 77px;
+
+    position: absolute;
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 280px;
+}
+
+#header-searchfield-results {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 12px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &amp;:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+#header-searchfield-results-Menu {
+    position: relative;
+    border-radius: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
+    width: calc(100% - 48px);
+    background-color: white;
+    z-index: 10;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    margin-top: 68px;
+
+    p {
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+
+        &amp;:hover {
+            background: rgba(166, 166, 166, 0.456);
+            border-radius: 42px;
+        }
+    }
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    width: 496px !important;
+    height: 310px !important;
+    min-width: unset !important;
+    max-width: unset !important;
+
+    border-top-left-radius: 35px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 35px !important;
+    border-bottom-left-radius: 35px !important;
+
+}
+
+::ng-deep .mat-mdc-menu-content.ng-tns-c2786309385-1 {
+    width: 100%;
+}
+
+.channelName {
+    color: #797EF3;
+    padding-left: 45px;
+}
+
+.addSelection {
+    background-color: #444DF2;
+    height: 54px;
+    width: 125px;
+    border-radius: 30px;
+    color: white;
+    border: unset;
+    position: absolute;
+    right: 57px;
+    bottom: 78px;
+
+    &amp;:hover {
+        opacity: 0.85;
+        cursor: pointer;
+    }
+
+}
+
+.inputContainerMaster {
+    width: 100%;
+}
+
+.cancelSelection {}
+
+.menuHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+    .header {
+        h2 {
+            font-size: 20px !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    #channel {
+        border-radius: 0px;
+
+        .header {
+            box-shadow: 0px 2px 10px 0px #00000014;
+            border-radius: 0px;
+
+            .user-avatar-list {
+                display: none;
+            }
+        }
+    }
+
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><mat-card id="emptyWindow">        <div class=\'header\'>        <div class="header-title" width="fit-content">            <h2>Neue Nachricht</h2>        </div>        <app-searchbar        *ngIf="userService.finishedLoading && channelService.finishedLoading"          [types]=\'"all"\'         [action]="\'openSelection\'"        [setStyle]="\'channelOption\'">       </app-searchbar>    </div></mat-card></div>'
+    var COMPONENTS = [{'name': 'ActionHandlerComponent', 'selector': 'app-action-handler'},{'name': 'AddChannelDialogComponent', 'selector': 'app-add-channel-dialog'},{'name': 'AddreactionComponent', 'selector': 'app-addreaction'},{'name': 'AddUserDialogComponent', 'selector': 'app-add-user-dialog'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AvatarChooseComponent', 'selector': 'app-avatar-choose'},{'name': 'ChannelComponent', 'selector': 'app-channel'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'ChatViewComponent', 'selector': 'app-chat-view'},{'name': 'DateLineComponent', 'selector': 'app-date-line'},{'name': 'EditChannelComponent', 'selector': 'app-edit-channel'},{'name': 'EditChannelUsersComponent', 'selector': 'app-edit-channel-users'},{'name': 'EmptyWindowComponent', 'selector': 'app-empty-window'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'IntroComponent', 'selector': 'app-intro'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MainscreenComponent', 'selector': 'app-mainscreen'},{'name': 'MessageComponent', 'selector': 'app-message'},{'name': 'MessageCreateComponent', 'selector': 'app-message-create'},{'name': 'MessageEditComponent', 'selector': 'app-message-edit'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ReactionComponent', 'selector': 'app-reaction'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SearchbarComponent', 'selector': 'app-searchbar'},{'name': 'ShowChannelUsersComponent', 'selector': 'app-show-channel-users'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'StartscreenComponent', 'selector': 'app-startscreen'},{'name': 'ThreadComponent', 'selector': 'app-thread'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UserProfilComponent', 'selector': 'app-user-profil'}];
+    var DIRECTIVES = [{'name': 'IfChangedDirective', 'selector': '[appIfChanged]'}];
+    var ACTUAL_COMPONENT = {'name': 'EmptyWindowComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EmptyWindowComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
