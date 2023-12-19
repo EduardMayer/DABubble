@@ -109,17 +109,7 @@ export class AuthFirebaseService implements OnInit {
       private activeSelectionService: ActiveSelectionService) {
     onAuthStateChanged(this.auth, async (user: any) => {
       if (user) {
-        this.UserData = user;
-        localStorage.setItem('user', JSON.stringify(this.UserData));
-        JSON.parse(localStorage.getItem('user')!);
-        await this.userService.setUIDToCurrentUser(this.UserData.uid);
-        await this.userService.syncMail(this.UserData.email);
-        await this.userService.setCurrentUserStatus("online");
-        await this.userStatusService.writeUserStatus(this.UserData.uid, "online");
-        this.firebaseUserService.currentUser.id=this.UserData.uid;
-        await this.firebaseUserService.load();
-        await this.channelFirebaseService.load(this.UserData.uid);
-        await this.chatFirebaseService.load(this.UserData.uid);
+        this.loginFunction(user); 
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -140,6 +130,19 @@ export class AuthFirebaseService implements OnInit {
     */
   }
 
+  async loginFunction(user:any){
+    this.UserData = user;
+    localStorage.setItem('user', JSON.stringify(this.UserData));
+    JSON.parse(localStorage.getItem('user')!);
+    await this.userService.setUIDToCurrentUser(this.UserData.uid);
+    await this.userService.syncMail(this.UserData.email);
+    await this.userService.setCurrentUserStatus("online");
+    await this.userStatusService.writeUserStatus(this.UserData.uid, "online");
+    this.firebaseUserService.currentUser.id=this.UserData.uid;
+    await this.firebaseUserService.load();
+    await this.channelFirebaseService.load(this.UserData.uid);
+    await this.chatFirebaseService.load(this.UserData.uid);
+  }
 
   /**
    * Login with Firebase
@@ -225,7 +228,7 @@ export class AuthFirebaseService implements OnInit {
    * @returns {Promise} - returns a promise whether the user was logged in with Google
    */
   GoogleAuth() {
-    return this.loginWithPopup(new GoogleAuthProvider());
+    this.loginWithPopup(new GoogleAuthProvider());
   }
 
   /**
@@ -233,8 +236,15 @@ export class AuthFirebaseService implements OnInit {
    * @param {GoogleAuthProvider} provider 
    * @returns {Promise} - returns a promise whether the user was logged in with Google
    */
-  loginWithPopup(provider: any) {
-    return signInWithPopup(this.auth, provider).then(() => {
+  async loginWithPopup(provider: any) {
+     signInWithPopup(this.auth, provider).then(async (result) => {
+      console.log(result);
+      this.UserData = result.user;
+      this.userService.registUser.id = this.UserData.uid;
+      this.userService.registUser.fullName = this.UserData.displayName;
+      this.userService.addRegistUserWithUID(this.UserData.uid); 
+      this.firebaseUserService.setCurrentUser(this.UserData); 
+      this.loginFunction(result.user); 
       this.router.navigate(['index']);
     });
   }

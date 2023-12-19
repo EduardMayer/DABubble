@@ -16,7 +16,8 @@ export class UserStatusFirebaseService {
    * @param userId - unique user id
    * @param status - status of user - e.g. "online", "offline". 
    */
-  writeUserStatus(userId:string, status:string) {
+  async writeUserStatus(userId:string, status:string) {
+    
     const userStatusDatabaseRef = ref(this.database, 'userStatus/' + userId);
     set(userStatusDatabaseRef, {
       "status": status
@@ -24,6 +25,9 @@ export class UserStatusFirebaseService {
       onDisconnect(userStatusDatabaseRef).set({
         "status": "offline"
       });
+    })
+    .catch((error) => {
+      console.error("Status could not set");
     });
   }
 
