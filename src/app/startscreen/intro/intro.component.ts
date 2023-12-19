@@ -29,6 +29,7 @@ export class IntroComponent implements OnInit {
       this.animationStart = true;
       setTimeout(() => {
         this.animationLogo = true;
+        //debugger
         setTimeout(() => {
           this.d_none = true;
         }, 600);
