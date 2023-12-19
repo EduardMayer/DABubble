@@ -2,7 +2,6 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Message } from 'src/models/message.class';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { UserFirebaseService } from 'src/services/user-firebase.service';
-import { FormBuilder } from '@angular/forms';
 import { MessageFirebaseService } from 'src/services/message-firebase.service';
 import { User } from 'src/models/user.class';
 import { StorageFirebaseService } from 'src/services/storage-firebase.service';
@@ -140,6 +139,13 @@ export class MessageCreateComponent {
     this.textInput.nativeElement.value += "@";
   }
 
+  handleMentionClosure(){
+    let str=this.textInput.nativeElement.value;
+    if (str.charAt(str.length - 1) === '@') {
+      this.textInput.nativeElement.value=str.slice(0, -1);
+    }
+  }
+
 
   /**
   * Initiates the mention search.
@@ -202,12 +208,13 @@ export class MessageCreateComponent {
     }
   }
 
+
   /**
- * Opens a message and sets it as the current message.
- * 
- * @param {Message} message - The message to be opened.
- * @returns {void}
- */
+  * Opens a message and sets it as the current message.
+  * 
+  * @param {Message} message - The message to be opened.
+  * @returns {void}
+  */
   openMessage(message: Message) {
     this.message = message;
   }
@@ -235,6 +242,7 @@ export class MessageCreateComponent {
     }
   }
 
+
   /**
   * Checks if a given file is a PDF based on its type.
   * 
@@ -245,6 +253,7 @@ export class MessageCreateComponent {
     return file.type === 'application/pdf';
   }
 
+
   /**
  * Checks if the size of a given file is within the allowed limit (500 KB).
  * 
@@ -254,6 +263,7 @@ export class MessageCreateComponent {
   isFileSizeValid(file: File): boolean {
     return file.size <= 500000;
   }
+
 
   /**
   * Deletes the currently stored file from the storage service.

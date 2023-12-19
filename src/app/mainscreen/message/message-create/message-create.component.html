@@ -63,7 +63,8 @@
         class="msg-write-container" [(ngModel)]="message.content"
         placeholder="{{getPlaceholder()}}" (click)="closeEmojiBar();"
         [mention]="items" [mentionConfig]="mentionConfig"
-        (keydown.enter)="createMessage()">
+        (keydown.enter)="createMessage()"
+        (closed)="handleMentionClosure()">
     </textarea>
 
 </div>
