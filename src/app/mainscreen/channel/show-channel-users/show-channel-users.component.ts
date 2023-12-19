@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Channel } from 'src/models/channel.class';
 import { User } from 'src/models/user.class';
 import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';

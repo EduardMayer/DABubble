@@ -9,7 +9,7 @@ import { UserFirebaseService } from 'src/services/user-firebase.service';
   templateUrl: './add-user-dialog.component.html',
   styleUrls: ['./add-user-dialog.component.scss']
 })
-export class AddUserDialogComponent implements OnInit {
+export class AddUserDialogComponent {
 
   selectedOption: string = '';
   public channel = new Channel();
@@ -21,9 +21,6 @@ export class AddUserDialogComponent implements OnInit {
     ) {
   }
 
-  ngOnInit() {
-    console.log(this.channel);
-  }
 
   /**
    * Logs the current selected option. 
@@ -32,6 +29,7 @@ export class AddUserDialogComponent implements OnInit {
     console.log(this.selectedOption); // Gibt den aktuell ausgewählten Wert aus
   }
 
+  
   /**
    * updates channel object when adding new users. 
    * @param newChannel - channel to create
@@ -41,6 +39,7 @@ export class AddUserDialogComponent implements OnInit {
     console.log("channel updated");
     console.log(this.channel)
   }
+
 
   /**
    * Creates a new channel with users based on selected option. (all or selected users)
@@ -58,6 +57,7 @@ export class AddUserDialogComponent implements OnInit {
       });
     }
   }
+
 
   /**
    * Closes add user dialog. 

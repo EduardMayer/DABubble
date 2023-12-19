@@ -109,6 +109,7 @@ export class ChannelComponent{
     this.showEditChannel = false;
   }
 
+  
   /**
   * Closes edit channel dialog
   */

@@ -60,6 +60,7 @@ export class ChatComponent {
     });
   }
 
+  
   /**
    * Loads a given chat and opens ist. 
    * @param newSelectedChat - Chat that should be loaded
@@ -77,6 +78,7 @@ export class ChatComponent {
     }
   }
 
+
   /**
    * Opens profile of chatparter. 
    */
@@ -85,6 +87,7 @@ export class ChatComponent {
       this.userProfileService.openUserProfil(this.chatPartner);
     }
   }
+
 
    /**
    * Returns the time (in a formated form) of a given Message. 

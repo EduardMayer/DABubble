@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Channel } from 'src/models/channel.class';
-import { ActiveSelectionService } from 'src/services/active-selection.service';
 import { ChannelFirebaseService } from 'src/services/channel-firebase.service';
 import { FormatService } from 'src/services/format.service';
 import { NotificationService } from 'src/services/notification.service';
@@ -21,12 +20,12 @@ export class EditChannelUsersComponent {
     this.channelCopy = value;
   }
 
-/**
- * Defines Services and declase a new channel to work with in this component. 
- * @param channelService 
- * @param notificationService 
- * @param formatService 
- */
+  /**
+  * Defines Services and declase a new channel to work with in this component. 
+  * @param channelService 
+  * @param notificationService 
+  * @param formatService 
+  */
   constructor(
     private channelService: ChannelFirebaseService,
     private notificationService: NotificationService,
@@ -45,6 +44,7 @@ export class EditChannelUsersComponent {
     this.isUserSelected= this.checkIfUserIsSelected(newChannel);
   }
   
+
 
   checkIfUserIsSelected(channel: Channel): boolean {
     return channel && channel.users && channel.users.length > 0;

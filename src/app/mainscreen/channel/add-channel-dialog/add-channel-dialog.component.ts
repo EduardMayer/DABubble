@@ -47,6 +47,7 @@ export class AddChannelDialogComponent {
     });
   }
 
+
   /**
    * Gets value of input field and give it to the next componente, to create the new channel. 
    * @param value - iput form value
@@ -58,6 +59,7 @@ export class AddChannelDialogComponent {
     this.closeDialog();
   }
 
+
   /**
    * Opens addChannel dialog
    */
@@ -67,6 +69,7 @@ export class AddChannelDialogComponent {
     });
   }
 
+  
   /**
    * Closes addChanenelDialog
    */
