@@ -45,7 +45,6 @@ import { ActionHandlerComponent } from './action-handler/action-handler.componen
 import { SearchbarComponent } from './mainscreen/searchbar/searchbar.component';
 import { ResetPasswordComponent } from './startscreen/reset-password/reset-password.component';
 import { MessageEditComponent } from './mainscreen/message/message-edit/message-edit.component';
-import { UserSearchComponent } from './mainscreen/user-search/user-search.component';
 import { UserProfilComponent } from './mainscreen/user-profil/user-profil.component';
 import { MentionModule } from 'angular-mentions';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
@@ -93,7 +92,6 @@ import { AddChannelDialogComponent } from './mainscreen/channel/add-channel-dial
     ResetPasswordComponent,
     MessageCreateComponent,
     MessageEditComponent,
-    UserSearchComponent,
     UserProfilComponent,
     IntroComponent,
     ChatViewComponent,
