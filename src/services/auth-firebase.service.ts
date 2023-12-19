@@ -110,6 +110,7 @@ export class AuthFirebaseService implements OnInit {
     onAuthStateChanged(this.auth, async (user: any) => {
       if (user) {
         this.loginFunction(user); 
+        await this.userStatusService.writeUserStatus(this.UserData.uid, "online");
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -137,7 +138,6 @@ export class AuthFirebaseService implements OnInit {
     await this.userService.setUIDToCurrentUser(this.UserData.uid);
     await this.userService.syncMail(this.UserData.email);
     await this.userService.setCurrentUserStatus("online");
-    await this.userStatusService.writeUserStatus(this.UserData.uid, "online");
     this.firebaseUserService.currentUser.id=this.UserData.uid;
     await this.firebaseUserService.load();
     await this.channelFirebaseService.load(this.UserData.uid);
