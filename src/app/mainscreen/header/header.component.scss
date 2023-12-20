@@ -146,6 +146,7 @@ $headerDropdownPositionRigth: 0px;
         img {
             width: 30%;
             border-radius: 50%;
+            object-fit: cover;
         }
     }
 
@@ -194,6 +195,7 @@ $headerDropdownPositionRigth: 0px;
         img {
             width: 24px;
             height: 24px;
+            object-fit: cover;
         }
     }
 
@@ -247,6 +249,7 @@ $headerDropdownPositionRigth: 0px;
 
             img {
                 width: 180px;
+                object-fit: cover;
             }
 
             #header-image-container-mobile-selected {
@@ -302,6 +305,7 @@ $headerDropdownPositionRigth: 0px;
         img {
             max-width: 180px;
             max-height: 100px;
+            object-fit: cover;
         }
     }
 }
@@ -317,6 +321,7 @@ $headerDropdownPositionRigth: 0px;
         img {
             max-width: 100px;
             max-height: 30px;
+            object-fit: cover;
         }
 
         h3 {
