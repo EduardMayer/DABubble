@@ -36,7 +36,7 @@
 
     </div>
     <textarea cdkTextareaAutosize #messageCreate class="msg-write-container" [(ngModel)]="_message.content"
-        *ngIf="channelService.selectedChannel"  (click)="closeEmojiBar()">
+        (click)="closeEmojiBar()">
     </textarea>
     
 </div>
