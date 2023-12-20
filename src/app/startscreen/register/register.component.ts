@@ -33,7 +33,7 @@ export class RegisterComponent {
   contactForm = new FormGroup({
     nameInput: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(3)
     ]),
     emailInput: new FormControl('', [
       Validators.required, 
