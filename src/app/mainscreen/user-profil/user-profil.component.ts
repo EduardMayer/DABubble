@@ -21,6 +21,7 @@ export class UserProfilComponent implements OnInit {
   isCurrentUser = false;
   editUserMode = false;
 
+  public currentUserId: string ="";
   currentAuthMail = "";
   currentUserInput = "";
 
@@ -54,6 +55,7 @@ export class UserProfilComponent implements OnInit {
     private chatService: ChatFirebaseService, 
     private notificationService: NotificationService
     ) {
+      this.currentUserId = this.userService.currentUser.id;
   }
 
 
